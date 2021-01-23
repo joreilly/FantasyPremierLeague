@@ -1,0 +1,5 @@
+
+target 'FantasyPremierLeague' do
+    pod 'common', :path => '../../common'
+end
+
