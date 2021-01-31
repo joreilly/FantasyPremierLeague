@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
+import dev.johnoreilly.fantasypremierleague.ui.Screen
 import dev.johnoreilly.fantasypremierleague.ui.global.FantasyPremierLeagueTheme
 import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
 import dev.johnoreilly.fantasypremierleague.ui.fixtures.FixturesListView
@@ -24,12 +25,6 @@ class MainActivity : AppCompatActivity() {
             MainLayout(playersViewModel)
         }
     }
-}
-
-sealed class Screen(val title: String) {
-    object PlayerListScreen : Screen("PlayerListScreen")
-    object PlayerDetailsScreen : Screen("PlayerDetailsScreen")
-    object FixtureListScreen : Screen("FixtureListScreen")
 }
 
 @Composable

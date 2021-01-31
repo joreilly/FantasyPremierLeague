@@ -34,7 +34,7 @@ fun PlayerListView(
         },
         bodyContent = {
             Column {
-                TextField(
+                OutlinedTextField(
                     singleLine = true,
                     value = playerSearchQuery.value,
                     modifier = Modifier
