@@ -1,12 +1,15 @@
 package dev.johnoreilly.fantasypremierleague.ui.players.playerDetails
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -16,42 +19,86 @@ import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
 @Composable
 fun PlayerDetailsView(
     player: Player,
-    playersViewModel: PlayersViewModel
+    playersViewModel: PlayersViewModel,
+    popBackStack: () -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-    ) {
-        Row(
-            modifier = Modifier
-                .preferredHeight(150.dp)
-                .fillMaxWidth()
-        ) {
-            CoilImage(
-                data = player.photoUrl,
-                modifier = Modifier.preferredSize(150.dp),
-                contentDescription = player.name
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "Player details")
+                },
+                navigationIcon = {
+                    IconButton(onClick = { popBackStack() }) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
             )
+        },
+        bodyContent = {
             Column(
-                verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .preferredHeight(100.dp)
-                    .fillMaxWidth()
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Center
             ) {
-                Text(player.name, style = MaterialTheme.typography.h6)
-                Text(player.team, style = MaterialTheme.typography.subtitle1, color = Color.DarkGray)
+                Text(
+                    text = player.name,
+                    style = MaterialTheme.typography.h6,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.size(16.dp))
+                CoilImage(
+                    data = player.photoUrl,
+                    modifier = Modifier
+                        .preferredSize(150.dp)
+                        .align(Alignment.CenterHorizontally),
+                    contentDescription = player.name
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.LightGray)
+                        .padding(4.dp)
+                ) {
+                    Text(
+                        text = "INFO",
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                PlayerStatView("Team", player.team)
+                PlayerStatView("CurrentPrice", player.currentPrice.toString())
+                PlayerStatView("Points", player.points.toString())
+                PlayerStatView("Goals Scored", player.goalsScored.toString())
+                PlayerStatView("Assists", player.assists.toString())
             }
         }
-        Spacer(modifier = Modifier.size(16.dp))
-        Row {
-            Text(text = "POINTS:", style = MaterialTheme.typography.subtitle1)
-            Text(
-                player.points.toString(),
-                modifier = Modifier.align(Alignment.CenterVertically),
-                style = MaterialTheme.typography.subtitle1,
-                fontWeight = FontWeight.Bold
-            )
+    )
+}
+
+@Composable
+fun PlayerStatView(statName: String, statValue: String) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                Text(
+                    text = statName,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Column {
+                Text(
+                    text = statValue,
+                    color = Color(0xFF3179EA),
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
+        Divider(thickness = 1.dp)
     }
 }

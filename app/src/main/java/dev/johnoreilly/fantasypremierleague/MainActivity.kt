@@ -51,7 +51,8 @@ fun MainLayout(playersViewModel: PlayersViewModel) {
                 // TODO error handling for invalid playerId edge case or when first throws an exception
                 PlayerDetailsView(
                     player = player!!,
-                    playersViewModel = playersViewModel
+                    playersViewModel = playersViewModel,
+                    popBackStack = { navController.popBackStack() }
                 )
             }
             composable(Screen.FixtureListScreen.title) {
