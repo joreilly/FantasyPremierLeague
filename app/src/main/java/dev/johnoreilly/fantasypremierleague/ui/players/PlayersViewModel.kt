@@ -10,7 +10,7 @@ import dev.johnoreilly.common.repository.Player
 import kotlinx.coroutines.launch
 
 
-class FantasyPremierLeagueViewModel(
+class PlayersViewModel(
     private val repository: FantasyPremierLeagueRepository,
     private val logger: Kermit
 ) : ViewModel() {

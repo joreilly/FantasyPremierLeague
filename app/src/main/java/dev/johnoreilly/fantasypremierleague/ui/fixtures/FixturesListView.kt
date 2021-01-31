@@ -8,11 +8,11 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import dev.johnoreilly.fantasypremierleague.ui.players.FantasyPremierLeagueViewModel
+import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
 
 @Composable
-fun FixturesListView(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
-    val fixtureListState = fantasyPremierLeagueViewModel.fixtures.observeAsState(emptyList())
+fun FixturesListView(playersViewModel: PlayersViewModel) {
+    val fixtureListState = playersViewModel.fixtures.observeAsState(emptyList())
 
     Scaffold(
         topBar = {

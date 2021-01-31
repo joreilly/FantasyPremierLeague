@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.setContent
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import dev.johnoreilly.fantasypremierleague.ui.global.FantasyPremierLeagueTheme
-import dev.johnoreilly.fantasypremierleague.ui.players.FantasyPremierLeagueViewModel
+import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
 import dev.johnoreilly.fantasypremierleague.ui.fixtures.FixturesListView
 import dev.johnoreilly.fantasypremierleague.ui.players.playerDetails.PlayerDetailsView
 import dev.johnoreilly.fantasypremierleague.ui.players.PlayerListView
@@ -15,13 +15,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
-    private val fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel by viewModel()
+    private val playersViewModel: PlayersViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MainLayout(fantasyPremierLeagueViewModel)
+            MainLayout(playersViewModel)
         }
     }
 }
@@ -33,14 +33,14 @@ sealed class Screen(val title: String) {
 }
 
 @Composable
-fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
+fun MainLayout(playersViewModel: PlayersViewModel) {
     val navController = rememberNavController()
 
     FantasyPremierLeagueTheme {
         NavHost(navController, startDestination = Screen.PlayerListScreen.title) {
             composable(Screen.PlayerListScreen.title) {
                 PlayerListView(
-                    fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel,
+                    playersViewModel = playersViewModel,
                     onPlayerSelected = { playerId ->
                         navController.navigate(Screen.PlayerDetailsScreen.title + "/${playerId}")
                     }
@@ -51,16 +51,16 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
                 arguments = listOf(navArgument("playerId") { type = NavType.IntType })
             ) { navBackStackEntry ->
                 val playerId: Int? = navBackStackEntry.arguments?.getInt("playerId")
-                val player = fantasyPremierLeagueViewModel.players.value?.first { it.id == playerId }
+                val player = playersViewModel.players.value?.first { it.id == playerId }
 
                 // TODO error handling for invalid playerId edge case or when first throws an exception
                 PlayerDetailsView(
                     player = player!!,
-                    fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel
+                    playersViewModel = playersViewModel
                 )
             }
             composable(Screen.FixtureListScreen.title) {
-                FixturesListView(fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel)
+                FixturesListView(playersViewModel = playersViewModel)
             }
         }
     }

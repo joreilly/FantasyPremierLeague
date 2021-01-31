@@ -11,12 +11,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.johnoreilly.common.repository.Player
-import dev.johnoreilly.fantasypremierleague.ui.players.FantasyPremierLeagueViewModel
+import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
 
 @Composable
 fun PlayerDetailsView(
     player: Player,
-    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel
+    playersViewModel: PlayersViewModel
 ) {
     Column(
         modifier = Modifier

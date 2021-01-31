@@ -18,11 +18,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun PlayerListView(
-    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
+    playersViewModel: PlayersViewModel,
     onPlayerSelected: (playerId: Int) -> Unit
 ) {
-    val playerList = fantasyPremierLeagueViewModel.players.observeAsState()
-    val playerSearchQuery = fantasyPremierLeagueViewModel.query
+    val playerList = playersViewModel.players.observeAsState()
+    val playerSearchQuery = playersViewModel.query
 
     Scaffold(
         topBar = {
@@ -55,7 +55,7 @@ fun PlayerListView(
                     ),
                     onImeActionPerformed = { action, softKeyboardController ->
                         if (action == ImeAction.Search) {
-                            fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(
+                            playersViewModel.onPlayerSearchQueryChange(
                                 playerSearchQuery.value
                             )
                             softKeyboardController?.hideSoftwareKeyboard()
@@ -63,7 +63,7 @@ fun PlayerListView(
                     },
                     onValueChange = {
                         playerSearchQuery.value = it
-                        fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(it)
+                        playersViewModel.onPlayerSearchQueryChange(it)
                     }
                 )
 
