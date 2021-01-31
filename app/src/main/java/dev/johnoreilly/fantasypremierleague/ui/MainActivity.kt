@@ -2,6 +2,7 @@ package dev.johnoreilly.fantasypremierleague.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,13 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import dev.chrisbanes.accompanist.coil.CoilImage
-import dev.johnoreilly.common.model.Element
-import dev.johnoreilly.common.remote.Fixture
 import dev.johnoreilly.common.repository.Player
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,12 +38,11 @@ class MainActivity : AppCompatActivity() {
             MainLayout(fantasyPremierLeagueViewModel)
         }
     }
-
 }
-
 
 sealed class Screen(val title: String) {
     object PlayerListScreen : Screen("PlayerListScreen")
+    object PlayerDetailsScreen : Screen("PlayerDetailsScreen")
     object FixtureListScreen : Screen("FixtureListScreen")
 }
 
@@ -53,58 +53,48 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
     FantasyPremierLeagueTheme {
         NavHost(navController, startDestination = Screen.PlayerListScreen.title) {
             composable(Screen.PlayerListScreen.title) {
-                PlayerListView(fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel,
-                    playerSelected = {
+                PlayerListView(
+                    fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel,
+                    onPlayerSelected = { playerId ->
+                        navController.navigate(Screen.PlayerDetailsScreen.title + "/${playerId}")
                     }
                 )
             }
-            composable(Screen.FixtureListScreen.title) {
-                FixtureList(fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel,
-                    fixtureSelected = {
-//                        navController.navigate(Screen.PersonDetailsDetails.title + "/${it.name}")
-                    }
+            composable(
+                Screen.PlayerDetailsScreen.title + "/{playerId}",
+                arguments = listOf(navArgument("playerId") { type = NavType.IntType })
+            ) { navBackStackEntry ->
+                val playerId: Int? = navBackStackEntry.arguments?.getInt("playerId")
+                val player = fantasyPremierLeagueViewModel.players.value?.first { it.id == playerId }
+
+                // TODO error handling for invalid playerId edge case or when first throws an exception
+                PlayerDetailsView(
+                    player = player!!,
+                    fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel
                 )
+            }
+            composable(Screen.FixtureListScreen.title) {
+                FixtureList(fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel)
             }
         }
     }
 }
 
 @Composable
-fun FixtureList(
-    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
-    fixtureSelected: (fixture: Fixture) -> Unit
-) {
-    val fixtureListState = fantasyPremierLeagueViewModel.fixtures.observeAsState(emptyList())
-
-
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text("Fantasy Premier League") })
-        },
-        bodyContent = {
-            Column {
-                LazyColumn {
-                    items(items = fixtureListState.value, itemContent = { fixture ->
-                        Text(fixture.kickoff_time ?: "")
-                    })
-                }
-            }
-        }
-    )
-}
-
-
-@Composable
 fun PlayerListView(
     fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
-    playerSelected: (player: Element) -> Unit
+    onPlayerSelected: (playerId: Int) -> Unit
 ) {
     val playerList = fantasyPremierLeagueViewModel.players.observeAsState()
     val playerSearchQuery = fantasyPremierLeagueViewModel.query
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Fantasy Premier League") })
+            TopAppBar(
+                title = {
+                    Text("Fantasy Premier League")
+                }
+            )
         },
         bodyContent = {
             Column {
@@ -120,7 +110,7 @@ fun PlayerListView(
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Default.Search,
-                            contentDescription = "Seach icon"
+                            contentDescription = "Search"
                         )
                     },
                     keyboardOptions = KeyboardOptions(
@@ -129,20 +119,22 @@ fun PlayerListView(
                     ),
                     onImeActionPerformed = { action, softKeyboardController ->
                         if (action == ImeAction.Search) {
-                            fantasyPremierLeagueViewModel.onPlayerSearch(playerSearchQuery.value)
+                            fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(
+                                playerSearchQuery.value
+                            )
                             softKeyboardController?.hideSoftwareKeyboard()
                         }
                     },
                     onValueChange = {
                         playerSearchQuery.value = it
-                        fantasyPremierLeagueViewModel.onPlayerSearch(it)
+                        fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(it)
                     }
                 )
 
                 playerList.value?.let {
                     LazyColumn {
                         items(items = it, itemContent = { player ->
-                            PlayerView(player)
+                            PlayerView(player, onPlayerSelected)
                         })
                     }
                 }
@@ -152,14 +144,17 @@ fun PlayerListView(
 }
 
 @Composable
-fun PlayerView(player: Player) {
+fun PlayerView(
+    player: Player,
+    onPlayerSelected: (playerId: Int) -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
+            .clickable { onPlayerSelected(player.id) }
     ) {
-
         CoilImage(
             data = player.photoUrl,
             modifier = Modifier.preferredSize(60.dp),
@@ -174,8 +169,69 @@ fun PlayerView(player: Player) {
             Text(player.name, style = typography.h6)
             Text(player.team, style = typography.subtitle1, color = Color.DarkGray)
         }
-
         Text(player.points.toString(), style = typography.h6)
     }
+}
 
+@Composable
+fun PlayerDetailsView(
+    player: Player,
+    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel
+) {
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .preferredHeight(150.dp)
+                .fillMaxWidth()
+        ) {
+            CoilImage(
+                data = player.photoUrl,
+                modifier = Modifier.preferredSize(150.dp),
+                contentDescription = player.name
+            )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .preferredHeight(100.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(player.name, style = typography.h6)
+                Text(player.team, style = typography.subtitle1, color = Color.DarkGray)
+            }
+        }
+        Spacer(modifier = Modifier.size(16.dp))
+        Row {
+            Text(text = "POINTS:", style = typography.subtitle1)
+            Text(
+                player.points.toString(),
+                modifier = Modifier.align(Alignment.CenterVertically),
+                style = typography.subtitle1,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+@Composable
+fun FixtureList(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
+    val fixtureListState = fantasyPremierLeagueViewModel.fixtures.observeAsState(emptyList())
+
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text("Fantasy Premier League") })
+        },
+        bodyContent = {
+            Column {
+                LazyColumn {
+                    items(items = fixtureListState.value, itemContent = { fixture ->
+                        Text(fixture.kickoff_time ?: "")
+                    })
+                }
+            }
+        }
+    )
 }
