@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -56,11 +55,13 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
             composable(Screen.PlayerListScreen.title) {
                 PlayerListView(
                     fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel,
-                    navController
+                    onPlayerSelected = { playerId ->
+                        navController.navigate(Screen.PlayerDetailsScreen.title + "/${playerId}")
+                    }
                 )
             }
             composable(
-                "${Screen.PlayerDetailsScreen.title}/{playerId}",
+                Screen.PlayerDetailsScreen.title + "/{playerId}",
                 arguments = listOf(navArgument("playerId") { type = NavType.IntType })
             ) { navBackStackEntry ->
                 val playerId: Int? = navBackStackEntry.arguments?.getInt("playerId")
@@ -82,7 +83,7 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
 @Composable
 fun PlayerListView(
     fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
-    navController: NavController
+    onPlayerSelected: (playerId: Int) -> Unit
 ) {
     val playerList = fantasyPremierLeagueViewModel.players.observeAsState()
     val playerSearchQuery = fantasyPremierLeagueViewModel.query
@@ -133,7 +134,7 @@ fun PlayerListView(
                 playerList.value?.let {
                     LazyColumn {
                         items(items = it, itemContent = { player ->
-                            PlayerView(player, navController)
+                            PlayerView(player, onPlayerSelected)
                         })
                     }
                 }
@@ -145,16 +146,14 @@ fun PlayerListView(
 @Composable
 fun PlayerView(
     player: Player,
-    navController: NavController
+    onPlayerSelected: (playerId: Int) -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
-            .clickable {
-                navController.navigate("${Screen.PlayerDetailsScreen.title}/${player.id}")
-            }
+            .clickable { onPlayerSelected(player.id) }
     ) {
         CoilImage(
             data = player.photoUrl,
