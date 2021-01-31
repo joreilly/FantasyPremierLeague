@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.ui
+package dev.johnoreilly.fantasypremierleague
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +25,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.johnoreilly.common.repository.Player
+import dev.johnoreilly.fantasypremierleague.ui.FantasyPremierLeagueTheme
+import dev.johnoreilly.fantasypremierleague.ui.FantasyPremierLeagueViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
