@@ -33,7 +33,7 @@ class FantasyPremierLeagueViewModel(
         viewModelScope.launch {
             players.value = repository
                 .getPlayers()
-                .filter { player -> player.name.toLowerCase().startsWith(query.toLowerCase()) }
+                .filter { player -> player.name.toLowerCase().contains(query.toLowerCase()) }
         }
     }
 }
