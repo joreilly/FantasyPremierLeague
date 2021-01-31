@@ -29,7 +29,7 @@ class FantasyPremierLeagueViewModel(
         }
     }
 
-    fun onPlayerSearch(query: String) {
+    fun onPlayerSearchQueryChange(query: String) {
         viewModelScope.launch {
             players.value = repository
                 .getPlayers()

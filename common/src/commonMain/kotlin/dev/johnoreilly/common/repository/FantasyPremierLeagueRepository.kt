@@ -18,14 +18,15 @@ class FantasyPremierLeagueRepository  : KoinComponent {
         // TODO persist this data and drive UI from database
         val bootstrapStaticInfo = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
 
-        return bootstrapStaticInfo.elements.sortedByDescending { it.total_points }.map { player ->
+        return bootstrapStaticInfo.elements
+            .sortedByDescending { it.total_points }
+            .map { player ->
             val playerName = "${player.first_name} ${player.second_name}"
             val playerImageUrl = "https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.code}.png"
-
             val team = bootstrapStaticInfo.teams.find { it.code == player.team_code }
             val teamName = team?.name ?: ""
+
             Player(player.id, playerName, teamName, playerImageUrl, player.total_points)
         }
     }
-
 }

@@ -60,6 +60,7 @@ dependencies {
     implementation(Compose.ui)
     implementation(Compose.uiGraphics)
     implementation(Compose.uiTooling)
+    implementation(Compose.foundation)
     implementation(Compose.foundationLayout)
     implementation(Compose.material)
     implementation(Compose.runtimeLiveData)
