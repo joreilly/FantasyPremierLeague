@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.ui
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
 import co.touchlab.kermit.Kermit
 import dev.johnoreilly.common.model.BootstrapStaticInfo
@@ -9,26 +10,30 @@ import dev.johnoreilly.common.repository.Player
 import kotlinx.coroutines.launch
 
 
-
 class FantasyPremierLeagueViewModel(
-    private val repoitory: FantasyPremierLeagueRepository,
+    private val repository: FantasyPremierLeagueRepository,
     private val logger: Kermit
 ) : ViewModel() {
-
     val fixtures = MutableLiveData<List<Fixture>>(emptyList())
     val staticData = MutableLiveData<BootstrapStaticInfo>()
 
     val players = MutableLiveData<List<Player>>()
+    val query = mutableStateOf("")
 
     init {
         viewModelScope.launch {
-            fixtures.value = repoitory.fetchFixtures()
-
-            val bootstrapStaticInfo = repoitory.fetchBootstrapStaticInfo()
-
+            fixtures.value = repository.fetchFixtures()
+            val bootstrapStaticInfo = repository.fetchBootstrapStaticInfo()
             staticData.value = bootstrapStaticInfo
+            players.value = repository.getPlayers()
+        }
+    }
 
-            players.value = repoitory.getPlayers()
+    fun onPlayerSearch(query: String) {
+        viewModelScope.launch {
+            players.value = repository
+                .getPlayers()
+                .filter { player -> player.name.toLowerCase().startsWith(query.toLowerCase()) }
         }
     }
 }

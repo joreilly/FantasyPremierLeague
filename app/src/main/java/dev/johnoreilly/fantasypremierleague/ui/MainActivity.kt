@@ -5,14 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.typography
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.*
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -56,7 +61,7 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
             composable(Screen.FixtureListScreen.title) {
                 FixtureList(fantasyPremierLeagueViewModel = fantasyPremierLeagueViewModel,
                     fixtureSelected = {
-                        //navController.navigate(Screen.PersonDetailsDetails.title + "/${it.name}")
+//                        navController.navigate(Screen.PersonDetailsDetails.title + "/${it.name}")
                     }
                 )
             }
@@ -65,7 +70,10 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
 }
 
 @Composable
-fun FixtureList(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel, fixtureSelected : (fixture : Fixture) -> Unit) {
+fun FixtureList(
+    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
+    fixtureSelected: (fixture: Fixture) -> Unit
+) {
     val fixtureListState = fantasyPremierLeagueViewModel.fixtures.observeAsState(emptyList())
 
 
@@ -87,8 +95,12 @@ fun FixtureList(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel, fi
 
 
 @Composable
-fun PlayerListView(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel, playerSelected : (player : Element) -> Unit) {
+fun PlayerListView(
+    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
+    playerSelected: (player: Element) -> Unit
+) {
     val playerList = fantasyPremierLeagueViewModel.players.observeAsState()
+    val playerSearchQuery = fantasyPremierLeagueViewModel.query
 
     Scaffold(
         topBar = {
@@ -96,6 +108,37 @@ fun PlayerListView(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
         },
         bodyContent = {
             Column {
+                TextField(
+                    singleLine = true,
+                    value = playerSearchQuery.value,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    label = {
+                        Text(text = "Search")
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Seach icon"
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Search
+                    ),
+                    onImeActionPerformed = { action, softKeyboardController ->
+                        if (action == ImeAction.Search) {
+                            fantasyPremierLeagueViewModel.onPlayerSearch(playerSearchQuery.value)
+                            softKeyboardController?.hideSoftwareKeyboard()
+                        }
+                    },
+                    onValueChange = {
+                        playerSearchQuery.value = it
+                        fantasyPremierLeagueViewModel.onPlayerSearch(it)
+                    }
+                )
+
                 playerList.value?.let {
                     LazyColumn {
                         items(items = it, itemContent = { player ->
@@ -110,12 +153,24 @@ fun PlayerListView(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
 
 @Composable
 fun PlayerView(player: Player) {
-    Row(verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+    ) {
 
-        CoilImage(data = player.photoUrl, modifier = Modifier.preferredSize(60.dp), contentDescription = player.name)
+        CoilImage(
+            data = player.photoUrl,
+            modifier = Modifier.preferredSize(60.dp),
+            contentDescription = player.name
+        )
         Spacer(modifier = Modifier.preferredSize(12.dp))
-        Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 8.dp)
+        ) {
             Text(player.name, style = typography.h6)
             Text(player.team, style = typography.subtitle1, color = Color.DarkGray)
         }
