@@ -4,7 +4,8 @@ import dev.johnoreilly.common.remote.FantasyPremierLeagueApi
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-data class Player(val id: Int, val name: String, val team: String, val photoUrl: String, val points: Int)
+data class Player(val id: Int, val name: String, val team: String, val photoUrl: String,
+                  val points: Int, val currentPrice: Double, val goalsScored: Int, val assists: Int)
 
 class FantasyPremierLeagueRepository  : KoinComponent {
     private val fantasyPremierLeagueApi: FantasyPremierLeagueApi by inject()
@@ -25,8 +26,10 @@ class FantasyPremierLeagueRepository  : KoinComponent {
             val playerImageUrl = "https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.code}.png"
             val team = bootstrapStaticInfo.teams.find { it.code == player.team_code }
             val teamName = team?.name ?: ""
+            val currentPrice = player.now_cost/10.0
 
-            Player(player.id, playerName, teamName, playerImageUrl, player.total_points)
+            Player(player.id, playerName, teamName, playerImageUrl,
+                player.total_points, currentPrice, player.goals_scored, player.assists)
         }
     }
 }
