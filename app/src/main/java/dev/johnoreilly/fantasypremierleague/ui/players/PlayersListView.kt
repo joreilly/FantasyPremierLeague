@@ -34,8 +34,9 @@ fun PlayerListView(
         },
         bodyContent = {
             Column {
-                OutlinedTextField(
+                TextField(
                     singleLine = true,
+                    backgroundColor = MaterialTheme.colors.background,
                     value = playerSearchQuery.value,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -66,12 +67,13 @@ fun PlayerListView(
                         playersViewModel.onPlayerSearchQueryChange(it)
                     }
                 )
-
                 playerList.value?.let {
                     LazyColumn {
-                        items(items = it, itemContent = { player ->
-                            PlayerView(player, onPlayerSelected)
-                        })
+                        items(
+                            items = it,
+                            itemContent = { player ->
+                                PlayerView(player, onPlayerSelected)
+                            })
                     }
                 }
             }
