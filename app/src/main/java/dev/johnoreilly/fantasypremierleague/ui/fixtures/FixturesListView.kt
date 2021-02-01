@@ -22,7 +22,7 @@ fun FixturesListView(playersViewModel: PlayersViewModel) {
             Column {
                 LazyColumn {
                     items(items = fixtureListState.value, itemContent = { fixture ->
-                        Text(fixture.kickoff_time ?: "")
+                        Text("${fixture.kickoffTime}: ${fixture.homeTeam} vs ${fixture.awayTeam}")
                     })
                 }
             }

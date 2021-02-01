@@ -2,8 +2,26 @@ import SwiftUI
 import FantasyPremierLeagueKit
 
 
+
 struct ContentView: View {
     @StateObject var viewModel = FantasyPremierLeagueViewModel(repository: FantasyPremierLeagueRepository())
+
+    var body: some View {
+        TabView {
+            PlayerListView(viewModel: viewModel)
+                .tabItem {
+                    Label("Players", systemImage: "person")
+                }
+            FixtureListView(viewModel: viewModel)
+                .tabItem {
+                    Label("Fixtues", systemImage: "clock")
+                }
+        }
+    }
+}
+
+struct PlayerListView: View {
+    @ObservedObject var viewModel: FantasyPremierLeagueViewModel
     
     var body: some View {
         NavigationView {
@@ -12,7 +30,7 @@ struct ContentView: View {
                     PlayerView(player: player)
                 }
             }
-            .navigationBarTitle(Text("Fantasy PL"))
+            .navigationBarTitle(Text("Players"))
             .onAppear {
                 viewModel.getPlayers()
             }
@@ -58,6 +76,23 @@ struct PlayerDetailsView: View {
         }
     }
 }
+
+struct FixtureListView: View {
+    @ObservedObject var viewModel: FantasyPremierLeagueViewModel
+    
+    var body: some View {
+        NavigationView {
+            List(viewModel.fixtureList, id: \.id) { fixture in
+                Text("\(fixture.homeTeam) v \(fixture.awayTeam)")
+            }
+            .navigationBarTitle(Text("Fixtues"))
+            .onAppear {
+                viewModel.getFixtures()
+            }
+        }
+    }
+}
+
 
 
 struct InfoRowView: View {

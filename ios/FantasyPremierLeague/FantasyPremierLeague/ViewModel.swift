@@ -5,6 +5,7 @@ import FantasyPremierLeagueKit
 
 class FantasyPremierLeagueViewModel: ObservableObject {
     @Published var playerList = [Player]()
+    @Published var fixtureList = [GameFixture]()
     
     private let repository: FantasyPremierLeagueRepository
     init(repository: FantasyPremierLeagueRepository) {
@@ -18,6 +19,15 @@ class FantasyPremierLeagueViewModel: ObservableObject {
             }
         }
     }
+    
+    func getFixtures() {
+        repository.getFixtures() { data, error in
+            if let fixtureList = data {
+                self.fixtureList = fixtureList
+            }
+        }
+    }
+
 }
 
 
