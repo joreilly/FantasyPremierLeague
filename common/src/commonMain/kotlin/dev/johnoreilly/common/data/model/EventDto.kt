@@ -1,11 +1,11 @@
-package dev.johnoreilly.common.model
+package dev.johnoreilly.common.data.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Event(
+data class EventDto(
     val average_entry_score: Int,
-    val chip_plays: List<ChipPlay>,
+    val chip_plays: List<ChipPlayDto>,
     val data_checked: Boolean,
     val deadline_time: String,
     val deadline_time_epoch: Int,
@@ -23,6 +23,6 @@ data class Event(
     val most_vice_captained: Int?,
     val name: String,
     val top_element: Int?,
-    val top_element_info: TopElementInfo?,
+    val top_element_info: TopElementInfoDto?,
     val transfers_made: Int
 )

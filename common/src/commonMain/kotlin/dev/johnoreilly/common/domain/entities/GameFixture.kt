@@ -1,4 +1,4 @@
-package dev.johnoreilly.common.entities
+package dev.johnoreilly.common.domain.entities
 
 data class GameFixture(
     val id: Int,

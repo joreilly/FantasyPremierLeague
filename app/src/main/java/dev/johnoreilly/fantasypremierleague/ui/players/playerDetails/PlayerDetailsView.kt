@@ -9,11 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.accompanist.coil.CoilImage
-import dev.johnoreilly.common.entities.Player
+import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
 
 @Composable

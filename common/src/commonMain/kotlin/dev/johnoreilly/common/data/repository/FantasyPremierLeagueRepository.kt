@@ -1,23 +1,22 @@
-package dev.johnoreilly.common.repository
+package dev.johnoreilly.common.data.repository
 
-import dev.johnoreilly.common.entities.GameFixture
-import dev.johnoreilly.common.entities.Player
-import dev.johnoreilly.common.getLogger
-import dev.johnoreilly.common.model.BootstrapStaticInfo
-import dev.johnoreilly.common.remote.FantasyPremierLeagueApi
+import dev.johnoreilly.common.domain.entities.GameFixture
+import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
+import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class FantasyPremierLeagueRepository : KoinComponent {
     private val fantasyPremierLeagueApi: FantasyPremierLeagueApi by inject()
-    private var bootstrapStaticInfo: BootstrapStaticInfo? = null
+    private var bootstrapStaticInfoDto: BootstrapStaticInfoDto? = null
 
-    suspend fun getBootstrapStaticInfo(): BootstrapStaticInfo {
+    suspend fun getBootstrapStaticInfo(): BootstrapStaticInfoDto {
         // TEMP local in memory cache until we add persistence
-        if (bootstrapStaticInfo == null) {
-            bootstrapStaticInfo = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
+        if (bootstrapStaticInfoDto == null) {
+            bootstrapStaticInfoDto = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
         }
-        return bootstrapStaticInfo!!
+        return bootstrapStaticInfoDto!!
     }
 
     suspend fun fetchFixtures() = fantasyPremierLeagueApi.fetchFixtures().filter { it.kickoff_time != null }

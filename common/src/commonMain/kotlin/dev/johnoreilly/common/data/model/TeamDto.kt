@@ -1,9 +1,9 @@
-package dev.johnoreilly.common.model
+package dev.johnoreilly.common.data.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Team(
+data class TeamDto(
     val code: Int,
     val draw: Int,
     val form: String?,

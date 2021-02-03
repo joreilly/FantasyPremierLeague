@@ -1,9 +1,9 @@
-package dev.johnoreilly.common.model
+package dev.johnoreilly.common.data.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Element(
+data class ElementDto(
     val assists: Int,
     val bonus: Int,
     val bps: Int,

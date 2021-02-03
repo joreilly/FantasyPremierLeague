@@ -3,9 +3,9 @@ package dev.johnoreilly.fantasypremierleague.ui.players
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
 import co.touchlab.kermit.Kermit
-import dev.johnoreilly.common.repository.FantasyPremierLeagueRepository
-import dev.johnoreilly.common.entities.GameFixture
-import dev.johnoreilly.common.entities.Player
+import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
+import dev.johnoreilly.common.domain.entities.GameFixture
+import dev.johnoreilly.common.domain.entities.Player
 import kotlinx.coroutines.launch
 
 

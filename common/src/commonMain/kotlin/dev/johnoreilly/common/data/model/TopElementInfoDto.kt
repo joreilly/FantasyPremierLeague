@@ -1,9 +1,9 @@
-package dev.johnoreilly.common.model
+package dev.johnoreilly.common.data.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TopElementInfo(
+data class TopElementInfoDto(
     val id: Int,
     val points: Int
 )

@@ -1,9 +1,9 @@
-package dev.johnoreilly.common.model
+package dev.johnoreilly.common.data.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ElementType(
+data class ElementTypeDto(
     val element_count: Int,
     val id: Int,
     val plural_name: String,
