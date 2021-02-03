@@ -1,7 +1,7 @@
 package dev.johnoreilly.common
 
 import dev.johnoreilly.common.di.initKoin
-import dev.johnoreilly.common.remote.FantasyPremierLeagueApi
+import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

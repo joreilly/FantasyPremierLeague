@@ -2,8 +2,8 @@ package dev.johnoreilly.common.di
 
 import co.touchlab.kermit.Kermit
 import dev.johnoreilly.common.getLogger
-import dev.johnoreilly.common.remote.FantasyPremierLeagueApi
-import dev.johnoreilly.common.repository.FantasyPremierLeagueRepository
+import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
+import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*

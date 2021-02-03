@@ -1,13 +1,10 @@
 package com.surrus
 
 import dev.johnoreilly.common.di.initKoin
-import dev.johnoreilly.common.remote.FantasyPremierLeagueApi
-import dev.johnoreilly.common.repository.FantasyPremierLeagueRepository
+import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
+import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import kotlinx.coroutines.runBlocking
 import org.nield.kotlinstatistics.descriptiveStatistics
-import org.nield.kotlinstatistics.simpleRegression
-import org.nield.kotlinstatistics.standardDeviation
-import org.ojalgo.okalgo.*
 
 fun main() {
     runBlocking {
