@@ -6,21 +6,18 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
-import dev.johnoreilly.fantasypremierleague.ui.Screen
-import dev.johnoreilly.fantasypremierleague.ui.bottomNavigationItems
-import dev.johnoreilly.fantasypremierleague.ui.global.FantasyPremierLeagueTheme
-import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
-import dev.johnoreilly.fantasypremierleague.ui.fixtures.FixturesListView
-import dev.johnoreilly.fantasypremierleague.ui.players.playerDetails.PlayerDetailsView
-import dev.johnoreilly.fantasypremierleague.ui.players.PlayerListView
+import dev.johnoreilly.fantasypremierleague.presentation.Screen
+import dev.johnoreilly.fantasypremierleague.presentation.bottomNavigationItems
+import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
+import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixturesListView
+import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
+import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

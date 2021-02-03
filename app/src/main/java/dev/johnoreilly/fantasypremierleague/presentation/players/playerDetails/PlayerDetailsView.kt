@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.ui.players.playerDetails
+package dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.johnoreilly.common.domain.entities.Player
-import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
 
 @Composable
 fun PlayerDetailsView(

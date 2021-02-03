@@ -1,6 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.di
 
-import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

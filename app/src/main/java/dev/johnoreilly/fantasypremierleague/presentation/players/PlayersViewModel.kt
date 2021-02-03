@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.ui.players
+package dev.johnoreilly.fantasypremierleague.presentation.players
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*

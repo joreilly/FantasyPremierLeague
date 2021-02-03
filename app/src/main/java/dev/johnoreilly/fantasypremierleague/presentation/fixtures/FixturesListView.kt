@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.ui.fixtures
+package dev.johnoreilly.fantasypremierleague.presentation.fixtures
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,7 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
 
 @Composable
 fun FixturesListView(playersViewModel: PlayersViewModel) {

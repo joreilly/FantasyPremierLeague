@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.ui.fixtures
+package dev.johnoreilly.fantasypremierleague.presentation.fixtures
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

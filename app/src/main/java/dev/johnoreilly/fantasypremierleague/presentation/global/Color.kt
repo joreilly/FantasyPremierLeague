@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.ui.global
+package dev.johnoreilly.fantasypremierleague.presentation.global
 
 import androidx.compose.ui.graphics.Color
 

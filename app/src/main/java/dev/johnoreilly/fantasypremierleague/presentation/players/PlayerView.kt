@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.ui.players
+package dev.johnoreilly.fantasypremierleague.presentation.players
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

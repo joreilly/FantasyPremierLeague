@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.ui
+package dev.johnoreilly.fantasypremierleague.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
