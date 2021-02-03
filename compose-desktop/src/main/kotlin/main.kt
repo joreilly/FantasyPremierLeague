@@ -59,17 +59,16 @@ fun main() = Window {
     }
 }
 
-
 @Composable
-fun PlayerView(player: Player, selectedPlayer: String, playerSelected : (player : Player) -> Unit) {
+fun PlayerView(player: Player, selectedPlayer: String, playerSelected: (player: Player) -> Unit) {
     Row(
-        modifier =  Modifier.fillMaxWidth().clickable(onClick = { playerSelected(player) })
+        modifier = Modifier.fillMaxWidth().clickable(onClick = { playerSelected(player) })
             .padding(8.dp), verticalAlignment = Alignment.CenterVertically
     ) {
 
         val imageAsset = fetchImage(player.photoUrl)
         imageAsset?.let {
-            Image(it, modifier = Modifier.preferredSize(80.dp))
+            Image(it, contentDescription = "player image", modifier = Modifier.preferredSize(80.dp))
         }
 
         Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
@@ -79,9 +78,6 @@ fun PlayerView(player: Player, selectedPlayer: String, playerSelected : (player 
         Text(player.points.toString())
     }
 }
-
-
-
 
 @Composable
 fun fetchImage(url: String): ImageBitmap? {
@@ -96,7 +92,7 @@ fun fetchImage(url: String): ImageBitmap? {
     return image
 }
 
-fun toByteArray(bitmap: BufferedImage) : ByteArray {
+fun toByteArray(bitmap: BufferedImage): ByteArray {
     val baos = ByteArrayOutputStream()
     ImageIO.write(bitmap, "png", baos)
     return baos.toByteArray()
