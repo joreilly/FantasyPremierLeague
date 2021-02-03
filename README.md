@@ -1,15 +1,20 @@
-# Fantasy Premier League (Work In Progress)
+# Fantasy Premier League
 
-**Kotlin Multiplatform** project using Jetpack Compose and SwiftUI.  Currently running on
+A **kotlin multiplatform** project using jetpack compose for android & desktop and swiftUI. Currently running on:
 * Android (Jetpack Compose)
 * iOS (SwiftUI)
 * Desktop (Compose for Desktop)
 
+> Fantasy Premier League is currently under heavy development and is open to outside contributions. Please refer to **Requirements** section below to setup your development environment correctly.
+
+## Requirements
+* Kotlin: "1.4.21-2"
+* Jetpack compose: "1.0.0-alpha11"
+* [Android Studio canary version](https://developer.android.com/studio/preview)
 
 ## Screenshots
-
-![FantasyPremierLeague Screenshot1](/art/screenshot1.png?raw=true )
-
-![FantasyPremierLeague Screenshot2](/art/screenshot2.png?raw=true )
-
-![FantasyPremierLeague Screenshot3](/art/screenshot3.png?raw=true )
+|Platform|Screenshot|
+|---|---|
+|Android|<img src="/art/screenshot1.png?raw=true" width=300/>|
+|iOS|<img src="/art/screenshot2.png?raw=true" width=300/>|
+|Desktop|<img src="/art/screenshot3.png?raw=true" width=300/>|
