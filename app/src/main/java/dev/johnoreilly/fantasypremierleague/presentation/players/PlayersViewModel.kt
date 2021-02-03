@@ -13,14 +13,13 @@ class PlayersViewModel(
     private val repository: FantasyPremierLeagueRepository,
     private val logger: Kermit
 ) : ViewModel() {
-    val fixtures = MutableLiveData<List<GameFixture>>(emptyList())
-
+    val pastFixtures = MutableLiveData<List<GameFixture>>(emptyList())
     val players = MutableLiveData<List<Player>>()
     val query = mutableStateOf("")
 
     init {
         viewModelScope.launch {
-            fixtures.value = repository.getFixtures()
+            pastFixtures.value = repository.getPastFixtures()
             players.value = repository.getPlayers()
         }
     }

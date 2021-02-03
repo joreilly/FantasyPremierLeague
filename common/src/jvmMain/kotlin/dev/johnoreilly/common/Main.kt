@@ -14,7 +14,7 @@ fun main() {
         val api = koin.get<FantasyPremierLeagueApi>()
         val staticInfo = api.fetchBootstrapStaticInfo()
 
-        val fixtures = repository.fetchFixtures()
+        val fixtures = repository.fetchPastFixtures()
 
         fixtures.forEach { fixture ->
             val homeTeam = staticInfo.teams.find { it.id == fixture.team_h }

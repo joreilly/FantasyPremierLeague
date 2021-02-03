@@ -11,7 +11,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
     private val fantasyPremierLeagueApi: FantasyPremierLeagueApi by inject()
     private var bootstrapStaticInfoDto: BootstrapStaticInfoDto? = null
 
-    suspend fun getBootstrapStaticInfo(): BootstrapStaticInfoDto {
+    private suspend fun getBootstrapStaticInfo(): BootstrapStaticInfoDto {
         // TEMP local in memory cache until we add persistence
         if (bootstrapStaticInfoDto == null) {
             bootstrapStaticInfoDto = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
@@ -19,7 +19,11 @@ class FantasyPremierLeagueRepository : KoinComponent {
         return bootstrapStaticInfoDto!!
     }
 
-    suspend fun fetchFixtures() = fantasyPremierLeagueApi.fetchFixtures().filter { it.kickoff_time != null }
+    suspend fun fetchPastFixtures() = fantasyPremierLeagueApi
+        .fetchFixtures()
+        .filter { it.kickoff_time != null }
+        .filter { it.team_h_score != null }
+        .filter { it.team_a_score != null }
 
     @Throws(Exception::class)
     suspend fun getPlayers(): List<Player> {
@@ -42,18 +46,20 @@ class FantasyPremierLeagueRepository : KoinComponent {
     }
 
     @Throws(Exception::class)
-    suspend fun getFixtures(): List<GameFixture> {
+    suspend fun getPastFixtures(): List<GameFixture> {
         val bootstrapStaticInfo = getBootstrapStaticInfo()
 
-        return fetchFixtures().map { fixture ->
+        return fetchPastFixtures().map { fixture ->
             val homeTeam = bootstrapStaticInfo.teams[fixture.team_h-1]
             val homeTeamName = homeTeam.name
             val homeTeamCode = homeTeam.code
             val homeTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${homeTeamCode}.png"
+            val homeTeamScore = fixture.team_h_score ?: 0
 
             val awayTeamCode = bootstrapStaticInfo.teams[fixture.team_a-1].code
             val awayTeamName = bootstrapStaticInfo.teams[fixture.team_a-1].name
             val awayTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${awayTeamCode}.png"
+            val awayTeamScore = fixture.team_a_score ?: 0
 
             GameFixture(
                 fixture.id,
@@ -61,7 +67,9 @@ class FantasyPremierLeagueRepository : KoinComponent {
                 homeTeamName,
                 awayTeamName,
                 homeTeamPhotoUrl,
-                awayTeamPhotoUrl
+                awayTeamPhotoUrl,
+                homeTeamScore,
+                awayTeamScore
             )
         }
     }
