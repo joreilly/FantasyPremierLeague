@@ -4,8 +4,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
 import co.touchlab.kermit.Kermit
 import dev.johnoreilly.common.repository.FantasyPremierLeagueRepository
-import dev.johnoreilly.common.repository.GameFixture
-import dev.johnoreilly.common.repository.Player
+import dev.johnoreilly.common.entities.GameFixture
+import dev.johnoreilly.common.entities.Player
 import kotlinx.coroutines.launch
 
 

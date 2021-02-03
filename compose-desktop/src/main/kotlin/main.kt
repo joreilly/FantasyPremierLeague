@@ -26,7 +26,7 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.imageio.ImageIO
-import dev.johnoreilly.common.repository.Player
+import dev.johnoreilly.common.entities.Player
 import dev.johnoreilly.common.repository.FantasyPremierLeagueRepository
 
 

@@ -13,7 +13,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.accompanist.coil.CoilImage
-import dev.johnoreilly.common.repository.Player
+import dev.johnoreilly.common.entities.Player
 import dev.johnoreilly.fantasypremierleague.ui.players.PlayersViewModel
 
 @Composable
