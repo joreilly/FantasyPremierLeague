@@ -1,8 +1,8 @@
 package com.surrus
 
-import dev.johnoreilly.common.di.initKoin
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
+import dev.johnoreilly.common.di.initKoin
 import kotlinx.coroutines.runBlocking
 import org.nield.kotlinstatistics.descriptiveStatistics
 

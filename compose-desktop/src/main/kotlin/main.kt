@@ -14,7 +14,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.unit.dp
+import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
+import dev.johnoreilly.common.domain.entities.Player
 import org.jetbrains.skija.Image
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
@@ -22,8 +24,6 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.imageio.ImageIO
-import dev.johnoreilly.common.domain.entities.Player
-import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 
 
 private val koin = initKoin(enableNetworkLogs = true).koin

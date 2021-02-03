@@ -1,9 +1,9 @@
 package dev.johnoreilly.common.data.repository
 
-import dev.johnoreilly.common.domain.entities.GameFixture
-import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
+import dev.johnoreilly.common.domain.entities.GameFixture
+import dev.johnoreilly.common.domain.entities.Player
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
