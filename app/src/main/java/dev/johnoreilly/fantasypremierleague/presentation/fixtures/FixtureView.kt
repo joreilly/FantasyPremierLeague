@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -16,52 +18,65 @@ import dev.johnoreilly.common.domain.entities.GameFixture
 
 @Composable
 fun FixtureView(fixture: GameFixture) {
-    Column(
-        modifier = Modifier.padding(10.dp)
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+        color = MaterialTheme.colors.surface,
+        shape = RoundedCornerShape(10.dp)
     ) {
-        Spacer(modifier = Modifier.size(10.dp))
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .preferredHeight(200.dp),
-            color = MaterialTheme.colors.surface,
-            shape = RoundedCornerShape(10.dp)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            Column(
+            Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Spacer(modifier = Modifier.size(4.dp))
+                ClubInFixtureView(
+                    fixture.homeTeam,
+                    fixture.homeTeamPhotoUrl
+                )
                 Text(
-                    text = "Date: ${fixture.kickoffTime.split("T").first()}",
+                    text = "(${fixture.homeTeamScore})",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp,
                     color = MaterialTheme.colors.onSurface
                 )
                 Text(
-                    text = "Time: ${fixture.kickoffTime.split("T")[1].split(":00Z").first()}",
+                    text = "VS",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 30.sp
+                )
+                Text(
+                    text = "(${fixture.awayTeamScore})",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp,
                     color = MaterialTheme.colors.onSurface
                 )
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    ClubInFixtureView(
-                        fixture.homeTeam,
-                        fixture.homeTeamPhotoUrl
-                    )
-                    Text(
-                        text = "VS",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 30.sp
-                    )
-                    ClubInFixtureView(
-                        fixture.awayTeam,
-                        fixture.awayTeamPhotoUrl
-                    )
-                }
+                ClubInFixtureView(
+                    fixture.awayTeam,
+                    fixture.awayTeamPhotoUrl
+                )
             }
+            Text(
+                modifier = Modifier.padding(top = 16.dp),
+                text = "Date: ${fixture.kickoffTime.split("T").first()}",
+                fontWeight = FontWeight.Light,
+                fontSize = 14.sp,
+                color = MaterialTheme.colors.onSurface
+            )
+            Text(
+                modifier = Modifier.padding(bottom = 16.dp),
+                text = "Kick off at: ${fixture.kickoffTime.split("T")[1].split(":00Z").first()}",
+                fontWeight = FontWeight.Light,
+                fontSize = 14.sp,
+                color = MaterialTheme.colors.onSurface
+            )
         }
     }
 }
@@ -77,6 +92,15 @@ fun ClubInFixtureView(
             modifier = Modifier.preferredSize(60.dp),
             contentDescription = teamName
         )
-        Text(text = teamName)
+        Text(
+            modifier = Modifier
+                .width(100.dp)
+                .padding(top = 4.dp),
+            text = teamName,
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            color = MaterialTheme.colors.onSurface
+        )
     }
 }

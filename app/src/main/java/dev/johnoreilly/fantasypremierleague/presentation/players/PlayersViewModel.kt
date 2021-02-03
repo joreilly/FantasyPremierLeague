@@ -1,7 +1,9 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Kermit
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.domain.entities.GameFixture
@@ -13,14 +15,13 @@ class PlayersViewModel(
     private val repository: FantasyPremierLeagueRepository,
     private val logger: Kermit
 ) : ViewModel() {
-    val fixtures = MutableLiveData<List<GameFixture>>(emptyList())
-
+    val pastFixtures = MutableLiveData<List<GameFixture>>(emptyList())
     val players = MutableLiveData<List<Player>>()
     val query = mutableStateOf("")
 
     init {
         viewModelScope.launch {
-            fixtures.value = repository.getFixtures()
+            pastFixtures.value = repository.getPastFixtures()
             players.value = repository.getPlayers()
         }
     }

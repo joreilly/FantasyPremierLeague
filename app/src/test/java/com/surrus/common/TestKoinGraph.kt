@@ -1,13 +1,13 @@
 package com.surrus.common
 
 import android.content.Context
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import dev.johnoreilly.common.di.initKoin
 import dev.johnoreilly.fantasypremierleague.di.appModule
 import org.junit.Test
-import org.koin.test.check.checkModules
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import org.junit.runner.RunWith
 import org.koin.android.ext.koin.androidContext
+import org.koin.test.check.checkModules
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)

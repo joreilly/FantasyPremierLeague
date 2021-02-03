@@ -13,11 +13,11 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import dev.johnoreilly.fantasypremierleague.presentation.Screen
 import dev.johnoreilly.fantasypremierleague.presentation.bottomNavigationItems
-import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
-import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixturesListView
-import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
+import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
+import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

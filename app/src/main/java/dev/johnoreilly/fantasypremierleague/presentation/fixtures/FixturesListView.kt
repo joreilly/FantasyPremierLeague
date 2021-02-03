@@ -12,7 +12,7 @@ import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewMode
 
 @Composable
 fun FixturesListView(playersViewModel: PlayersViewModel) {
-    val fixtureListState = playersViewModel.fixtures.observeAsState(emptyList())
+    val pastFixturesState = playersViewModel.pastFixtures.observeAsState(emptyList())
 
     Scaffold(
         topBar = {
@@ -21,7 +21,7 @@ fun FixturesListView(playersViewModel: PlayersViewModel) {
         bodyContent = {
             Column {
                 LazyColumn {
-                    items(items = fixtureListState.value, itemContent = { fixture ->
+                    items(items = pastFixturesState.value, itemContent = { fixture ->
                         FixtureView(fixture = fixture)
                     })
                 }
