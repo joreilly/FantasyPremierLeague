@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontSynthesis
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -44,7 +46,7 @@ fun FixtureView(fixture: GameFixture) {
                     fixture.homeTeamPhotoUrl
                 )
                 Text(
-                    text = "0",
+                    text = "(${fixture.homeTeamScore})",
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp,
                     color = MaterialTheme.colors.onSurface
@@ -55,7 +57,7 @@ fun FixtureView(fixture: GameFixture) {
                     fontSize = 30.sp
                 )
                 Text(
-                    text = "0",
+                    text = "(${fixture.awayTeamScore})",
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp,
                     color = MaterialTheme.colors.onSurface
@@ -95,8 +97,13 @@ fun ClubInFixtureView(
             contentDescription = teamName
         )
         Text(
-            modifier = Modifier.padding(top = 4.dp),
+            modifier = Modifier
+                .width(100.dp)
+                .padding(top = 4.dp),
             text = teamName,
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             color = MaterialTheme.colors.onSurface
         )
     }
