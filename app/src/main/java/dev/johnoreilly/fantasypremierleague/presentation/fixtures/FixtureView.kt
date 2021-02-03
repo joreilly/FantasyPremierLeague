@@ -48,9 +48,9 @@ fun FixtureView(fixture: GameFixture) {
                     color = MaterialTheme.colors.onSurface
                 )
                 Text(
-                    text = "VS",
+                    text = "vs",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 30.sp
+                    fontSize = 25.sp
                 )
                 Text(
                     text = "(${fixture.awayTeamScore})",

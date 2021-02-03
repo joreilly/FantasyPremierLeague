@@ -21,7 +21,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     }
     
     func getFixtures() {
-        repository.getFixtures() { data, error in
+        repository.getPastFixtures() { data, error in
             if let fixtureList = data {
                 self.fixtureList = fixtureList
             }
