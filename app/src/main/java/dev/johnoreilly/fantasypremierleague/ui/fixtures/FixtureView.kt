@@ -47,29 +47,36 @@ fun FixtureView(fixture: GameFixture) {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Column {
-                        CoilImage(
-                            data = fixture.homeTeamPhotoUrl,
-                            modifier = Modifier.preferredSize(60.dp),
-                            contentDescription = fixture.homeTeam
-                        )
-                        Text(text = fixture.homeTeam)
-                    }
+                    ClubInFixtureView(
+                        fixture.homeTeam,
+                        fixture.homeTeamPhotoUrl
+                    )
                     Text(
                         text = "VS",
                         fontWeight = FontWeight.Bold,
                         fontSize = 30.sp
                     )
-                    Column {
-                        CoilImage(
-                            data = fixture.awayTeamPhotoUrl,
-                            modifier = Modifier.preferredSize(60.dp),
-                            contentDescription = fixture.awayTeam
-                        )
-                        Text(text = fixture.awayTeam)
-                    }
+                    ClubInFixtureView(
+                        fixture.awayTeam,
+                        fixture.awayTeamPhotoUrl
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ClubInFixtureView(
+    teamName: String,
+    teamPhotoUrl: String
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        CoilImage(
+            data = teamPhotoUrl,
+            modifier = Modifier.preferredSize(60.dp),
+            contentDescription = teamName
+        )
+        Text(text = teamName)
     }
 }
