@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.johnoreilly.common.domain.entities.GameFixture
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 @Composable
 fun FixtureView(fixture: GameFixture) {
@@ -65,14 +67,17 @@ fun FixtureView(fixture: GameFixture) {
             }
             Text(
                 modifier = Modifier.padding(top = 16.dp),
-                text = "Date: ${fixture.kickoffTime.split("T").first()}",
+                text = fixture.localKickoffTime.date.toString(),
                 fontWeight = FontWeight.Light,
                 fontSize = 14.sp,
                 color = MaterialTheme.colors.onSurface
             )
+
+            val formattedTime = "%02d:%02d".format(fixture.localKickoffTime.hour,
+                        fixture.localKickoffTime.minute)
             Text(
                 modifier = Modifier.padding(bottom = 16.dp),
-                text = "Kick off at: ${fixture.kickoffTime.split("T")[1].split(":00Z").first()}",
+                text = formattedTime,
                 fontWeight = FontWeight.Light,
                 fontSize = 14.sp,
                 color = MaterialTheme.colors.onSurface

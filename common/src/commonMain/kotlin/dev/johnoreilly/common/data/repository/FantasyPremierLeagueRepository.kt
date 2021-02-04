@@ -6,6 +6,11 @@ import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
+
 
 class FantasyPremierLeagueRepository : KoinComponent {
     private val fantasyPremierLeagueApi: FantasyPremierLeagueApi by inject()
@@ -61,16 +66,20 @@ class FantasyPremierLeagueRepository : KoinComponent {
             val awayTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${awayTeamCode}.png"
             val awayTeamScore = fixture.team_a_score ?: 0
 
-            GameFixture(
-                fixture.id,
-                fixture.kickoff_time ?: "",
-                homeTeamName,
-                awayTeamName,
-                homeTeamPhotoUrl,
-                awayTeamPhotoUrl,
-                homeTeamScore,
-                awayTeamScore
-            )
-        }
+            fixture.kickoff_time?.let {
+                val localKickoffTime = it.toInstant().toLocalDateTime(TimeZone.currentSystemDefault())
+
+                GameFixture(
+                    fixture.id,
+                    localKickoffTime,
+                    homeTeamName,
+                    awayTeamName,
+                    homeTeamPhotoUrl,
+                    awayTeamPhotoUrl,
+                    homeTeamScore,
+                    awayTeamScore
+                )
+            }
+        }.filterNotNull()
     }
 }

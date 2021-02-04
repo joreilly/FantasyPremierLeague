@@ -1,8 +1,10 @@
 package dev.johnoreilly.common.domain.entities
 
+import kotlinx.datetime.LocalDateTime
+
 data class GameFixture(
     val id: Int,
-    val kickoffTime: String,
+    val localKickoffTime: LocalDateTime,
     val homeTeam: String,
     val awayTeam: String,
     val homeTeamPhotoUrl: String,

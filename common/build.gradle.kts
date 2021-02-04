@@ -72,6 +72,9 @@ kotlin {
             // Kotlinx Serialization
             implementation(Serialization.core)
 
+            // Kotlinx Date/Time
+            api(Deps.kotlinxDateTime)
+
             // koin
             api(Koin.core)
             api(Koin.test)
@@ -103,6 +106,13 @@ kotlin {
         }
         sourceSets["iOSTest"].dependencies {
         }
+    }
+}
+
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xuse-experimental=kotlin.time.ExperimentalTime")
     }
 }
 
