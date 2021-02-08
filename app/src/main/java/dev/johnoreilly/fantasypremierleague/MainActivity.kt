@@ -14,6 +14,7 @@ import androidx.navigation.compose.*
 import dev.johnoreilly.fantasypremierleague.presentation.Screen
 import dev.johnoreilly.fantasypremierleague.presentation.bottomNavigationItems
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixturesListView
+import dev.johnoreilly.fantasypremierleague.presentation.fixtures.fixtureDetails.FixtureDetailsView
 import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
@@ -88,7 +89,22 @@ fun MainLayout(playersViewModel: PlayersViewModel) {
                     )
                 }
                 composable(Screen.FixtureListScreen.title) {
-                    FixturesListView(playersViewModel = playersViewModel)
+                    FixturesListView(
+                        playersViewModel = playersViewModel,
+                        onFixtureSelected = { fixtureId ->
+                            navController.navigate(Screen.FixtureDetailsScreen.title + "/${fixtureId}")
+                        }
+                    )
+                }
+                composable(
+                    Screen.FixtureDetailsScreen.title + "/{fixtureId}",
+                    arguments = listOf(navArgument("fixtureId") { type = NavType.IntType })
+                ) { navBackStackEntry ->
+                    val fixtureId: Int? = navBackStackEntry.arguments?.getInt("fixtureId")
+                    
+                    FixtureDetailsView(
+                        popBackStack = { navController.popBackStack() }
+                    )
                 }
             }
         }

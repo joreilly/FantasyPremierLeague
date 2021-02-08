@@ -11,7 +11,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
 
 @Composable
-fun FixturesListView(playersViewModel: PlayersViewModel) {
+fun FixturesListView(
+    playersViewModel: PlayersViewModel,
+    onFixtureSelected: (fixtureId: Int) -> Unit
+) {
     val pastFixturesState = playersViewModel.pastFixtures.observeAsState(emptyList())
 
     Scaffold(
@@ -22,7 +25,10 @@ fun FixturesListView(playersViewModel: PlayersViewModel) {
             Column {
                 LazyColumn {
                     items(items = pastFixturesState.value, itemContent = { fixture ->
-                        FixtureView(fixture = fixture)
+                        FixtureView(
+                            fixture = fixture,
+                            onFixtureSelected = onFixtureSelected
+                        )
                     })
                 }
             }
