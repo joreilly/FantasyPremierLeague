@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.fixtures
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -15,15 +16,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.johnoreilly.common.domain.entities.GameFixture
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 @Composable
-fun FixtureView(fixture: GameFixture) {
+fun FixtureView(
+    fixture: GameFixture,
+    onFixtureSelected: (fixtureId: Int) -> Unit
+) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+            .clickable { onFixtureSelected(fixture.id) },
         color = MaterialTheme.colors.surface,
         shape = RoundedCornerShape(10.dp)
     ) {
