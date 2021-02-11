@@ -103,6 +103,8 @@ fun MainLayout(playersViewModel: PlayersViewModel) {
                     val fixtureId: Int? = navBackStackEntry.arguments?.getInt("fixtureId")
                     
                     FixtureDetailsView(
+                        fixtureId = fixtureId,
+                        playersViewModel = playersViewModel,
                         popBackStack = { navController.popBackStack() }
                     )
                 }
