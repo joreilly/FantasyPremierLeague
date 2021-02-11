@@ -5,6 +5,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -18,6 +19,8 @@ fun FixtureDetailsView(
     playersViewModel: PlayersViewModel,
     popBackStack: () -> Unit
 ) {
+    val pastFixtureAsState = playersViewModel.getPastFixtureWithId(fixtureId).observeAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -33,18 +36,13 @@ fun FixtureDetailsView(
         },
         bodyContent = {
             Column(modifier = Modifier.fillMaxSize()) {
+                Spacer(modifier = Modifier.size(16.dp))
                 Text(
-                    text = "Team vs Team",
+                    text = "${pastFixtureAsState.value?.homeTeam} VS ${pastFixtureAsState.value?.awayTeam} ",
                     style = MaterialTheme.typography.h6,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
                 Spacer(modifier = Modifier.size(16.dp))
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "INFO",
-                        fontWeight = FontWeight.Bold
-                    )
-                }
             }
         }
     )

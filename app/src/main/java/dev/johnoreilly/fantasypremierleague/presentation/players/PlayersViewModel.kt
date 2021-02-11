@@ -1,9 +1,7 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import co.touchlab.kermit.Kermit
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.domain.entities.GameFixture
@@ -31,6 +29,14 @@ class PlayersViewModel(
             players.value = repository
                 .getPlayers()
                 .filter { player -> player.name.toLowerCase().contains(query.toLowerCase()) }
+        }
+    }
+
+    fun getPastFixtureWithId(fixtureId: Int?): LiveData<GameFixture> {
+        return liveData {
+            val pastGameFixture: GameFixture? = repository.getPastFixtures().firstOrNull { it.id == fixtureId }
+
+            pastGameFixture?.let { emit(it) }
         }
     }
 }
