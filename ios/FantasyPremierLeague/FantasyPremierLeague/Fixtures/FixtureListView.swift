@@ -9,7 +9,9 @@ struct FixtureListView: View {
     var body: some View {
         NavigationView {
             List(viewModel.fixtureList, id: \.id) { fixture in
-                FixtureView(fixture: fixture)
+                NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
+                    FixtureView(fixture: fixture)
+                }
             }
             .navigationBarTitle(Text("Fixtues"))
             .onAppear {
@@ -59,6 +61,6 @@ struct ClubInFixtureView: View {
         VStack {
             ImageView(withURL: teamPhotoUrl, width: 50, height: 50)
             Text(teamName).font(.system(size: 14))
-        }.frame(minWidth: 100)
+        }.frame(minWidth: 80)
     }
 }

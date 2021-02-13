@@ -14,6 +14,7 @@
 		1A45B23825CB3BBE00A8C613 /* PlayerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23725CB3BBE00A8C613 /* PlayerListView.swift */; };
 		1A45B23B25CB3BF100A8C613 /* PlayerDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23A25CB3BF100A8C613 /* PlayerDetailsView.swift */; };
 		1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */; };
+		1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */; };
 		1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670525C5F8FF009FA782 /* ViewModel.swift */; };
 		1ABD670925C600EE009FA782 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670825C600EE009FA782 /* ImageView.swift */; };
 		32741BEFE411DB0FEFC793A2 /* libPods-FantasyPremierLeague.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49861D068274297DB728D12B /* libPods-FantasyPremierLeague.a */; };
@@ -29,6 +30,7 @@
 		1A45B23725CB3BBE00A8C613 /* PlayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListView.swift; sourceTree = "<group>"; };
 		1A45B23A25CB3BF100A8C613 /* PlayerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsView.swift; sourceTree = "<group>"; };
 		1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureListView.swift; sourceTree = "<group>"; };
+		1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDetailView.swift; sourceTree = "<group>"; };
 		1ABD670525C5F8FF009FA782 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1ABD670825C600EE009FA782 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		49861D068274297DB728D12B /* libPods-FantasyPremierLeague.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FantasyPremierLeague.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */,
+				1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				1A0F7AE425C5C96F00EB34CF /* ContentView.swift in Sources */,
 				1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */,
 				1A0F7AE225C5C96F00EB34CF /* FantasyPremierLeagueApp.swift in Sources */,
+				1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
