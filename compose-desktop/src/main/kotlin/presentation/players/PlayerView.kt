@@ -29,7 +29,7 @@ fun PlayerView(player: Player, selectedPlayer: String, playerSelected: (player: 
 
         val imageAsset = fetchImage(player.photoUrl)
         imageAsset?.let {
-            Image(it, contentDescription = "player image", modifier = Modifier.preferredSize(80.dp))
+            Image(it, contentDescription = "player image", modifier = Modifier.size(80.dp))
         }
 
         Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {

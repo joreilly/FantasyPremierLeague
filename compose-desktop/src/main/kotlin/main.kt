@@ -30,8 +30,7 @@ fun main() = Window {
         Scaffold(
             topBar = {
                 TopAppBar(title = { Text("Fantasy Premier League") })
-            },
-            bodyContent = {
+            }) {
                 Row(Modifier.fillMaxSize()) {
                     LazyColumn {
                         items(items = playerList, itemContent = { player ->
@@ -41,7 +40,6 @@ fun main() = Window {
                     }
                 }
             }
-        )
 
     }
 }
