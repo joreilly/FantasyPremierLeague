@@ -35,8 +35,7 @@ fun FixtureDetailsView(
                     }
                 }
             )
-        },
-        bodyContent = {
+        }) {
             pastFixtureAsState.value?.let { fixture ->
                 Column(
                     modifier = Modifier.fillMaxSize(),
@@ -85,7 +84,6 @@ fun FixtureDetailsView(
                 }
             }
         }
-    )
 }
 
 @Composable

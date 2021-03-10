@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import kotlin.math.sin
 
 @Composable
 fun PlayerListView(
@@ -31,16 +32,12 @@ fun PlayerListView(
                     Text("Fantasy Premier League")
                 }
             )
-        },
-        bodyContent = {
+        }) {
             Column {
                 TextField(
                     singleLine = true,
-                    backgroundColor = MaterialTheme.colors.background,
                     value = playerSearchQuery.value,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(8.dp),
                     label = {
                         Text(text = "Search")
                     },
@@ -54,14 +51,6 @@ fun PlayerListView(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Search
                     ),
-                    onImeActionPerformed = { action, softKeyboardController ->
-                        if (action == ImeAction.Search) {
-                            playersViewModel.onPlayerSearchQueryChange(
-                                playerSearchQuery.value
-                            )
-                            softKeyboardController?.hideSoftwareKeyboard()
-                        }
-                    },
                     onValueChange = {
                         playerSearchQuery.value = it
                         playersViewModel.onPlayerSearchQueryChange(it)
@@ -78,5 +67,4 @@ fun PlayerListView(
                 }
             }
         }
-    )
 }

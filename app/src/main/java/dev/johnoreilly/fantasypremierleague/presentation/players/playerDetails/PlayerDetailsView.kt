@@ -33,8 +33,7 @@ fun PlayerDetailsView(
                     }
                 }
             )
-        },
-        bodyContent = {
+        }) {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -49,7 +48,7 @@ fun PlayerDetailsView(
                 CoilImage(
                     data = player.photoUrl,
                     modifier = Modifier
-                        .preferredSize(150.dp)
+                        .size(150.dp)
                         .align(Alignment.CenterHorizontally),
                     contentDescription = player.name
                 )
@@ -72,7 +71,6 @@ fun PlayerDetailsView(
                 PlayerStatView("Assists", player.assists.toString())
             }
         }
-    )
 }
 
 @Composable

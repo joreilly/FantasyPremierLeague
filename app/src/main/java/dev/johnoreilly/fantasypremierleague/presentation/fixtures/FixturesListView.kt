@@ -20,8 +20,7 @@ fun FixturesListView(
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Fantasy Premier League") })
-        },
-        bodyContent = {
+        }) {
             Column {
                 LazyColumn {
                     items(items = pastFixturesState.value, itemContent = { fixture ->
@@ -33,5 +32,4 @@ fun FixturesListView(
                 }
             }
         }
-    )
 }

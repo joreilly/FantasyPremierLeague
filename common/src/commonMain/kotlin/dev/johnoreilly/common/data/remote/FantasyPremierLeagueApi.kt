@@ -4,7 +4,7 @@ import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.model.FixtureDto
 import io.ktor.client.*
 import io.ktor.client.request.*
-import org.koin.core.KoinComponent
+import org.koin.core.component.KoinComponent
 
 
 class FantasyPremierLeagueApi(

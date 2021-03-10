@@ -26,10 +26,10 @@ fun PlayerView(
     ) {
         CoilImage(
             data = player.photoUrl,
-            modifier = Modifier.preferredSize(60.dp),
+            modifier = Modifier.size(60.dp),
             contentDescription = player.name
         )
-        Spacer(modifier = Modifier.preferredSize(12.dp))
+        Spacer(modifier = Modifier.size(12.dp))
         Column(
             modifier = Modifier
                 .weight(1f)

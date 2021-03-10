@@ -97,7 +97,7 @@ fun ClubInFixtureView(
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         CoilImage(
             data = teamPhotoUrl,
-            modifier = Modifier.preferredSize(60.dp),
+            modifier = Modifier.size(60.dp),
             contentDescription = teamName
         )
         Text(
