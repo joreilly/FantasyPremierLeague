@@ -10,7 +10,7 @@ A **kotlin multiplatform** project using jetpack compose for android & desktop a
 ## Requirements
 * Kotlin: "1.4.21-2"
 * Jetpack compose: "1.0.0-alpha11"
-* [Android Studio canary version](https://developer.android.com/studio/preview)
+* [Android Studio canary version](https://developer.android.com/studio/preview) (*UPDATE*: now works with stable version of Android Stuio)
 
 ## Screenshots
 |Platform|Screenshot|
