@@ -13,18 +13,14 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     }
     
     func getPlayers() {
-        repository.getPlayers() { data, error in
-            if let playerList = data {
-                self.playerList = playerList
-            }
+        repository.getPlayers { playerList in
+            self.playerList = playerList
         }
     }
     
     func getFixtures() {
-        repository.getPastFixtures() { data, error in
-            if let fixtureList = data {
-                self.fixtureList = fixtureList
-            }
+        repository.getFixtures { fixtureList in
+            self.fixtureList = fixtureList
         }
     }
 

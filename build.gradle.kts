@@ -4,11 +4,13 @@ buildscript {
         google()
         mavenCentral()
         jcenter()
+        maven(url = "http://oss.jfrog.org/artifactory/oss-snapshot-local")
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.0-beta03")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}")
+        classpath("io.realm.kotlin:gradle-plugin:${Versions.realm}")
     }
 }
 
@@ -17,10 +19,8 @@ allprojects {
         google()
         mavenCentral()
         jcenter()
-        maven(url = "https://dl.bintray.com/ekito/koin")
-        maven(url = "https://kotlin.bintray.com/kotlin-js-wrappers/")
-        maven(url = "https://jitpack.io")
         maven(url = "https://kotlin.bintray.com/kotlinx/")
+        maven(url = "http://oss.jfrog.org/artifactory/oss-snapshot-local")
     }
 }
 

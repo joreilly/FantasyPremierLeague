@@ -70,21 +70,22 @@ fun FixtureView(
             }
             Text(
                 modifier = Modifier.padding(top = 16.dp),
-                text = fixture.localKickoffTime.date.toString(),
+                text = fixture.localKickoffTime?.date.toString() ?: "",
                 fontWeight = FontWeight.Light,
                 fontSize = 14.sp,
                 color = MaterialTheme.colors.onSurface
             )
 
-            val formattedTime = "%02d:%02d".format(fixture.localKickoffTime.hour,
-                        fixture.localKickoffTime.minute)
-            Text(
-                modifier = Modifier.padding(bottom = 16.dp),
-                text = formattedTime,
-                fontWeight = FontWeight.Light,
-                fontSize = 14.sp,
-                color = MaterialTheme.colors.onSurface
-            )
+            fixture.localKickoffTime?.let { localKickoffTime ->
+                val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
+                Text(
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    text = formattedTime,
+                    fontWeight = FontWeight.Light,
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colors.onSurface
+                )
+            }
         }
     }
 }

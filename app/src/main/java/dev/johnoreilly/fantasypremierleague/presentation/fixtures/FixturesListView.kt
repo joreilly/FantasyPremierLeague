@@ -7,15 +7,16 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
-import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 
 @Composable
 fun FixturesListView(
-    playersViewModel: PlayersViewModel,
+    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
     onFixtureSelected: (fixtureId: Int) -> Unit
 ) {
-    val pastFixturesState = playersViewModel.pastFixtures.observeAsState(emptyList())
+    val pastFixturesState = fantasyPremierLeagueViewModel.fixturesList.collectAsState()
 
     Scaffold(
         topBar = {

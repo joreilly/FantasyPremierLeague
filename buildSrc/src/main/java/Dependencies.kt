@@ -5,6 +5,7 @@ object Versions {
     const val ktor = "1.5.3"
     const val kotlinxSerialization = "1.1.0"
     const val koin = "3.0.1"
+    const val realm = "0.0.1-SNAPSHOT"
     const val kermit = "0.1.8"
     const val kotlinxDateTime = "0.1.1"
 
@@ -26,6 +27,7 @@ object AndroidSdk {
 object Deps {
     const val kermit = "co.touchlab:kermit:${Versions.kermit}"
     const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
+    const val realm = "io.realm.kotlin:library:0.0.1-SNAPSHOT"
 }
 
 object Test {

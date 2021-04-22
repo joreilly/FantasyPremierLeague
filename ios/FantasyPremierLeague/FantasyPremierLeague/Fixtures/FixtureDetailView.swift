@@ -10,11 +10,11 @@ struct FixtureDetailView: View {
             HStack {
                 ClubInFixtureView(teamName: fixture.homeTeam, teamPhotoUrl: fixture.homeTeamPhotoUrl)
                 Spacer()
-                Text("(\(fixture.homeTeamScore))").font(.system(size: 22))
+                Text("(\(fixture.homeTeamScore ?? 0))").font(.system(size: 22))
                 Spacer()
                 Text("vs").font(.system(size: 22))
                 Spacer()
-                Text("(\(fixture.awayTeamScore))").font(.system(size: 22))
+                Text("(\(fixture.awayTeamScore ?? 0))").font(.system(size: 22))
                 Spacer()
                 ClubInFixtureView(teamName: fixture.awayTeam, teamPhotoUrl: fixture.awayTeamPhotoUrl)
             }

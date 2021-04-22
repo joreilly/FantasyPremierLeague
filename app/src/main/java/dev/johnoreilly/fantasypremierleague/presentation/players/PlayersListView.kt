@@ -10,20 +10,22 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import kotlin.math.sin
+import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 
 @Composable
 fun PlayerListView(
-    playersViewModel: PlayersViewModel,
+    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
     onPlayerSelected: (playerId: Int) -> Unit
 ) {
-    val playerList = playersViewModel.players.observeAsState()
-    val playerSearchQuery = playersViewModel.query
+    val playerList: State<List<Player>> = fantasyPremierLeagueViewModel.playerList.collectAsState()
+    val playerSearchQuery = fantasyPremierLeagueViewModel.searchQuery.collectAsState()
 
     Scaffold(
         topBar = {
@@ -52,11 +54,11 @@ fun PlayerListView(
                         imeAction = ImeAction.Search
                     ),
                     onValueChange = {
-                        playerSearchQuery.value = it
-                        playersViewModel.onPlayerSearchQueryChange(it)
+                        //playerSearchQuery.value = it
+                        fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(it)
                     }
                 )
-                playerList.value?.let {
+                playerList.value.let {
                     LazyColumn {
                         items(
                             items = it,

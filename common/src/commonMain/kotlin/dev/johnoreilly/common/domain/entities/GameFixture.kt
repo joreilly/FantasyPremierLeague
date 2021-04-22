@@ -9,6 +9,6 @@ data class GameFixture(
     val awayTeam: String,
     val homeTeamPhotoUrl: String,
     val awayTeamPhotoUrl: String,
-    val homeTeamScore: Int,
-    val awayTeamScore: Int
+    val homeTeamScore: Int?,
+    val awayTeamScore: Int?
 )

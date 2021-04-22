@@ -13,14 +13,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.coil.CoilImage
 import dev.johnoreilly.common.domain.entities.Player
-import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
+
 
 @Composable
-fun PlayerDetailsView(
-    player: Player,
-    playersViewModel: PlayersViewModel,
-    popBackStack: () -> Unit
-) {
+fun PlayerDetailsView(player: Player, popBackStack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

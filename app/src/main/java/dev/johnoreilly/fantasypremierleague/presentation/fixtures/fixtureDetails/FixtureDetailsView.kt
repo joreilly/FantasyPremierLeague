@@ -12,16 +12,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.ClubInFixtureView
-import dev.johnoreilly.fantasypremierleague.presentation.players.PlayersViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 
 @Composable
-fun FixtureDetailsView(
-    fixtureId: Int?,
-    playersViewModel: PlayersViewModel,
-    popBackStack: () -> Unit
-) {
-    val pastFixtureAsState = playersViewModel.getPastFixtureWithId(fixtureId).observeAsState()
+fun FixtureDetailsView(fixture: GameFixture, popBackStack: () -> Unit) {
 
     Scaffold(
         topBar = {
@@ -36,54 +32,51 @@ fun FixtureDetailsView(
                 }
             )
         }) {
-            pastFixtureAsState.value?.let { fixture ->
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        ClubInFixtureView(
-                            fixture.homeTeam,
-                            fixture.homeTeamPhotoUrl
-                        )
-                        Text(
-                            text = "(${fixture.homeTeamScore})",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 25.sp,
-                            color = MaterialTheme.colors.onSurface
-                        )
-                        Text(
-                            text = "vs",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 25.sp
-                        )
-                        Text(
-                            text = "(${fixture.awayTeamScore})",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 25.sp,
-                            color = MaterialTheme.colors.onSurface
-                        )
-                        ClubInFixtureView(
-                            fixture.awayTeam,
-                            fixture.awayTeamPhotoUrl
-                        )
-                    }
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                ClubInFixtureView(
+                    fixture.homeTeam,
+                    fixture.homeTeamPhotoUrl
+                )
+                Text(
+                    text = "(${fixture.homeTeamScore})",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp,
+                    color = MaterialTheme.colors.onSurface
+                )
+                Text(
+                    text = "vs",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp
+                )
+                Text(
+                    text = "(${fixture.awayTeamScore})",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp,
+                    color = MaterialTheme.colors.onSurface
+                )
+                ClubInFixtureView(
+                    fixture.awayTeam,
+                    fixture.awayTeamPhotoUrl
+                )
+            }
 
-                    val formattedTime = "%02d:%02d".format(
-                        fixture.localKickoffTime.hour,
-                        fixture.localKickoffTime.minute
-                    )
-                    PastFixtureStatView(statName = "Date", statValue = fixture.localKickoffTime.date.toString())
-                    PastFixtureStatView(statName = "Kick Off Time", statValue = formattedTime)
-                }
+            fixture.localKickoffTime?.let { localKickoffTime ->
+                val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
+                PastFixtureStatView(statName = "Date", statValue = localKickoffTime.date.toString())
+                PastFixtureStatView(statName = "Kick Off Time", statValue = formattedTime)
             }
         }
+    }
 }
 
 @Composable

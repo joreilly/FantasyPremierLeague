@@ -3,6 +3,7 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
+    id("realm-kotlin")
     id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
 }
 
@@ -67,6 +68,9 @@ kotlin {
 
             // Kotlinx Serialization
             implementation(Serialization.core)
+
+            // Realm
+            implementation(Deps.realm)
 
             // Kotlinx Date/Time
             api(Deps.kotlinxDateTime)
