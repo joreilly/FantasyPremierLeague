@@ -114,57 +114,57 @@ class FantasyPremierLeagueRepository : KoinComponent {
         val bootstrapStaticInfoDto = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
         val fixtures = fantasyPremierLeagueApi.fetchFixtures()
 
-        realm.beginTransaction()
+        realm.writeBlocking {
 
-        // basic implementation for now where we recreate/repopulate db on startup
-        realm.objects<TeamDb>().delete()
-        realm.objects<PlayerDb>().delete()
-        realm.objects<FixtureDb>().delete()
+            // basic implementation for now where we recreate/repopulate db on startup
+            realm.objects<TeamDb>().delete()
+            realm.objects<PlayerDb>().delete()
+            realm.objects<FixtureDb>().delete()
 
-        // store teams
-        bootstrapStaticInfoDto.teams.forEachIndexed { teamIndex, teamDto ->
-            realm.create<TeamDb>().apply {
-                id = teamDto.id
-                index = teamIndex + 1
-                name = teamDto.name
-                code = teamDto.code
+            // store teams
+            bootstrapStaticInfoDto.teams.forEachIndexed { teamIndex, teamDto ->
+                copyToRealm(TeamDb().apply {
+                    id = teamDto.id
+                    index = teamIndex + 1
+                    name = teamDto.name
+                    code = teamDto.code
+                })
             }
-        }
 
-        // store players
-        bootstrapStaticInfoDto.elements.forEach { player ->
-            realm.create<PlayerDb>().apply {
-                id = player.id
-                firstName = player.first_name
-                secondName = player.second_name
-                code = player.code
-                teamCode = player.team_code
-                totalPoints = player.total_points
-                nowCost = player.now_cost
-                goalsScored = player.goals_scored
-                assists = player.assists
+            // store players
+            bootstrapStaticInfoDto.elements.forEach { player ->
+                copyToRealm(PlayerDb().apply {
+                    id = player.id
+                    firstName = player.first_name
+                    secondName = player.second_name
+                    code = player.code
+                    teamCode = player.team_code
+                    totalPoints = player.total_points
+                    nowCost = player.now_cost
+                    goalsScored = player.goals_scored
+                    assists = player.assists
 
-                team = realm.objects<TeamDb>().query("code = $0", player.team_code).first()
+                    team = realm.objects<TeamDb>().query("code = $0", player.team_code).first()
+                })
             }
-        }
 
-        // store fixtures
-        val teams = realm.objects<TeamDb>().toList()
-        fixtures.forEach { fixtureDto ->
-            if (fixtureDto.kickoff_time != null) {
-                realm.create<FixtureDb>().apply {
-                    id = fixtureDto.id
-                    kickoffTime = fixtureDto.kickoff_time
-                    fixtureDto.team_h_score?.let { homeTeamScore = it }
-                    fixtureDto.team_a_score?.let { awayTeamScore = it }
+            // store fixtures
+            val teams = realm.objects<TeamDb>().toList()
+            fixtures.forEach { fixtureDto ->
+                if (fixtureDto.kickoff_time != null) {
+                    copyToRealm(FixtureDb().apply {
+                        id = fixtureDto.id
+                        kickoffTime = fixtureDto.kickoff_time
+                        fixtureDto.team_h_score?.let { homeTeamScore = it }
+                        fixtureDto.team_a_score?.let { awayTeamScore = it }
 
-                    homeTeam = teams.find { it.index == fixtureDto.team_h }
-                    awayTeam = teams.find { it.index == fixtureDto.team_a }
+                        homeTeam = teams.find { it.index == fixtureDto.team_h }
+                        awayTeam = teams.find { it.index == fixtureDto.team_a }
+                    })
                 }
             }
-        }
 
-        realm.commitTransaction()
+        }
     }
 
     suspend fun fetchPastFixtures() = fantasyPremierLeagueApi

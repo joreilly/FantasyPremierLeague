@@ -24,7 +24,7 @@ fun PlayerListView(
     fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
     onPlayerSelected: (playerId: Int) -> Unit
 ) {
-    val playerList: State<List<Player>> = fantasyPremierLeagueViewModel.playerList.collectAsState()
+    val playerList = fantasyPremierLeagueViewModel.playerList.collectAsState()
     val playerSearchQuery = fantasyPremierLeagueViewModel.searchQuery.collectAsState()
 
     Scaffold(
@@ -58,14 +58,10 @@ fun PlayerListView(
                         fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(it)
                     }
                 )
-                playerList.value.let {
-                    LazyColumn {
-                        items(
-                            items = it,
-                            itemContent = { player ->
-                                PlayerView(player, onPlayerSelected)
-                            })
-                    }
+                LazyColumn {
+                    items(items = playerList.value, itemContent = { player ->
+                        PlayerView(player, onPlayerSelected)
+                    })
                 }
             }
         }

@@ -41,7 +41,6 @@ object Compose {
     const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
     const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
     const val material = "androidx.compose.material:material:${Versions.compose}"
-    const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
     const val navigation = "androidx.navigation:navigation-compose:${Versions.nav_compose}"
     const val accompanist= "com.google.accompanist:accompanist-coil:${Versions.accompanist}"
 }
