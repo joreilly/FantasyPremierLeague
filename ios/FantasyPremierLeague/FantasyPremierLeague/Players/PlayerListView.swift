@@ -8,15 +8,16 @@ struct PlayerListView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.playerList, id: \.id) { player in
-                NavigationLink(destination: PlayerDetailsView(player: player)) {
-                    PlayerView(player: player)
+            
+            List {
+                TextField("Query", text: $viewModel.query)
+                ForEach(viewModel.playerList, id: \.id) { player in
+                    NavigationLink(destination: PlayerDetailsView(player: player)) {
+                        PlayerView(player: player)
+                    }
                 }
             }
             .navigationBarTitle(Text("Players"))
-            .onAppear {
-                viewModel.getPlayers()
-            }
         }
     }
 }

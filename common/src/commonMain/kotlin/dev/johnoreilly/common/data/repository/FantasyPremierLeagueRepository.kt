@@ -7,17 +7,14 @@ import dev.johnoreilly.common.domain.entities.Team
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmObject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import kotlin.coroutines.CoroutineContext
 
 class TeamDb: RealmObject {
     var id: Int = 0
@@ -181,6 +178,13 @@ class FantasyPremierLeagueRepository : KoinComponent {
         }
     }
 
+    val iosScope: CoroutineScope = object : CoroutineScope {
+        override val coroutineContext: CoroutineContext
+            get() = SupervisorJob() + Dispatchers.Main
+    }
+
+    fun getPlayersFlow() = KotlinNativeFlowWrapper<List<Player>>(playerList)
+
 
     fun getFixtures(success: (List<GameFixture>) -> Unit) {
         mainScope.launch {
@@ -189,4 +193,18 @@ class FantasyPremierLeagueRepository : KoinComponent {
             }
         }
     }
+}
+
+
+class KotlinNativeFlowWrapper<T>(private val flow: Flow<T>) {
+    fun subscribe(
+        scope: CoroutineScope,
+        onEach: (item: T) -> Unit,
+        onComplete: () -> Unit,
+        onThrow: (error: Throwable) -> Unit
+    ) = flow
+        .onEach { onEach(it) }
+        .catch { onThrow(it) }
+        .onCompletion { onComplete() }
+        .launchIn(scope)
 }
