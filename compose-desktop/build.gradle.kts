@@ -11,7 +11,6 @@ group = "me.joreilly"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    jcenter()
     mavenCentral()
     maven(url = "https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }

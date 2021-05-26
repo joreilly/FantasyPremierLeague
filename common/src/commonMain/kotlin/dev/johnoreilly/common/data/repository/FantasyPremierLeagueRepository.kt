@@ -5,7 +5,6 @@ import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.Team
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import io.realm.RealmObject
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -58,10 +57,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
     private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
     val fixtureList = _fixtureList.asStateFlow()
 
-    private val realm: Realm by lazy {
-        val configuration = RealmConfiguration(schema = setOf(PlayerDb::class, TeamDb::class, FixtureDb::class))
-        Realm.open(configuration)
-    }
+    private val realm: Realm by inject()
 
     init {
         mainScope.launch {
