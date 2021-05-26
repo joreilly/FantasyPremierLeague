@@ -24,7 +24,7 @@ data class ElementDto(
     val direct_freekicks_text: String,
     val dreamteam_count: Int,
     val element_type: Int,
-    val ep_next: String,
+    val ep_next: String?,
     val ep_this: String,
     val event_points: Int,
     val first_name: String,
