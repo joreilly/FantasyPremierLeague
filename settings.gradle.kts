@@ -10,6 +10,4 @@ pluginManagement {
 
 rootProject.name = "FantasyPremierLeague"
 
-enableFeaturePreview("GRADLE_METADATA")
-
 include(":app", ":common", ":compose-desktop")
