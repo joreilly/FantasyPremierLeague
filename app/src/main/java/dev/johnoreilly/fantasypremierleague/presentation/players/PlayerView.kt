@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -9,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.coil.CoilImage
+import com.google.accompanist.coil.rememberCoilPainter
 import dev.johnoreilly.common.domain.entities.Player
 
 @Composable
@@ -24,8 +25,8 @@ fun PlayerView(
             .fillMaxWidth()
             .clickable { onPlayerSelected(player.id) }
     ) {
-        CoilImage(
-            data = player.photoUrl,
+        Image(
+            painter = rememberCoilPainter(player.photoUrl),
             modifier = Modifier.size(60.dp),
             contentDescription = player.name
         )

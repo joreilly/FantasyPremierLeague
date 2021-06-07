@@ -3,7 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven(url = "http://oss.jfrog.org/artifactory/oss-snapshot-local")
+        maven(url = "https://oss.jfrog.org/artifactory/oss-snapshot-local")
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.0-beta03")
@@ -18,7 +18,7 @@ allprojects {
         google()
         mavenCentral()
         maven(url = "https://kotlin.bintray.com/kotlinx/")
-        maven(url = "http://oss.jfrog.org/artifactory/oss-snapshot-local")
+        maven(url = "https://oss.jfrog.org/artifactory/oss-snapshot-local")
     }
 }
 

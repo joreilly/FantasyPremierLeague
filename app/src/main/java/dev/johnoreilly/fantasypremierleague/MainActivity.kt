@@ -42,7 +42,7 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
             bottomBar = {
                 BottomNavigation {
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
-                    val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
+                    val currentRoute = navBackStackEntry?.destination?.route
 
                     bottomNavigationItems.forEach { bottomNavigationitem ->
                         BottomNavigationItem(
@@ -55,7 +55,7 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
                             selected = currentRoute == bottomNavigationitem.route,
                             onClick = {
                                 navController.navigate(bottomNavigationitem.route) {
-                                    popUpTo = navController.graph.startDestination
+                                    popUpTo(navController.graph.id)
                                     launchSingleTop = true
                                 }
                             }

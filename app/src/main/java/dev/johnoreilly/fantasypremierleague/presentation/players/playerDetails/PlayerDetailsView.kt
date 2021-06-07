@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -11,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.coil.CoilImage
+import com.google.accompanist.coil.rememberCoilPainter
 import dev.johnoreilly.common.domain.entities.Player
 
 
@@ -41,8 +42,8 @@ fun PlayerDetailsView(player: Player, popBackStack: () -> Unit) {
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
                 Spacer(modifier = Modifier.size(16.dp))
-                CoilImage(
-                    data = player.photoUrl,
+                Image(
+                    painter = rememberCoilPainter(player.photoUrl),
                     modifier = Modifier
                         .size(150.dp)
                         .align(Alignment.CenterHorizontally),

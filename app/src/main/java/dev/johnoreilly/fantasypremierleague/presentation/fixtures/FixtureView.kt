@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.fixtures
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.coil.CoilImage
+import com.google.accompanist.coil.rememberCoilPainter
 import dev.johnoreilly.common.domain.entities.GameFixture
 
 @Composable
@@ -96,8 +97,8 @@ fun ClubInFixtureView(
     teamPhotoUrl: String
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        CoilImage(
-            data = teamPhotoUrl,
+        Image(
+            painter = rememberCoilPainter(teamPhotoUrl),
             modifier = Modifier.size(60.dp),
             contentDescription = teamName
         )
