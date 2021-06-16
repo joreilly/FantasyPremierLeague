@@ -1,5 +1,7 @@
 package dev.johnoreilly.common.data.repository
 
+import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
+import dev.johnoreilly.common.data.model.FixtureDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
@@ -106,6 +108,14 @@ class FantasyPremierLeagueRepository : KoinComponent {
     private suspend fun loadData() {
         val bootstrapStaticInfoDto = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
         val fixtures = fantasyPremierLeagueApi.fetchFixtures()
+        writeDataToDb(bootstrapStaticInfoDto, fixtures)
+
+    }
+
+    private suspend fun writeDataToDb(
+        bootstrapStaticInfoDto: BootstrapStaticInfoDto,
+        fixtures: List<FixtureDto>
+    )  {
 
         realm.writeBlocking {
 

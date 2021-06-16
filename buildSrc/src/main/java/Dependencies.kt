@@ -27,7 +27,7 @@ object AndroidSdk {
 object Deps {
     const val kermit = "co.touchlab:kermit:${Versions.kermit}"
     const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
-    const val realm = "io.realm.kotlin:library:0.0.1-SNAPSHOT"
+    const val realm = "io.realm.kotlin:library:${Versions.realm}"
 }
 
 object Test {
