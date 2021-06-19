@@ -112,7 +112,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     }
 
-    private suspend fun writeDataToDb(
+    private fun writeDataToDb(
         bootstrapStaticInfoDto: BootstrapStaticInfoDto,
         fixtures: List<FixtureDto>
     )  {

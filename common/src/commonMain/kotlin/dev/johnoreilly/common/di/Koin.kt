@@ -39,7 +39,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single { FantasyPremierLeagueApi(get()) }
 }
 
-fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
+fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true; useAlternativeNames = false }
 
 fun createHttpClient(json: Json, enableNetworkLogs: Boolean) = HttpClient {
     install(JsonFeature) {
