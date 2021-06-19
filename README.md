@@ -1,6 +1,6 @@
 # Fantasy Premier League
 
-A **kotlin multiplatform** project using jetpack compose for android & desktop and swiftUI. Currently running on:
+*Kotlin Multiplatform** project using Jetpack Compose for Android, Desktop and SwiftUI (using Realm for persistence). Currently running on:
 * Android (Jetpack Compose)
 * iOS (SwiftUI)
 * Desktop (Compose for Desktop) - note, this has been temporarily disabled until Realm has JVM support
