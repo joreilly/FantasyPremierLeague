@@ -12,7 +12,7 @@ object Versions {
     const val slf4j = "1.7.30"
     const val compose = "1.0.0-rc01"
     const val nav_compose = "2.4.0-alpha04"
-    const val accompanist = "0.12.0"
+    const val accompanist = "0.13.0"
 
     const val junit = "4.13"
 }
