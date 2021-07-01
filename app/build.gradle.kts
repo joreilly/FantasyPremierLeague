@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AndroidSdk.compile)
+    compileSdk = AndroidSdk.compile
     defaultConfig {
         applicationId = "dev.johnoreilly.fantasypremierleague"
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
 
         versionCode = 1
         versionName = "1.0"
