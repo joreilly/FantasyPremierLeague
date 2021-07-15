@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.coil.rememberCoilPainter
+import coil.compose.rememberImagePainter
 import dev.johnoreilly.common.domain.entities.Player
 
 
@@ -43,7 +43,7 @@ fun PlayerDetailsView(player: Player, popBackStack: () -> Unit) {
                 )
                 Spacer(modifier = Modifier.size(16.dp))
                 Image(
-                    painter = rememberCoilPainter(player.photoUrl),
+                    painter = rememberImagePainter(player.photoUrl),
                     modifier = Modifier
                         .size(150.dp)
                         .align(Alignment.CenterHorizontally),

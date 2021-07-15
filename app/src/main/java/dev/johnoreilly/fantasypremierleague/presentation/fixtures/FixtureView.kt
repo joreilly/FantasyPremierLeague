@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.coil.rememberCoilPainter
+import coil.compose.rememberImagePainter
 import dev.johnoreilly.common.domain.entities.GameFixture
 
 @Composable
@@ -71,13 +71,13 @@ fun FixtureView(
             }
             Text(
                 modifier = Modifier.padding(top = 16.dp),
-                text = fixture.localKickoffTime?.date.toString() ?: "",
+                text = fixture.localKickoffTime.date.toString(),
                 fontWeight = FontWeight.Light,
                 fontSize = 14.sp,
                 color = MaterialTheme.colors.onSurface
             )
 
-            fixture.localKickoffTime?.let { localKickoffTime ->
+            fixture.localKickoffTime.let { localKickoffTime ->
                 val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
                 Text(
                     modifier = Modifier.padding(bottom = 16.dp),
@@ -98,7 +98,7 @@ fun ClubInFixtureView(
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
-            painter = rememberCoilPainter(teamPhotoUrl),
+            painter = rememberImagePainter(teamPhotoUrl),
             modifier = Modifier.size(60.dp),
             contentDescription = teamName
         )

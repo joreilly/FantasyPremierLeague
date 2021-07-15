@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.coil.rememberCoilPainter
+import coil.compose.rememberImagePainter
 import dev.johnoreilly.common.domain.entities.Player
 
 @Composable
@@ -26,7 +26,7 @@ fun PlayerView(
             .clickable { onPlayerSelected(player.id) }
     ) {
         Image(
-            painter = rememberCoilPainter(player.photoUrl),
+            painter = rememberImagePainter(player.photoUrl),
             modifier = Modifier.size(60.dp),
             contentDescription = player.name
         )
