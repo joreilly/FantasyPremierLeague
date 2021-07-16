@@ -3,7 +3,7 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
-    id("io.realm.kotlin")
+    id("io.realm.kotlin") version Versions.realm
     id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
 }
 

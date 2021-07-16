@@ -33,13 +33,16 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single { Kermit(getLogger()) }
 
     single { RealmConfiguration(schema = setOf(PlayerDb::class, TeamDb::class, FixtureDb::class)) }
-    single { Realm.open(get()) }
+    single { Realm(get()) }
 
     single { FantasyPremierLeagueRepository() }
     single { FantasyPremierLeagueApi(get()) }
 }
 
-fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
+fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true
+    // to avoid 'mutation attempt of frozen kotlin.collections.HashMap@' in K/N
+    useAlternativeNames = false
+}
 
 fun createHttpClient(json: Json, enableNetworkLogs: Boolean) = HttpClient {
     install(JsonFeature) {

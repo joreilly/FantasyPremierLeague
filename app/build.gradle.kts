@@ -23,11 +23,20 @@ android {
         kotlinCompilerExtensionVersion = Versions.compose
     }
 
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+            storeFile = rootProject.file("debug.keystore")
+            storePassword = "android"
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
