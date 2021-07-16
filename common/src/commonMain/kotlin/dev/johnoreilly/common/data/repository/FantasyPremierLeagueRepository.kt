@@ -6,8 +6,10 @@ import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.Team
+import io.realm.PrimaryKey
 import io.realm.Realm
 import io.realm.RealmObject
+import io.realm.RealmResults
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
@@ -18,6 +20,7 @@ import kotlinx.datetime.toLocalDateTime
 import kotlin.coroutines.CoroutineContext
 
 class TeamDb: RealmObject {
+    @PrimaryKey
     var id: Int = 0
     var index: Int = 0
     var name: String = ""
@@ -25,6 +28,7 @@ class TeamDb: RealmObject {
 }
 
 class PlayerDb: RealmObject {
+    @PrimaryKey
     var id: Int = 0
     var firstName: String = ""
     var secondName: String = ""
@@ -38,6 +42,7 @@ class PlayerDb: RealmObject {
 }
 
 class FixtureDb: RealmObject {
+    @PrimaryKey
     var id: Int = 0
     var kickoffTime: String? = ""
     var homeTeam: TeamDb? = null
@@ -65,43 +70,55 @@ class FantasyPremierLeagueRepository : KoinComponent {
         mainScope.launch {
             loadData()
 
-            realm.objects(TeamDb::class).observe {
-                _teamList.value = it.toList().map {
-                    Team(it.id, it.index, it.name, it.code)
-                }
-            }
-
-            realm.objects(PlayerDb::class).observe {
-                _playerList.value = it.toList().map {
-                    val playerName = "${it.firstName} ${it.secondName}"
-                    val playerImageUrl = "https://resources.premierleague.com/premierleague/photos/players/110x140/p${it.code}.png"
-                    val teamName = it.team?.name ?: ""
-                    val currentPrice = it.nowCost / 10.0
-
-                    Player(it.id, playerName, teamName, playerImageUrl, it.totalPoints, currentPrice, it.goalsScored, it.assists)
-                }
-            }
-
-            realm.objects(FixtureDb::class).observe {
-                _fixtureList.value = it.toList().map {
-                    val homeTeamName = it.homeTeam?.name ?: ""
-                    val homeTeamCode = it.homeTeam?.code ?: 0
-                    val homeTeamScore = it.homeTeamScore ?: 0
-                    val homeTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${homeTeamCode}.png"
-
-                    val awayTeamName = it.awayTeam?.name ?: ""
-                    val awayTeamCode = it.awayTeam?.code ?: 0
-                    val awayTeamScore = it.awayTeamScore ?: 0
-                    val awayTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${awayTeamCode}.png"
-
-                    it.kickoffTime?.let { kickoffTime ->
-                        val localKickoffTime = kickoffTime.toInstant().toLocalDateTime(TimeZone.currentSystemDefault())
-
-                        GameFixture(it.id, localKickoffTime, homeTeamName, awayTeamName,
-                            homeTeamPhotoUrl, awayTeamPhotoUrl, homeTeamScore, awayTeamScore)
+            launch {
+                realm.objects(TeamDb::class).observe().collect { it: RealmResults<TeamDb> ->
+                    _teamList.value = it.toList().map {
+                        Team(it.id, it.index, it.name, it.code)
                     }
-                }.filterNotNull()
+                }
             }
+
+            launch {
+                realm.objects(PlayerDb::class).observe().collect { it: RealmResults<PlayerDb> ->
+                    _playerList.value = it.toList().map {
+                        val playerName = "${it.firstName} ${it.secondName}"
+                        val playerImageUrl = "https://resources.premierleague.com/premierleague/photos/players/110x140/p${it.code}.png"
+                        val teamName = it.team?.name ?: ""
+                        val currentPrice = it.nowCost / 10.0
+
+                        Player(it.id, playerName, teamName, playerImageUrl, it.totalPoints, currentPrice, it.goalsScored, it.assists)
+                    }
+                }
+            }
+
+            launch {
+                realm.objects(FixtureDb::class).observe().collect { it: RealmResults<FixtureDb> ->
+                    _fixtureList.value = it.toList().mapNotNull {
+                        val homeTeamName = it.homeTeam?.name ?: ""
+                        val homeTeamCode = it.homeTeam?.code ?: 0
+                        val homeTeamScore = it.homeTeamScore ?: 0
+                        val homeTeamPhotoUrl =
+                            "https://resources.premierleague.com/premierleague/badges/t${homeTeamCode}.png"
+
+                        val awayTeamName = it.awayTeam?.name ?: ""
+                        val awayTeamCode = it.awayTeam?.code ?: 0
+                        val awayTeamScore = it.awayTeamScore ?: 0
+                        val awayTeamPhotoUrl =
+                            "https://resources.premierleague.com/premierleague/badges/t${awayTeamCode}.png"
+
+                        it.kickoffTime?.let { kickoffTime ->
+                            val localKickoffTime = kickoffTime.toInstant()
+                                .toLocalDateTime(TimeZone.currentSystemDefault())
+
+                            GameFixture(
+                                it.id, localKickoffTime, homeTeamName, awayTeamName,
+                                homeTeamPhotoUrl, awayTeamPhotoUrl, homeTeamScore, awayTeamScore
+                            )
+                        }
+                    }
+                }
+            }
+
         }
     }
 
@@ -112,17 +129,17 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     }
 
-    private fun writeDataToDb(
+    private suspend fun writeDataToDb(
         bootstrapStaticInfoDto: BootstrapStaticInfoDto,
         fixtures: List<FixtureDto>
     )  {
 
-        realm.writeBlocking {
+        realm.write {
 
             // basic implementation for now where we recreate/repopulate db on startup
-            realm.objects<TeamDb>().delete()
-            realm.objects<PlayerDb>().delete()
-            realm.objects<FixtureDb>().delete()
+            objects<TeamDb>().delete()
+            objects<PlayerDb>().delete()
+            objects<FixtureDb>().delete()
 
             // store teams
             bootstrapStaticInfoDto.teams.forEachIndexed { teamIndex, teamDto ->
@@ -147,12 +164,12 @@ class FantasyPremierLeagueRepository : KoinComponent {
                     goalsScored = player.goals_scored
                     assists = player.assists
 
-                    team = realm.objects<TeamDb>().query("code = $0", player.team_code).first()
+                    team = objects<TeamDb>().query("code = $0", player.team_code).first()
                 })
             }
 
             // store fixtures
-            val teams = realm.objects<TeamDb>().toList()
+            val teams = objects<TeamDb>().toList()
             fixtures.forEach { fixtureDto ->
                 if (fixtureDto.kickoff_time != null) {
                     copyToRealm(FixtureDb().apply {
