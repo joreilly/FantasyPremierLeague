@@ -25,7 +25,7 @@ data class ElementDto(
     val dreamteam_count: Int,
     val element_type: Int,
     val ep_next: String?,
-    val ep_this: String,
+    val ep_this: String?,
     val event_points: Int,
     val first_name: String,
     val form: String,

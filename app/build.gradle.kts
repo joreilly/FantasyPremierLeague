@@ -54,14 +54,14 @@ android {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
-        freeCompilerArgs = listOf("-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check",
+        freeCompilerArgs = listOf("-Xallow-jvm-ir-dependencies",
                 "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
         )
     }
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
@@ -73,14 +73,15 @@ dependencies {
     implementation(Compose.foundationLayout)
     implementation(Compose.material)
     implementation(Compose.navigation)
-    implementation(Compose.accompanist)
+    implementation(Compose.coilCompose)
+
 
     implementation(Koin.android)
 
-    testImplementation("junit:junit:4.13.1")
-    testImplementation("androidx.test:core:1.3.0")
-    testImplementation("org.robolectric:robolectric:4.4")
-    androidTestImplementation("androidx.test:runner:1.3.0")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("androidx.test:core:1.4.0")
+    testImplementation("org.robolectric:robolectric:4.6.1")
+    androidTestImplementation("androidx.test:runner:1.4.0")
 
     implementation(project(":common"))
 }
