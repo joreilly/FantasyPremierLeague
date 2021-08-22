@@ -6,10 +6,10 @@ import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.Team
-import io.realm.PrimaryKey
 import io.realm.Realm
 import io.realm.RealmObject
 import io.realm.RealmResults
+import io.realm.annotations.PrimaryKey
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
