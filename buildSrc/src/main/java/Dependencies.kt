@@ -10,8 +10,8 @@ object Versions {
     const val kotlinxDateTime = "0.2.1"
 
     const val slf4j = "1.7.30"
-    const val compose = "1.0.1"
-    const val nav_compose = "2.4.0-alpha06"
+    const val compose = "1.0.2"
+    const val nav_compose = "2.4.0-alpha08"
     const val coilCompose = "1.3.1"
 
     const val junit = "4.13"
@@ -20,7 +20,7 @@ object Versions {
 
 object AndroidSdk {
     const val min = 21
-    const val compile = 30
+    const val compile = 31
     const val target = compile
 }
 
