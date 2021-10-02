@@ -3,7 +3,7 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
-    id("io.realm.kotlin") version Versions.realm
+    id("io.realm.kotlin")
     id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
 }
 
@@ -32,7 +32,7 @@ kotlin {
     }
 
     android()
-    //jvm()
+    jvm()
 
     cocoapods {
         summary = "Fantasy Football Premier League"
@@ -81,13 +81,13 @@ kotlin {
             implementation(Test.junit)
         }
 
-//        sourceSets["jvmMain"].dependencies {
-//            implementation(Ktor.clientApache)
-//            implementation(Ktor.slf4j)
-//
-//            implementation("org.nield:kotlin-statistics:1.2.1")
-//            implementation("org.ojalgo:okalgo:0.0.2")
-//        }
+        sourceSets["jvmMain"].dependencies {
+            implementation(Ktor.clientApache)
+            implementation(Ktor.slf4j)
+
+            implementation("org.nield:kotlin-statistics:1.2.1")
+            implementation("org.ojalgo:okalgo:0.0.2")
+        }
 
         sourceSets["iOSMain"].dependencies {
             implementation(Ktor.clientIos)

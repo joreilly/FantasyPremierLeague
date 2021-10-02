@@ -5,14 +5,14 @@ object Versions {
     const val ktor = "1.6.3"
     const val kotlinxSerialization = "1.2.2"
     const val koin = "3.1.2"
-    const val realm = "0.5.0"
+    const val realm = "0.6.0-SNAPSHOT"
     const val kermit = "0.1.9"
     const val kotlinxDateTime = "0.2.1"
 
     const val slf4j = "1.7.30"
-    const val compose = "1.1.0-alpha04"
-    const val nav_compose = "2.4.0-alpha08"
-    const val coilCompose = "1.3.1"
+    const val compose = "1.0.3"
+    const val nav_compose = "2.4.0-alpha10"
+    const val coilCompose = "1.3.2"
 
     const val junit = "4.13"
 }
@@ -27,7 +27,7 @@ object AndroidSdk {
 object Deps {
     const val kermit = "co.touchlab:kermit:${Versions.kermit}"
     const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
-    const val realm = "io.realm.kotlin:library:${Versions.realm}"
+    const val realm = "io.realm.kotlin:library-base:${Versions.realm}"
 }
 
 object Test {

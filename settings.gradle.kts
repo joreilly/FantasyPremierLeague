@@ -10,4 +10,4 @@ pluginManagement {
 
 rootProject.name = "FantasyPremierLeague"
 
-include(":app", ":common")
+include(":app", "compose-desktop", ":common")

@@ -46,12 +46,14 @@ fun fetchImage(url: String): ImageBitmap? {
 
     LaunchedEffect(url) {
         loadFullImage(url)?.let {
-            image = org.jetbrains.skija.Image.makeFromEncoded(toByteArray(it)).asImageBitmap()
+            image =  org.jetbrains.skia.Image.makeFromEncoded(toByteArray(it)).asImageBitmap()
         }
     }
 
     return image
 }
+
+
 
 fun loadFullImage(source: String): BufferedImage? {
     return try {
