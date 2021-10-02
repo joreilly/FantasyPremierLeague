@@ -37,11 +37,13 @@ fun main() = application {
         title = "Fantasy Premier League"
     ) {
         Row(Modifier.fillMaxSize()) {
-            LazyColumn {
-                items(items = playerList, itemContent = { player ->
-                    PlayerView(player, selectedPlayer) {
-                    }
-                })
+            if (playerList.isNotEmpty()) {
+                LazyColumn {
+                    items(items = playerList, itemContent = { player ->
+                        PlayerView(player, selectedPlayer) {
+                        }
+                    })
+                }
             }
         }
     }
