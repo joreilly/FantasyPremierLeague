@@ -3,8 +3,7 @@
 **Kotlin Multiplatform** project with Jetpack Compose, Compose for Desktop and SwiftUI clients (and using Ktor for remote API requessts and Realm for persistence). Currently running on:
 * Android (Jetpack Compose)
 * iOS (SwiftUI)
-* Desktop (Compose for Desktop) - note, this has been temporarily disabled until Realm has JVM support
-
+* Desktop (Compose for Desktop)
 
 ## Screenshots
 |Platform|Screenshot|
