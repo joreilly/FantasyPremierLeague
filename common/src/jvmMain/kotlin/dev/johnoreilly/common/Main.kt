@@ -3,6 +3,8 @@ package dev.johnoreilly.common
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.di.initKoin
 import kotlinx.datetime.*
+import org.ojalgo.okalgo.*
+import org.ojalgo.optimisation.Variable
 
 suspend fun main() {
     val koin = initKoin(enableNetworkLogs = true).koin
@@ -11,7 +13,7 @@ suspend fun main() {
     val staticInfo = api.fetchBootstrapStaticInfo()
     val fixtures = api.fetchFixtures()
 
-    
+
     println("Positions")
     staticInfo.element_types.forEach {
         println("${it.id}: ${it.singular_name_short}")
@@ -46,5 +48,42 @@ suspend fun main() {
         println("${element.first_name} ${element.second_name}: ${element.now_cost/10.0} ${element.total_points} ${position?.singular_name_short}")
     }
 
+
+
+    expressionsbasedmodel {
+
+        val playerVariableList = mutableListOf<Variable>()
+
+        val maximiseExpression = ExpressionBuilder()
+        val costConstraint = ExpressionBuilder()
+        val maxNumberOfPlayersConstraint = ExpressionBuilder()
+
+        players.forEach { player ->
+            val playerVariable = variable(name = player.web_name, isBinary = true)
+            playerVariableList.add(playerVariable)
+
+            maximiseExpression.plus(player.total_points*playerVariable)
+            costConstraint.plus(player.now_cost*playerVariable)
+            maxNumberOfPlayersConstraint.plus(playerVariable)
+        }
+        costConstraint.GTE(1000)
+        maxNumberOfPlayersConstraint.EQ(15)
+
+        expression(maximiseExpression) {
+            weight(1)
+        }
+
+        expression {
+            set(costConstraint)
+            set(maxNumberOfPlayersConstraint)
+        }
+
+        maximise().run(::println)
+        playerVariableList.forEach {
+            if (it.value.toInt() == 1) {
+                println(it.name)
+            }
+        }
+    }
 
 }
