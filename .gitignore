@@ -26,7 +26,6 @@ gradle-app.setting
 /captures
 
 
-*.xcworkspacedata
 *.xcuserstate
 *.xcscheme
 xcschememanagement.plist
