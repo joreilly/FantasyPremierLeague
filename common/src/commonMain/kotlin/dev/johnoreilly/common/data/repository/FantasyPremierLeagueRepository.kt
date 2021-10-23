@@ -175,7 +175,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                 if (fixtureDto.kickoff_time != null) {
                     copyToRealm(FixtureDb().apply {
                         id = fixtureDto.id
-                        kickoffTime = fixtureDto.kickoff_time
+                        kickoffTime = fixtureDto.kickoff_time.toString()
                         fixtureDto.team_h_score?.let { homeTeamScore = it }
                         fixtureDto.team_a_score?.let { awayTeamScore = it }
 

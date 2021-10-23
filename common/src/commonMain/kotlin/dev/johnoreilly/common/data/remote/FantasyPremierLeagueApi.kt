@@ -13,4 +13,5 @@ class FantasyPremierLeagueApi(
 ) : KoinComponent {
     suspend fun fetchBootstrapStaticInfo() = client.get<BootstrapStaticInfoDto>("$baseUrl/bootstrap-static/")
     suspend fun fetchFixtures() = client.get<List<FixtureDto>>("$baseUrl/fixtures")
+    suspend fun fetchUpcomingFixtures() = client.get<List<FixtureDto>>("$baseUrl/fixtures?future=1")
 }

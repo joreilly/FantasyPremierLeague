@@ -1,16 +1,16 @@
 
 object Versions {
-    const val kotlin = "1.5.30"
+    const val kotlin = "1.5.31"
     const val kotlinCoroutines = "1.5.2-native-mt"
     const val ktor = "1.6.3"
-    const val kotlinxSerialization = "1.2.2"
+    const val kotlinxSerialization = "1.3.0"
     const val koin = "3.1.2"
     const val realm = "0.6.0"
     const val kermit = "0.1.9"
-    const val kotlinxDateTime = "0.2.1"
+    const val kotlinxDateTime = "0.3.0"
 
     const val slf4j = "1.7.30"
-    const val compose = "1.0.3"
+    const val compose = "1.0.4"
     const val nav_compose = "2.4.0-alpha10"
     const val coilCompose = "1.3.2"
 
@@ -60,6 +60,7 @@ object Ktor {
 
     val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
     val clientApache = "io.ktor:ktor-client-apache:${Versions.ktor}"
+    val clientJava = "io.ktor:ktor-client-java:${Versions.ktor}"
     val slf4j = "org.slf4j:slf4j-simple:${Versions.slf4j}"
     val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
 }
