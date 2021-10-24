@@ -1,6 +1,6 @@
 package dev.johnoreilly.common
 
-import dev.johnoreilly.common.data.model.ElementDto
+import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.di.initKoin
 import kotlinx.datetime.*
@@ -26,14 +26,15 @@ suspend fun main() {
         println("${it.id}, ${it.name}")
     }
 
-    val currentEvent = staticInfo.events.find { it.is_current == true }
-    val nextEvent = staticInfo.events.find { it.is_next == true }
+    val currentEvent = staticInfo.events.find { it.is_current }
+    val nextEvent = staticInfo.events.find { it.is_next }
 
     println("next game week fixtures")
     val nextFixtures = fixtures.filter { it.event == nextEvent?.id }
     nextFixtures.forEach { fixture ->
 
-        val datetimeInSystemZone = fixture.kickoff_time?.toLocalDateTime(TimeZone.currentSystemDefault())
+        val datetimeInSystemZone =
+            fixture.kickoff_time?.toLocalDateTime(TimeZone.currentSystemDefault())
 
         val homeTeam = staticInfo.teams.find { it.id == fixture.team_h }
         val awayTeam = staticInfo.teams.find { it.id == fixture.team_a }
@@ -46,9 +47,32 @@ suspend fun main() {
     println("Players")
     players.sortedByDescending { it.total_points }.take(10).forEach { element ->
         val position = staticInfo.element_types.find { it.id == element.element_type }
-        println("${element.first_name} ${element.second_name}: ${element.now_cost/10.0} ${element.total_points} ${position?.singular_name_short}")
+        val team = staticInfo.teams.find { it.id == element.team }
+        println("${element.first_name} ${element.second_name}: ${element.now_cost / 10.0} ${element.total_points} ${position?.singular_name_short}, team=${team?.name}")
     }
 
+
+    currentEvent?.let {
+        val gameWeekLiveData = api.fetchGameWeekLiveData(currentEvent.id)
+
+        println("Game week player info")
+        gameWeekLiveData.elements.sortedByDescending { it.stats.total_points }.take(10)
+            .forEach { gameWeekElement ->
+                players.find { it.id == gameWeekElement.id }?.let { element ->
+                    println("${element.web_name}: ${element.now_cost / 10.0} ${element.total_points} ${gameWeekElement.stats}")
+                }
+            }
+    }
+
+
+    pickTeam(staticInfo)
+
+}
+
+/*
+    Use okAlgo library to pick team
+ */
+fun pickTeam(staticInfo: BootstrapStaticInfoDto) {
 
 
     expressionsbasedmodel {
@@ -63,6 +87,7 @@ suspend fun main() {
         val numberMidfieldersConstraint = ExpressionBuilder()
         val numberForwardsConstraint = ExpressionBuilder()
 
+        val players = staticInfo.elements
         players.forEach { player ->
             val playerVariable = variable(name = player.id.toString(), isBinary = true)
             playerVariableList.add(playerVariable)
@@ -71,22 +96,39 @@ suspend fun main() {
             costConstraint.plus(player.now_cost*playerVariable)
             numberOfPlayersConstraint.plus(playerVariable)
 
-            if (player.element_type == 1) {
-                numberGoalkeepersConstraint.plus(playerVariable)
-            } else if (player.element_type == 2) {
-                numberDefendersConstraint.plus(playerVariable)
-            } else if (player.element_type == 3) {
-                numberMidfieldersConstraint.plus(playerVariable)
-            } else if (player.element_type == 4) {
-                numberForwardsConstraint.plus(playerVariable)
+            when (player.element_type) {
+                1 -> numberGoalkeepersConstraint.plus(playerVariable)
+                2 -> numberDefendersConstraint.plus(playerVariable)
+                3 -> numberMidfieldersConstraint.plus(playerVariable)
+                4 -> numberForwardsConstraint.plus(playerVariable)
             }
         }
+
+        // team constraints
+        val teamConstraintList = mutableListOf<ExpressionBuilder>()
+        staticInfo.teams.forEach { team ->
+            val teamConstraint = ExpressionBuilder()
+
+            players.forEach { player ->
+                if (player.team == team.id) {
+                    val playerVariable = playerVariableList.find { it.name == player.id.toString() }
+                    playerVariable?.let {
+                        teamConstraint.plus(playerVariable)
+                    }
+                }
+            }
+            teamConstraint.GTE(3)
+            teamConstraintList.add(teamConstraint)
+        }
+
+
         costConstraint.GTE(1000)
         numberOfPlayersConstraint.EQ(15)
         numberGoalkeepersConstraint.EQ(2)
         numberDefendersConstraint.EQ(5)
         numberMidfieldersConstraint.EQ(5)
         numberForwardsConstraint.EQ(3)
+
 
         expression(maximiseExpression) {
             weight(1)
@@ -100,18 +142,29 @@ suspend fun main() {
             set(numberDefendersConstraint)
             set(numberMidfieldersConstraint)
             set(numberForwardsConstraint)
+            teamConstraintList.forEach {
+                set(it)
+            }
         }
 
         maximise().run(::println)
 
-        val optimizedTeam = playerVariableList.filter { it.value.toInt() == 1 }.map { playerVariable ->
+        val optimizedTeam = playerVariableList.filter { it.value.toInt() == 1 }.mapNotNull { playerVariable ->
             players.find { it.id.toString() == playerVariable.name }
-        }.filterNotNull()
+        }
 
         optimizedTeam.sortedBy { it.element_type }.forEach { player ->
-            println(player.web_name + " " + player.total_points + " " + player.element_type)
+            val team = staticInfo.teams.find { it.id == player.team }
+            println("${player.web_name} ${player.now_cost} ${player.total_points} ${player.element_type}, team=${team?.name}")
         }
+
+        val totalPoints = optimizedTeam.sumOf { it.total_points }
+        println("total points = $totalPoints")
+
+        val totalCost = optimizedTeam.sumOf { it.now_cost }
+        println("total cost = $totalCost")
 
     }
 
 }
+

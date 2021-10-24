@@ -84,7 +84,6 @@ kotlin {
         sourceSets["jvmMain"].dependencies {
             implementation(Ktor.clientJava)
             implementation(Ktor.slf4j)
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutines}")
 
             implementation("org.nield:kotlin-statistics:1.2.1")
             implementation("org.ojalgo:okalgo:0.0.2")
