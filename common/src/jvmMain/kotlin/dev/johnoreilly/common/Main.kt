@@ -1,5 +1,6 @@
 package dev.johnoreilly.common
 
+import dev.johnoreilly.common.data.model.ElementDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.di.initKoin
 import kotlinx.datetime.*
@@ -56,18 +57,36 @@ suspend fun main() {
 
         val maximiseExpression = ExpressionBuilder()
         val costConstraint = ExpressionBuilder()
-        val maxNumberOfPlayersConstraint = ExpressionBuilder()
+        val numberOfPlayersConstraint = ExpressionBuilder()
+        val numberGoalkeepersConstraint = ExpressionBuilder()
+        val numberDefendersConstraint = ExpressionBuilder()
+        val numberMidfieldersConstraint = ExpressionBuilder()
+        val numberForwardsConstraint = ExpressionBuilder()
 
         players.forEach { player ->
-            val playerVariable = variable(name = player.web_name, isBinary = true)
+            val playerVariable = variable(name = player.id.toString(), isBinary = true)
             playerVariableList.add(playerVariable)
 
             maximiseExpression.plus(player.total_points*playerVariable)
             costConstraint.plus(player.now_cost*playerVariable)
-            maxNumberOfPlayersConstraint.plus(playerVariable)
+            numberOfPlayersConstraint.plus(playerVariable)
+
+            if (player.element_type == 1) {
+                numberGoalkeepersConstraint.plus(playerVariable)
+            } else if (player.element_type == 2) {
+                numberDefendersConstraint.plus(playerVariable)
+            } else if (player.element_type == 3) {
+                numberMidfieldersConstraint.plus(playerVariable)
+            } else if (player.element_type == 4) {
+                numberForwardsConstraint.plus(playerVariable)
+            }
         }
         costConstraint.GTE(1000)
-        maxNumberOfPlayersConstraint.EQ(15)
+        numberOfPlayersConstraint.EQ(15)
+        numberGoalkeepersConstraint.EQ(2)
+        numberDefendersConstraint.EQ(5)
+        numberMidfieldersConstraint.EQ(5)
+        numberForwardsConstraint.EQ(3)
 
         expression(maximiseExpression) {
             weight(1)
@@ -75,15 +94,24 @@ suspend fun main() {
 
         expression {
             set(costConstraint)
-            set(maxNumberOfPlayersConstraint)
+            set(numberOfPlayersConstraint)
+
+            set(numberGoalkeepersConstraint)
+            set(numberDefendersConstraint)
+            set(numberMidfieldersConstraint)
+            set(numberForwardsConstraint)
         }
 
         maximise().run(::println)
-        playerVariableList.forEach {
-            if (it.value.toInt() == 1) {
-                println(it.name)
-            }
+
+        val optimizedTeam = playerVariableList.filter { it.value.toInt() == 1 }.map { playerVariable ->
+            players.find { it.id.toString() == playerVariable.name }
+        }.filterNotNull()
+
+        optimizedTeam.sortedBy { it.element_type }.forEach { player ->
+            println(player.web_name + " " + player.total_points + " " + player.element_type)
         }
+
     }
 
 }
