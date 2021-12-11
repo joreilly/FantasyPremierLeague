@@ -4,10 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GameSettingsDto(
-    val cup_qualifying_method: String,
-    val cup_start_event_id: Int,
-    val cup_stop_event_id: Int,
-    val cup_type: String,
+    val cup_qualifying_method: String?,
+    val cup_start_event_id: Int?,
+    val cup_stop_event_id: Int?,
+    val cup_type: String?,
     val league_h2h_tiebreak_stats: List<String>,
     val league_join_private_max: Int,
     val league_join_public_max: Int,

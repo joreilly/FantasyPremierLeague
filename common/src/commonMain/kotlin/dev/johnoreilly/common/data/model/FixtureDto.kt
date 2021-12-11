@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FixtureDto(
     val id: Int,
-    val event: Int,
+    val event: Int?,
     val kickoff_time: Instant?,
     val team_h: Int,
     val team_a: Int,
