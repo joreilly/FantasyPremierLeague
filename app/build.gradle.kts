@@ -20,7 +20,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = Versions.composeCompiler
     }
 
     signingConfigs {
@@ -47,7 +47,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
     }
 }
 
@@ -66,6 +65,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
 
+    implementation(Compose.compiler)
     implementation(Compose.ui)
     implementation(Compose.uiGraphics)
     implementation(Compose.uiTooling)

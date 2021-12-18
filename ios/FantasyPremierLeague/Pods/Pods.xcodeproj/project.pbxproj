@@ -16,6 +16,7 @@
 			dependencies = (
 			);
 			name = common;
+			productName = common;
 		};
 /* End PBXAggregateTarget section */
 
@@ -39,10 +40,10 @@
 		1B66ACDB316BB07C56A86F582BFDB259 /* Pods-FantasyPremierLeague-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FantasyPremierLeague-acknowledgements.plist"; sourceTree = "<group>"; };
 		2DBD030CABF4EDD46113BB5A0659A6EA /* Pods-FantasyPremierLeague-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FantasyPremierLeague-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6D081AD9C76DDEFCC198334610B47387 /* common.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = common.release.xcconfig; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B1E40019099757C97E75F752A58E479E /* Pods-FantasyPremierLeague.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FantasyPremierLeague.debug.xcconfig"; sourceTree = "<group>"; };
-		BF5993A34715379F35DD1039639859F1 /* libPods-FantasyPremierLeague.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-FantasyPremierLeague.a"; path = "libPods-FantasyPremierLeague.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1A9FF4410BEEFC5F12F7442B23097D3 /* common.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = common.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BF5993A34715379F35DD1039639859F1 /* libPods-FantasyPremierLeague.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FantasyPremierLeague.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1A9FF4410BEEFC5F12F7442B23097D3 /* common.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = common.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E31DCE835A4CC462BEAA9609462F0A1F /* Pods-FantasyPremierLeague-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FantasyPremierLeague-dummy.m"; sourceTree = "<group>"; };
 		FF4B7B4BFE009B348ED4191BC2BA63EE /* common.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = common.debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -250,7 +251,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,7 +314,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
