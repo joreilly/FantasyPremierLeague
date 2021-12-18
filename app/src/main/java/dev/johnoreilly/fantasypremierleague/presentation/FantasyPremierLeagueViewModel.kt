@@ -1,7 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation
 
 import androidx.lifecycle.*
-import co.touchlab.kermit.Kermit
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
@@ -9,8 +8,7 @@ import kotlinx.coroutines.flow.*
 
 
 class FantasyPremierLeagueViewModel(
-    private val repository: FantasyPremierLeagueRepository,
-    private val logger: Kermit
+    private val repository: FantasyPremierLeagueRepository
 ) : ViewModel() {
 
     val searchQuery = MutableStateFlow("")

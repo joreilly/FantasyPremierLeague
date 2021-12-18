@@ -6,11 +6,8 @@ import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.Team
-import io.realm.Realm
-import io.realm.RealmObject
-import io.realm.RealmResults
+import io.realm.*
 import io.realm.annotations.PrimaryKey
-import io.realm.objects
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
@@ -66,6 +63,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
     val fixtureList = _fixtureList.asStateFlow()
 
     private val realm: Realm by inject()
+
 
     init {
         mainScope.launch {
