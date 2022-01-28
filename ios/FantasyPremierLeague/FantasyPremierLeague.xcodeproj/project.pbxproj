@@ -17,7 +17,7 @@
 		1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */; };
 		1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670525C5F8FF009FA782 /* ViewModel.swift */; };
 		1ABD670925C600EE009FA782 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670825C600EE009FA782 /* ImageView.swift */; };
-		32741BEFE411DB0FEFC793A2 /* libPods-FantasyPremierLeague.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49861D068274297DB728D12B /* libPods-FantasyPremierLeague.a */; };
+		97AEEC03768340F535C22984 /* libPods-FantasyPremierLeague.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98AFD909CA05E9D9955C01A4 /* libPods-FantasyPremierLeague.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +33,9 @@
 		1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDetailView.swift; sourceTree = "<group>"; };
 		1ABD670525C5F8FF009FA782 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1ABD670825C600EE009FA782 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		49861D068274297DB728D12B /* libPods-FantasyPremierLeague.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FantasyPremierLeague.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B09F3FBB6749EBCDDD3AF643 /* Pods-FantasyPremierLeague.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FantasyPremierLeague.debug.xcconfig"; path = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.debug.xcconfig"; sourceTree = "<group>"; };
-		E6CCD8E5B0DABCB50C6C881F /* Pods-FantasyPremierLeague.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FantasyPremierLeague.release.xcconfig"; path = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.release.xcconfig"; sourceTree = "<group>"; };
+		220F5DEC32FFD13E3EE7DD8A /* Pods-FantasyPremierLeague.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FantasyPremierLeague.release.xcconfig"; path = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.release.xcconfig"; sourceTree = "<group>"; };
+		98AFD909CA05E9D9955C01A4 /* libPods-FantasyPremierLeague.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FantasyPremierLeague.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F726E93BA6D38C9D6B5A3456 /* Pods-FantasyPremierLeague.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FantasyPremierLeague.debug.xcconfig"; path = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32741BEFE411DB0FEFC793A2 /* libPods-FantasyPremierLeague.a in Frameworks */,
+				97AEEC03768340F535C22984 /* libPods-FantasyPremierLeague.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,8 +53,8 @@
 		16C7AE40E142CB44EC8CE872 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B09F3FBB6749EBCDDD3AF643 /* Pods-FantasyPremierLeague.debug.xcconfig */,
-				E6CCD8E5B0DABCB50C6C881F /* Pods-FantasyPremierLeague.release.xcconfig */,
+				F726E93BA6D38C9D6B5A3456 /* Pods-FantasyPremierLeague.debug.xcconfig */,
+				220F5DEC32FFD13E3EE7DD8A /* Pods-FantasyPremierLeague.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -65,7 +65,7 @@
 				1A0F7AE025C5C96F00EB34CF /* FantasyPremierLeague */,
 				1A0F7ADF25C5C96F00EB34CF /* Products */,
 				16C7AE40E142CB44EC8CE872 /* Pods */,
-				7D2BD1CD84CFB64B32D5F821 /* Frameworks */,
+				7340EFD75C070F0584EB1DE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,10 +119,10 @@
 			path = Fixtures;
 			sourceTree = "<group>";
 		};
-		7D2BD1CD84CFB64B32D5F821 /* Frameworks */ = {
+		7340EFD75C070F0584EB1DE1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				49861D068274297DB728D12B /* libPods-FantasyPremierLeague.a */,
+				98AFD909CA05E9D9955C01A4 /* libPods-FantasyPremierLeague.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -134,7 +134,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A0F7AED25C5C97000EB34CF /* Build configuration list for PBXNativeTarget "FantasyPremierLeague" */;
 			buildPhases = (
-				685A9E68FD77BE925CDED36F /* [CP] Check Pods Manifest.lock */,
+				244ACB2ED330FBC72E20844E /* [CP] Check Pods Manifest.lock */,
 				1A0F7ADA25C5C96F00EB34CF /* Sources */,
 				1A0F7ADB25C5C96F00EB34CF /* Frameworks */,
 				1A0F7ADC25C5C96F00EB34CF /* Resources */,
@@ -193,7 +193,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		685A9E68FD77BE925CDED36F /* [CP] Check Pods Manifest.lock */ = {
+		244ACB2ED330FBC72E20844E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -354,7 +354,7 @@
 		};
 		1A0F7AEE25C5C97000EB34CF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B09F3FBB6749EBCDDD3AF643 /* Pods-FantasyPremierLeague.debug.xcconfig */;
+			baseConfigurationReference = F726E93BA6D38C9D6B5A3456 /* Pods-FantasyPremierLeague.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -377,7 +377,7 @@
 		};
 		1A0F7AEF25C5C97000EB34CF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6CCD8E5B0DABCB50C6C881F /* Pods-FantasyPremierLeague.release.xcconfig */;
+			baseConfigurationReference = 220F5DEC32FFD13E3EE7DD8A /* Pods-FantasyPremierLeague.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
