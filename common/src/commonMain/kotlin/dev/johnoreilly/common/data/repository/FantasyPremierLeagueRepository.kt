@@ -70,7 +70,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
             loadData()
 
             launch {
-                realm.objects(TeamDb::class).observe().collect { it: RealmResults<TeamDb> ->
+                realm.query<TeamDb>().asFlow().collect { it: RealmResults<TeamDb> ->
                     _teamList.value = it.toList().map {
                         Team(it.id, it.index, it.name, it.code)
                     }
@@ -78,7 +78,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
             }
 
             launch {
-                realm.objects(PlayerDb::class).observe().collect { it: RealmResults<PlayerDb> ->
+                realm.query<PlayerDb>().asFlow().collect { it: RealmResults<PlayerDb> ->
                     _playerList.value = it.toList().map {
                         val playerName = "${it.firstName} ${it.secondName}"
                         val playerImageUrl = "https://resources.premierleague.com/premierleague/photos/players/110x140/p${it.code}.png"
@@ -91,7 +91,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
             }
 
             launch {
-                realm.objects(FixtureDb::class).observe().collect { it: RealmResults<FixtureDb> ->
+                realm.query<FixtureDb>().asFlow().collect { it: RealmResults<FixtureDb> ->
                     _fixtureList.value = it.toList().mapNotNull {
                         val homeTeamName = it.homeTeam?.name ?: ""
                         val homeTeamCode = it.homeTeam?.code ?: 0
@@ -136,9 +136,9 @@ class FantasyPremierLeagueRepository : KoinComponent {
         realm.write {
 
             // basic implementation for now where we recreate/repopulate db on startup
-            objects<TeamDb>().delete()
-            objects<PlayerDb>().delete()
-            objects<FixtureDb>().delete()
+            query<TeamDb>().find().delete()
+            query<PlayerDb>().find().delete()
+            query<FixtureDb>().find().delete()
 
             // store teams
             bootstrapStaticInfoDto.teams.forEachIndexed { teamIndex, teamDto ->
@@ -163,12 +163,12 @@ class FantasyPremierLeagueRepository : KoinComponent {
                     goalsScored = player.goals_scored
                     assists = player.assists
 
-                    team = objects<TeamDb>().query("code = $0", player.team_code).first()
+                    team = query<TeamDb>("code = $0", player.team_code).first().find()
                 })
             }
 
             // store fixtures
-            val teams = objects<TeamDb>().toList()
+            val teams = query<TeamDb>().find().toList()
             fixtures.forEach { fixtureDto ->
                 if (fixtureDto.kickoff_time != null) {
                     copyToRealm(FixtureDb().apply {
