@@ -10,10 +10,10 @@ object Versions {
     const val kotlinxDateTime = "0.3.1"
 
     const val slf4j = "1.7.30"
-    const val compose = "1.1.0-rc01"
-    const val composeCompiler = "1.1.0-rc02"
-    const val navCompose = "2.4.0-rc01"
-    const val coilCompose = "1.3.2"
+    const val compose = "1.1.0"
+    const val composeCompiler = "1.1.0"
+    const val navCompose = "2.4.1"
+    const val coilCompose = "1.4.0"
 
     const val junit = "4.13"
 }
