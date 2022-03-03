@@ -8,6 +8,7 @@ import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.Team
 import io.realm.*
 import io.realm.annotations.PrimaryKey
+import io.realm.notifications.ResultsChange
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
@@ -70,7 +71,9 @@ class FantasyPremierLeagueRepository : KoinComponent {
             loadData()
 
             launch {
-                realm.query<TeamDb>().asFlow().collect { it: RealmResults<TeamDb> ->
+                realm.query<TeamDb>().asFlow()
+                    .map { it.list }
+                    .collect { it: RealmResults<TeamDb> ->
                     _teamList.value = it.toList().map {
                         Team(it.id, it.index, it.name, it.code)
                     }
@@ -78,7 +81,9 @@ class FantasyPremierLeagueRepository : KoinComponent {
             }
 
             launch {
-                realm.query<PlayerDb>().asFlow().collect { it: RealmResults<PlayerDb> ->
+                realm.query<PlayerDb>().asFlow()
+                    .map { it.list }
+                    .collect { it: RealmResults<PlayerDb> ->
                     _playerList.value = it.toList().map {
                         val playerName = "${it.firstName} ${it.secondName}"
                         val playerImageUrl = "https://resources.premierleague.com/premierleague/photos/players/110x140/p${it.code}.png"
@@ -91,7 +96,9 @@ class FantasyPremierLeagueRepository : KoinComponent {
             }
 
             launch {
-                realm.query<FixtureDb>().asFlow().collect { it: RealmResults<FixtureDb> ->
+                realm.query<FixtureDb>().asFlow()
+                    .map { it.list }
+                    .collect { it: RealmResults<FixtureDb> ->
                     _fixtureList.value = it.toList().mapNotNull {
                         val homeTeamName = it.homeTeam?.name ?: ""
                         val homeTeamCode = it.homeTeam?.code ?: 0
@@ -134,12 +141,6 @@ class FantasyPremierLeagueRepository : KoinComponent {
     )  {
 
         realm.write {
-
-            // basic implementation for now where we recreate/repopulate db on startup
-            query<TeamDb>().find().delete()
-            query<PlayerDb>().find().delete()
-            query<FixtureDb>().find().delete()
-
             // store teams
             bootstrapStaticInfoDto.teams.forEachIndexed { teamIndex, teamDto ->
                 copyToRealm(TeamDb().apply {
@@ -147,7 +148,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                     index = teamIndex + 1
                     name = teamDto.name
                     code = teamDto.code
-                })
+                }, updatePolicy = MutableRealm.UpdatePolicy.ALL)
             }
 
             // store players
@@ -164,7 +165,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                     assists = player.assists
 
                     team = query<TeamDb>("code = $0", player.team_code).first().find()
-                })
+                }, updatePolicy = MutableRealm.UpdatePolicy.ALL)
             }
 
             // store fixtures
@@ -179,7 +180,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
                         homeTeam = teams.find { it.index == fixtureDto.team_h }
                         awayTeam = teams.find { it.index == fixtureDto.team_a }
-                    })
+                    }, updatePolicy = MutableRealm.UpdatePolicy.ALL)
                 }
             }
 
