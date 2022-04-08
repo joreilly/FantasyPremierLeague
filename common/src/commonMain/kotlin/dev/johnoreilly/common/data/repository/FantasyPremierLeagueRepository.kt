@@ -129,9 +129,14 @@ class FantasyPremierLeagueRepository : KoinComponent {
     }
 
     private suspend fun loadData() {
-        val bootstrapStaticInfoDto = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
-        val fixtures = fantasyPremierLeagueApi.fetchFixtures()
-        writeDataToDb(bootstrapStaticInfoDto, fixtures)
+        try {
+            val bootstrapStaticInfoDto = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
+            val fixtures = fantasyPremierLeagueApi.fetchFixtures()
+            writeDataToDb(bootstrapStaticInfoDto, fixtures)
+        } catch (e: Exception) {
+            // TODO surface this to UI/option to retry etc ?
+            println("Exception reading data: $e")
+        }
 
     }
 
