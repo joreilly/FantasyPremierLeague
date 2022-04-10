@@ -16,7 +16,6 @@
 		1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */; };
 		1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */; };
 		1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670525C5F8FF009FA782 /* ViewModel.swift */; };
-		1ABD670925C600EE009FA782 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670825C600EE009FA782 /* ImageView.swift */; };
 		97AEEC03768340F535C22984 /* libPods-FantasyPremierLeague.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98AFD909CA05E9D9955C01A4 /* libPods-FantasyPremierLeague.a */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureListView.swift; sourceTree = "<group>"; };
 		1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDetailView.swift; sourceTree = "<group>"; };
 		1ABD670525C5F8FF009FA782 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		1ABD670825C600EE009FA782 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		220F5DEC32FFD13E3EE7DD8A /* Pods-FantasyPremierLeague.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FantasyPremierLeague.release.xcconfig"; path = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.release.xcconfig"; sourceTree = "<group>"; };
 		98AFD909CA05E9D9955C01A4 /* libPods-FantasyPremierLeague.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FantasyPremierLeague.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F726E93BA6D38C9D6B5A3456 /* Pods-FantasyPremierLeague.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FantasyPremierLeague.debug.xcconfig"; path = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				1A0F7AEA25C5C97000EB34CF /* Info.plist */,
 				1A0F7AE725C5C97000EB34CF /* Preview Content */,
 				1ABD670525C5F8FF009FA782 /* ViewModel.swift */,
-				1ABD670825C600EE009FA782 /* ImageView.swift */,
 			);
 			path = FantasyPremierLeague;
 			sourceTree = "<group>";
@@ -224,7 +221,6 @@
 			files = (
 				1A45B23B25CB3BF100A8C613 /* PlayerDetailsView.swift in Sources */,
 				1A45B23825CB3BBE00A8C613 /* PlayerListView.swift in Sources */,
-				1ABD670925C600EE009FA782 /* ImageView.swift in Sources */,
 				1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */,
 				1A0F7AE425C5C96F00EB34CF /* ContentView.swift in Sources */,
 				1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */,
@@ -287,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -342,7 +338,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -363,7 +359,7 @@
 				DEVELOPMENT_TEAM = NT77748GS8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FantasyPremierLeague/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -386,7 +382,7 @@
 				DEVELOPMENT_TEAM = NT77748GS8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FantasyPremierLeague/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

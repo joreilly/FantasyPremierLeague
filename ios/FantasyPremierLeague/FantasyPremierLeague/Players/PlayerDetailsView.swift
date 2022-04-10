@@ -8,7 +8,14 @@ struct PlayerDetailsView: View {
         
         VStack(alignment: .center, spacing: 32) {
             Text(player.name).font(.title).multilineTextAlignment(.center)
-            ImageView(withURL: player.photoUrl, width: 128, height: 128)
+            
+            AsyncImage(url: URL(string: player.photoUrl)) { image in
+                 image.resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 128, height: 128)
+            } placeholder: {
+                ProgressView()
+            }
         }
         
         List {

@@ -28,7 +28,14 @@ struct PlayerView: View {
     
     var body: some View {
         HStack {
-            ImageView(withURL: player.photoUrl, width: 64, height: 64)
+            AsyncImage(url: URL(string: player.photoUrl)) { image in
+                 image.resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 64, height: 64)
+            } placeholder: {
+                ProgressView()
+            }
+            
             VStack(alignment: .leading) {
                 Text(player.name).font(.headline)
                 Text(player.team).font(.subheadline)

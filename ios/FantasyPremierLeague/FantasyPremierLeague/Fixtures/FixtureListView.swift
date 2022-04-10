@@ -56,7 +56,13 @@ struct ClubInFixtureView: View {
     
     var body: some View {
         VStack {
-            ImageView(withURL: teamPhotoUrl, width: 50, height: 50)
+            AsyncImage(url: URL(string: teamPhotoUrl)) { image in
+                 image.resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+            } placeholder: {
+                ProgressView()
+            }
             Text(teamName).font(.system(size: 14))
         }.frame(minWidth: 80)
     }
