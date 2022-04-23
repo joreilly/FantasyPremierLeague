@@ -60,10 +60,10 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
 
     implementation(Compose.compiler)
     implementation(Compose.ui)
@@ -76,11 +76,11 @@ dependencies {
     implementation(Compose.coilCompose)
 
 
-    implementation(Koin.android)
+    implementation(Deps.Koin.android)
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.test:core:1.4.0")
-    testImplementation("org.robolectric:robolectric:4.6.1")
+    testImplementation("org.robolectric:robolectric:4.7.3")
     androidTestImplementation("androidx.test:runner:1.4.0")
 
     implementation(project(":common"))

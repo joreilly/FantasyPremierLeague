@@ -42,29 +42,27 @@ kotlin {
     sourceSets {
 
         sourceSets["commonMain"].dependencies {
-            // Coroutines
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}") {
-                isForce = true
+            with(Deps.Ktor) {
+                implementation(clientCore)
+                implementation(clientJson)
+                implementation(clientLogging)
+                implementation(clientSerialization)
+                implementation(contentNegotiation)
+                implementation(json)
             }
 
-            // Ktor
-            implementation(Ktor.clientCore)
-            implementation(Ktor.clientJson)
-            implementation(Ktor.clientLogging)
-            implementation(Ktor.clientSerialization)
-
-            // Kotlinx Serialization
-            implementation(Serialization.core)
+            with(Deps.Kotlinx) {
+                implementation(coroutinesCore)
+                implementation(serializationCore)
+                api(dateTime)
+            }
 
             // Realm
             implementation(Deps.realm)
 
-            // Kotlinx Date/Time
-            api(Deps.kotlinxDateTime)
-
             // koin
-            api(Koin.core)
-            api(Koin.test)
+            api(Deps.Koin.core)
+            api(Deps.Koin.test)
 
             // kermit
             api(Deps.kermit)
@@ -73,7 +71,7 @@ kotlin {
         }
 
         sourceSets["androidMain"].dependencies {
-            implementation(Ktor.clientAndroid)
+            implementation(Deps.Ktor.clientAndroid)
         }
         sourceSets["androidTest"].dependencies {
             implementation(kotlin("test-junit"))
@@ -81,8 +79,8 @@ kotlin {
         }
 
         sourceSets["jvmMain"].dependencies {
-            implementation(Ktor.clientJava)
-            implementation(Ktor.slf4j)
+            implementation(Deps.Ktor.clientJava)
+            implementation(Deps.Ktor.slf4j)
 
             implementation("org.nield:kotlin-statistics:1.2.1")
             implementation("org.ojalgo:okalgo:0.0.2")
@@ -91,7 +89,7 @@ kotlin {
         }
 
         sourceSets["iOSMain"].dependencies {
-            implementation(Ktor.clientIos)
+            implementation(Deps.Ktor.clientIos)
         }
         sourceSets["iOSTest"].dependencies {
         }

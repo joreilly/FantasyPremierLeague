@@ -52,7 +52,7 @@ class FixtureDb: RealmObject {
 
 class FantasyPremierLeagueRepository : KoinComponent {
     private val fantasyPremierLeagueApi: FantasyPremierLeagueApi by inject()
-    private val mainScope: CoroutineScope = MainScope()
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)
 
     private val _teamList = MutableStateFlow<List<Team>>(emptyList())
     val teamList = _teamList.asStateFlow()
@@ -67,7 +67,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
 
     init {
-        mainScope.launch {
+        coroutineScope.launch {
             loadData()
 
             launch {
@@ -199,7 +199,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     // called from iOS
     fun getPlayers(success: (List<Player>) -> Unit) {
-        mainScope.launch {
+        coroutineScope.launch {
             playerList.collect {
                 success(it.sortedByDescending { it.points })
             }
@@ -215,7 +215,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
 
     fun getFixtures(success: (List<GameFixture>) -> Unit) {
-        mainScope.launch {
+        coroutineScope.launch {
             fixtureList.collect {
                 success(it)
             }
