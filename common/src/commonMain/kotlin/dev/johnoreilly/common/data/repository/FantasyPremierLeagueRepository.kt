@@ -1,5 +1,6 @@
 package dev.johnoreilly.common.data.repository
 
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.model.FixtureDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
@@ -52,6 +53,9 @@ class FixtureDb: RealmObject {
 
 class FantasyPremierLeagueRepository : KoinComponent {
     private val fantasyPremierLeagueApi: FantasyPremierLeagueApi by inject()
+    private val realm: Realm by inject()
+
+    @NativeCoroutineScope
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
 
     private val _teamList = MutableStateFlow<List<Team>>(emptyList())
@@ -62,8 +66,6 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
     val fixtureList = _fixtureList.asStateFlow()
-
-    private val realm: Realm by inject()
 
 
     init {
@@ -191,7 +193,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
         }
     }
-
+/*
     suspend fun fetchPastFixtures() = fantasyPremierLeagueApi
         .fetchFixtures()
         .filter { it.kickoff_time != null && it.team_h_score != null && it.team_a_score != null}
@@ -221,18 +223,20 @@ class FantasyPremierLeagueRepository : KoinComponent {
             }
         }
     }
+
+ */
 }
 
 
-class KotlinNativeFlowWrapper<T>(private val flow: Flow<T>) {
-    fun subscribe(
-        scope: CoroutineScope,
-        onEach: (item: T) -> Unit,
-        onComplete: () -> Unit,
-        onThrow: (error: Throwable) -> Unit
-    ) = flow
-        .onEach { onEach(it) }
-        .catch { onThrow(it) }
-        .onCompletion { onComplete() }
-        .launchIn(scope)
-}
+//class KotlinNativeFlowWrapper<T>(private val flow: Flow<T>) {
+//    fun subscribe(
+//        scope: CoroutineScope,
+//        onEach: (item: T) -> Unit,
+//        onComplete: () -> Unit,
+//        onThrow: (error: Throwable) -> Unit
+//    ) = flow
+//        .onEach { onEach(it) }
+//        .catch { onThrow(it) }
+//        .onCompletion { onComplete() }
+//        .launchIn(scope)
+//}

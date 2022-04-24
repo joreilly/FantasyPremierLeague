@@ -15,8 +15,10 @@ struct FixtureListView: View {
             }
             .navigationBarTitle(Text("Fixtues"))
             .onAppear {
-                UITableView.appearance().separatorStyle = .none
-                viewModel.getFixtures()
+                UITableView.appearance().separatorStyle = .none                
+            }
+            .task {
+                await viewModel.getFixtures()
             }
         }
         .onAppear {
