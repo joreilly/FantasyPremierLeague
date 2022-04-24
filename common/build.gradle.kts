@@ -2,8 +2,9 @@ plugins {
     kotlin("multiplatform")
     id("kotlinx-serialization")
     id("com.android.library")
-    id("org.jetbrains.kotlin.native.cocoapods")
     id("io.realm.kotlin") version Versions.realm
+    id("org.jetbrains.kotlin.native.cocoapods")
+    id("com.rickclephas.kmp.nativecoroutines")
     id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
 }
 

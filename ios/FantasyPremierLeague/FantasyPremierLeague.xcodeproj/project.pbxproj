@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		1A45B23825CB3BBE00A8C613 /* PlayerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23725CB3BBE00A8C613 /* PlayerListView.swift */; };
 		1A45B23B25CB3BF100A8C613 /* PlayerDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23A25CB3BF100A8C613 /* PlayerDetailsView.swift */; };
 		1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */; };
+		1AA5CFD02815D27D009DB2E8 /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1AA5CFCF2815D27D009DB2E8 /* AsyncAlgorithms */; };
 		1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */; };
 		1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670525C5F8FF009FA782 /* ViewModel.swift */; };
 		97AEEC03768340F535C22984 /* libPods-FantasyPremierLeague.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98AFD909CA05E9D9955C01A4 /* libPods-FantasyPremierLeague.a */; };
@@ -42,6 +43,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97AEEC03768340F535C22984 /* libPods-FantasyPremierLeague.a in Frameworks */,
+				1AA5CFD02815D27D009DB2E8 /* AsyncAlgorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +143,9 @@
 			dependencies = (
 			);
 			name = FantasyPremierLeague;
+			packageProductDependencies = (
+				1AA5CFCF2815D27D009DB2E8 /* AsyncAlgorithms */,
+			);
 			productName = FantasyPremierLeague;
 			productReference = 1A0F7ADE25C5C96F00EB34CF /* FantasyPremierLeague.app */;
 			productType = "com.apple.product-type.application";
@@ -168,6 +173,9 @@
 				Base,
 			);
 			mainGroup = 1A0F7AD525C5C96F00EB34CF;
+			packageReferences = (
+				1AA5CFCE2815D27D009DB2E8 /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
+			);
 			productRefGroup = 1A0F7ADF25C5C96F00EB34CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -417,6 +425,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1AA5CFCE2815D27D009DB2E8 /* XCRemoteSwiftPackageReference "swift-async-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-async-algorithms";
+			requirement = {
+				kind = exactVersion;
+				version = 0.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1AA5CFCF2815D27D009DB2E8 /* AsyncAlgorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1AA5CFCE2815D27D009DB2E8 /* XCRemoteSwiftPackageReference "swift-async-algorithms" */;
+			productName = AsyncAlgorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1A0F7AD625C5C96F00EB34CF /* Project object */;
 }

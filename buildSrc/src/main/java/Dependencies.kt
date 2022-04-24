@@ -9,6 +9,8 @@ object Versions {
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.3.2"
 
+    const val kmpNativeCoroutinesVersion = "0.12.1-new-mm"
+
     const val slf4j = "1.7.30"
     const val compose = "1.2.0-alpha08"
     const val composeCompiler = "1.2.0-alpha08"

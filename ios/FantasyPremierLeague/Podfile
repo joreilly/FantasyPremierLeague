@@ -1,5 +1,6 @@
 
 target 'FantasyPremierLeague' do
     pod 'common', :path => '../../common'
+    pod 'KMPNativeCoroutinesAsync'
 end
 
