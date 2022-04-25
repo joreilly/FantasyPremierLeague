@@ -3,12 +3,15 @@ import Combine
 import FantasyPremierLeagueKit
 
 
+
+extension GameFixture: Identifiable { }
+
 struct FixtureListView: View {
     @ObservedObject var viewModel: FantasyPremierLeagueViewModel
     
     var body: some View {
         NavigationView {
-            List(viewModel.fixtureList, id: \.id) { fixture in
+            List(viewModel.fixtureList) { fixture in
                 NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
                     FixtureView(fixture: fixture)
                 }

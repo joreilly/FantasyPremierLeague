@@ -1,6 +1,5 @@
 import Foundation
 import FantasyPremierLeagueKit
-import Combine
 import KMPNativeCoroutinesAsync
 import AsyncAlgorithms
 
@@ -15,15 +14,24 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     private let repository: FantasyPremierLeagueRepository
     init(repository: FantasyPremierLeagueRepository) {
         self.repository = repository
-        
-        Task {
+    }
+
+    
+    func getPlayers() async {
+        do {
             let playerStream = asyncStream(for: repository.playerListNative)
                 .map { $0.sorted { $0.points > $1.points } }
             
-            for try await (players, searchQuery) in combineLatest(playerStream, $query.values) {
+            let queryStream = $query
+                .debounce(for: 0.5, scheduler: DispatchQueue.main)
+                .values
+            
+            for try await (players, query) in combineLatest(playerStream, queryStream) {
                 self.playerList = players
-                    .filter { searchQuery.isEmpty || $0.name.localizedCaseInsensitiveContains(query) }
+                    .filter { query.isEmpty || $0.name.localizedCaseInsensitiveContains(query) }
             }
+        } catch {
+            print("Failed with error: \(error)")
         }
     }
     
@@ -37,6 +45,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
             print("Failed with error: \(error)")
         }
     }
-
 }
+
+
 

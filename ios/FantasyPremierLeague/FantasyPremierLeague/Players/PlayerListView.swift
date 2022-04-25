@@ -3,21 +3,26 @@ import Combine
 import FantasyPremierLeagueKit
 
 
+
+extension Player: Identifiable { }
+
 struct PlayerListView: View {
     @ObservedObject var viewModel: FantasyPremierLeagueViewModel
     
     var body: some View {
-        NavigationView {
-            
+        NavigationView {            
             List {
-                TextField("Query", text: $viewModel.query)
-                ForEach(viewModel.playerList, id: \.id) { player in
+                ForEach(viewModel.playerList) { player in
                     NavigationLink(destination: PlayerDetailsView(player: player)) {
                         PlayerView(player: player)
                     }
                 }
             }
+            .searchable(text: $viewModel.query)
             .navigationBarTitle(Text("Players"))
+        }
+        .task {
+            await viewModel.getPlayers()
         }
     }
 }
