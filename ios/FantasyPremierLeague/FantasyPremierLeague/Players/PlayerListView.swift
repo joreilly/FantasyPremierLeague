@@ -10,12 +10,10 @@ struct PlayerListView: View {
     @ObservedObject var viewModel: FantasyPremierLeagueViewModel
     
     var body: some View {
-        NavigationView {            
-            List {
-                ForEach(viewModel.playerList) { player in
-                    NavigationLink(destination: PlayerDetailsView(player: player)) {
-                        PlayerView(player: player)
-                    }
+        NavigationView {
+            List(viewModel.playerList) { player in
+                NavigationLink(destination: PlayerDetailsView(player: player)) {
+                    PlayerView(player: player)
                 }
             }
             .searchable(text: $viewModel.query)
