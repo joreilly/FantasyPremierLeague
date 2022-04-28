@@ -5,6 +5,14 @@
 * iOS (SwiftUI)
 * Desktop (Compose for Desktop)
 
+
+Related posts:
+* [Using Realm persistence library in a Kotlin Multiplatform project](https://johnoreilly.dev/posts/realm-kotlinmultiplatform/)
+
+
+
+
+
 ## Screenshots
 |Platform|Screenshot|
 |---|---|
