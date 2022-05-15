@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PlayerListView(
     fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
@@ -25,14 +27,14 @@ fun PlayerListView(
     val playerList = fantasyPremierLeagueViewModel.playerList.collectAsState()
     val playerSearchQuery = fantasyPremierLeagueViewModel.searchQuery.collectAsState()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text("Fantasy Premier League")
-                }
-            )
-        }) {
+//    Scaffold(
+//        topBar = {
+//            TopAppBar(
+//                title = {
+//                    Text("Fantasy Premier League")
+//                }
+//            )
+//        }) {
             Column {
                 TextField(
                     singleLine = true,
@@ -62,5 +64,5 @@ fun PlayerListView(
                     })
                 }
             }
-        }
+//        }
 }

@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,21 +17,22 @@ import coil.compose.rememberImagePainter
 import dev.johnoreilly.common.domain.entities.Player
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PlayerDetailsView(player: Player, popBackStack: () -> Unit) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = "Player details")
-                },
-                navigationIcon = {
-                    IconButton(onClick = { popBackStack() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                }
-            )
-        }) {
+//    Scaffold(
+//        topBar = {
+//            TopAppBar(
+//                title = {
+//                    Text(text = "Player details")
+//                },
+//                navigationIcon = {
+//                    IconButton(onClick = { popBackStack() }) {
+//                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+//                    }
+//                }
+//            )
+//        }) {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -67,7 +69,7 @@ fun PlayerDetailsView(player: Player, popBackStack: () -> Unit) {
                 PlayerStatView("Goals Scored", player.goalsScored.toString())
                 PlayerStatView("Assists", player.assists.toString())
             }
-        }
+//        }
 }
 
 @Composable

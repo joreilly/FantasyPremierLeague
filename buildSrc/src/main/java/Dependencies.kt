@@ -15,7 +15,7 @@ object Versions {
     const val compose = "1.2.0-beta01"
     const val composeCompiler = "1.2.0-beta01"
     const val navCompose = "2.4.2"
-    const val coilCompose = "1.4.0"
+    const val coilCompose = "2.0.0"
     const val composeDesktop = "1.2.0-alpha01-dev683"
 
     const val junit = "4.13"

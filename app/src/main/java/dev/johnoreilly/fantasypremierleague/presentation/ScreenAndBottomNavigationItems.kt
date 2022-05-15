@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 sealed class Screen(val title: String) {
     object PlayerListScreen : Screen("PlayerListScreen")
     object PlayerDetailsScreen : Screen("PlayerDetailsScreen")
+    object PlayerListWithDetailsScreen : Screen("PlayerListWithDetailsScreen")
     object FixtureListScreen : Screen("FixtureListScreen")
     object FixtureDetailsScreen : Screen("FixtureDetailsScreen")
 }

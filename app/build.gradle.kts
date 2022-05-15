@@ -74,6 +74,8 @@ dependencies {
     implementation(Compose.material)
     implementation(Compose.navigation)
     implementation(Compose.coilCompose)
+    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-alpha11")
+    implementation("androidx.window:window:1.0.0")
 
 
     implementation(Deps.Koin.android)
