@@ -7,9 +7,12 @@ import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.Team
-import io.realm.*
-import io.realm.annotations.PrimaryKey
-import io.realm.notifications.ResultsChange
+import io.realm.kotlin.Realm
+import io.realm.kotlin.UpdatePolicy
+import io.realm.kotlin.ext.query
+import io.realm.kotlin.query.RealmResults
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.koin.core.component.KoinComponent
@@ -155,7 +158,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                     index = teamIndex + 1
                     name = teamDto.name
                     code = teamDto.code
-                }, updatePolicy = MutableRealm.UpdatePolicy.ALL)
+                }, updatePolicy = UpdatePolicy.ALL)
             }
 
             // store players
@@ -172,7 +175,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                     assists = player.assists
 
                     team = query<TeamDb>("code = $0", player.team_code).first().find()
-                }, updatePolicy = MutableRealm.UpdatePolicy.ALL)
+                }, updatePolicy = UpdatePolicy.ALL)
             }
 
             // store fixtures
@@ -187,7 +190,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
                         homeTeam = teams.find { it.index == fixtureDto.team_h }
                         awayTeam = teams.find { it.index == fixtureDto.team_a }
-                    }, updatePolicy = MutableRealm.UpdatePolicy.ALL)
+                    }, updatePolicy = UpdatePolicy.ALL)
                 }
             }
 
