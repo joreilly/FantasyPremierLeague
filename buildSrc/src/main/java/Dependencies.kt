@@ -5,7 +5,7 @@ object Versions {
     const val ktor = "2.0.1"
     const val kotlinxSerialization = "1.3.3"
     const val koin = "3.2.0"
-    const val realm = "0.11.0"
+    const val realm = "1.0.0"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.3.2"
 
