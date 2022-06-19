@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PlayerListView(
     fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
