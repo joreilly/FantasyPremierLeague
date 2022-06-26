@@ -1,16 +1,18 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
 import dev.johnoreilly.common.domain.entities.Player
 
 @Composable
@@ -25,10 +27,11 @@ fun PlayerView(
             .fillMaxWidth()
             .clickable { onPlayerSelected(player.id) }
     ) {
-        Image(
-            painter = rememberImagePainter(player.photoUrl),
-            modifier = Modifier.size(60.dp),
-            contentDescription = player.name
+        AsyncImage(
+            model = player.photoUrl,
+            contentDescription = player.name,
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(60.dp)
         )
         Spacer(modifier = Modifier.size(12.dp))
         Column(

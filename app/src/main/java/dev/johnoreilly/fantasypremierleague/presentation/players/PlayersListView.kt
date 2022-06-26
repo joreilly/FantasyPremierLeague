@@ -54,7 +54,6 @@ fun PlayerListView(
                         imeAction = ImeAction.Search
                     ),
                     onValueChange = {
-                        //playerSearchQuery.value = it
                         fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(it)
                     }
                 )
