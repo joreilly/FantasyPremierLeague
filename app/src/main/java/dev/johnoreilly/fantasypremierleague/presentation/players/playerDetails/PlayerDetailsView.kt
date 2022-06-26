@@ -1,6 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails
 
-import androidx.compose.foundation.Image
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,12 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
 import dev.johnoreilly.common.domain.entities.Player
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PlayerDetailsView(player: Player, popBackStack: () -> Unit) {
     Scaffold(
@@ -32,22 +34,20 @@ fun PlayerDetailsView(player: Player, popBackStack: () -> Unit) {
             )
         }) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Center
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Spacer(modifier = Modifier.size(16.dp))
                 Text(
                     text = player.name,
-                    style = MaterialTheme.typography.h6,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                    style = MaterialTheme.typography.h6
                 )
                 Spacer(modifier = Modifier.size(16.dp))
-                Image(
-                    painter = rememberImagePainter(player.photoUrl),
-                    modifier = Modifier
-                        .size(150.dp)
-                        .align(Alignment.CenterHorizontally),
-                    contentDescription = player.name
+                AsyncImage(
+                    model = player.photoUrl,
+                    contentDescription = player.name,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.size(150.dp)
                 )
                 Spacer(modifier = Modifier.size(8.dp))
                 Row(

@@ -1,5 +1,6 @@
 package dev.johnoreilly.fantasypremierleague.presentation.fixtures.fixtureDetails
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -15,6 +16,7 @@ import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.ClubInFixtureView
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun FixtureDetailsView(fixture: GameFixture, popBackStack: () -> Unit) {
 
