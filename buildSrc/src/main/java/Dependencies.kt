@@ -1,22 +1,22 @@
 
 object Versions {
-    const val kotlin = "1.6.21"
-    const val kotlinCoroutines = "1.6.1"
-    const val ktor = "2.0.1"
+    const val kotlin = "1.7.0"
+    const val kotlinCoroutines = "1.6.3"
+    const val ktor = "2.0.3"
     const val kotlinxSerialization = "1.3.3"
     const val koin = "3.2.0"
     const val realm = "1.0.0"
     const val kermit = "1.0.0"
-    const val kotlinxDateTime = "0.3.2"
+    const val kotlinxDateTime = "0.4.0"
 
-    const val kmpNativeCoroutinesVersion = "0.12.1-new-mm"
+    const val kmpNativeCoroutinesVersion = "0.12.5-new-mm"
 
     const val slf4j = "1.7.30"
-    const val compose = "1.2.0-rc01"
-    const val composeCompiler = "1.2.0-rc01"
+    const val compose = "1.2.0-rc03"
+    const val composeCompiler = "1.2.0"
     const val navCompose = "2.4.2"
     const val coilCompose = "2.1.0"
-    const val composeDesktop = "1.2.0-alpha01-dev716"
+    const val composeDesktop = "1.2.0-alpha01-dev731"
 
     const val junit = "4.13"
 }
