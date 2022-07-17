@@ -14,7 +14,6 @@ suspend fun main() {
     val staticInfo = api.fetchBootstrapStaticInfo()
     val fixtures = api.fetchFixtures()
 
-
     println("Positions")
     staticInfo.element_types.forEach {
         println("${it.id}: ${it.singular_name_short}")
@@ -66,7 +65,6 @@ suspend fun main() {
 
 
     pickTeam(staticInfo)
-
 }
 
 /*
