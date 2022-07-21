@@ -1,7 +1,7 @@
 
 object Versions {
-    const val kotlin = "1.7.0"
-    const val kotlinCoroutines = "1.6.3"
+    const val kotlin = "1.7.10"
+    const val kotlinCoroutines = "1.6.4"
     const val ktor = "2.0.3"
     const val kotlinxSerialization = "1.3.3"
     const val koin = "3.2.0"
@@ -13,10 +13,10 @@ object Versions {
 
     const val slf4j = "1.7.30"
     const val compose = "1.2.0-rc03"
-    const val composeCompiler = "1.2.0"
+    const val composeCompiler = "1.3.0-beta01"
     const val navCompose = "2.4.2"
     const val coilCompose = "2.1.0"
-    const val composeDesktop = "1.2.0-alpha01-dev731"
+    const val composeDesktop =  "1.2.0-alpha01-dev748"
 
     const val junit = "4.13"
 }
