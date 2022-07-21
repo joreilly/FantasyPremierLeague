@@ -20,7 +20,7 @@ import org.koin.core.component.inject
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import kotlin.coroutines.CoroutineContext
+
 
 class TeamDb: RealmObject {
     @PrimaryKey
@@ -196,50 +196,4 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
         }
     }
-/*
-    suspend fun fetchPastFixtures() = fantasyPremierLeagueApi
-        .fetchFixtures()
-        .filter { it.kickoff_time != null && it.team_h_score != null && it.team_a_score != null}
-
-
-    // called from iOS
-    fun getPlayers(success: (List<Player>) -> Unit) {
-        coroutineScope.launch {
-            playerList.collect {
-                success(it.sortedByDescending { it.points })
-            }
-        }
-    }
-
-    val iosScope: CoroutineScope = object : CoroutineScope {
-        override val coroutineContext: CoroutineContext
-            get() = SupervisorJob() + Dispatchers.Main
-    }
-
-    fun getPlayersFlow() = KotlinNativeFlowWrapper<List<Player>>(playerList)
-
-
-    fun getFixtures(success: (List<GameFixture>) -> Unit) {
-        coroutineScope.launch {
-            fixtureList.collect {
-                success(it)
-            }
-        }
-    }
-
- */
 }
-
-
-//class KotlinNativeFlowWrapper<T>(private val flow: Flow<T>) {
-//    fun subscribe(
-//        scope: CoroutineScope,
-//        onEach: (item: T) -> Unit,
-//        onComplete: () -> Unit,
-//        onThrow: (error: Throwable) -> Unit
-//    ) = flow
-//        .onEach { onEach(it) }
-//        .catch { onThrow(it) }
-//        .onCompletion { onComplete() }
-//        .launchIn(scope)
-//}
