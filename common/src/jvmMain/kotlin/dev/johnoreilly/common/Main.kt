@@ -23,7 +23,7 @@ suspend fun main() {
 
     println("Events")
     staticInfo.events.forEach {
-        println("${it.id}, ${it.name}")
+        println("${it.id}, ${it.name} ${it.deadline_time}")
     }
 
     val currentEvent = staticInfo.events.find { it.is_current }
