@@ -12,7 +12,7 @@ struct PlayerListView: View {
     var body: some View {
         NavigationView {
             List(viewModel.playerList) { player in
-                NavigationLink(destination: PlayerDetailsView(player: player)) {
+                NavigationLink(destination: PlayerDetailsView(viewModel: viewModel, player: player)) {
                     PlayerView(player: player)
                 }
             }

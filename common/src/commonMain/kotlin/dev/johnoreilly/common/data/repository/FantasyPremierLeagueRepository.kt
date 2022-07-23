@@ -2,10 +2,12 @@ package dev.johnoreilly.common.data.repository
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
+import dev.johnoreilly.common.data.model.ElementSummaryDto
 import dev.johnoreilly.common.data.model.FixtureDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.domain.entities.PlayerPastHistory
 import dev.johnoreilly.common.domain.entities.Team
 import io.realm.kotlin.Realm
 import io.realm.kotlin.UpdatePolicy
@@ -194,6 +196,12 @@ class FantasyPremierLeagueRepository : KoinComponent {
                 }
             }
 
+        }
+    }
+
+    suspend fun getPlayerHistoryData(playerId: Int): List<PlayerPastHistory> {
+        return fantasyPremierLeagueApi.fetchPlayerData(playerId).history_past.map {
+            PlayerPastHistory(it.season_name, it.total_points)
         }
     }
 }

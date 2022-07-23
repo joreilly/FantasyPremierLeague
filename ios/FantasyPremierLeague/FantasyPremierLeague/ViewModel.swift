@@ -4,10 +4,13 @@ import KMPNativeCoroutinesAsync
 import AsyncAlgorithms
 
 
+extension PlayerPastHistory: Identifiable { }
+
 @MainActor
 class FantasyPremierLeagueViewModel: ObservableObject {
     @Published var playerList = [Player]()
     @Published var fixtureList = [GameFixture]()
+    @Published var playerHistory = [PlayerPastHistory]()
     
     @Published var query: String = ""
     
@@ -34,6 +37,19 @@ class FantasyPremierLeagueViewModel: ObservableObject {
             print("Failed with error: \(error)")
         }
     }
+    
+    
+    func getPlayerStats(playerId: Int32) async {
+        do {
+            let playerHistory = try await asyncFunction(for: repository.getPlayerHistoryDataNative(playerId: playerId))
+            self.playerHistory = playerHistory
+            print(self.playerHistory)
+            
+        } catch {
+            print("Failed with error: \(error)")
+        }
+    }
+
     
     func getFixtures() async {
         do {
