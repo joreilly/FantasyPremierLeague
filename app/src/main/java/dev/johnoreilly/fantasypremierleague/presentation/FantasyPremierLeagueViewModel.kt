@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.domain.entities.PlayerPastHistory
 import kotlinx.coroutines.flow.*
 
 
@@ -29,6 +30,10 @@ class FantasyPremierLeagueViewModel(
 
     fun getPlayer(playerId: Int): Player? {
         return playerList.value.find { it.id == playerId}
+    }
+
+    suspend fun getPlayerHistory(playerId: Int): List<PlayerPastHistory> {
+        return repository.getPlayerHistoryData(playerId)
     }
 
 
