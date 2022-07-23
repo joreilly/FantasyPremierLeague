@@ -75,6 +75,7 @@ dependencies {
     implementation(Compose.navigation)
     implementation(Compose.coilCompose)
 
+    implementation("com.patrykandpatryk.vico:compose:1.2.0")
 
     implementation(Deps.Koin.android)
 

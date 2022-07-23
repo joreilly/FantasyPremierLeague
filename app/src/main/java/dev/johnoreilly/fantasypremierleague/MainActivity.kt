@@ -82,7 +82,7 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
                     playerId?.let {
                         val player = fantasyPremierLeagueViewModel.getPlayer(playerId)
                         player?.let {
-                            PlayerDetailsView(player, popBackStack = { navController.popBackStack() })
+                            PlayerDetailsView(fantasyPremierLeagueViewModel, player, popBackStack = { navController.popBackStack() })
                         }
                     }
                 }
