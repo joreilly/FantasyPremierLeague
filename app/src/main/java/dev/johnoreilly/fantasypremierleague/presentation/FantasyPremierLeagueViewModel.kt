@@ -1,6 +1,7 @@
 package dev.johnoreilly.fantasypremierleague.presentation
 
 import androidx.lifecycle.*
+import dev.johnoreilly.common.data.model.LeagueStandingsDto
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
@@ -23,7 +24,6 @@ class FantasyPremierLeagueViewModel(
 
     val fixturesList = repository.fixtureList
 
-
     fun onPlayerSearchQueryChange(query: String) {
         searchQuery.value = query
     }
@@ -36,6 +36,9 @@ class FantasyPremierLeagueViewModel(
         return repository.getPlayerHistoryData(playerId)
     }
 
+    suspend fun getLeagueStandings(leagueId: Int): LeagueStandingsDto {
+        return repository.getLeagueStandings(leagueId)
+    }
 
     fun getFixture(fixtureId: Int?): GameFixture? {
         return fixturesList.value.find { it.id == fixtureId}

@@ -4,6 +4,7 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.model.ElementSummaryDto
 import dev.johnoreilly.common.data.model.FixtureDto
+import dev.johnoreilly.common.data.model.LeagueStandingsDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
@@ -204,4 +205,9 @@ class FantasyPremierLeagueRepository : KoinComponent {
             PlayerPastHistory(it.season_name, it.total_points)
         }
     }
+
+    suspend fun getLeagueStandings(leagueId: Int): LeagueStandingsDto {
+        return fantasyPremierLeagueApi.fetchLeagueStandings(leagueId)
+    }
+
 }

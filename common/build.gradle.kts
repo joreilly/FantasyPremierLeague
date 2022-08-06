@@ -5,7 +5,6 @@ plugins {
     id("io.realm.kotlin") version Versions.realm
     id("org.jetbrains.kotlin.native.cocoapods")
     id("com.rickclephas.kmp.nativecoroutines")
-    id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
 }
 
 // CocoaPods requires the podspec to have a version.
@@ -112,10 +111,4 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 
-multiplatformSwiftPackage {
-    swiftToolsVersion("5.3")
-    targetPlatforms {
-        iOS { v("13") }
-    }
-}
 

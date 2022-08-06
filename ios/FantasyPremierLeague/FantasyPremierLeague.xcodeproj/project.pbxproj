@@ -11,6 +11,7 @@
 		1A0F7AE425C5C96F00EB34CF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0F7AE325C5C96F00EB34CF /* ContentView.swift */; };
 		1A0F7AE625C5C97000EB34CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0F7AE525C5C97000EB34CF /* Assets.xcassets */; };
 		1A0F7AE925C5C97000EB34CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0F7AE825C5C97000EB34CF /* Preview Assets.xcassets */; };
+		1A1D2B32289EA235000149CC /* LeagueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D2B31289EA235000149CC /* LeagueListView.swift */; };
 		1A45B23825CB3BBE00A8C613 /* PlayerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23725CB3BBE00A8C613 /* PlayerListView.swift */; };
 		1A45B23B25CB3BF100A8C613 /* PlayerDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23A25CB3BF100A8C613 /* PlayerDetailsView.swift */; };
 		1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */; };
@@ -27,6 +28,7 @@
 		1A0F7AE525C5C97000EB34CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A0F7AE825C5C97000EB34CF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1A0F7AEA25C5C97000EB34CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A1D2B31289EA235000149CC /* LeagueListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListView.swift; sourceTree = "<group>"; };
 		1A45B23725CB3BBE00A8C613 /* PlayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListView.swift; sourceTree = "<group>"; };
 		1A45B23A25CB3BF100A8C613 /* PlayerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsView.swift; sourceTree = "<group>"; };
 		1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureListView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		1A0F7AE025C5C96F00EB34CF /* FantasyPremierLeague */ = {
 			isa = PBXGroup;
 			children = (
+				1A1D2B30289EA226000149CC /* Leagues */,
 				1A45B23625CB3BAA00A8C613 /* Fixtures */,
 				1A45B23525CB3BA100A8C613 /* Players */,
 				1A0F7AE125C5C96F00EB34CF /* FantasyPremierLeagueApp.swift */,
@@ -98,6 +101,14 @@
 				1A0F7AE825C5C97000EB34CF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1A1D2B30289EA226000149CC /* Leagues */ = {
+			isa = PBXGroup;
+			children = (
+				1A1D2B31289EA235000149CC /* LeagueListView.swift */,
+			);
+			path = Leagues;
 			sourceTree = "<group>";
 		};
 		1A45B23525CB3BA100A8C613 /* Players */ = {
@@ -228,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A45B23B25CB3BF100A8C613 /* PlayerDetailsView.swift in Sources */,
+				1A1D2B32289EA235000149CC /* LeagueListView.swift in Sources */,
 				1A45B23825CB3BBE00A8C613 /* PlayerListView.swift in Sources */,
 				1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */,
 				1A0F7AE425C5C96F00EB34CF /* ContentView.swift in Sources */,

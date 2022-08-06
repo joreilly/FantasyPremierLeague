@@ -10,10 +10,27 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+//import io.github.koalaplot.core.ChartLayout
+//import io.github.koalaplot.core.bar.BarChartEntry
+//import io.github.koalaplot.core.bar.DefaultBarChartEntry
+//import io.github.koalaplot.core.bar.DefaultVerticalBar
+//import io.github.koalaplot.core.bar.VerticalBarChart
+//import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
+//import io.github.koalaplot.core.util.VerticalRotation
+//import io.github.koalaplot.core.util.generateHueColorPalette
+//import io.github.koalaplot.core.util.rotateVertically
+//import io.github.koalaplot.core.util.toString
+//import io.github.koalaplot.core.xychart.CategoryAxisModel
+//import io.github.koalaplot.core.xychart.LinearAxisModel
+//import io.github.koalaplot.core.xychart.TickPosition
+//import io.github.koalaplot.core.xychart.XYChart
+//import io.github.koalaplot.core.xychart.rememberAxisStyle
+
 import com.patrykandpatryk.vico.compose.axis.horizontal.bottomAxis
 import com.patrykandpatryk.vico.compose.axis.vertical.startAxis
 import com.patrykandpatryk.vico.compose.chart.Chart
@@ -43,6 +60,16 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
         playerHistory = viewModel.getPlayerHistory(player.id)
         println(playerHistory)
     }
+
+
+//    var tickPositionState by remember {
+//        mutableStateOf(
+//            TickPositionState(
+//                TickPosition.Outside,
+//                TickPosition.Outside
+//            )
+//        )
+//    }
 
 
     Scaffold(
@@ -95,6 +122,9 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
                 Spacer(modifier = Modifier.size(8.dp))
 
                 if (playerHistory.isNotEmpty()) {
+
+                    //BarSamplePlot(playerHistory, tickPositionState, "Points by Season")
+
                     val producer = ChartEntryModelProducer(playerHistory.mapIndexed { x, y ->
                         FloatEntry(x = x.toFloat(), y = y.totalPoints.toFloat())
                     })
@@ -145,3 +175,143 @@ fun PlayerStatView(statName: String, statValue: String) {
         Divider(thickness = 1.dp)
     }
 }
+
+
+/*
+private fun barChartEntries(playerHistory: List<PlayerPastHistory>): List<BarChartEntry<String, Float>> {
+    val list = mutableListOf<BarChartEntry<String, Float>>()
+
+    playerHistory.forEachIndexed { index, player ->
+        list.add(
+            DefaultBarChartEntry(
+                xValue = player.seasonName,
+                yMin = 0f,
+                yMax = player.totalPoints.toFloat(),
+            )
+        )
+    }
+    return list
+}
+
+
+@Composable
+fun ChartTitle(title: String) {
+    Column {
+        Text(
+            title,
+            color = MaterialTheme.colors.onBackground,
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+    }
+}
+
+@Composable
+fun AxisTitle(title: String, modifier: Modifier = Modifier) {
+    Text(
+        title,
+        color = MaterialTheme.colors.onBackground,
+        style = MaterialTheme.typography.subtitle1,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun AxisLabel(label: String, modifier: Modifier = Modifier) {
+    Text(
+        label,
+        color = MaterialTheme.colors.onBackground,
+        style = MaterialTheme.typography.caption,
+        modifier = modifier
+    )
+}
+
+private val YAxisRange = 0f..25f
+
+internal val padding = 8.dp
+internal val paddingMod = Modifier.padding(padding)
+
+internal val fibonacci = mutableStateListOf(1.0f, 1.0f, 2.0f, 3.0f, 5.0f, 8.0f, 13.0f, 21.0f)
+
+private val colors = generateHueColorPalette(fibonacci.size)
+private const val BarWidth = 0.8f
+
+@Composable
+fun HoverSurface(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    Surface(
+        elevation = 2.dp,
+        shape = MaterialTheme.shapes.medium,
+        color = Color.LightGray,
+        modifier = modifier.padding(padding)
+    ) {
+        Box(modifier = Modifier.padding(padding)) {
+            content()
+        }
+    }
+}
+
+
+private data class TickPositionState(
+    val verticalAxis: TickPosition,
+    val horizontalAxis: TickPosition
+)
+
+@OptIn(ExperimentalKoalaPlotApi::class)
+@Composable
+private fun BarSamplePlot(
+    playerHistory: List<PlayerPastHistory>,
+    tickPositionState: TickPositionState,
+    title: String
+) {
+    val barChartEntries = remember() { barChartEntries(playerHistory) }
+
+    ChartLayout(
+        modifier = paddingMod,
+        title = { ChartTitle(title) }
+    ) {
+
+        XYChart<String, Float>(
+            xAxisModel = CategoryAxisModel(playerHistory.map { it.seasonName }),
+            yAxisModel = LinearAxisModel(
+                0f..playerHistory.maxOf { it.totalPoints }.toFloat(),
+                minimumMajorTickIncrement = 1f,
+                minorTickCount = 0
+            ),
+            xAxisStyle = rememberAxisStyle(
+                tickPosition = tickPositionState.horizontalAxis,
+                color = Color.LightGray
+            ),
+            xAxisLabels = {
+                AxisLabel(it, Modifier.padding(top = 2.dp))
+            },
+            xAxisTitle = { AxisTitle("Season") },
+            yAxisStyle = rememberAxisStyle(tickPosition = tickPositionState.verticalAxis),
+            yAxisLabels = {
+                AxisLabel(it.toString(1), Modifier.absolutePadding(right = 2.dp))
+            },
+            yAxisTitle = {
+                AxisTitle(
+                    "Points",
+                    modifier = Modifier.rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
+                        .padding(bottom = padding)
+                )
+            },
+            verticalMajorGridLineStyle = null
+        ) {
+            VerticalBarChart(
+                series = listOf(barChartEntries),
+                bar = { series, _, value ->
+                    DefaultVerticalBar(
+                        brush = SolidColor(colors[series]),
+                        modifier = Modifier.fillMaxWidth(BarWidth),
+                    ) {
+                        HoverSurface { Text(value.yMax.toString()) }
+                    }
+                }
+
+            )
+        }
+    }
+}
+
+*/

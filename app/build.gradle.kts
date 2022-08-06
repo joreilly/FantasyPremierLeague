@@ -13,6 +13,8 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "LEAGUE_ID", "\"\"")
     }
 
     buildFeatures {
@@ -75,6 +77,8 @@ dependencies {
     implementation(Compose.navigation)
     implementation(Compose.coilCompose)
 
+
+    //implementation("io.github.koalaplot:koalaplot-core:0.1.0-SNAPSHOT")
     implementation("com.patrykandpatryk.vico:compose:1.2.0")
 
     implementation(Deps.Koin.android)
