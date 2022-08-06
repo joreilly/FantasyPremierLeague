@@ -11,6 +11,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     @Published var playerList = [Player]()
     @Published var fixtureList = [GameFixture]()
     @Published var playerHistory = [PlayerPastHistory]()
+    @Published var leagueStandings: LeagueStandingsDto? = nil
     
     @Published var query: String = ""
     
@@ -44,6 +45,18 @@ class FantasyPremierLeagueViewModel: ObservableObject {
             let playerHistory = try await asyncFunction(for: repository.getPlayerHistoryDataNative(playerId: playerId))
             self.playerHistory = playerHistory
             print(self.playerHistory)
+            
+        } catch {
+            print("Failed with error: \(error)")
+        }
+    }
+
+    
+    func getLeageStandings(leagueId: Int32) async {
+        do {
+            let leagueStandings = try await asyncFunction(for: repository.getLeagueStandingsNative(leagueId: leagueId))
+            self.leagueStandings = leagueStandings
+            print(self.leagueStandings!)
             
         } catch {
             print("Failed with error: \(error)")

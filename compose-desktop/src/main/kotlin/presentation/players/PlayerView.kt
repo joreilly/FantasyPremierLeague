@@ -21,22 +21,16 @@ import java.net.URL
 import javax.imageio.ImageIO
 
 @Composable
-fun PlayerView(player: Player, selectedPlayer: String, playerSelected: (player: Player) -> Unit) {
+fun PlayerView(player: Player, playerSelected: (player: Player) -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth().clickable(onClick = { playerSelected(player) })
             .padding(8.dp), verticalAlignment = Alignment.CenterVertically
     ) {
 
-        val imageAsset = fetchImage(player.photoUrl)
-        imageAsset?.let {
-            Image(it, contentDescription = "player image", modifier = Modifier.size(80.dp))
-        }
-
         Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
             Text(player.name, style = MaterialTheme.typography.h6)
             Text(player.team, style = MaterialTheme.typography.subtitle1, color = Color.DarkGray)
         }
-        Text(player.points.toString())
     }
 }
 

@@ -19,6 +19,7 @@ import dev.johnoreilly.fantasypremierleague.presentation.fixtures.fixtureDetails
 import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.leagues.LeagueListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,21 +47,27 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
                     val currentRoute = navBackStackEntry?.destination?.route
 
                     bottomNavigationItems.forEach { bottomNavigationitem ->
-                        BottomNavigationItem(
-                            icon = {
-                                Icon(
-                                    bottomNavigationitem.icon,
-                                    contentDescription = bottomNavigationitem.iconContentDescription
-                                )
-                            },
-                            selected = currentRoute == bottomNavigationitem.route,
-                            onClick = {
-                                navController.navigate(bottomNavigationitem.route) {
-                                    popUpTo(navController.graph.id)
-                                    launchSingleTop = true
+
+                        val skipItem = bottomNavigationitem.route == Screen.LeagueStandingsListScreen.title
+                            && BuildConfig.LEAGUE_ID.isEmpty()
+
+                        if (!skipItem) {
+                            BottomNavigationItem(
+                                icon = {
+                                    Icon(
+                                        bottomNavigationitem.icon,
+                                        contentDescription = bottomNavigationitem.iconContentDescription
+                                    )
+                                },
+                                selected = currentRoute == bottomNavigationitem.route,
+                                onClick = {
+                                    navController.navigate(bottomNavigationitem.route) {
+                                        popUpTo(navController.graph.id)
+                                        launchSingleTop = true
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }
@@ -106,6 +113,13 @@ fun MainLayout(fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel) {
                         }
                     }
                 }
+
+                composable(Screen.LeagueStandingsListScreen.title) {
+                    LeagueListView(
+                        viewModel = fantasyPremierLeagueViewModel
+                    )
+                }
+
             }
         }
     }

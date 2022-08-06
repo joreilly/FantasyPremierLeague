@@ -2,6 +2,7 @@ package dev.johnoreilly.fantasypremierleague.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -10,6 +11,7 @@ sealed class Screen(val title: String) {
     object PlayerDetailsScreen : Screen("PlayerDetailsScreen")
     object FixtureListScreen : Screen("FixtureListScreen")
     object FixtureDetailsScreen : Screen("FixtureDetailsScreen")
+    object LeagueStandingsListScreen : Screen("LeagueStandingsListScreen")
 }
 
 data class BottomNavigationitem(
@@ -29,4 +31,9 @@ val bottomNavigationItems = listOf(
         Icons.Filled.DateRange,
         "Fixtures"
     ),
+    BottomNavigationitem(
+        Screen.LeagueStandingsListScreen.title,
+        Icons.Filled.List,
+        "League"
+    )
 )

@@ -11,8 +11,17 @@ suspend fun main() {
     val koin = initKoin(enableNetworkLogs = true).koin
 
     val api = koin.get<FantasyPremierLeagueApi>()
+
+    // https://medium.com/@frenzelts/fantasy-premier-league-api-endpoints-a-detailed-guide-acbd5598eb19
+
+    val eventStatus = api.fetchEventStatus()
+    println(eventStatus)
+
+
+
     val staticInfo = api.fetchBootstrapStaticInfo()
     val fixtures = api.fetchFixtures()
+
 
     println("Positions")
     staticInfo.element_types.forEach {
