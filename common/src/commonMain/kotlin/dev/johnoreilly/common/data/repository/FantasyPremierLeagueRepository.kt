@@ -4,6 +4,7 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import dev.johnoreilly.common.AppSettings
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.model.ElementSummaryDto
+import dev.johnoreilly.common.data.model.EventStatusListDto
 import dev.johnoreilly.common.data.model.FixtureDto
 import dev.johnoreilly.common.data.model.LeagueStandingsDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
@@ -212,6 +213,10 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     suspend fun getLeagueStandings(leagueId: Int): LeagueStandingsDto {
         return fantasyPremierLeagueApi.fetchLeagueStandings(leagueId)
+    }
+
+    suspend fun getEventStatus(): EventStatusListDto {
+        return fantasyPremierLeagueApi.fetchEventStatus()
     }
 
     fun updateLeagues(leagues: List<String>) {
