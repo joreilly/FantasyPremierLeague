@@ -4,7 +4,9 @@ import KMPNativeCoroutinesAsync
 import AsyncAlgorithms
 
 
+
 extension PlayerPastHistory: Identifiable { }
+
 
 @MainActor
 class FantasyPremierLeagueViewModel: ObservableObject {
@@ -12,6 +14,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     @Published var fixtureList = [GameFixture]()
     @Published var playerHistory = [PlayerPastHistory]()
     @Published var leagueStandings: LeagueStandingsDto? = nil
+    @Published var eventStatusList: EventStatusListDto? = nil
     
     @Published public var leagues = [String]()
     
@@ -27,15 +30,19 @@ class FantasyPremierLeagueViewModel: ObservableObject {
             
             
             do {
-                let stream = asyncStream(for: repository.leaguesNative)
-                for try await data in stream {
+                let leagueStream = asyncStream(for: repository.leaguesNative)
+                for try await data in leagueStream {
                     self.leagues = data
                 }
+                
             } catch {
                 print("Failed with error: \(error)")
             }
         }
-
+        
+        Task {
+            self.eventStatusList = try await asyncFunction(for: repository.getEventStatusNative())
+        }
     }
 
     

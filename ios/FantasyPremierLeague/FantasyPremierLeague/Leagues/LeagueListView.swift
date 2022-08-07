@@ -5,17 +5,35 @@ import FantasyPremierLeagueKit
 
 
 extension LeagueResultDto: Identifiable { }
+extension EventStatusDto: Identifiable { }
+
+
 
 struct LeagueListView: View {
     @ObservedObject var viewModel: FantasyPremierLeagueViewModel
     
     var body: some View {
-        NavigationView {
-            if let leagueStandings = viewModel.leagueStandings {
-                List(leagueStandings.standings.results) { leagueResult in
-                    LeagueReesultView(leagueResult: leagueResult)
+        VStack(alignment: .center) {
+            if let eventStatusList = viewModel.eventStatusList {
+                List {
+                    Section(header: Text("Status"), content: {
+                        ForEach(eventStatusList.status) { eventStatus in
+                            InfoRowView(label: eventStatus.date, value: eventStatus.bonus_added.description)
+                        }
+                    })
                 }
-                .navigationBarTitle(Text(leagueStandings.league.name))
+                .frame(height: 200)
+            }
+            
+            if let leagueStandings = viewModel.leagueStandings {
+                List {
+                    Section(header: Text(leagueStandings.league.name), content: {
+                        ForEach(leagueStandings.standings.results) { leagueResult in
+                            LeagueReesultView(leagueResult: leagueResult)
+                        }
+
+                    })
+                }
             }
         }
         .task {
