@@ -16,10 +16,12 @@ struct ContentView: View {
                 .tabItem {
                     Label("Fixtues", systemImage: "clock")
                 }
-            LeagueListView(viewModel: viewModel)
-                .tabItem {
-                    Label("League", systemImage: "list.number")
-                }
+            if (!viewModel.leagues.isEmpty) {
+                LeagueListView(viewModel: viewModel)
+                    .tabItem {
+                        Label("League", systemImage: "list.number")
+                    }
+            }
         }
     }
 }

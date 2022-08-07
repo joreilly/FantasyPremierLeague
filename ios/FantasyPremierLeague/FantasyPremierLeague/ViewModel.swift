@@ -13,11 +13,29 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     @Published var playerHistory = [PlayerPastHistory]()
     @Published var leagueStandings: LeagueStandingsDto? = nil
     
+    @Published public var leagues = [String]()
+    
     @Published var query: String = ""
     
     private let repository: FantasyPremierLeagueRepository
     init(repository: FantasyPremierLeagueRepository) {
         self.repository = repository
+        
+        Task {
+            // TEMP to set a particular league until settings screen added
+            //repository.updateLeagues(leagues: [""])
+            
+            
+            do {
+                let stream = asyncStream(for: repository.leaguesNative)
+                for try await data in stream {
+                    self.leagues = data
+                }
+            } catch {
+                print("Failed with error: \(error)")
+            }
+        }
+
     }
 
     
@@ -52,8 +70,9 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     }
 
     
-    func getLeageStandings(leagueId: Int32) async {
+    func getLeageStandings() async {
         do {
+            let leagueId = Int32(leagues[0])! // first league for now
             let leagueStandings = try await asyncFunction(for: repository.getLeagueStandingsNative(leagueId: leagueId))
             self.leagueStandings = leagueStandings
             print(self.leagueStandings!)

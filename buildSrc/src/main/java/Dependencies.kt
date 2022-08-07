@@ -8,6 +8,7 @@ object Versions {
     const val realm = "1.0.0"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.4.0"
+    const val multiplatformSettings = "0.9"
 
     const val kmpNativeCoroutinesVersion = "0.12.5-new-mm"
 
@@ -31,6 +32,9 @@ object AndroidSdk {
 object Deps {
     const val realm = "io.realm.kotlin:library-base:${Versions.realm}"
     const val kermit = "co.touchlab:kermit:${Versions.kermit}"
+
+    const val multiplatformSettings = "com.russhwolf:multiplatform-settings:${Versions.multiplatformSettings}"
+    const val multiplatformSettingsCoroutines = "com.russhwolf:multiplatform-settings-coroutines:${Versions.multiplatformSettings}"
 
     object Kotlinx {
         const val serializationCore = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlinxSerialization}"

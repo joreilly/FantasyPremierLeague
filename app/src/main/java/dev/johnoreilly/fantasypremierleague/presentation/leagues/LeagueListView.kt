@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,17 +18,21 @@ import dev.johnoreilly.fantasypremierleague.BuildConfig
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 
 @Composable
-fun LeagueListView(
-    viewModel: FantasyPremierLeagueViewModel
-) {
+fun LeagueListView(viewModel: FantasyPremierLeagueViewModel) {
+
     var leagueStandings by remember { mutableStateOf(emptyList<LeagueResultDto>()) }
     var leagueName by remember { mutableStateOf("") }
 
-    LaunchedEffect(true) {
-        val result = viewModel.getLeagueStandings(BuildConfig.LEAGUE_ID.toInt())
+    val leagues by viewModel.leagues.collectAsState(emptyList())
 
-        leagueName = result.league.name
-        leagueStandings = result.standings.results
+    LaunchedEffect(leagues) {
+        if (leagues.isNotEmpty()) {
+            val league = leagues[0] // 1 league for now
+            val result = viewModel.getLeagueStandings(league.toInt())
+
+            leagueName = result.league.name
+            leagueStandings = result.standings.results
+        }
     }
 
     Scaffold(
