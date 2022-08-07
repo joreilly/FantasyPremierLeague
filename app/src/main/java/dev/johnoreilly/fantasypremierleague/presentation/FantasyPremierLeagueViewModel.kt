@@ -24,6 +24,10 @@ class FantasyPremierLeagueViewModel(
 
     val fixturesList = repository.fixtureList
 
+    val leagues: StateFlow<List<String>> = repository.leagues
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+
     fun onPlayerSearchQueryChange(query: String) {
         searchQuery.value = query
     }
@@ -42,5 +46,9 @@ class FantasyPremierLeagueViewModel(
 
     fun getFixture(fixtureId: Int?): GameFixture? {
         return fixturesList.value.find { it.id == fixtureId}
+    }
+
+    fun updateLeagues(leagues: List<String>) {
+        repository.updateLeagues(leagues)
     }
 }

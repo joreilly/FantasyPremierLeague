@@ -1,5 +1,6 @@
 package dev.johnoreilly.common.di
 
+import dev.johnoreilly.common.AppSettings
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.data.repository.FixtureDb
@@ -37,6 +38,8 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
     single { FantasyPremierLeagueRepository() }
     single { FantasyPremierLeagueApi(get()) }
+
+    single { AppSettings(get()) }
 }
 
 fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }

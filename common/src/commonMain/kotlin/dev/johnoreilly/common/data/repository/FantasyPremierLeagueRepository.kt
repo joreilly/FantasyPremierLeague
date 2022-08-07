@@ -1,6 +1,7 @@
 package dev.johnoreilly.common.data.repository
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
+import dev.johnoreilly.common.AppSettings
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.model.ElementSummaryDto
 import dev.johnoreilly.common.data.model.FixtureDto
@@ -60,6 +61,7 @@ class FixtureDb: RealmObject {
 class FantasyPremierLeagueRepository : KoinComponent {
     private val fantasyPremierLeagueApi: FantasyPremierLeagueApi by inject()
     private val realm: Realm by inject()
+    private val appSettings: AppSettings by inject()
 
     @NativeCoroutineScope
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
@@ -72,6 +74,8 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
     val fixtureList = _fixtureList.asStateFlow()
+
+    val leagues = appSettings.leagues
 
 
     init {
@@ -208,6 +212,10 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     suspend fun getLeagueStandings(leagueId: Int): LeagueStandingsDto {
         return fantasyPremierLeagueApi.fetchLeagueStandings(leagueId)
+    }
+
+    fun updateLeagues(leagues: List<String>) {
+        appSettings.updatesLeagesSetting(leagues)
     }
 
 }

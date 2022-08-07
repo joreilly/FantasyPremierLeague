@@ -19,7 +19,7 @@ struct LeagueListView: View {
             }
         }
         .task {
-            await viewModel.getLeageStandings(leagueId: 0)
+            await viewModel.getLeageStandings()
         }
     }
 }

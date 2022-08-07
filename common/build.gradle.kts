@@ -64,6 +64,10 @@ kotlin {
             api(Deps.Koin.core)
             api(Deps.Koin.test)
 
+            api(Deps.multiplatformSettings)
+            api(Deps.multiplatformSettingsCoroutines)
+
+
             // kermit
             api(Deps.kermit)
         }
