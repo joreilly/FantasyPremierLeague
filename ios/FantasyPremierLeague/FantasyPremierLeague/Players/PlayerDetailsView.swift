@@ -42,7 +42,7 @@ struct PlayerDetailsView: View {
                     
                 }
                 .chartYAxisLabel("Points")
-                .chartXAxisLabel("Season")
+                .chartXAxisLabel("Season", alignment: Alignment.center)
                 .frame(height: 250)
                 
             
