@@ -39,7 +39,10 @@ struct PlayerDetailsView: View {
                         x: .value("Season", $0.seasonName),
                         y: .value("Points", $0.totalPoints)
                     )
+                    
                 }
+                .chartYAxisLabel("Points")
+                .chartXAxisLabel("Season")
                 .frame(height: 250)
                 
             
