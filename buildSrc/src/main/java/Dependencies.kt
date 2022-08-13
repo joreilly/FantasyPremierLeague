@@ -8,7 +8,7 @@ object Versions {
     const val realm = "1.0.2"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.4.0"
-    const val multiplatformSettings = "0.9"
+    const val multiplatformSettings = "1.0.0-alpha01"
 
     const val kmpNativeCoroutinesVersion = "0.12.6-new-mm"
 
