@@ -60,20 +60,23 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.6.0")
+    implementation("androidx.appcompat:appcompat:1.5.0")
+    implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
 
-    implementation(Compose.compiler)
-    implementation(Compose.ui)
-    implementation(Compose.uiGraphics)
-    implementation(Compose.uiTooling)
-    implementation(Compose.foundation)
-    implementation(Compose.foundationLayout)
-    implementation(Compose.material)
-    implementation(Compose.navigation)
-    implementation(Compose.coilCompose)
+    with (Compose) {
+        implementation(compiler)
+        implementation(ui)
+        implementation(uiGraphics)
+        implementation(uiTooling)
+        implementation(foundation)
+        implementation(foundationLayout)
+        implementation(material)
+        implementation(navigation)
+        implementation(coilCompose)
+        implementation(Compose.accompanistSwipeRefresh)
+    }
 
 
     //implementation("io.github.koalaplot:koalaplot-core:0.1.0-SNAPSHOT")

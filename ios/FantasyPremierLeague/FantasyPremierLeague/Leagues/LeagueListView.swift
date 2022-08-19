@@ -34,6 +34,9 @@ struct LeagueListView: View {
 
                     })
                 }
+                .refreshable {
+                    await viewModel.getLeageStandings()
+                }
             }
         }
         .task {
