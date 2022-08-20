@@ -1,12 +1,19 @@
 package dev.johnoreilly.fantasypremierleague.presentation
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.*
+import dev.johnoreilly.common.data.model.LeagueResultDto
 import dev.johnoreilly.common.data.model.LeagueStandingsDto
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 
 class FantasyPremierLeagueViewModel(
@@ -27,7 +34,16 @@ class FantasyPremierLeagueViewModel(
     val leagues: StateFlow<List<String>> = repository.leagues
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
+    var leagueStandings = MutableStateFlow((emptyList<LeagueResultDto>()))
+    var leagueName = MutableStateFlow("")
 
+
+
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean>
+        get() = _isRefreshing.asStateFlow()
+
+    
     fun onPlayerSearchQueryChange(query: String) {
         searchQuery.value = query
     }
@@ -40,8 +56,19 @@ class FantasyPremierLeagueViewModel(
         return repository.getPlayerHistoryData(playerId)
     }
 
-    suspend fun getLeagueStandings(leagueId: Int): LeagueStandingsDto {
-        return repository.getLeagueStandings(leagueId)
+    fun getLeagueStandings() {
+        viewModelScope.launch {
+            if (leagues.value.isNotEmpty()) {
+                _isRefreshing.emit(true)
+                val leagueId = leagues.value[0]
+                val result = repository.getLeagueStandings(leagueId.toInt())
+                result.let {
+                    leagueName.value = result.league.name
+                    leagueStandings.value = result.standings.results
+                }
+                _isRefreshing.emit(false)
+            }
+        }
     }
 
     fun getFixture(fixtureId: Int?): GameFixture? {
@@ -51,4 +78,5 @@ class FantasyPremierLeagueViewModel(
     fun updateLeagues(leagues: List<String>) {
         repository.updateLeagues(leagues)
     }
+
 }

@@ -16,6 +16,7 @@ object Versions {
     const val compose = "1.2.1"
     const val composeCompiler = "1.3.0"
     const val navCompose = "2.5.1"
+    const val accompanist = "0.25.1"
     const val coilCompose = "2.1.0"
     const val composeDesktop =  "1.2.0-alpha01-dev755"
 
@@ -79,6 +80,7 @@ object Compose {
     const val material = "androidx.compose.material:material:${Versions.compose}"
     const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coilCompose}"
+    const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
 }
 
 

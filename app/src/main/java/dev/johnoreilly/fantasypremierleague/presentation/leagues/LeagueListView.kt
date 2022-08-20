@@ -13,6 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dev.johnoreilly.common.data.model.LeagueResultDto
 import dev.johnoreilly.fantasypremierleague.BuildConfig
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
@@ -20,18 +22,16 @@ import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueVie
 @Composable
 fun LeagueListView(viewModel: FantasyPremierLeagueViewModel) {
 
-    var leagueStandings by remember { mutableStateOf(emptyList<LeagueResultDto>()) }
-    var leagueName by remember { mutableStateOf("") }
+    val leagueStandings by viewModel.leagueStandings.collectAsState(emptyList())
+    val leagueName by viewModel.leagueName.collectAsState("")
 
     val leagues by viewModel.leagues.collectAsState(emptyList())
 
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
+
     LaunchedEffect(leagues) {
         if (leagues.isNotEmpty()) {
-            val league = leagues[0] // 1 league for now
-            val result = viewModel.getLeagueStandings(league.toInt())
-
-            leagueName = result.league.name
-            leagueStandings = result.standings.results
+            viewModel.getLeagueStandings()
         }
     }
 
@@ -39,11 +39,14 @@ fun LeagueListView(viewModel: FantasyPremierLeagueViewModel) {
         topBar = {
             TopAppBar(title = { Text(leagueName) })
         }) {
-            Column {
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(isRefreshing),
+                onRefresh = { viewModel.getLeagueStandings() },
+            ) {
                 LazyColumn {
-                    items(items = leagueStandings, itemContent = { leagueResult ->
+                    items(items = leagueStandings) { leagueResult ->
                         LeagueResultView(leagueResult = leagueResult)
-                    })
+                    }
                 }
             }
         }
