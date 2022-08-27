@@ -15,7 +15,7 @@ struct PlayerDetailsView: View {
                 AsyncImage(url: URL(string: player.photoUrl)) { image in
                      image.resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 100, height: 100)
+                        .frame(width: 150, height: 150)
                 } placeholder: {
                     ProgressView()
                 }

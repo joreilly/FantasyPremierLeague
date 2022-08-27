@@ -19,6 +19,7 @@ object Versions {
     const val accompanist = "0.25.1"
     const val coilCompose = "2.1.0"
     const val composeDesktop =  "1.2.0-alpha01-dev755"
+    const val koalaPlot =  "0.1.0"
 
     const val junit = "4.13"
 }
@@ -81,6 +82,7 @@ object Compose {
     const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coilCompose}"
     const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
+    const val koalaPlot = "io.github.koalaplot:koalaplot-core:${Versions.koalaPlot}"
 }
 
 

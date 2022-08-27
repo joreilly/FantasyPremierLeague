@@ -75,12 +75,12 @@ dependencies {
         implementation(material)
         implementation(navigation)
         implementation(coilCompose)
-        implementation(Compose.accompanistSwipeRefresh)
+        implementation(accompanistSwipeRefresh)
+        implementation(Compose.koalaPlot)
     }
 
 
-    //implementation("io.github.koalaplot:koalaplot-core:0.1.0-SNAPSHOT")
-    implementation("com.patrykandpatryk.vico:compose:1.2.0")
+    //implementation("com.patrykandpatryk.vico:compose:1.2.0")
 
     implementation(Deps.Koin.android)
 

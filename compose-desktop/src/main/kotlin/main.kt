@@ -34,21 +34,21 @@ import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
-//import io.github.koalaplot.core.ChartLayout
-//import io.github.koalaplot.core.bar.BarChartEntry
-//import io.github.koalaplot.core.bar.DefaultBarChartEntry
-//import io.github.koalaplot.core.bar.DefaultVerticalBar
-//import io.github.koalaplot.core.bar.VerticalBarChart
-//import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
-//import io.github.koalaplot.core.util.VerticalRotation
-//import io.github.koalaplot.core.util.generateHueColorPalette
-//import io.github.koalaplot.core.util.rotateVertically
-//import io.github.koalaplot.core.util.toString
-//import io.github.koalaplot.core.xychart.CategoryAxisModel
-//import io.github.koalaplot.core.xychart.LinearAxisModel
-//import io.github.koalaplot.core.xychart.TickPosition
-//import io.github.koalaplot.core.xychart.XYChart
-//import io.github.koalaplot.core.xychart.rememberAxisStyle
+import io.github.koalaplot.core.ChartLayout
+import io.github.koalaplot.core.bar.BarChartEntry
+import io.github.koalaplot.core.bar.DefaultBarChartEntry
+import io.github.koalaplot.core.bar.DefaultVerticalBar
+import io.github.koalaplot.core.bar.VerticalBarChart
+import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
+import io.github.koalaplot.core.util.VerticalRotation
+import io.github.koalaplot.core.util.generateHueColorPalette
+import io.github.koalaplot.core.util.rotateVertically
+import io.github.koalaplot.core.util.toString
+import io.github.koalaplot.core.xychart.CategoryAxisModel
+import io.github.koalaplot.core.xychart.LinearAxisModel
+import io.github.koalaplot.core.xychart.TickPosition
+import io.github.koalaplot.core.xychart.XYChart
+import io.github.koalaplot.core.xychart.rememberAxisStyle
 import kotlinx.coroutines.flow.*
 import presentation.players.PlayerView
 import presentation.players.fetchImage
@@ -146,22 +146,24 @@ fun PlayerListView(playerList: List<Player>, playerSelected: (player: Player) ->
 fun PlayerDetailsView(player: Player?, repository: FantasyPremierLeagueRepository) {
 
     player?.let {
-//        var tickPositionState by remember {
-//            mutableStateOf(
-//                TickPositionState(
-//                    TickPosition.Outside,
-//                    TickPosition.Outside
-//                )
-//            )
-//        }
+        val tickPositionState by remember {
+            mutableStateOf(
+                TickPositionState(
+                    TickPosition.Outside,
+                    TickPosition.Outside
+                )
+            )
+        }
 
         var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }
 
-        LaunchedEffect(true) {
+        LaunchedEffect(player.id) {
             playerHistory = repository.getPlayerHistoryData(player.id)
             println(playerHistory)
         }
 
+
+        //var playerHistory = produceState()
 
 
         Column(
@@ -196,11 +198,11 @@ fun PlayerDetailsView(player: Player?, repository: FantasyPremierLeagueRepositor
             PlayerStatView("Goals Scored", player.goalsScored.toString())
             PlayerStatView("Assists", player.assists.toString())
 
-//            Spacer(modifier = Modifier.size(8.dp))
-//
-//            if (playerHistory.isNotEmpty()) {
-//                BarSamplePlot(playerHistory, tickPositionState, "Points by Season")
-//            }
+            Spacer(modifier = Modifier.size(8.dp))
+
+            if (playerHistory.isNotEmpty()) {
+                BarSamplePlot(playerHistory, tickPositionState, "Points by Season")
+            }
 
         }
     }
@@ -235,7 +237,7 @@ fun PlayerStatView(statName: String, statValue: String) {
     }
 }
 
-/*
+
 
 private data class TickPositionState(
     val verticalAxis: TickPosition,
@@ -372,4 +374,4 @@ private fun BarSamplePlot(
         }
     }
 }
-*/
+

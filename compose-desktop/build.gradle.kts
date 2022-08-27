@@ -11,13 +11,12 @@ group = "me.joreilly"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven(url = "https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 
 dependencies {
-    //implementation("io.github.koalaplot:koalaplot-core:0.1.0-SNAPSHOT")
+    implementation(Compose.koalaPlot)
     implementation(compose.desktop.currentOs)
     implementation(project(":common"))
 }

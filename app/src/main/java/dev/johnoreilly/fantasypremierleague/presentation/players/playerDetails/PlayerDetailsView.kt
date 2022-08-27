@@ -15,34 +15,34 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-//import io.github.koalaplot.core.ChartLayout
-//import io.github.koalaplot.core.bar.BarChartEntry
-//import io.github.koalaplot.core.bar.DefaultBarChartEntry
-//import io.github.koalaplot.core.bar.DefaultVerticalBar
-//import io.github.koalaplot.core.bar.VerticalBarChart
-//import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
-//import io.github.koalaplot.core.util.VerticalRotation
-//import io.github.koalaplot.core.util.generateHueColorPalette
-//import io.github.koalaplot.core.util.rotateVertically
-//import io.github.koalaplot.core.util.toString
-//import io.github.koalaplot.core.xychart.CategoryAxisModel
-//import io.github.koalaplot.core.xychart.LinearAxisModel
-//import io.github.koalaplot.core.xychart.TickPosition
-//import io.github.koalaplot.core.xychart.XYChart
-//import io.github.koalaplot.core.xychart.rememberAxisStyle
+import io.github.koalaplot.core.ChartLayout
+import io.github.koalaplot.core.bar.BarChartEntry
+import io.github.koalaplot.core.bar.DefaultBarChartEntry
+import io.github.koalaplot.core.bar.DefaultVerticalBar
+import io.github.koalaplot.core.bar.VerticalBarChart
+import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
+import io.github.koalaplot.core.util.VerticalRotation
+import io.github.koalaplot.core.util.generateHueColorPalette
+import io.github.koalaplot.core.util.rotateVertically
+import io.github.koalaplot.core.util.toString
+import io.github.koalaplot.core.xychart.CategoryAxisModel
+import io.github.koalaplot.core.xychart.LinearAxisModel
+import io.github.koalaplot.core.xychart.TickPosition
+import io.github.koalaplot.core.xychart.XYChart
+import io.github.koalaplot.core.xychart.rememberAxisStyle
 
-import com.patrykandpatryk.vico.compose.axis.horizontal.bottomAxis
-import com.patrykandpatryk.vico.compose.axis.vertical.startAxis
-import com.patrykandpatryk.vico.compose.chart.Chart
-import com.patrykandpatryk.vico.compose.chart.column.columnChart
-import com.patrykandpatryk.vico.compose.component.shape.lineComponent
-import com.patrykandpatryk.vico.core.DefaultDimens
-import com.patrykandpatryk.vico.core.component.shape.Shapes
-import com.patrykandpatryk.vico.core.entry.ChartEntry
-import com.patrykandpatryk.vico.core.entry.ChartEntryModelProducer
-import com.patrykandpatryk.vico.core.entry.FloatEntry
-import com.patrykandpatryk.vico.core.entry.composed.ComposedChartEntryModelProducer
-import com.patrykandpatryk.vico.core.entry.entryModelOf
+//import com.patrykandpatryk.vico.compose.axis.horizontal.bottomAxis
+//import com.patrykandpatryk.vico.compose.axis.vertical.startAxis
+//import com.patrykandpatryk.vico.compose.chart.Chart
+//import com.patrykandpatryk.vico.compose.chart.column.columnChart
+//import com.patrykandpatryk.vico.compose.component.shape.lineComponent
+//import com.patrykandpatryk.vico.core.DefaultDimens
+//import com.patrykandpatryk.vico.core.component.shape.Shapes
+//import com.patrykandpatryk.vico.core.entry.ChartEntry
+//import com.patrykandpatryk.vico.core.entry.ChartEntryModelProducer
+//import com.patrykandpatryk.vico.core.entry.FloatEntry
+//import com.patrykandpatryk.vico.core.entry.composed.ComposedChartEntryModelProducer
+//import com.patrykandpatryk.vico.core.entry.entryModelOf
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
@@ -62,14 +62,14 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
     }
 
 
-//    var tickPositionState by remember {
-//        mutableStateOf(
-//            TickPositionState(
-//                TickPosition.Outside,
-//                TickPosition.Outside
-//            )
-//        )
-//    }
+    var tickPositionState by remember {
+        mutableStateOf(
+            TickPositionState(
+                TickPosition.Outside,
+                TickPosition.Outside
+            )
+        )
+    }
 
 
     Scaffold(
@@ -123,26 +123,26 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
 
                 if (playerHistory.isNotEmpty()) {
 
-                    //BarSamplePlot(playerHistory, tickPositionState, "Points by Season")
+                    BarSamplePlot(playerHistory, tickPositionState, "Points by Season")
 
-                    val producer = ChartEntryModelProducer(playerHistory.mapIndexed { x, y ->
-                        FloatEntry(x = x.toFloat(), y = y.totalPoints.toFloat())
-                    })
-
-                    val columnChart = columnChart(
-                        columns = listOf(lineComponent(
-                            color = Color(0xFF3179EA),
-                            thickness = 36.dp
-                        )),
-                        spacing = 10.dp
-                    )
-
-                    Chart(
-                        chart = columnChart,
-                        chartModelProducer = producer,
-                        startAxis = startAxis(),
-                        bottomAxis = bottomAxis(),
-                    )
+//                    val producer = ChartEntryModelProducer(playerHistory.mapIndexed { x, y ->
+//                        FloatEntry(x = x.toFloat(), y = y.totalPoints.toFloat())
+//                    })
+//
+//                    val columnChart = columnChart(
+//                        columns = listOf(lineComponent(
+//                            color = Color(0xFF3179EA),
+//                            thickness = 36.dp
+//                        )),
+//                        spacing = 10.dp
+//                    )
+//
+//                    Chart(
+//                        chart = columnChart,
+//                        chartModelProducer = producer,
+//                        startAxis = startAxis(),
+//                        bottomAxis = bottomAxis(),
+//                    )
                 }
             }
         }
@@ -177,7 +177,7 @@ fun PlayerStatView(statName: String, statValue: String) {
 }
 
 
-/*
+
 private fun barChartEntries(playerHistory: List<PlayerPastHistory>): List<BarChartEntry<String, Float>> {
     val list = mutableListOf<BarChartEntry<String, Float>>()
 
@@ -314,4 +314,3 @@ private fun BarSamplePlot(
     }
 }
 
-*/
