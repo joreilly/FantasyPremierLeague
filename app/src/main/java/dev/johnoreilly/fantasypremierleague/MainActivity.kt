@@ -15,16 +15,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.Screen
 import dev.johnoreilly.fantasypremierleague.presentation.bottomNavigationItems
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixturesListView
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.fixtureDetails.FixtureDetailsView
 import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
-import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
-import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.leagues.LeagueListView
+import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -83,7 +86,9 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
                     fantasyPremierLeagueViewModel = viewModel,
                     onFixtureSelected = { fixtureId ->
                         navController.navigate(Screen.FixtureDetailsScreen.title + "/${fixtureId}")
-                    }
+                    },
+                    //todo Calculate current GW and pass in
+                    currentGameweek = 1
                 )
             }
             composable(
