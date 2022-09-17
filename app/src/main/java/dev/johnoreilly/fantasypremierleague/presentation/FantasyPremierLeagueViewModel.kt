@@ -1,17 +1,12 @@
 package dev.johnoreilly.fantasypremierleague.presentation
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.johnoreilly.common.data.model.LeagueResultDto
-import dev.johnoreilly.common.data.model.LeagueStandingsDto
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -21,23 +16,24 @@ class FantasyPremierLeagueViewModel(
 ) : ViewModel() {
 
     val searchQuery = MutableStateFlow("")
-    val playerList: StateFlow<List<Player>> = searchQuery.debounce(250).flatMapLatest { searchQuery ->
-        repository.playerList.mapLatest { playerList ->
-            playerList
-                .filter { it.name.contains(searchQuery, ignoreCase = true) }
-                .sortedByDescending { it.points }
-        }
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+    val playerList: StateFlow<List<Player>> =
+        searchQuery.debounce(250).flatMapLatest { searchQuery ->
+            repository.playerList.mapLatest { playerList ->
+                playerList
+                    .filter { it.name.contains(searchQuery, ignoreCase = true) }
+                    .sortedByDescending { it.points }
+            }
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val fixturesList = repository.fixtureList
+
+    val gameweekToFixtures = repository.gameweekToFixtures
 
     val leagues: StateFlow<List<String>> = repository.leagues
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     var leagueStandings = MutableStateFlow((emptyList<LeagueResultDto>()))
     var leagueName = MutableStateFlow("")
-
-
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>

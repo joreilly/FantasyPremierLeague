@@ -3,7 +3,6 @@ package dev.johnoreilly.common.data.repository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
 import dev.johnoreilly.common.AppSettings
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
-import dev.johnoreilly.common.data.model.ElementSummaryDto
 import dev.johnoreilly.common.data.model.EventStatusListDto
 import dev.johnoreilly.common.data.model.FixtureDto
 import dev.johnoreilly.common.data.model.LeagueStandingsDto
@@ -18,13 +17,17 @@ import io.realm.kotlin.ext.query
 import io.realm.kotlin.query.RealmResults
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
 class TeamDb: RealmObject {
@@ -57,6 +60,7 @@ class FixtureDb: RealmObject {
     var awayTeam: TeamDb? = null
     var homeTeamScore: Int = 0
     var awayTeamScore: Int = 0
+    var event: Int = 0
 }
 
 class FantasyPremierLeagueRepository : KoinComponent {
@@ -75,6 +79,10 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
     val fixtureList = _fixtureList.asStateFlow()
+
+    private val _gameweekToFixtureMap =
+        MutableStateFlow<MutableMap<Int, List<GameFixture>>>(mutableMapOf())
+    val gameweekToFixtures = _gameweekToFixtureMap.asStateFlow()
 
     val leagues = appSettings.leagues
 
@@ -129,10 +137,27 @@ class FantasyPremierLeagueRepository : KoinComponent {
                             val localKickoffTime = kickoffTime.toInstant()
                                 .toLocalDateTime(TimeZone.currentSystemDefault())
 
-                            GameFixture(
-                                it.id, localKickoffTime, homeTeamName, awayTeamName,
-                                homeTeamPhotoUrl, awayTeamPhotoUrl, homeTeamScore, awayTeamScore
+                            val gf = GameFixture(
+                                it.id,
+                                localKickoffTime,
+                                homeTeamName,
+                                awayTeamName,
+                                homeTeamPhotoUrl,
+                                awayTeamPhotoUrl,
+                                homeTeamScore,
+                                awayTeamScore,
+                                it.event
                             )
+                            //Build gameweek to fixture map
+                            var currentValueForGw = _gameweekToFixtureMap.value[gf.event]
+                            if (currentValueForGw.isNullOrEmpty()) {
+                                _gameweekToFixtureMap.value[gf.event!!] = mutableListOf(gf)
+                            } else {
+                                currentValueForGw = currentValueForGw.plus(gf)
+                                _gameweekToFixtureMap.value[gf.event!!] = currentValueForGw
+                            }
+
+                            return@let gf
                         }
                     }
                 }
@@ -193,6 +218,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                     copyToRealm(FixtureDb().apply {
                         id = fixtureDto.id
                         kickoffTime = fixtureDto.kickoff_time.toString()
+                        fixtureDto.event?.let { event = it }
                         fixtureDto.team_h_score?.let { homeTeamScore = it }
                         fixtureDto.team_a_score?.let { awayTeamScore = it }
 
