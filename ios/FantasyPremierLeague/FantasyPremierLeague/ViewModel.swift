@@ -12,6 +12,8 @@ extension PlayerPastHistory: Identifiable { }
 class FantasyPremierLeagueViewModel: ObservableObject {
     @Published var playerList = [Player]()
     @Published var fixtureList = [GameFixture]()
+    @Published var gameWeekFixtures = [Int: [GameFixture]]()
+    
     @Published var playerHistory = [PlayerPastHistory]()
     @Published var leagueStandings: LeagueStandingsDto? = nil
     @Published var eventStatusList: EventStatusListDto? = nil
@@ -41,7 +43,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
         }
         
         Task {
-            self.eventStatusList = try await asyncFunction(for: repository.getEventStatusNative())
+            self.eventStatusList = try await asyncFunction(for: repository.getEventStatusNative())                        
         }
     }
 
@@ -100,6 +102,20 @@ class FantasyPremierLeagueViewModel: ObservableObject {
             print("Failed with error: \(error)")
         }
     }
+
+    
+    func getGameWeekFixtures() async {
+        do {
+            let stream = asyncStream(for: repository.gameweekToFixturesNative)
+            for try await data in stream {
+                self.gameWeekFixtures = data as! [Int : [GameFixture]]
+            }
+        } catch {
+            print("Failed with error: \(error)")
+        }
+    }
+
+    
 }
 
 
