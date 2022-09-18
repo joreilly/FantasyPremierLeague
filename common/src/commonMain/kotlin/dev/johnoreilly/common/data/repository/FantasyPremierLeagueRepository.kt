@@ -154,8 +154,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                         }
                         //Build gameweek to fixture map
                         _gameweekToFixtureMap.value = _fixtureList.value
-                            .filter { it.event != null }
-                            .groupBy { it.event!! }
+                            .groupBy { it.event }
                 }
             }
 
