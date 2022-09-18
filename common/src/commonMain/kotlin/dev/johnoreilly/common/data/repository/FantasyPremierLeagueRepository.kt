@@ -20,6 +20,7 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -80,9 +81,8 @@ class FantasyPremierLeagueRepository : KoinComponent {
     private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
     val fixtureList = _fixtureList.asStateFlow()
 
-    private val _gameweekToFixtureMap =
-        MutableStateFlow<MutableMap<Int, List<GameFixture>>>(mutableMapOf())
-    val gameweekToFixtures = _gameweekToFixtureMap.asStateFlow()
+    private val _gameweekToFixtureMap = MutableStateFlow<Map<Int,List<GameFixture>>>(emptyMap())
+    val gameweekToFixtures: StateFlow<Map<Int, List<GameFixture>>> = _gameweekToFixtureMap.asStateFlow()
 
     val leagues = appSettings.leagues
 
@@ -120,46 +120,42 @@ class FantasyPremierLeagueRepository : KoinComponent {
                 realm.query<FixtureDb>().asFlow()
                     .map { it.list }
                     .collect { it: RealmResults<FixtureDb> ->
-                    _fixtureList.value = it.toList().mapNotNull {
-                        val homeTeamName = it.homeTeam?.name ?: ""
-                        val homeTeamCode = it.homeTeam?.code ?: 0
-                        val homeTeamScore = it.homeTeamScore ?: 0
-                        val homeTeamPhotoUrl =
-                            "https://resources.premierleague.com/premierleague/badges/t${homeTeamCode}.png"
+                        _fixtureList.value = it.toList().mapNotNull {
+                            val homeTeamName = it.homeTeam?.name ?: ""
+                            val homeTeamCode = it.homeTeam?.code ?: 0
+                            val homeTeamScore = it.homeTeamScore ?: 0
+                            val homeTeamPhotoUrl =
+                                "https://resources.premierleague.com/premierleague/badges/t${homeTeamCode}.png"
 
-                        val awayTeamName = it.awayTeam?.name ?: ""
-                        val awayTeamCode = it.awayTeam?.code ?: 0
-                        val awayTeamScore = it.awayTeamScore ?: 0
-                        val awayTeamPhotoUrl =
-                            "https://resources.premierleague.com/premierleague/badges/t${awayTeamCode}.png"
+                            val awayTeamName = it.awayTeam?.name ?: ""
+                            val awayTeamCode = it.awayTeam?.code ?: 0
+                            val awayTeamScore = it.awayTeamScore ?: 0
+                            val awayTeamPhotoUrl =
+                                "https://resources.premierleague.com/premierleague/badges/t${awayTeamCode}.png"
 
-                        it.kickoffTime?.let { kickoffTime ->
-                            val localKickoffTime = kickoffTime.toInstant()
-                                .toLocalDateTime(TimeZone.currentSystemDefault())
+                            it.kickoffTime?.let { kickoffTime ->
+                                val localKickoffTime = kickoffTime.toInstant()
+                                    .toLocalDateTime(TimeZone.currentSystemDefault())
 
-                            val gf = GameFixture(
-                                it.id,
-                                localKickoffTime,
-                                homeTeamName,
-                                awayTeamName,
-                                homeTeamPhotoUrl,
-                                awayTeamPhotoUrl,
-                                homeTeamScore,
-                                awayTeamScore,
-                                it.event
-                            )
-                            //Build gameweek to fixture map
-                            var currentValueForGw = _gameweekToFixtureMap.value[gf.event]
-                            if (currentValueForGw.isNullOrEmpty()) {
-                                _gameweekToFixtureMap.value[gf.event!!] = mutableListOf(gf)
-                            } else {
-                                currentValueForGw = currentValueForGw.plus(gf)
-                                _gameweekToFixtureMap.value[gf.event!!] = currentValueForGw
+                                val gf = GameFixture(
+                                    it.id,
+                                    localKickoffTime,
+                                    homeTeamName,
+                                    awayTeamName,
+                                    homeTeamPhotoUrl,
+                                    awayTeamPhotoUrl,
+                                    homeTeamScore,
+                                    awayTeamScore,
+                                    it.event
+                                )
+
+                                return@let gf
                             }
-
-                            return@let gf
                         }
-                    }
+                        //Build gameweek to fixture map
+                        _gameweekToFixtureMap.value = _fixtureList.value
+                            .filter { it.event != null }
+                            .groupBy { it.event!! }
                 }
             }
 
