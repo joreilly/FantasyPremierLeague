@@ -23,11 +23,10 @@ import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueVie
 @Composable
 fun FixturesListView(
     fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
-    onFixtureSelected: (fixtureId: Int) -> Unit,
-    currentGameweek: Int = 1
+    onFixtureSelected: (fixtureId: Int) -> Unit
 ) {
     val fixturesState = fantasyPremierLeagueViewModel.gameweekToFixtures.collectAsState()
-    val gameweek = remember { mutableStateOf(currentGameweek) }
+    val gameweek = remember { mutableStateOf(fantasyPremierLeagueViewModel.currentGameweek) }
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Fixtures") })

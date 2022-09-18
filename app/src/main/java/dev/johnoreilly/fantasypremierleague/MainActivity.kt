@@ -86,9 +86,7 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
                     fantasyPremierLeagueViewModel = viewModel,
                     onFixtureSelected = { fixtureId ->
                         navController.navigate(Screen.FixtureDetailsScreen.title + "/${fixtureId}")
-                    },
-                    //todo Calculate current GW and pass in
-                    currentGameweek = 1
+                    }
                 )
             }
             composable(

@@ -81,11 +81,15 @@ class FantasyPremierLeagueRepository : KoinComponent {
     private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
     val fixtureList = _fixtureList.asStateFlow()
 
-    private val _gameweekToFixtureMap = MutableStateFlow<Map<Int,List<GameFixture>>>(emptyMap())
-    val gameweekToFixtures: StateFlow<Map<Int, List<GameFixture>>> = _gameweekToFixtureMap.asStateFlow()
+    private val _gameweekToFixtureMap = MutableStateFlow<Map<Int, List<GameFixture>>>(emptyMap())
+    val gameweekToFixtures: StateFlow<Map<Int, List<GameFixture>>> =
+        _gameweekToFixtureMap.asStateFlow()
 
     val leagues = appSettings.leagues
 
+    private var _currentGameweek: Int? = null
+    val currentGameweek: Int
+        get() = _currentGameweek ?: 1
 
     init {
         coroutineScope.launch {
@@ -95,7 +99,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                 realm.query<TeamDb>().asFlow()
                     .map { it.list }
                     .collect { it: RealmResults<TeamDb> ->
-                    _teamList.value = it.toList().map {
+                        _teamList.value = it.toList().map {
                         Team(it.id, it.index, it.name, it.code)
                     }
                 }
@@ -206,6 +210,9 @@ class FantasyPremierLeagueRepository : KoinComponent {
                 }, updatePolicy = UpdatePolicy.ALL)
             }
 
+            //store current gameweek
+            _currentGameweek = bootstrapStaticInfoDto.events.first { it.is_current }.id
+
             // store fixtures
             val teams = query<TeamDb>().find().toList()
             fixtures.forEach { fixtureDto ->
@@ -222,7 +229,6 @@ class FantasyPremierLeagueRepository : KoinComponent {
                     }, updatePolicy = UpdatePolicy.ALL)
                 }
             }
-
         }
     }
 

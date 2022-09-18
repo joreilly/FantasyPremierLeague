@@ -29,6 +29,9 @@ class FantasyPremierLeagueViewModel(
 
     val gameweekToFixtures = repository.gameweekToFixtures
 
+    val currentGameweek: Int
+        get() = repository.currentGameweek
+
     val leagues: StateFlow<List<String>> = repository.leagues
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
