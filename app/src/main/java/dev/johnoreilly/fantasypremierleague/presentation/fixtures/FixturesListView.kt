@@ -30,7 +30,7 @@ fun FixturesListView(
     val gameweek = remember { mutableStateOf(currentGameweek) }
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Fantasy Premier League") })
+            TopAppBar(title = { Text("Fixtures") })
         }) {
         Column {
             GameweekSelector(selectedGameweek = gameweek.value, onGameweekChanged = {

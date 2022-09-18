@@ -13,37 +13,34 @@ struct FixtureListView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Button(action: {
-                    if (gameWeek > 1) {
-                        gameWeek = gameWeek - 1
-                    }
-                }) {
-                  Image(systemName: "arrow.left")
-                }
-
-                Text("Gameweek \(gameWeek)")
-                
-                Button(action: {
-                    if (gameWeek < 38) {
-                        gameWeek = gameWeek + 1
-                    }
-                }) {
-                  Image(systemName: "arrow.right")
-                }
-            }
             NavigationView {
-                List(viewModel.gameWeekFixtures[gameWeek] ?? []) { fixture in
-                    NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
-                        FixtureView(fixture: fixture)
+                VStack(spacing: 0) {
+                    HStack {
+                        Button(action: {
+                            if (gameWeek > 1) { gameWeek = gameWeek - 1 }
+                        }) {
+                          Image(systemName: "arrow.left")
+                        }
+                        Text("Gameweek \(gameWeek)")
+                        Button(action: {
+                            if (gameWeek < 38) { gameWeek = gameWeek + 1 }
+                        }) {
+                          Image(systemName: "arrow.right")
+                        }
                     }
-                }
-                .navigationBarTitle(Text("Fixtues"))
-                .onAppear {
-                    UITableView.appearance().separatorStyle = .none
-                }
-                .task {
-                    await viewModel.getGameWeekFixtures()
+                    List(viewModel.gameWeekFixtures[gameWeek] ?? []) { fixture in
+                        NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
+                            FixtureView(fixture: fixture)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .navigationBarTitle(Text("Fixtures"))
+                    .onAppear {
+                        UITableView.appearance().separatorStyle = .none
+                    }
+                    .task {
+                        await viewModel.getGameWeekFixtures()
+                    }
                 }
             }
             .onAppear {
@@ -62,11 +59,11 @@ struct FixtureView: View {
             HStack {
                 ClubInFixtureView(teamName: fixture.homeTeam, teamPhotoUrl: fixture.homeTeamPhotoUrl)
                 Spacer()
-                Text("(\(fixture.homeTeamScore ?? 0))").font(.system(size: 18))
+                Text("(\(fixture.homeTeamScore ?? 0))").font(.system(size: 20))
                 Spacer()
                 Text("vs").font(.system(size: 22))
                 Spacer()
-                Text("(\(fixture.awayTeamScore ?? 0))").font(.system(size: 18))
+                Text("(\(fixture.awayTeamScore ?? 0))").font(.system(size: 20))
                 Spacer()
                 ClubInFixtureView(teamName: fixture.awayTeam, teamPhotoUrl: fixture.awayTeamPhotoUrl)
             }
@@ -91,7 +88,7 @@ struct ClubInFixtureView: View {
             } placeholder: {
                 ProgressView()
             }
-            Text(teamName).font(.system(size: 14))
+            Text(teamName).font(.system(size: 14)).lineLimit(1)
         }.frame(minWidth: 80)
     }
 }
