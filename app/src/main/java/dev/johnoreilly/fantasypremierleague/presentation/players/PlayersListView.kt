@@ -16,7 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.placeholder.placeholder
+import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -35,33 +38,74 @@ fun PlayerListView(
                 }
             )
         }) {
-            Column {
-                TextField(
-                    singleLine = true,
-                    value = playerSearchQuery.value,
-                    modifier = Modifier.fillMaxWidth().padding(8.dp),
-                    label = {
-                        Text(text = "Search")
-                    },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "Search"
-                        )
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Search
+        Column {
+            val isDataLoading = playerList.value.isEmpty()
+            TextField(
+                singleLine = true,
+                value = playerSearchQuery.value,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .placeholder(
+                        visible = isDataLoading,
+                        color = lowfidelitygray
                     ),
-                    onValueChange = {
-                        fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(it)
-                    }
-                )
-                LazyColumn {
+                label = {
+                    Text(text = "Search")
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search"
+                    )
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Search
+                ),
+                onValueChange = {
+                    fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(it)
+                }
+            )
+            LazyColumn {
+                if (isDataLoading) {
+                    items(
+                        items = placeHolderPlayerList, itemContent = { player ->
+                            PlayerView(player, onPlayerSelected, isDataLoading)
+                        })
+                } else {
                     items(items = playerList.value, itemContent = { player ->
-                        PlayerView(player, onPlayerSelected)
+                        PlayerView(player, onPlayerSelected, isDataLoading)
                     })
                 }
             }
         }
+    }
 }
+
+private val placeHolderPlayerList = listOf(
+    Player(
+        1, "Harry Kane", "Spurs",
+        "", 99, 10.0, 14, 1
+    ),
+    Player(
+        1, "Jordan Henderson", "Liverpool",
+        "", 95, 10.0, 14, 1
+    ),
+    Player(
+        1, "Scott McTominay", "Manchester United",
+        "", 90, 10.0, 14, 1
+    ),
+    Player(
+        1, "Kevin DeBruyne", "Manchester City",
+        "", 85, 10.0, 14, 1
+    ),
+    Player(
+        1, "Lewis Dunk", "Brighton",
+        "", 66, 10.0, 14, 1
+    ),
+    Player(
+        1, "Gabriel Jesus", "Arsenal",
+        "", 14, 10.0, 14, 1
+    ),
+)
