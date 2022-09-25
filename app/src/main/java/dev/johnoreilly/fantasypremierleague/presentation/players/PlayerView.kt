@@ -47,6 +47,7 @@ fun PlayerView(
                 text = player.name,
                 style = MaterialTheme.typography.h6
             )
+            Spacer(modifier = Modifier.size(1.dp))
             Text(
                 modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
                 text = player.team,
