@@ -39,13 +39,15 @@ class FantasyPremierLeagueViewModel(
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
 
-    
+    val currentGameweek: StateFlow<Int>
+        get() = repository.currentGameweek
+
     fun onPlayerSearchQueryChange(query: String) {
         searchQuery.value = query
     }
 
     fun getPlayer(playerId: Int): Player? {
-        return playerList.value.find { it.id == playerId}
+        return playerList.value.find { it.id == playerId }
     }
 
     suspend fun getPlayerHistory(playerId: Int): List<PlayerPastHistory> {

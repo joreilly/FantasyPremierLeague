@@ -75,7 +75,8 @@ dependencies {
         implementation(material)
         implementation(navigation)
         implementation(coilCompose)
-        implementation(Compose.accompanistSwipeRefresh)
+        implementation(accompanistSwipeRefresh)
+        implementation(accompanistSwipePlaceholder)
     }
 
 

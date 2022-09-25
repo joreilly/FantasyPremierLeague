@@ -80,7 +80,10 @@ object Compose {
     const val material = "androidx.compose.material:material:${Versions.compose}"
     const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coilCompose}"
-    const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
+    const val accompanistSwipeRefresh =
+        "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
+    const val accompanistSwipePlaceholder =
+        "com.google.accompanist:accompanist-placeholder-material:${Versions.accompanist}"
 }
 
 
