@@ -1,8 +1,10 @@
 package dev.johnoreilly.fantasypremierleague.presentation.fixtures
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -13,12 +15,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
+import dev.johnoreilly.fantasypremierleague.presentation.global.maroon200
 
 @Composable
 fun FixtureView(
@@ -52,19 +56,19 @@ fun FixtureView(
                     fixture.homeTeamPhotoUrl
                 )
                 Text(
-                    text = "(${fixture.homeTeamScore})",
+                    text = "${fixture.homeTeamScore}",
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp,
                     color = MaterialTheme.colors.onSurface
                 )
-                Text(
-                    modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
-                    text = "vs",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
+                Divider(
+                    modifier = Modifier
+                        .heightIn(min = 20.dp, max = 30.dp)
+                        .width(1.dp)
+                        .background(color = maroon200)
                 )
                 Text(
-                    text = "(${fixture.awayTeamScore})",
+                    text = "${fixture.awayTeamScore}",
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp,
                     color = MaterialTheme.colors.onSurface
@@ -117,6 +121,29 @@ fun ClubInFixtureView(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             color = MaterialTheme.colors.onSurface
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PreviewFixtureView() {
+    val placeholderKickoffTime = kotlinx.datetime.LocalDateTime(2022, 9, 5, 13, 30, 0)
+    Column(modifier = Modifier.height(200.dp)) {
+        FixtureView(
+            fixture = GameFixture(
+                id = 1,
+                localKickoffTime = placeholderKickoffTime,
+                homeTeam = "Liverpool",
+                "Spurs",
+                "",
+                "",
+                3,
+                0,
+                5
+            ),
+            onFixtureSelected = {},
+            isDataLoading = false
         )
     }
 }
