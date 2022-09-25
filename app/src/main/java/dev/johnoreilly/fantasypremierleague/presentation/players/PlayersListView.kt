@@ -85,27 +85,27 @@ fun PlayerListView(
 
 private val placeHolderPlayerList = listOf(
     Player(
-        1, "Harry Kane", "Spurs",
-        "", 99, 10.0, 14, 1
+        1, "Jordan Henderson", "Liverpool",
+        "", 95, 10.0, 14, 1
     ),
     Player(
         1, "Jordan Henderson", "Liverpool",
         "", 95, 10.0, 14, 1
     ),
     Player(
-        1, "Scott McTominay", "Manchester United",
-        "", 90, 10.0, 14, 1
+        1, "Jordan Henderson", "Liverpool",
+        "", 95, 10.0, 14, 1
     ),
     Player(
-        1, "Kevin DeBruyne", "Manchester City",
-        "", 85, 10.0, 14, 1
+        1, "Jordan Henderson", "Liverpool",
+        "", 95, 10.0, 14, 1
     ),
     Player(
-        1, "Lewis Dunk", "Brighton",
-        "", 66, 10.0, 14, 1
+        1, "Jordan Henderson", "Liverpool",
+        "", 95, 10.0, 14, 1
     ),
     Player(
-        1, "Gabriel Jesus", "Arsenal",
-        "", 14, 10.0, 14, 1
-    ),
+        1, "Jordan Henderson", "Liverpool",
+        "", 95, 10.0, 14, 1
+    )
 )

@@ -125,10 +125,10 @@ private val placeholderFixtureList = listOf(
         event = 0
     ),
     GameFixture(
-        id = 2,
+        id = 1,
         localKickoffTime = placeholderKickoffTime,
-        homeTeam = "Brighton",
-        awayTeam = "Fulham",
+        homeTeam = "Liverpool",
+        awayTeam = "Manchester United",
         homeTeamPhotoUrl = "",
         awayTeamPhotoUrl = "",
         homeTeamScore = null,
@@ -136,10 +136,10 @@ private val placeholderFixtureList = listOf(
         event = 0
     ),
     GameFixture(
-        id = 3,
+        id = 1,
         localKickoffTime = placeholderKickoffTime,
-        homeTeam = "Chelsea",
-        awayTeam = "Crystal Palace",
+        homeTeam = "Liverpool",
+        awayTeam = "Manchester United",
         homeTeamPhotoUrl = "",
         awayTeamPhotoUrl = "",
         homeTeamScore = null,
@@ -147,10 +147,10 @@ private val placeholderFixtureList = listOf(
         event = 0
     ),
     GameFixture(
-        id = 4,
+        id = 1,
         localKickoffTime = placeholderKickoffTime,
-        homeTeam = "Tottenham",
-        awayTeam = "Wolves",
+        homeTeam = "Liverpool",
+        awayTeam = "Manchester United",
         homeTeamPhotoUrl = "",
         awayTeamPhotoUrl = "",
         homeTeamScore = null,
@@ -158,10 +158,10 @@ private val placeholderFixtureList = listOf(
         event = 0
     ),
     GameFixture(
-        id = 5,
+        id = 1,
         localKickoffTime = placeholderKickoffTime,
-        homeTeam = "Everton",
-        awayTeam = "Southampton",
+        homeTeam = "Liverpool",
+        awayTeam = "Manchester United",
         homeTeamPhotoUrl = "",
         awayTeamPhotoUrl = "",
         homeTeamScore = null,
