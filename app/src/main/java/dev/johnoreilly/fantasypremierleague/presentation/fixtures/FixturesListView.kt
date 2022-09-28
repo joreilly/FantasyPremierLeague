@@ -24,19 +24,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.domain.entities.GameFixture
-import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 import dev.johnoreilly.fantasypremierleague.presentation.global.maroon200
 
 @Composable
 fun FixturesListView(
-    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
     onFixtureSelected: (fixtureId: Int) -> Unit,
 ) {
-    val fixturesState = fantasyPremierLeagueViewModel.gameweekToFixtures.collectAsState()
-    val currentGameweek: State<Int> = fantasyPremierLeagueViewModel.currentGameweek.collectAsState()
+    val fixturesViewModel: FixturesViewModel = viewModel()
+
+    val fixturesState = fixturesViewModel.gameweekToFixtures.collectAsState()
+    val currentGameweek: State<Int> = fixturesViewModel.currentGameweek.collectAsState()
     val selectedGameweek = remember { mutableStateOf(currentGameweek.value) }
     val isLoading = fixturesState.value[currentGameweek.value] == null
     Scaffold(
@@ -51,8 +52,10 @@ fun FixturesListView(
                     if (it is GameweekChange.PastGameweek) selectedGameweek.value -= 1 else selectedGameweek.value += 1
                 })
             LazyColumn {
+                val fixtureItems: List<GameFixture> = if(isLoading) placeholderFixtureList
+                    else fixturesState.value[selectedGameweek.value] ?: emptyList()
                 items(
-                    items = fixturesState.value[selectedGameweek.value] ?: placeholderFixtureList,
+                    items = fixtureItems,
                     itemContent = { fixture ->
                         FixtureView(
                             fixture = fixture,
