@@ -83,7 +83,6 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
             }
             composable(Screen.FixtureListScreen.title) {
                 FixturesListView(
-                    fantasyPremierLeagueViewModel = viewModel,
                     onFixtureSelected = { fixtureId ->
                         navController.navigate(Screen.FixtureDetailsScreen.title + "/${fixtureId}")
                     }
