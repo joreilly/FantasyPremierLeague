@@ -48,6 +48,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    namespace = "dev.johnoreilly.fantasypremierleague"
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

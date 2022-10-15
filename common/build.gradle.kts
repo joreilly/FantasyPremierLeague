@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("kotlinx-serialization")
     id("com.android.library")
-    id("io.realm.kotlin") version Versions.realm
+    id("io.realm.kotlin")
     id("org.jetbrains.kotlin.native.cocoapods")
     id("com.rickclephas.kmp.nativecoroutines")
 }
@@ -19,6 +19,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    namespace = "dev.johnoreilly.common"
 }
 
 kotlin {

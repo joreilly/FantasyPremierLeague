@@ -1,24 +1,24 @@
 
 object Versions {
-    const val kotlin = "1.7.10"
+    const val kotlin = "1.7.20"
     const val kotlinCoroutines = "1.6.4"
     const val ktor = "2.1.0"
     const val kotlinxSerialization = "1.3.3"
-    const val koin = "3.2.0"
-    const val realm = "1.0.2"
+    const val koin = "3.2.1"
+    const val realm = "1.4.0-SNAPSHOT"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.4.0"
     const val multiplatformSettings = "1.0.0-alpha01"
 
-    const val kmpNativeCoroutinesVersion = "0.12.6-new-mm"
+    const val kmpNativeCoroutinesVersion = "0.13.1"
 
     const val slf4j = "1.7.30"
     const val compose = "1.2.1"
-    const val composeCompiler = "1.3.0"
+    const val composeCompiler = "1.3.2"
     const val navCompose = "2.5.1"
     const val accompanist = "0.25.1"
     const val coilCompose = "2.1.0"
-    const val composeDesktop =  "1.2.0-alpha01-dev755"
+    const val composeDesktop =  "1.2.0"
 
     const val junit = "4.13"
 }
