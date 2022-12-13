@@ -3,15 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
 		8217FBB9D1218C346C0781D0B8F2BBE8 /* common */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 8B956A1754BE2B8AB8F24C42BA56614B /* Build configuration list for PBXAggregateTarget "common" */;
+			buildConfigurationList = 1D5F1C893FEB1534A938215715B55EDF /* Build configuration list for PBXAggregateTarget "common" */;
 			buildPhases = (
-				A1BCF229B5954BD301CB4429B46C7710 /* [CP-User] Build common */,
+				7117138631DE463A2F0FAF7227B3ADA6 /* [CP-User] Build common */,
 			);
 			dependencies = (
 			);
@@ -21,17 +21,17 @@
 
 /* Begin PBXBuildFile section */
 		151D983118A61DA58A6EE0BE5DF0A6FC /* NativeCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3736CCAE531106B24BF896B4BAFE91A6 /* NativeCallback.swift */; };
-		1FA426B9BAD763BF419988493D0C9674 /* KMPNativeCoroutinesAsync-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0808FC749BDC333ECB0CBBCC6AEF9C31 /* KMPNativeCoroutinesAsync-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1FA426B9BAD763BF419988493D0C9674 /* KMPNativeCoroutinesAsync-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A42474EBECFB3C82FDF145E621407D5 /* KMPNativeCoroutinesAsync-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		21148768FB51672933F062711A68F4C6 /* NativeSuspend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD32D879CE7C7908891395C95554C183 /* NativeSuspend.swift */; };
 		302FEA1E0DEEE6C6773880C64EA35530 /* NativeCancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26209B75A6DCB5B933C29FAF13C952D8 /* NativeCancellable.swift */; };
-		3D67B30D6806CA88327C8FB58E495E28 /* Pods-FantasyPremierLeague-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DF20853F821DB6870997F205119EFEB /* Pods-FantasyPremierLeague-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		513DC683615B8AA39F13962096D3A181 /* AsyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4C548D9ECAC97B922000C033D986E7 /* AsyncResult.swift */; };
-		71A73C674C689B86308EB9FC79BDCBB5 /* KMPNativeCoroutinesAsync-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2153AB5840A8A16456EA57B1E9322943 /* KMPNativeCoroutinesAsync-dummy.m */; };
+		3D67B30D6806CA88327C8FB58E495E28 /* Pods-FantasyPremierLeague-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F669F8E120A12289714C395F35713BA4 /* Pods-FantasyPremierLeague-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7E7657A9DC147AE9606679B07B2E1BCA /* AsyncFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C7057A0F693538F1BFE06E7FF1C063 /* AsyncFunction.swift */; };
 		8EFF3FAB7469A1BC39D309CF21FB09FE /* NativeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53887243C188630B31E6AFF5E8B1F9DF /* NativeFlow.swift */; };
-		ADBC7397FA7B70EF70C9ED917BCD954F /* AsyncStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514A9E9922960CC92674D991833334B5 /* AsyncStream.swift */; };
-		AF60A0468AC137EC9BC06BD42AA486D0 /* AsyncFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8602FDD79D54A527C1C71BA5B96143 /* AsyncFunction.swift */; };
-		C08163F6BCF727ECFBE894BD3A6561FE /* Pods-FantasyPremierLeague-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0600C8C0A66B92D3D5B88F93AF7704C9 /* Pods-FantasyPremierLeague-dummy.m */; };
+		92D1B951C247A6C31A44D889590E14EC /* AsyncSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16614C8D0B6E2B82C1394ECB0FB354B /* AsyncSequence.swift */; };
+		B470DDCDCFD196CDAB34D71FB6B449A4 /* AsyncResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1692B171ADA8E2A7D913BEBA0767C4B0 /* AsyncResult.swift */; };
+		C08163F6BCF727ECFBE894BD3A6561FE /* Pods-FantasyPremierLeague-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F02C959092A053409B06B95C6B8505A7 /* Pods-FantasyPremierLeague-dummy.m */; };
 		CF73F0E255330422D2DF9F13C29AB5D9 /* KMPNativeCoroutinesCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B8BABB8576340DAE590635B5E5B379B0 /* KMPNativeCoroutinesCore-dummy.m */; };
+		E54539FC5B84138936DED5CE3C2602DB /* KMPNativeCoroutinesAsync-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5040CB524E1555B09A34025C0E34F372 /* KMPNativeCoroutinesAsync-dummy.m */; };
 		EFE6DBBB0DDF4F9A6431783FC83AEBF8 /* KMPNativeCoroutinesCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BF752D8A3C32D99BC39B1CA9EB0C0148 /* KMPNativeCoroutinesCore-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
@@ -67,39 +67,40 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0600C8C0A66B92D3D5B88F93AF7704C9 /* Pods-FantasyPremierLeague-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FantasyPremierLeague-dummy.m"; sourceTree = "<group>"; };
-		0808FC749BDC333ECB0CBBCC6AEF9C31 /* KMPNativeCoroutinesAsync-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesAsync-umbrella.h"; sourceTree = "<group>"; };
-		0C0EBC32F1B1BA014E8B76A843EE486E /* Pods-FantasyPremierLeague.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FantasyPremierLeague.modulemap"; sourceTree = "<group>"; };
 		125FC0570563A9702EC3849621E5A9C4 /* KMPNativeCoroutinesCore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KMPNativeCoroutinesCore.modulemap; sourceTree = "<group>"; };
 		1326CE60D1E37FE392006F188C5B7BE5 /* FantasyPremierLeagueKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FantasyPremierLeagueKit.framework; path = build/cocoapods/framework/FantasyPremierLeagueKit.framework; sourceTree = "<group>"; };
+		1692B171ADA8E2A7D913BEBA0767C4B0 /* AsyncResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncResult.swift; path = KMPNativeCoroutinesAsync/AsyncResult.swift; sourceTree = "<group>"; };
 		17F266290B7506A697CE1CF9BCE3039F /* KMPNativeCoroutinesCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesCore.release.xcconfig; sourceTree = "<group>"; };
+		1E435950C959D29E2E8D1FC302DF9DDD /* KMPNativeCoroutinesAsync-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesAsync-prefix.pch"; sourceTree = "<group>"; };
 		1F8EE423D7E90CF093777441E4F44D7E /* KMPNativeCoroutinesCore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesCore-prefix.pch"; sourceTree = "<group>"; };
-		2153AB5840A8A16456EA57B1E9322943 /* KMPNativeCoroutinesAsync-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KMPNativeCoroutinesAsync-dummy.m"; sourceTree = "<group>"; };
-		2448F3C991981C27F31B82814D9E79F2 /* Pods-FantasyPremierLeague.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FantasyPremierLeague.debug.xcconfig"; sourceTree = "<group>"; };
 		26209B75A6DCB5B933C29FAF13C952D8 /* NativeCancellable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeCancellable.swift; path = KMPNativeCoroutinesCore/NativeCancellable.swift; sourceTree = "<group>"; };
 		3736CCAE531106B24BF896B4BAFE91A6 /* NativeCallback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeCallback.swift; path = KMPNativeCoroutinesCore/NativeCallback.swift; sourceTree = "<group>"; };
-		3DF20853F821DB6870997F205119EFEB /* Pods-FantasyPremierLeague-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FantasyPremierLeague-umbrella.h"; sourceTree = "<group>"; };
-		3F5A120F3C321FC17BC578E62AAD8AD2 /* KMPNativeCoroutinesAsync.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KMPNativeCoroutinesAsync.modulemap; sourceTree = "<group>"; };
-		514A9E9922960CC92674D991833334B5 /* AsyncStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncStream.swift; path = KMPNativeCoroutinesAsync/AsyncStream.swift; sourceTree = "<group>"; };
+		5040CB524E1555B09A34025C0E34F372 /* KMPNativeCoroutinesAsync-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KMPNativeCoroutinesAsync-dummy.m"; sourceTree = "<group>"; };
 		53887243C188630B31E6AFF5E8B1F9DF /* NativeFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeFlow.swift; path = KMPNativeCoroutinesCore/NativeFlow.swift; sourceTree = "<group>"; };
-		59E4F40761823B71708CCF0B05E58C99 /* Pods-FantasyPremierLeague-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FantasyPremierLeague-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5A9D361B995883F3B7EFAE316F931DD5 /* KMPNativeCoroutinesAsync.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesAsync.release.xcconfig; sourceTree = "<group>"; };
-		6762C061FBB0900BF3141ACAC1B45127 /* KMPNativeCoroutinesAsync-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesAsync-prefix.pch"; sourceTree = "<group>"; };
+		592A580EBF13B94A4CA3F8470F7A324C /* Pods-FantasyPremierLeague-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FantasyPremierLeague-acknowledgements.plist"; sourceTree = "<group>"; };
+		5E4BAD90744B30E6724628F92F3AFE24 /* Pods-FantasyPremierLeague-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FantasyPremierLeague-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6D081AD9C76DDEFCC198334610B47387 /* common.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = common.release.xcconfig; sourceTree = "<group>"; };
+		73D376F86D4F16F663A3E3BBAA428CC0 /* Pods-FantasyPremierLeague.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FantasyPremierLeague.release.xcconfig"; sourceTree = "<group>"; };
+		7A42474EBECFB3C82FDF145E621407D5 /* KMPNativeCoroutinesAsync-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesAsync-umbrella.h"; sourceTree = "<group>"; };
+		8702954977341382B1A5E8521C42CAC2 /* KMPNativeCoroutinesAsync.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesAsync.debug.xcconfig; sourceTree = "<group>"; };
 		871A9D54A6CD20F402C51D2E5B0D59C4 /* KMPNativeCoroutinesCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesCore.debug.xcconfig; sourceTree = "<group>"; };
-		99758BB4F75B345E3E3FCFCFE0F6E2FE /* KMPNativeCoroutinesAsync.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesAsync.debug.xcconfig; sourceTree = "<group>"; };
+		9ADB77C674CA1964357C51A0F1C74840 /* Pods-FantasyPremierLeague.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FantasyPremierLeague.modulemap"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AA4C548D9ECAC97B922000C033D986E7 /* AsyncResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncResult.swift; path = KMPNativeCoroutinesAsync/AsyncResult.swift; sourceTree = "<group>"; };
-		AB231459732AA7EB47720090A854D74B /* Pods-FantasyPremierLeague.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FantasyPremierLeague.release.xcconfig"; sourceTree = "<group>"; };
-		AB8602FDD79D54A527C1C71BA5B96143 /* AsyncFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncFunction.swift; path = KMPNativeCoroutinesAsync/AsyncFunction.swift; sourceTree = "<group>"; };
+		B0C7057A0F693538F1BFE06E7FF1C063 /* AsyncFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncFunction.swift; path = KMPNativeCoroutinesAsync/AsyncFunction.swift; sourceTree = "<group>"; };
 		B8BABB8576340DAE590635B5E5B379B0 /* KMPNativeCoroutinesCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KMPNativeCoroutinesCore-dummy.m"; sourceTree = "<group>"; };
+		BE0302E6B7F16924135FA038E91B386A /* KMPNativeCoroutinesAsync.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KMPNativeCoroutinesAsync.modulemap; sourceTree = "<group>"; };
 		BF5993A34715379F35DD1039639859F1 /* Pods-FantasyPremierLeague */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-FantasyPremierLeague"; path = "libPods-FantasyPremierLeague.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF752D8A3C32D99BC39B1CA9EB0C0148 /* KMPNativeCoroutinesCore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KMPNativeCoroutinesCore-umbrella.h"; sourceTree = "<group>"; };
 		CBB360F2822905300C310CBA06D6A093 /* KMPNativeCoroutinesAsync */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = KMPNativeCoroutinesAsync; path = libKMPNativeCoroutinesAsync.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA33058D755FE74978C8C4BDEA18497 /* Pods-FantasyPremierLeague.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FantasyPremierLeague.debug.xcconfig"; sourceTree = "<group>"; };
 		DD32D879CE7C7908891395C95554C183 /* NativeSuspend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeSuspend.swift; path = KMPNativeCoroutinesCore/NativeSuspend.swift; sourceTree = "<group>"; };
+		DFDF453B5B62A91AE3AA0A61882D1545 /* KMPNativeCoroutinesAsync.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KMPNativeCoroutinesAsync.release.xcconfig; sourceTree = "<group>"; };
+		E16614C8D0B6E2B82C1394ECB0FB354B /* AsyncSequence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncSequence.swift; path = KMPNativeCoroutinesAsync/AsyncSequence.swift; sourceTree = "<group>"; };
 		E1A9FF4410BEEFC5F12F7442B23097D3 /* common.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = common.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E32954243B605448566BC0C0B0BCF70D /* KMPNativeCoroutinesCore */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = KMPNativeCoroutinesCore; path = libKMPNativeCoroutinesCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9FCEE759061D2AFCA7387C5C8FDE392 /* Pods-FantasyPremierLeague-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FantasyPremierLeague-acknowledgements.plist"; sourceTree = "<group>"; };
+		F02C959092A053409B06B95C6B8505A7 /* Pods-FantasyPremierLeague-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FantasyPremierLeague-dummy.m"; sourceTree = "<group>"; };
+		F654205BA054BE4F66B4C2023ADFD116 /* Pods-FantasyPremierLeague-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FantasyPremierLeague-frameworks.sh"; sourceTree = "<group>"; };
+		F669F8E120A12289714C395F35713BA4 /* Pods-FantasyPremierLeague-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FantasyPremierLeague-umbrella.h"; sourceTree = "<group>"; };
 		FF4B7B4BFE009B348ED4191BC2BA63EE /* common.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = common.debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +129,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3437753C9C91E727FF746633A6715933 /* KMPNativeCoroutinesAsync */ = {
+			isa = PBXGroup;
+			children = (
+				B0C7057A0F693538F1BFE06E7FF1C063 /* AsyncFunction.swift */,
+				1692B171ADA8E2A7D913BEBA0767C4B0 /* AsyncResult.swift */,
+				E16614C8D0B6E2B82C1394ECB0FB354B /* AsyncSequence.swift */,
+				994229A9170DCF8055ADB32C01D79575 /* Support Files */,
+			);
+			name = KMPNativeCoroutinesAsync;
+			path = KMPNativeCoroutinesAsync;
+			sourceTree = "<group>";
+		};
+		39B0712253BB11EEEC71A90738D566EF /* Pods-FantasyPremierLeague */ = {
+			isa = PBXGroup;
+			children = (
+				9ADB77C674CA1964357C51A0F1C74840 /* Pods-FantasyPremierLeague.modulemap */,
+				5E4BAD90744B30E6724628F92F3AFE24 /* Pods-FantasyPremierLeague-acknowledgements.markdown */,
+				592A580EBF13B94A4CA3F8470F7A324C /* Pods-FantasyPremierLeague-acknowledgements.plist */,
+				F02C959092A053409B06B95C6B8505A7 /* Pods-FantasyPremierLeague-dummy.m */,
+				F654205BA054BE4F66B4C2023ADFD116 /* Pods-FantasyPremierLeague-frameworks.sh */,
+				F669F8E120A12289714C395F35713BA4 /* Pods-FantasyPremierLeague-umbrella.h */,
+				CCA33058D755FE74978C8C4BDEA18497 /* Pods-FantasyPremierLeague.debug.xcconfig */,
+				73D376F86D4F16F663A3E3BBAA428CC0 /* Pods-FantasyPremierLeague.release.xcconfig */,
+			);
+			name = "Pods-FantasyPremierLeague";
+			path = "Target Support Files/Pods-FantasyPremierLeague";
+			sourceTree = "<group>";
+		};
 		49C6627D56F9A5EC99D951DB94E5C613 /* common */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,10 +168,10 @@
 			path = ../../../common;
 			sourceTree = "<group>";
 		};
-		4D915946C9878200BA674DB800A92863 /* Targets Support Files */ = {
+		49EFE21235BAA6760A1A12D4CDE74671 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8C22B8B903C258D82A0DA576CF1E8B44 /* Pods-FantasyPremierLeague */,
+				39B0712253BB11EEEC71A90738D566EF /* Pods-FantasyPremierLeague */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -171,18 +200,6 @@
 			path = "../Target Support Files/KMPNativeCoroutinesCore";
 			sourceTree = "<group>";
 		};
-		790BE78C1C37BF57978E7DC30371A5A7 /* KMPNativeCoroutinesAsync */ = {
-			isa = PBXGroup;
-			children = (
-				AB8602FDD79D54A527C1C71BA5B96143 /* AsyncFunction.swift */,
-				AA4C548D9ECAC97B922000C033D986E7 /* AsyncResult.swift */,
-				514A9E9922960CC92674D991833334B5 /* AsyncStream.swift */,
-				86739FB50DC7280BDC901CDE1329F343 /* Support Files */,
-			);
-			name = KMPNativeCoroutinesAsync;
-			path = KMPNativeCoroutinesAsync;
-			sourceTree = "<group>";
-		};
 		80B74D1693E4B45EC273F423F7855179 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,33 +208,18 @@
 			name = Pod;
 			sourceTree = "<group>";
 		};
-		86739FB50DC7280BDC901CDE1329F343 /* Support Files */ = {
+		994229A9170DCF8055ADB32C01D79575 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3F5A120F3C321FC17BC578E62AAD8AD2 /* KMPNativeCoroutinesAsync.modulemap */,
-				2153AB5840A8A16456EA57B1E9322943 /* KMPNativeCoroutinesAsync-dummy.m */,
-				6762C061FBB0900BF3141ACAC1B45127 /* KMPNativeCoroutinesAsync-prefix.pch */,
-				0808FC749BDC333ECB0CBBCC6AEF9C31 /* KMPNativeCoroutinesAsync-umbrella.h */,
-				99758BB4F75B345E3E3FCFCFE0F6E2FE /* KMPNativeCoroutinesAsync.debug.xcconfig */,
-				5A9D361B995883F3B7EFAE316F931DD5 /* KMPNativeCoroutinesAsync.release.xcconfig */,
+				BE0302E6B7F16924135FA038E91B386A /* KMPNativeCoroutinesAsync.modulemap */,
+				5040CB524E1555B09A34025C0E34F372 /* KMPNativeCoroutinesAsync-dummy.m */,
+				1E435950C959D29E2E8D1FC302DF9DDD /* KMPNativeCoroutinesAsync-prefix.pch */,
+				7A42474EBECFB3C82FDF145E621407D5 /* KMPNativeCoroutinesAsync-umbrella.h */,
+				8702954977341382B1A5E8521C42CAC2 /* KMPNativeCoroutinesAsync.debug.xcconfig */,
+				DFDF453B5B62A91AE3AA0A61882D1545 /* KMPNativeCoroutinesAsync.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/KMPNativeCoroutinesAsync";
-			sourceTree = "<group>";
-		};
-		8C22B8B903C258D82A0DA576CF1E8B44 /* Pods-FantasyPremierLeague */ = {
-			isa = PBXGroup;
-			children = (
-				0C0EBC32F1B1BA014E8B76A843EE486E /* Pods-FantasyPremierLeague.modulemap */,
-				59E4F40761823B71708CCF0B05E58C99 /* Pods-FantasyPremierLeague-acknowledgements.markdown */,
-				F9FCEE759061D2AFCA7387C5C8FDE392 /* Pods-FantasyPremierLeague-acknowledgements.plist */,
-				0600C8C0A66B92D3D5B88F93AF7704C9 /* Pods-FantasyPremierLeague-dummy.m */,
-				3DF20853F821DB6870997F205119EFEB /* Pods-FantasyPremierLeague-umbrella.h */,
-				2448F3C991981C27F31B82814D9E79F2 /* Pods-FantasyPremierLeague.debug.xcconfig */,
-				AB231459732AA7EB47720090A854D74B /* Pods-FantasyPremierLeague.release.xcconfig */,
-			);
-			name = "Pods-FantasyPremierLeague";
-			path = "Target Support Files/Pods-FantasyPremierLeague";
 			sourceTree = "<group>";
 		};
 		ACC2480344C7021181745B6973049754 /* Support Files */ = {
@@ -238,7 +240,7 @@
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
 				F396F8E52A45B39311E8247396FEDDBE /* Pods */,
 				7010EC0B67CCCADECA7B8107666EC2EE /* Products */,
-				4D915946C9878200BA674DB800A92863 /* Targets Support Files */,
+				49EFE21235BAA6760A1A12D4CDE74671 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -281,7 +283,7 @@
 		F396F8E52A45B39311E8247396FEDDBE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				790BE78C1C37BF57978E7DC30371A5A7 /* KMPNativeCoroutinesAsync */,
+				3437753C9C91E727FF746633A6715933 /* KMPNativeCoroutinesAsync */,
 				DAA39BDA20831F3D15543097BEC28F58 /* KMPNativeCoroutinesCore */,
 			);
 			name = Pods;
@@ -342,7 +344,7 @@
 			buildConfigurationList = 3B63F33F2F5EBE97410138A80D11B0E0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesAsync" */;
 			buildPhases = (
 				0ACD6CC877412C7F69F0E7C3C120FFDB /* Headers */,
-				5EF1DD2343CC73761652C1ABD1D116F5 /* Sources */,
+				1022DB88EB3EAA7013C7675D1D2B70D4 /* Sources */,
 				B4211E636E9CFAB78425D5ACF1719D83 /* Frameworks */,
 				F87512CEFDF666B84D412E821F347EA1 /* Copy generated compatibility header */,
 			);
@@ -384,7 +386,7 @@
 				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -405,7 +407,7 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A1BCF229B5954BD301CB4429B46C7710 /* [CP-User] Build common */ = {
+		7117138631DE463A2F0FAF7227B3ADA6 /* [CP-User] Build common */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -413,7 +415,7 @@
 			name = "[CP-User] Build common";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "                if [ \"YES\" = \"$COCOAPODS_SKIP_KOTLIN_BUILD\" ]; then\n                  echo \"Skipping Gradle build task invocation due to COCOAPODS_SKIP_KOTLIN_BUILD environment variable set to \"YES\"\"\n                  exit 0\n                fi\n                set -ev\n                REPO_ROOT=\"$PODS_TARGET_SRCROOT\"\n                \"$REPO_ROOT/../gradlew\" -p \"$REPO_ROOT\" $KOTLIN_PROJECT_PATH:syncFramework                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME                     -Pkotlin.native.cocoapods.archs=\"$ARCHS\"                     -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\"\n";
+			shellScript = "                if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n                  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\"\"\n                  exit 0\n                fi\n                set -ev\n                REPO_ROOT=\"$PODS_TARGET_SRCROOT\"\n                \"$REPO_ROOT/../gradlew\" -p \"$REPO_ROOT\" $KOTLIN_PROJECT_PATH:syncFramework                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME                     -Pkotlin.native.cocoapods.archs=\"$ARCHS\"                     -Pkotlin.native.cocoapods.configuration=\"$CONFIGURATION\"\n";
 		};
 		D0502055E8ADB6F4B05733A8038B5C55 /* Copy generated compatibility header */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -466,6 +468,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1022DB88EB3EAA7013C7675D1D2B70D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E7657A9DC147AE9606679B07B2E1BCA /* AsyncFunction.swift in Sources */,
+				B470DDCDCFD196CDAB34D71FB6B449A4 /* AsyncResult.swift in Sources */,
+				92D1B951C247A6C31A44D889590E14EC /* AsyncSequence.swift in Sources */,
+				E54539FC5B84138936DED5CE3C2602DB /* KMPNativeCoroutinesAsync-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A7724D2B580F49702AB07DA49126913 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,17 +496,6 @@
 				302FEA1E0DEEE6C6773880C64EA35530 /* NativeCancellable.swift in Sources */,
 				8EFF3FAB7469A1BC39D309CF21FB09FE /* NativeFlow.swift in Sources */,
 				21148768FB51672933F062711A68F4C6 /* NativeSuspend.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5EF1DD2343CC73761652C1ABD1D116F5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AF60A0468AC137EC9BC06BD42AA486D0 /* AsyncFunction.swift in Sources */,
-				513DC683615B8AA39F13962096D3A181 /* AsyncResult.swift in Sources */,
-				ADBC7397FA7B70EF70C9ED917BCD954F /* AsyncStream.swift in Sources */,
-				71A73C674C689B86308EB9FC79BDCBB5 /* KMPNativeCoroutinesAsync-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +529,91 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		241D1E937A617599CFA0086DD1631A02 /* Debug */ = {
+		2091ED44CEA817EF01C38882FC3E10FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCA33058D755FE74978C8C4BDEA18497 /* Pods-FantasyPremierLeague.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		30E0B9EFD9A5C45D0D351231E81B30B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		32135EAD0B259EE60F8BE942370C965E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FF4B7B4BFE009B348ED4191BC2BA63EE /* common.debug.xcconfig */;
 			buildSettings = {
@@ -546,7 +632,7 @@
 		};
 		4F7A44B7E2843DFF5A4B87CFA95FFB3B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A9D361B995883F3B7EFAE316F931DD5 /* KMPNativeCoroutinesAsync.release.xcconfig */;
+			baseConfigurationReference = DFDF453B5B62A91AE3AA0A61882D1545 /* KMPNativeCoroutinesAsync.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -570,9 +656,50 @@
 			};
 			name = Release;
 		};
+		55229197A5024EB4D32F47136D0818C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D081AD9C76DDEFCC198334610B47387 /* common.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5A6C8B056F78969045A308D09CBF080D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73D376F86D4F16F663A3E3BBAA428CC0 /* Pods-FantasyPremierLeague.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		8509F25BC56B79606F99DEB4AF2ABCC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99758BB4F75B345E3E3FCFCFE0F6E2FE /* KMPNativeCoroutinesAsync.debug.xcconfig */;
+			baseConfigurationReference = 8702954977341382B1A5E8521C42CAC2 /* KMPNativeCoroutinesAsync.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -595,7 +722,56 @@
 			};
 			name = Debug;
 		};
-		90D4D09BCB6A4660E43ACBE9ECB6FE9A /* Debug */ = {
+		C137F52CF9CC706AA4E6CD5C23879CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 871A9D54A6CD20F402C51D2E5B0D59C4 /* KMPNativeCoroutinesCore.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MODULEMAP_FILE = Headers/Public/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = KMPNativeCoroutinesCore;
+				PRODUCT_NAME = KMPNativeCoroutinesCore;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC6E083B79F74EDF84702A9F19DC4BAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17F266290B7506A697CE1CF9BCE3039F /* KMPNativeCoroutinesCore.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MODULEMAP_FILE = Headers/Public/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = KMPNativeCoroutinesCore;
+				PRODUCT_NAME = KMPNativeCoroutinesCore;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F4FF6A0D1970CA9705974E3CB2134802 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -648,7 +824,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -661,183 +837,18 @@
 			};
 			name = Debug;
 		};
-		9553C89E183877A5CB2F3C6801BEC129 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		C137F52CF9CC706AA4E6CD5C23879CEA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 871A9D54A6CD20F402C51D2E5B0D59C4 /* KMPNativeCoroutinesCore.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MODULEMAP_FILE = Headers/Public/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore.modulemap;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = KMPNativeCoroutinesCore;
-				PRODUCT_NAME = KMPNativeCoroutinesCore;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		D58EBC90A6657FA9C38D5DF0D6709A23 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2448F3C991981C27F31B82814D9E79F2 /* Pods-FantasyPremierLeague.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		D9EA6B963FE5A0A5376804C699E9AECA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AB231459732AA7EB47720090A854D74B /* Pods-FantasyPremierLeague.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FantasyPremierLeague/Pods-FantasyPremierLeague.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		EC6E083B79F74EDF84702A9F19DC4BAC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 17F266290B7506A697CE1CF9BCE3039F /* KMPNativeCoroutinesCore.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MODULEMAP_FILE = Headers/Public/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore.modulemap;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = KMPNativeCoroutinesCore;
-				PRODUCT_NAME = KMPNativeCoroutinesCore;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		FB8C638C259F5C23AE425CD93CB523B4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D081AD9C76DDEFCC198334610B47387 /* common.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1D5F1C893FEB1534A938215715B55EDF /* Build configuration list for PBXAggregateTarget "common" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32135EAD0B259EE60F8BE942370C965E /* Debug */,
+				55229197A5024EB4D32F47136D0818C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3B63F33F2F5EBE97410138A80D11B0E0 /* Build configuration list for PBXNativeTarget "KMPNativeCoroutinesAsync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -850,17 +861,8 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				90D4D09BCB6A4660E43ACBE9ECB6FE9A /* Debug */,
-				9553C89E183877A5CB2F3C6801BEC129 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8B956A1754BE2B8AB8F24C42BA56614B /* Build configuration list for PBXAggregateTarget "common" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				241D1E937A617599CFA0086DD1631A02 /* Debug */,
-				FB8C638C259F5C23AE425CD93CB523B4 /* Release */,
+				F4FF6A0D1970CA9705974E3CB2134802 /* Debug */,
+				30E0B9EFD9A5C45D0D351231E81B30B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -877,8 +879,8 @@
 		9922FD15A88FB7D4FC8BBD3F755C64B9 /* Build configuration list for PBXNativeTarget "Pods-FantasyPremierLeague" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D58EBC90A6657FA9C38D5DF0D6709A23 /* Debug */,
-				D9EA6B963FE5A0A5376804C699E9AECA /* Release */,
+				2091ED44CEA817EF01C38882FC3E10FE /* Debug */,
+				5A6C8B056F78969045A308D09CBF080D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
