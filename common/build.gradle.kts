@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     id("io.realm.kotlin")
     id("org.jetbrains.kotlin.native.cocoapods")
+    id("com.google.devtools.ksp")
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -37,7 +38,9 @@ kotlin {
     cocoapods {
         summary = "Fantasy Football Premier League"
         homepage = "Link to a Kotlin/Native module homepage"
-        frameworkName = "FantasyPremierLeagueKit"
+        framework {
+            baseName = "FantasyPremierLeagueKit"
+        }
     }
 
     sourceSets {
@@ -115,5 +118,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     }
 }
 
-
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
 

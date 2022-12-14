@@ -22,6 +22,11 @@ dependencies {
     implementation(project(":common"))
 }
 
+compose {
+    kotlinCompilerPlugin.set("1.4.0-dev-k1.8.0-RC-4c1865595ed")
+}
+
+
 application {
     mainClass.set("MainKt")
 }

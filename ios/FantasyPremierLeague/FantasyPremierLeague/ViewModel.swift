@@ -32,7 +32,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
             
             
             do {
-                let leagueStream = asyncStream(for: repository.leaguesNative)
+                let leagueStream = asyncSequence(for: repository.leagues)
                 for try await data in leagueStream {
                     self.leagues = data
                 }
@@ -43,14 +43,14 @@ class FantasyPremierLeagueViewModel: ObservableObject {
         }
         
         Task {
-            self.eventStatusList = try await asyncFunction(for: repository.getEventStatusNative())                        
+            self.eventStatusList = try await asyncFunction(for: repository.getEventStatus())
         }
     }
 
     
     func getPlayers() async {
         do {
-            let playerStream = asyncStream(for: repository.playerListNative)
+            let playerStream = asyncSequence(for: repository.playerList)
                 .map { $0.sorted { $0.points > $1.points } }
             
             let queryStream = $query
@@ -69,7 +69,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     
     func getPlayerStats(playerId: Int32) async {
         do {
-            let playerHistory = try await asyncFunction(for: repository.getPlayerHistoryDataNative(playerId: playerId))
+            let playerHistory = try await asyncFunction(for: repository.getPlayerHistoryData(playerId: playerId))
             self.playerHistory = playerHistory
             print(self.playerHistory)
             
@@ -82,7 +82,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     func getLeageStandings() async {
         do {
             let leagueId = Int32(leagues[0])! // first league for now
-            let leagueStandings = try await asyncFunction(for: repository.getLeagueStandingsNative(leagueId: leagueId))
+            let leagueStandings = try await asyncFunction(for: repository.getLeagueStandings(leagueId: leagueId))
             self.leagueStandings = leagueStandings
             print(self.leagueStandings!)
             
@@ -94,7 +94,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     
     func getFixtures() async {
         do {
-            let stream = asyncStream(for: repository.fixtureListNative)
+            let stream = asyncSequence(for: repository.fixtureList)
             for try await data in stream {
                 self.fixtureList = data
             }
@@ -106,7 +106,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     
     func getGameWeekFixtures() async {
         do {
-            let stream = asyncStream(for: repository.gameweekToFixturesNative)
+            let stream = asyncSequence(for: repository.gameweekToFixtures)
             for try await data in stream {
                 self.gameWeekFixtures = data as! [Int : [GameFixture]]
             }
