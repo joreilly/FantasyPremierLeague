@@ -4,7 +4,9 @@ object Versions {
     const val kotlinCoroutines = "1.6.4"
     const val ktor = "2.1.0"
     const val kotlinxSerialization = "1.3.3"
-    const val koin = "3.2.1"
+    const val koinCore = "3.3.0"
+    const val koinAndroid = "3.3.1"
+    const val koinAndroidCompose = "3.4.0"
     const val realm = "1.5.1"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.4.0"
@@ -44,10 +46,10 @@ object Deps {
     }
 
     object Koin {
-        val core = "io.insert-koin:koin-core:${Versions.koin}"
-        val test = "io.insert-koin:koin-test:${Versions.koin}"
-        val android = "io.insert-koin:koin-android:${Versions.koin}"
-        val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+        const val core = "io.insert-koin:koin-core:${Versions.koinCore}"
+        const val test = "io.insert-koin:koin-test:${Versions.koinCore}"
+        const val android = "io.insert-koin:koin-android:${Versions.koinAndroid}"
+        const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koinAndroidCompose}"
     }
 
     object Ktor {
