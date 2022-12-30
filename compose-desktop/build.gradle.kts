@@ -26,6 +26,15 @@ compose {
     kotlinCompilerPlugin.set("1.4.0-dev-k1.8.0-RC-4c1865595ed")
 }
 
+tasks.withType<KotlinCompile>() {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
+    }
+}
 
 application {
     mainClass.set("MainKt")

@@ -81,10 +81,6 @@ kotlin {
         sourceSets["androidMain"].dependencies {
             implementation(Deps.Ktor.clientAndroid)
         }
-        sourceSets["androidTest"].dependencies {
-            implementation(kotlin("test-junit"))
-            implementation(Test.junit)
-        }
 
         sourceSets["jvmMain"].dependencies {
             implementation(Deps.Ktor.clientJava)
