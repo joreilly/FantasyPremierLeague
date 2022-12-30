@@ -1,18 +1,18 @@
 
 object Versions {
-    const val kotlin = "1.8.0-RC"
+    const val kotlin = "1.8.0"
     const val kotlinCoroutines = "1.6.4"
     const val ktor = "2.1.0"
     const val kotlinxSerialization = "1.3.3"
-    const val koinCore = "3.3.0"
-    const val koinAndroid = "3.3.1"
-    const val koinAndroidCompose = "3.4.0"
+    const val koinCore = "3.3.2"
+    const val koinAndroid = "3.3.2"
+    const val koinAndroidCompose = "3.4.1"
     const val realm = "1.5.1"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.4.0"
     const val multiplatformSettings = "1.0.0-alpha01"
 
-    const val kmpNativeCoroutinesVersion = "1.0.0-ALPHA-2"
+    const val kmpNativeCoroutinesVersion = "1.0.0-ALPHA-4"
 
     const val slf4j = "1.7.30"
     const val compose = "1.4.0-alpha03"

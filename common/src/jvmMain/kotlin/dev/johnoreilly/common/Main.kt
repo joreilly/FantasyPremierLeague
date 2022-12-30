@@ -96,18 +96,22 @@ fun pickTeam(staticInfo: BootstrapStaticInfoDto) {
 
         val players = staticInfo.elements
         players.forEach { player ->
-            val playerVariable = variable(name = player.id.toString(), isBinary = true)
-            playerVariableList.add(playerVariable)
+            val playingThisRound  = player.chance_of_playing_next_round == 100
+            if (playingThisRound) {
 
-            maximiseExpression.plus(player.total_points*playerVariable)
-            costConstraint.plus(player.now_cost*playerVariable)
-            numberOfPlayersConstraint.plus(playerVariable)
+                val playerVariable = variable(name = player.id.toString(), isBinary = true)
+                playerVariableList.add(playerVariable)
 
-            when (player.element_type) {
-                1 -> numberGoalkeepersConstraint.plus(playerVariable)
-                2 -> numberDefendersConstraint.plus(playerVariable)
-                3 -> numberMidfieldersConstraint.plus(playerVariable)
-                4 -> numberForwardsConstraint.plus(playerVariable)
+                maximiseExpression.plus(player.total_points * playerVariable)
+                costConstraint.plus(player.now_cost * playerVariable)
+                numberOfPlayersConstraint.plus(playerVariable)
+
+                when (player.element_type) {
+                    1 -> numberGoalkeepersConstraint.plus(playerVariable)
+                    2 -> numberDefendersConstraint.plus(playerVariable)
+                    3 -> numberMidfieldersConstraint.plus(playerVariable)
+                    4 -> numberForwardsConstraint.plus(playerVariable)
+                }
             }
         }
 
@@ -162,7 +166,7 @@ fun pickTeam(staticInfo: BootstrapStaticInfoDto) {
 
         optimizedTeam.sortedBy { it.element_type }.forEach { player ->
             val team = staticInfo.teams.find { it.id == player.team }
-            println("${player.web_name} ${player.now_cost} ${player.total_points} ${player.element_type}, team=${team?.name}")
+            println("${player.web_name} ${player.now_cost} ${player.total_points} ${player.element_type}, team=${team?.name}, ${player.chance_of_playing_this_round}")
         }
 
         val totalPoints = optimizedTeam.sumOf { it.total_points }

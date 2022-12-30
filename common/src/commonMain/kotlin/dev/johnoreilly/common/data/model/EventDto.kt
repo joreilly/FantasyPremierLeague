@@ -24,5 +24,5 @@ data class EventDto(
     val name: String,
     val top_element: Int?,
     val top_element_info: TopElementInfoDto?,
-    val transfers_made: Int
+    val transfers_made: Int?
 )
