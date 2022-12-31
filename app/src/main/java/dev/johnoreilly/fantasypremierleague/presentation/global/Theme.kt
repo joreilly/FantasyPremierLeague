@@ -6,12 +6,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 
 private val LightColors = lightColorScheme(
@@ -76,18 +71,6 @@ private val DarkColors = darkColorScheme(
 )
 
 
-/**
- * Light Android background theme
- */
-internal val DarkGreenGray95 = Color(0xFFF0F1EC)
-//val LightAndroidBackgroundTheme = BackgroundTheme(color = DarkGreenGray95)
-
-/**
- * Dark Android background theme
- */
-//val DarkAndroidBackgroundTheme = BackgroundTheme(color = Color.Black)
-
-
 @Composable
 fun FantasyPremierLeagueTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -105,19 +88,7 @@ fun FantasyPremierLeagueTheme(
         if (darkTheme) DarkColors else LightColors
     }
 
-//    val defaultBackgroundTheme = BackgroundTheme(
-//        color = colorScheme.surface,
-//        tonalElevation = 2.dp
-//    )
-//    val backgroundTheme = if (androidTheme) {
-//        if (darkTheme) DarkAndroidBackgroundTheme else LightAndroidBackgroundTheme
-//    } else {
-//        defaultBackgroundTheme
-//    }
-
-    CompositionLocalProvider(
-        //LocalBackgroundTheme provides backgroundTheme
-    ) {
+    CompositionLocalProvider {
         MaterialTheme(
             colorScheme = colorScheme,
             typography = typography,

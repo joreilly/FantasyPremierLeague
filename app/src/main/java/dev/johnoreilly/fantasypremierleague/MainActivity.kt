@@ -2,15 +2,19 @@
 
 package dev.johnoreilly.fantasypremierleague
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,7 +37,6 @@ import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLe
 import dev.johnoreilly.fantasypremierleague.presentation.leagues.LeagueListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -46,12 +49,18 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             FantasyPremierLeagueTheme {
-                MainLayout(fantasyPremierLeagueViewModel)
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MainLayout(fantasyPremierLeagueViewModel)
+                }
             }
         }
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
     val navController = rememberNavController()
@@ -59,14 +68,17 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
 
     val leagues by viewModel.leagues.collectAsState()
 
-    coroutineScope.launch {
-        // TEMP to set a particular league until settings screen added
-        //viewModel.updateLeagues(listOf(""))
-    }
+    // TEMP to set a particular league until settings screen added
+//    coroutineScope.launch {
+//        viewModel.updateLeagues(listOf(""))
+//    }
 
-    Scaffold(bottomBar = { FantasyPremierLeagueBottomNavigation(navController, leagues) }) {
+    Scaffold(
+        bottomBar = { FantasyPremierLeagueBottomNavigation(navController, leagues) },
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+    ) {
 
-        NavHost(navController, startDestination = Screen.PlayerListScreen.title, modifier = Modifier.padding(it)) {
+        NavHost(navController, startDestination = Screen.PlayerListScreen.title) {
             composable(Screen.PlayerListScreen.title) {
                 PlayerListView(
                     fantasyPremierLeagueViewModel = viewModel,

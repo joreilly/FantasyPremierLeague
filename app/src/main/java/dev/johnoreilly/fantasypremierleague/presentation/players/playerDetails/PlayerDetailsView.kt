@@ -2,20 +2,18 @@
 
 package dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -60,7 +58,6 @@ import kotlin.random.Random
 import kotlin.random.Random.Default.nextFloat
 
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, popBackStack: () -> Unit) {
 
@@ -84,9 +81,9 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Player")
+                    Text(text = player.name)
                 },
                 navigationIcon = {
                     IconButton(onClick = { popBackStack() }) {
@@ -99,11 +96,6 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
                 modifier = Modifier.padding(it).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Spacer(modifier = Modifier.size(16.dp))
-                Text(
-                    text = player.name,
-                    style = MaterialTheme.typography.titleLarge
-                )
                 Spacer(modifier = Modifier.size(16.dp))
                 AsyncImage(
                     model = player.photoUrl,
