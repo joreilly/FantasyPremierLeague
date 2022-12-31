@@ -68,11 +68,13 @@ dependencies {
         implementation(uiTooling)
         implementation(foundation)
         implementation(foundationLayout)
-        implementation(material)
         implementation(navigation)
         implementation(coilCompose)
         implementation(accompanistSwipeRefresh)
         implementation(accompanistSwipePlaceholder)
+
+        implementation(material3)
+        implementation(material3WindowSizeClass)
     }
 
 

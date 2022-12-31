@@ -1,13 +1,16 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package dev.johnoreilly.fantasypremierleague
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,7 +35,7 @@ import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.P
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     private val fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,7 +118,7 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
 @Composable
 private fun FantasyPremierLeagueBottomNavigation(navController: NavHostController, leagues: List<String>) {
 
-    BottomNavigation {
+    NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
@@ -125,7 +128,7 @@ private fun FantasyPremierLeagueBottomNavigation(navController: NavHostControlle
                     && leagues.isEmpty()
 
             if (!skipItem) {
-                BottomNavigationItem(
+                NavigationBarItem(
                     icon = {
                         Icon(
                             bottomNavigationitem.icon,

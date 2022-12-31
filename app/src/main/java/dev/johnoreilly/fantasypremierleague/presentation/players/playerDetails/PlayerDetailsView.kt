@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails
 
 import android.annotation.SuppressLint
@@ -6,6 +8,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -86,13 +96,13 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
             )
         }) {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.padding(it).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.size(16.dp))
                 Text(
                     text = player.name,
-                    style = MaterialTheme.typography.h6
+                    style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.size(16.dp))
                 AsyncImage(
