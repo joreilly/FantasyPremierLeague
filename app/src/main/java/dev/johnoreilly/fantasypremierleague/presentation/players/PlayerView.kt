@@ -2,8 +2,8 @@ package dev.johnoreilly.fantasypremierleague.presentation.players
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,19 +45,19 @@ fun PlayerView(
             Text(
                 modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
                 text = player.name,
-                style = MaterialTheme.typography.h6
+                style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.size(1.dp))
             Text(
                 modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
                 text = player.team,
-                style = MaterialTheme.typography.subtitle1, color = Color.DarkGray
+                style = MaterialTheme.typography.titleMedium, color = Color.DarkGray
             )
         }
         Text(
             modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
             text = player.points.toString(),
-            style = MaterialTheme.typography.h6
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package dev.johnoreilly.fantasypremierleague.presentation.players
 
 import android.annotation.SuppressLint
@@ -10,6 +12,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -38,7 +46,7 @@ fun PlayerListView(
                 }
             )
         }) {
-        Column {
+        Column(Modifier.padding(it)) {
             val isDataLoading = playerList.value.isEmpty()
             TextField(
                 singleLine = true,

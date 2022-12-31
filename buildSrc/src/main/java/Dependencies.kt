@@ -20,6 +20,7 @@ object Versions {
     const val navCompose = "2.5.1"
     const val accompanist = "0.25.1"
     const val coilCompose = "2.1.0"
+    const val composeMaterial3 = "1.0.0"
     const val composeDesktop = "1.3.0-beta03"
 
     const val junit = "4.13"
@@ -79,9 +80,11 @@ object Compose {
     const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
     const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
     const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
-    const val material = "androidx.compose.material:material:${Versions.compose}"
     const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coilCompose}"
+    const val material3 = "androidx.compose.material3:material3:${Versions.composeMaterial3}"
+    const val material3WindowSizeClass = "androidx.compose.material3:material3-window-size-class:${Versions.composeMaterial3}"
+
     const val accompanistSwipeRefresh =
         "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
     const val accompanistSwipePlaceholder =

@@ -4,10 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +36,7 @@ fun FixtureView(
             .padding(start = 16.dp, top = 16.dp, end = 16.dp)
             .clickable { onFixtureSelected(fixture.id) }
             .placeholder(visible = isDataLoading, lowfidelitygray),
-        color = MaterialTheme.colors.surface,
+        //color = MaterialTheme.colors.surface,
         shape = RoundedCornerShape(10.dp)
     ) {
         Column(
@@ -58,8 +58,7 @@ fun FixtureView(
                 Text(
                     text = "${fixture.homeTeamScore}",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp,
-                    color = MaterialTheme.colors.onSurface
+                    fontSize = 25.sp
                 )
                 Divider(
                     modifier = Modifier
@@ -70,8 +69,7 @@ fun FixtureView(
                 Text(
                     text = "${fixture.awayTeamScore}",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp,
-                    color = MaterialTheme.colors.onSurface
+                    fontSize = 25.sp
                 )
                 ClubInFixtureView(
                     fixture.awayTeam,
@@ -82,8 +80,7 @@ fun FixtureView(
                 modifier = Modifier.padding(top = 16.dp),
                 text = fixture.localKickoffTime.date.toString(),
                 fontWeight = FontWeight.Light,
-                fontSize = 14.sp,
-                color = MaterialTheme.colors.onSurface
+                fontSize = 14.sp
             )
 
             fixture.localKickoffTime.let { localKickoffTime ->
@@ -92,8 +89,7 @@ fun FixtureView(
                     modifier = Modifier.padding(bottom = 16.dp),
                     text = formattedTime,
                     fontWeight = FontWeight.Light,
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colors.onSurface
+                    fontSize = 14.sp
                 )
             }
         }
@@ -119,8 +115,7 @@ fun ClubInFixtureView(
             text = teamName,
             textAlign = TextAlign.Center,
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            color = MaterialTheme.colors.onSurface
+            overflow = TextOverflow.Ellipsis
         )
     }
 }

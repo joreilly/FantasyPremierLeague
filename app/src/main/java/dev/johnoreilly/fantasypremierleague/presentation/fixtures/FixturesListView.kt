@@ -1,16 +1,24 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package dev.johnoreilly.fantasypremierleague.presentation.fixtures
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -29,13 +37,13 @@ fun FixturesListView(
 ) {
     val fixturesState = fantasyPremierLeagueViewModel.gameweekToFixtures.collectAsState()
     val currentGameweek: State<Int> = fantasyPremierLeagueViewModel.currentGameweek.collectAsState()
-    val selectedGameweek = mutableStateOf(currentGameweek.value)
+    val selectedGameweek = remember { mutableStateOf(currentGameweek.value) }
     val isLoading = fixturesState.value[currentGameweek.value] == null
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Fixtures") })
         }) {
-        Column {
+        Column(Modifier.padding(it)) {
             GameweekSelector(
                 selectedGameweek = selectedGameweek.value,
                 isDataLoading = isLoading,

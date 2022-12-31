@@ -1,10 +1,18 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package dev.johnoreilly.fantasypremierleague.presentation.fixtures.fixtureDetails
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +42,7 @@ fun FixtureDetailsView(fixture: GameFixture, popBackStack: () -> Unit) {
             )
         }) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.padding(it).fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
@@ -51,8 +59,7 @@ fun FixtureDetailsView(fixture: GameFixture, popBackStack: () -> Unit) {
                 Text(
                     text = "(${fixture.homeTeamScore})",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp,
-                    color = MaterialTheme.colors.onSurface
+                    fontSize = 25.sp
                 )
                 Text(
                     text = "vs",
@@ -62,8 +69,7 @@ fun FixtureDetailsView(fixture: GameFixture, popBackStack: () -> Unit) {
                 Text(
                     text = "(${fixture.awayTeamScore})",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp,
-                    color = MaterialTheme.colors.onSurface
+                    fontSize = 25.sp
                 )
                 ClubInFixtureView(
                     fixture.awayTeam,
