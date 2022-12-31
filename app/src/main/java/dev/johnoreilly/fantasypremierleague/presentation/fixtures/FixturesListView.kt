@@ -8,12 +8,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
@@ -41,7 +41,7 @@ fun FixturesListView(
     val isLoading = fixturesState.value[currentGameweek.value] == null
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Fixtures") })
+            CenterAlignedTopAppBar(title = { Text("Fixtures") })
         }) {
         Column(Modifier.padding(it)) {
             GameweekSelector(
