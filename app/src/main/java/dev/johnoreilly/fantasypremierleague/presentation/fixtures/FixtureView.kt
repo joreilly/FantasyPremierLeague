@@ -36,7 +36,7 @@ fun FixtureView(
             .padding(start = 16.dp, top = 16.dp, end = 16.dp)
             .clickable { onFixtureSelected(fixture.id) }
             .placeholder(visible = isDataLoading, lowfidelitygray),
-        //color = MaterialTheme.colors.surface,
+        color = MaterialTheme.colorScheme.surfaceVariant,
         shape = RoundedCornerShape(10.dp)
     ) {
         Column(
