@@ -18,7 +18,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
@@ -64,12 +63,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
     val navController = rememberNavController()
-    val coroutineScope = rememberCoroutineScope()
 
     val leagues by viewModel.leagues.collectAsState()
 
     // TEMP to set a particular league until settings screen added
-//    coroutineScope.launch {
+//    LaunchedEffect(viewModel) {
 //        viewModel.updateLeagues(listOf(""))
 //    }
 
