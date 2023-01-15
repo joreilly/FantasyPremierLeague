@@ -2,26 +2,26 @@
 object Versions {
     const val kotlin = "1.8.0"
     const val kotlinCoroutines = "1.6.4"
-    const val ktor = "2.1.0"
-    const val kotlinxSerialization = "1.3.3"
+    const val ktor = "2.2.2"
+    const val kotlinxSerialization = "1.4.1"
     const val koinCore = "3.3.2"
     const val koinAndroid = "3.3.2"
     const val koinAndroidCompose = "3.4.1"
-    const val realm = "1.5.1"
+    const val realm = "1.5.2"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.4.0"
-    const val multiplatformSettings = "1.0.0-alpha01"
+    const val multiplatformSettings = "1.0.0"
 
     const val kmpNativeCoroutinesVersion = "1.0.0-ALPHA-4"
 
     const val slf4j = "1.7.30"
     const val compose = "1.4.0-alpha03"
     const val composeCompiler = "1.4.0-dev-k1.8.0-RC-4c1865595ed"
-    const val navCompose = "2.5.1"
-    const val accompanist = "0.25.1"
-    const val coilCompose = "2.1.0"
-    const val composeMaterial3 = "1.0.0"
-    const val composeDesktop = "1.3.0-beta03"
+    const val navCompose = "2.5.2"
+    const val accompanist = "0.29.0-alpha"
+    const val coilCompose = "2.2.2"
+    const val composeMaterial3 = "1.1.0-alpha04"
+    const val composeDesktop = "1.3.0-rc02"
 
     const val junit = "4.13"
 }
@@ -88,7 +88,7 @@ object Compose {
     const val accompanistSwipeRefresh =
         "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
     const val accompanistSwipePlaceholder =
-        "com.google.accompanist:accompanist-placeholder-material:${Versions.accompanist}"
+        "com.google.accompanist:accompanist-placeholder-material3:${Versions.accompanist}"
 }
 
 
