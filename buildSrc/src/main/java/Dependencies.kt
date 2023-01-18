@@ -16,7 +16,7 @@ object Versions {
 
     const val slf4j = "1.7.30"
     const val compose = "1.4.0-alpha03"
-    const val composeCompiler = "1.4.0-dev-k1.8.0-RC-4c1865595ed"
+    const val composeCompiler = "1.4.0"
     const val navCompose = "2.5.2"
     const val accompanist = "0.29.0-alpha"
     const val coilCompose = "2.2.2"
