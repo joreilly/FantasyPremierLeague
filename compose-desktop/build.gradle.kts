@@ -22,10 +22,6 @@ dependencies {
     implementation(project(":common"))
 }
 
-compose {
-    kotlinCompilerPlugin.set(Versions.composeCompiler)
-}
-
 tasks.withType<KotlinCompile>() {
     kotlinOptions {
         jvmTarget = "1.8"

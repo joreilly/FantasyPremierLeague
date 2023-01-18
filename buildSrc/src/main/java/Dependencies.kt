@@ -21,7 +21,7 @@ object Versions {
     const val accompanist = "0.29.0-alpha"
     const val coilCompose = "2.2.2"
     const val composeMaterial3 = "1.1.0-alpha04"
-    const val composeDesktop = "1.3.0-rc02"
+    const val composeDesktop = "1.3.0-rc03"
 
     const val junit = "4.13"
 }
