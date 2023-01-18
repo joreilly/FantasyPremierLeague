@@ -24,14 +24,3 @@ allprojects {
         maven("https://androidx.dev/storage/compose-compiler/repository")
     }
 }
-
-
-allprojects {
-    configurations.all {
-        resolutionStrategy.dependencySubstitution {
-            substitute(module("org.jetbrains.compose.compiler:compiler")).apply {
-                using(module("androidx.compose.compiler:compiler:${Versions.composeCompiler}"))
-            }
-        }
-    }
-}
