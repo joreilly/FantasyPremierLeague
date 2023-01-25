@@ -7,7 +7,7 @@ object Versions {
     const val koinCore = "3.3.2"
     const val koinAndroid = "3.3.2"
     const val koinAndroidCompose = "3.4.1"
-    const val realm = "1.5.2"
+    const val realm = "1.6.0"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.4.0"
     const val multiplatformSettings = "1.0.0"
