@@ -89,7 +89,7 @@ kotlin {
             implementation("org.nield:kotlin-statistics:1.2.1")
             implementation("org.ojalgo:okalgo:0.0.2")
             implementation("org.jetbrains.kotlinx:multik-api:0.1.1")
-            implementation("org.jetbrains.kotlinx:multik-jvm:0.1.0")
+            implementation("org.jetbrains.kotlinx:multik-jvm:0.1.1")
         }
 
         sourceSets["iOSMain"].dependencies {
