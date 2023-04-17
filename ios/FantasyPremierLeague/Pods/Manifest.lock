@@ -1,12 +1,12 @@
 PODS:
   - common (1.0)
-  - KMPNativeCoroutinesAsync (1.0.0-ALPHA-6):
-    - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-6)
-  - KMPNativeCoroutinesCore (1.0.0-ALPHA-6)
+  - KMPNativeCoroutinesAsync (1.0.0-ALPHA-7):
+    - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-7)
+  - KMPNativeCoroutinesCore (1.0.0-ALPHA-7)
 
 DEPENDENCIES:
   - common (from `../../common`)
-  - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-6)
+  - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-7)
 
 SPEC REPOS:
   trunk:
@@ -19,9 +19,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   common: d578ad83bf1a42ef02499fc38578b1bc16856e29
-  KMPNativeCoroutinesAsync: 05e23198a8607af5abbb016beeed5586ab69d40e
-  KMPNativeCoroutinesCore: ee5236cd93d3f96c594d3d7ea4245739cb06a367
+  KMPNativeCoroutinesAsync: ec6d9c73fccd5b3ce61a08335038e5d4465ad7d4
+  KMPNativeCoroutinesCore: 394490858758d4dce66b23d5b40d3cb0a295d585
 
-PODFILE CHECKSUM: 20b6742c1b8619348dca5c267cb4baeed93601ee
+PODFILE CHECKSUM: 4ee937b4dd4bb6e347a4a6c11728ee516e022f03
 
 COCOAPODS: 1.11.3
