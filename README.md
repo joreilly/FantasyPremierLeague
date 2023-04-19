@@ -20,10 +20,14 @@ Note that we're not handling realm db migrations yet so, for now, you may need t
 
 
 ## Screenshots
-|Platform|Screenshot|
-|---|---|
-|Android|<img src="https://user-images.githubusercontent.com/6302/210137422-7c289cbb-d428-4ae3-9183-6c481184b5fa.png" width=300/>|
-|iOS|<img src="/art/screenshot2.png?raw=true" width=300/>|
-|Desktop|<img src="/art/screenshot3.png?raw=true" width=300/>|
+
+### Android
+<img src="https://user-images.githubusercontent.com/6302/210137422-7c289cbb-d428-4ae3-9183-6c481184b5fa.png" width=300/>|
+
+### iOS
+<img src="https://user-images.githubusercontent.com/6302/233188752-f18cb96d-cf2b-45a1-af7d-fdad0db06dfb.png" width=300/>|
+
+### Desktop
+<img width="912" alt="Screenshot 2023-04-19 at 21 07 13" src="https://user-images.githubusercontent.com/6302/233188214-d003a631-5ccb-41a5-b0f4-a3b35ff709be.png">
 
 
