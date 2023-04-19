@@ -1,6 +1,6 @@
 # Fantasy Premier League
 
-![kotlin-version](https://img.shields.io/badge/kotlin-1.8.0-orange)
+![kotlin-version](https://img.shields.io/badge/kotlin-1.8.20-orange)
 
 **Kotlin Multiplatform** project with Jetpack Compose, Compose for Desktop and SwiftUI clients (and using Ktor for remote API requests and Realm for persistence). Currently running on:
 * Android (Jetpack Compose)

@@ -24,7 +24,6 @@ dependencies {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions {
-        jvmTarget = "1.8"
         freeCompilerArgs += listOf(
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
