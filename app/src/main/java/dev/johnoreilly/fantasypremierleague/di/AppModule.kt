@@ -7,5 +7,5 @@ import org.koin.dsl.module
 
 val appModule = module {
     viewModel { FantasyPremierLeagueViewModel(get()) }
-    viewModel { FixturesViewModel() }
+    viewModel { FixturesViewModel(get()) }
 }
