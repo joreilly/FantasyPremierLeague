@@ -27,8 +27,6 @@ class FantasyPremierLeagueViewModel(
 
     val fixturesList = repository.fixtureList
 
-    val gameweekToFixtures = repository.gameweekToFixtures
-
     val leagues: StateFlow<List<String>> = repository.leagues
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
@@ -38,9 +36,6 @@ class FantasyPremierLeagueViewModel(
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
-
-    val currentGameweek: StateFlow<Int>
-        get() = repository.currentGameweek
 
     fun onPlayerSearchQueryChange(query: String) {
         searchQuery.value = query
