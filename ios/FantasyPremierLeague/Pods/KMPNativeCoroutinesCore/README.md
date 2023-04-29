@@ -24,12 +24,13 @@ This library solves both of these limitations 😄.
 
 ## Compatibility
 
-The latest version of the library uses Kotlin version `1.8.20`.  
+The latest version of the library uses Kotlin version `1.8.21`.  
 Compatibility versions for older Kotlin versions are also available:
 
 | Version       | Version suffix  |   Kotlin   |    KSP     | Coroutines |
 |---------------|-----------------|:----------:|:----------:|:----------:|
-| **_latest_**  | **_no suffix_** | **1.8.20** | **1.0.10** | **1.6.4**  |
+| **_latest_**  | **_no suffix_** | **1.8.21** | **1.0.11** | **1.6.4**  |
+| 1.0.0-ALPHA-7 | _no suffix_     |   1.8.20   |   1.0.10   |   1.6.4    |
 | 1.0.0-ALPHA-5 | _no suffix_     |   1.8.10   |   1.0.9    |   1.6.4    |
 | 1.0.0-ALPHA-4 | _no suffix_     |   1.8.0    |   1.0.8    |   1.6.4    |
 
@@ -50,7 +51,7 @@ or the Swift Package Manager.
 
 Make sure to always use the same versions for all the libraries!
 
-[![latest release](https://img.shields.io/github/v/release/rickclephas/KMP-NativeCoroutines?label=latest%20release&sort=semver)](https://github.com/rickclephas/KMP-NativeCoroutines/releases)
+[![latest release](https://img.shields.io/github/v/release/rickclephas/KMP-NativeCoroutines?label=latest%20release&sort=semver&include_prereleases)](https://github.com/rickclephas/KMP-NativeCoroutines/releases)
 
 ### Kotlin
 
