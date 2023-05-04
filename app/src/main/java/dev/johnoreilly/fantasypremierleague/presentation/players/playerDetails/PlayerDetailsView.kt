@@ -112,7 +112,8 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
                 ) {
                     Text(
                         text = "INFO",
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
                 }
                 PlayerStatView("Team", player.team)

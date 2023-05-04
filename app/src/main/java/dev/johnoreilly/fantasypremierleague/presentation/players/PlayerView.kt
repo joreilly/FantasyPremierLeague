@@ -51,7 +51,7 @@ fun PlayerView(
             Text(
                 modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
                 text = player.team,
-                style = MaterialTheme.typography.titleMedium, color = Color.DarkGray
+                style = MaterialTheme.typography.titleMedium,
             )
         }
         Text(
