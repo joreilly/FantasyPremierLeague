@@ -67,6 +67,7 @@ dependencies {
         implementation(foundationLayout)
         implementation(navigation)
         implementation(coilCompose)
+        implementation(flow)
         implementation(accompanistSwipeRefresh)
         implementation(accompanistSwipePlaceholder)
 

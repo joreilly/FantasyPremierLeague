@@ -14,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
@@ -21,12 +22,12 @@ import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueVie
 @Composable
 fun LeagueListView(viewModel: FantasyPremierLeagueViewModel) {
 
-    val leagueStandings by viewModel.leagueStandings.collectAsState(emptyList())
-    val leagueName by viewModel.leagueName.collectAsState("")
+    val leagueStandings by viewModel.leagueStandings.collectAsStateWithLifecycle(emptyList())
+    val leagueName by viewModel.leagueName.collectAsStateWithLifecycle("")
 
-    val leagues by viewModel.leagues.collectAsState(emptyList())
+    val leagues by viewModel.leagues.collectAsStateWithLifecycle(emptyList())
 
-    val isRefreshing by viewModel.isRefreshing.collectAsState()
+    val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
 
     LaunchedEffect(leagues) {
         if (leagues.isNotEmpty()) {

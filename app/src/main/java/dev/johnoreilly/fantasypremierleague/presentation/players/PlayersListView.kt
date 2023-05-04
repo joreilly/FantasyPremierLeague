@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
@@ -33,8 +34,8 @@ fun PlayerListView(
     fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
     onPlayerSelected: (playerId: Int) -> Unit
 ) {
-    val playerList = fantasyPremierLeagueViewModel.playerList.collectAsState()
-    val playerSearchQuery = fantasyPremierLeagueViewModel.searchQuery.collectAsState()
+    val playerList = fantasyPremierLeagueViewModel.playerList.collectAsStateWithLifecycle()
+    val playerSearchQuery = fantasyPremierLeagueViewModel.searchQuery.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {

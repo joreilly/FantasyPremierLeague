@@ -24,6 +24,7 @@ object Versions {
     const val composeDesktop = "1.4.0"
 
     const val junit = "4.13"
+    const val flow = "2.6.1"
 }
 
 
@@ -82,6 +83,7 @@ object Compose {
     const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
     const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coilCompose}"
+    const val flow = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.flow}"
     const val material3 = "androidx.compose.material3:material3:${Versions.composeMaterial3}"
     const val material3WindowSizeClass = "androidx.compose.material3:material3-window-size-class:${Versions.composeMaterial3}"
 

@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.domain.entities.GameFixture
@@ -36,8 +37,8 @@ fun FixturesListView(
 ) {
     val fixturesViewModel: FixturesViewModel = viewModel()
 
-    val fixturesState = fixturesViewModel.gameweekToFixtures.collectAsState()
-    val currentGameweek: State<Int> = fixturesViewModel.currentGameweek.collectAsState()
+    val fixturesState = fixturesViewModel.gameweekToFixtures.collectAsStateWithLifecycle()
+    val currentGameweek: State<Int> = fixturesViewModel.currentGameweek.collectAsStateWithLifecycle()
     val selectedGameweek = remember { mutableStateOf(currentGameweek.value) }
     val isLoading = fixturesState.value[currentGameweek.value] == null
     Scaffold(
