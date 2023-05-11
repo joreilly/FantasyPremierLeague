@@ -20,7 +20,7 @@ object Versions {
     const val navCompose = "2.5.3"
     const val accompanist = "0.30.1"
     const val coilCompose = "2.3.0"
-    const val composeMaterial3 = "1.1.0-rc01"
+    const val composeMaterial3 = "1.1.0"
     const val composeDesktop = "1.4.0"
 
     const val junit = "4.13"
