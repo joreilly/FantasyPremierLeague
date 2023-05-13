@@ -12,7 +12,7 @@ object Versions {
     const val kotlinxDateTime = "0.4.0"
     const val multiplatformSettings = "1.0.0"
 
-    const val kmpNativeCoroutinesVersion = "1.0.0-ALPHA-7"
+    const val kmpNativeCoroutinesVersion = "1.0.0-ALPHA-10"
 
     const val slf4j = "1.7.30"
     const val compose = "1.4.2"
