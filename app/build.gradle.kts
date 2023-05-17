@@ -83,7 +83,7 @@ dependencies {
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.test:core:1.5.0")
-    testImplementation("org.robolectric:robolectric:4.10")
+    testImplementation("org.robolectric:robolectric:4.10.3")
     androidTestImplementation("androidx.test:runner:1.5.2")
 
     implementation(project(":common"))
