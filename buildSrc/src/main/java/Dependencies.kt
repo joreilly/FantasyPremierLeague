@@ -6,7 +6,7 @@ object Versions {
     const val kotlinxSerialization = "1.5.0"
     const val koinCore = "3.4.0"
     const val koinAndroid = "3.4.0"
-    const val koinAndroidCompose = "3.4.3"
+    const val koinAndroidCompose = "3.4.5"
     const val realm = "1.7.1"
     const val kermit = "1.0.0"
     const val kotlinxDateTime = "0.4.0"
