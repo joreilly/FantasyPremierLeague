@@ -18,5 +18,5 @@ jobs:
     - name: Run Unit Tests
       run: ./gradlew test
     - name: Build iOS shared code
-      run: ./gradlew :common:compileKotlinIOS
+      run: ./gradlew :common:compileKotlinIosSimulatorArm64
 

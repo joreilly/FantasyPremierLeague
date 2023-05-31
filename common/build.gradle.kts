@@ -3,103 +3,93 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("io.realm.kotlin")
-    id("org.jetbrains.kotlin.native.cocoapods")
     id("com.google.devtools.ksp")
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
-// CocoaPods requires the podspec to have a version.
-version = "1.0"
 
 android {
-    compileSdk = AndroidSdk.compile
+    compileSdk = libs.versions.compileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = AndroidSdk.min
-        targetSdk = AndroidSdk.target
-
+        minSdk = libs.versions.minSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     namespace = "dev.johnoreilly.common"
 }
 
 kotlin {
-    val iosTarget: (String, org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit) -> org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget = when {
-        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64 // available to KT 1.5.30
-        else -> ::iosX64
-    }
-    iosTarget("iOS") {}
-
-
-    android()
-    jvm()
-
-    cocoapods {
-        summary = "Fantasy Football Premier League"
-        homepage = "Link to a Kotlin/Native module homepage"
-        framework {
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
             baseName = "FantasyPremierLeagueKit"
         }
     }
 
+    androidTarget()
+    jvm()
+
+
     sourceSets {
 
-        sourceSets["commonMain"].dependencies {
-            with(Deps.Ktor) {
-                implementation(clientCore)
-                implementation(clientJson)
-                implementation(clientLogging)
-                implementation(clientSerialization)
-                implementation(contentNegotiation)
-                implementation(json)
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines)
+                implementation(libs.kotlinx.serialization)
+                api(libs.kotlinx.datetime)
+
+                api(libs.koin.core)
+                implementation(libs.koin.test)
+
+                implementation(libs.bundles.ktor.common)
+                implementation(libs.realm)
+                api(libs.bundles.multiplatformSettings)
+                api(libs.kermit)
             }
+        }
 
-            with(Deps.Kotlinx) {
-                implementation(coroutinesCore)
-                implementation(serializationCore)
-                api(dateTime)
+        val commonTest by getting {
+            dependencies {
             }
-
-            // Realm
-            implementation(Deps.realm)
-
-            // koin
-            api(Deps.Koin.core)
-            api(Deps.Koin.test)
-
-            api(Deps.multiplatformSettings)
-            api(Deps.multiplatformSettingsCoroutines)
-
-
-            // kermit
-            api(Deps.kermit)
-        }
-        sourceSets["commonTest"].dependencies {
         }
 
-        sourceSets["androidMain"].dependencies {
-            implementation(Deps.Ktor.clientAndroid)
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.android)
+            }
         }
 
-        sourceSets["jvmMain"].dependencies {
-            implementation(Deps.Ktor.clientJava)
-            implementation(Deps.Ktor.slf4j)
+        val jvmMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.java)
+                implementation(libs.slf4j)
 
-            implementation("org.nield:kotlin-statistics:1.2.1")
-            implementation("org.ojalgo:okalgo:0.0.2")
-            implementation("org.jetbrains.kotlinx:multik-api:0.1.1")
-            implementation("org.jetbrains.kotlinx:multik-jvm:0.1.1")
+                implementation("org.nield:kotlin-statistics:1.2.1")
+                implementation("org.ojalgo:okalgo:0.0.2")
+                implementation("org.jetbrains.kotlinx:multik-api:0.1.1")
+                implementation("org.jetbrains.kotlinx:multik-jvm:0.1.1")
+            }
         }
 
-        sourceSets["iOSMain"].dependencies {
-            implementation(Deps.Ktor.clientIos)
+
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                implementation(libs.ktor.client.ios)
+            }
         }
-        sourceSets["iOSTest"].dependencies {
-        }
+
     }
 }
-
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
@@ -109,26 +99,4 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
-}
-
-
-// workaround for https://youtrack.jetbrains.com/issue/KT-55751 - should be fixed in Kotlin 1.9
-val myAttribute = Attribute.of("myOwnAttribute", String::class.java)
-
-if (configurations.findByName("podDebugFrameworkIosFat") != null) {
-    configurations.named("podDebugFrameworkIosFat").configure {
-        attributes {
-            // put a unique attribute
-            attribute(myAttribute, "podDebugFrameworkIosFat")
-        }
-
-    }
-}
-
-if (configurations.findByName("podReleaseFrameworkIosFat") != null) {
-    configurations.named("podReleaseFrameworkIosFat").configure {
-        attributes {
-            attribute(myAttribute, "podReleaseFrameworkIosFat")
-        }
-    }
 }

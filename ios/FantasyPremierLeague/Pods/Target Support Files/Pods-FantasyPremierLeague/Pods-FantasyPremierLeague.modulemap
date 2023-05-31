@@ -1,6 +1,0 @@
-module Pods_FantasyPremierLeague {
-  umbrella header "Pods-FantasyPremierLeague-umbrella.h"
-
-  export *
-  module * { export * }
-}

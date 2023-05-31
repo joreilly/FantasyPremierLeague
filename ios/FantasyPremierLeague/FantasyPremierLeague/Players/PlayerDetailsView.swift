@@ -32,26 +32,20 @@ struct PlayerDetailsView: View {
             }
             
             
-            if let playerHistory = viewModel.playerHistory {
-                
-                Chart(playerHistory) {
-                    BarMark(
-                        x: .value("Season", $0.seasonName),
-                        y: .value("Points", $0.totalPoints)
-                    )
-                    
-                }
-                .chartYAxisLabel("Points")
-                .chartXAxisLabel("Season", alignment: Alignment.center)
-                .frame(height: 250)
-                
-            
-                
+            let playerHistory = viewModel.playerHistory
+
+            Chart(playerHistory) {
+                BarMark(
+                    x: .value("Season", $0.seasonName),
+                    y: .value("Points", $0.totalPoints)
+                )
+
             }
+            .chartYAxisLabel("Points")
+            .chartXAxisLabel("Season", alignment: Alignment.center)
+            .frame(height: 250)
+
             Spacer()
-            
-            
-            
         }
         .task {
             await viewModel.getPlayerStats(playerId: player.id)
