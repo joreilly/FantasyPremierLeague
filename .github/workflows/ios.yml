@@ -17,6 +17,6 @@ jobs:
         with:
           java-version: 17
       - name: Build iOS app
-        run: xcodebuild -workspace ios/FantasyPremierLeague/FantasyPremierLeague.xcworkspace -configuration Debug -scheme FantasyPremierLeague -sdk iphoneos -destination name='iPhone 14' build
+        run: xcodebuild -workspace ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj/project.xcworkspace -configuration Debug -scheme FantasyPremierLeague -sdk iphoneos -destination name='iPhone 14' build
 
 
