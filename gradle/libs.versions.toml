@@ -23,7 +23,7 @@ composeMultiplatform = "1.4.0"
 accompanist = "0.30.1"
 horologist = "0.2.5"
 wearCompose = "1.2.0-beta01"
-coilCompose = "2.3.0"
+coilCompose = "2.4.0"
 junit = "4.13.2"
 
 multiplatformSettings = "1.0.0"
