@@ -21,7 +21,7 @@ androidxLifecycle = "2.6.1"
 
 composeMultiplatform = "1.4.0"
 accompanist = "0.30.1"
-horologist = "0.2.5"
+horologist = "0.4.8"
 wearCompose = "1.2.0-beta01"
 coilCompose = "2.4.0"
 junit = "4.13.2"
