@@ -2,15 +2,19 @@ import SwiftUI
 import Charts
 import FantasyPremierLeagueKit
 
+
 struct PlayerDetailsView: View {
     @ObservedObject var viewModel: FantasyPremierLeagueViewModel
     var player: Player
+   
+    @State private var selectedSeason: String?
+
     
     var body: some View {
-        
+
         VStack(alignment: .center) {
             VStack {
-                Text(player.name).font(.title).multilineTextAlignment(.center)
+                //Text(player.name).font(.title).multilineTextAlignment(.center)
                 
                 AsyncImage(url: URL(string: player.photoUrl)) { image in
                      image.resizable()
@@ -32,24 +36,62 @@ struct PlayerDetailsView: View {
             }
             
             
+            
             let playerHistory = viewModel.playerHistory
 
-            Chart(playerHistory) {
-                BarMark(
-                    x: .value("Season", $0.seasonName),
-                    y: .value("Points", $0.totalPoints)
-                )
+            Chart {
+                ForEach(playerHistory) {
+                    BarMark(
+                        x: .value("Season", $0.seasonName),
+                        y: .value("Points", $0.totalPoints)
+                    )
+                }
+
+                if let selectedSeason {
+                    RuleMark(
+                        x: .value("Selection", selectedSeason)
+                    )
+                    .foregroundStyle(Color.gray)
+                    .annotation(
+                        position: .leading, alignment: .center, spacing: 0,
+                        overflowResolution: .init(
+                            x: .fit(to: .chart),
+                            y: .disabled
+                        )
+                    ) {
+                        
+                        VStack(alignment: .center) {
+                            Text(selectedSeason)
+                            Divider()
+                            if let seasonHistory = playerHistory.first(where: { $0.seasonName == selectedSeason }) {
+                                Text("\(seasonHistory.totalPoints) points")
+                                Text("\(seasonHistory.totalGoals) goals")
+                                Text("\(seasonHistory.totalAssists) assists")
+                            }
+                        }
+                        .padding()
+                        .background(Color(uiColor: .secondarySystemBackground))
+                    }
+
+                }
 
             }
+            .chartScrollableAxes(.horizontal)
+            .chartXVisibleDomain(length: 5)
             .chartYAxisLabel("Points")
             .chartXAxisLabel("Season", alignment: Alignment.center)
+            .chartXSelection(value: $selectedSeason)
             .frame(height: 250)
+            .padding()
+            
 
             Spacer()
         }
         .task {
             await viewModel.getPlayerStats(playerId: player.id)
         }
+        .navigationBarTitle(Text(player.name), displayMode: .inline)
+        
     }
 }
 

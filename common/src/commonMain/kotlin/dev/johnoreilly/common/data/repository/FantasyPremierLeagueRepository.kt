@@ -242,7 +242,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
     @NativeCoroutines
     suspend fun getPlayerHistoryData(playerId: Int): List<PlayerPastHistory> {
         return fantasyPremierLeagueApi.fetchPlayerData(playerId).history_past.map {
-            PlayerPastHistory(it.season_name, it.total_points)
+            PlayerPastHistory(it.season_name, it.total_points, it.goals_scored, it.assists)
         }
     }
 
