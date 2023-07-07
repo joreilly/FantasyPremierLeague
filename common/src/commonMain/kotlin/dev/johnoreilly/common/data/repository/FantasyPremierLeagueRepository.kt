@@ -217,7 +217,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
             }
 
             //store current gameweek
-            _currentGameweek.value = bootstrapStaticInfoDto.events.first { it.is_current }.id
+            _currentGameweek.value = bootstrapStaticInfoDto.events.firstOrNull { it.is_current }?.id ?: 1
 
             // store fixtures
             val teams = query<TeamDb>().find().toList()
