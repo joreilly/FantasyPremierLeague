@@ -1,22 +1,22 @@
 [versions]
 kotlin = "1.9.0"
 ksp = "1.9.0-1.0.11"
-coroutines = "1.7.2"
+coroutines = "1.7.3"
 kotlinxSerialization = "1.5.1"
 kotlinxDateTime = "0.4.0"
-androidGradlePlugin = "8.0.2"
-koin = "3.4.1"
-koinCompose = "3.4.5"
+androidGradlePlugin = "8.1.0"
+koin = "3.4.3"
+koinCompose = "3.4.6"
 ktor = "2.3.2"
 slf4j = "2.0.7"
-realm = "1.10.1"
+realm = "1.10.2"
 kmpNativeCoroutines = "1.0.0-ALPHA-13"
 
 androidxActivity = "1.7.2"
-androidxComposeCompiler = "1.5.0-dev-k1.9.0-6a60475e07f"
-jbComposeCompiler = "1.4.8-beta"
+androidxComposeCompiler = "1.5.1"
+jbComposeCompiler = "1.5.0"
 androidxComposeBom = "2023.06.01"
-androidxNavigationCompose = "2.5.3"
+androidxNavigationCompose = "2.6.0"
 androidxLifecycle = "2.6.1"
 
 composeMultiplatform = "1.4.0"
@@ -28,8 +28,8 @@ multiplatformSettings = "1.0.0"
 kermit = "1.2.2"
 
 minSdk = "24"
-targetSdk = "33"
-compileSdk = "33"
+targetSdk = "34"
+compileSdk = "34"
 
 
 [libraries]
