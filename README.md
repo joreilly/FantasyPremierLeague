@@ -14,7 +14,7 @@ Related posts:
 
 
 ### Building
-This project currently uses iOS16 features (e.g. Swift Charts) so requires use of XCode 14 beta. 
+This project currently uses iOS16 features (e.g. Swift Charts) so requires use of at least Xcode 14.
 
 Note that we're not handling realm db migrations yet so, for now, you may need to clear app data and re-run if you encounter "Migration is required" type errors.
 
