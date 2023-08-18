@@ -43,7 +43,7 @@ import com.patrykandpatryk.vico.compose.axis.horizontal.bottomAxis
 import com.patrykandpatryk.vico.compose.axis.vertical.startAxis
 import com.patrykandpatryk.vico.compose.chart.Chart
 import com.patrykandpatryk.vico.compose.chart.column.columnChart
-import com.patrykandpatryk.vico.compose.component.shape.lineComponent
+import com.patrykandpatryk.vico.compose.component.lineComponent
 import com.patrykandpatryk.vico.core.DefaultDimens
 import com.patrykandpatryk.vico.core.component.shape.Shapes
 import com.patrykandpatryk.vico.core.entry.ChartEntry
@@ -93,7 +93,9 @@ fun PlayerDetailsView(viewModel: FantasyPremierLeagueViewModel, player: Player, 
             )
         }) {
             Column(
-                modifier = Modifier.padding(it).fillMaxSize(),
+                modifier = Modifier
+                    .padding(it)
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.size(16.dp))
