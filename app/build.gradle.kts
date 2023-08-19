@@ -69,7 +69,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.compose)
     implementation(libs.coilCompose)
 
-    implementation(libs.accompanist.swiperefresh)
     implementation(libs.accompanist.placeholder)
 
     implementation(libs.koin.core)

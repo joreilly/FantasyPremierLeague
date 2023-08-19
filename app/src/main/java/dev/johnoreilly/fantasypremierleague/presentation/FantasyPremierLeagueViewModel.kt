@@ -1,12 +1,17 @@
+@file:OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+
+
 package dev.johnoreilly.fantasypremierleague.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.johnoreilly.common.data.model.LeagueResultDto
+import dev.johnoreilly.common.data.model.LeagueStandingsDto
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.domain.entities.GameFixture
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -25,13 +30,12 @@ class FantasyPremierLeagueViewModel(
             }
         }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    val fixturesList = repository.fixtureList
+    private val fixturesList = repository.fixtureList
 
     val leagues: StateFlow<List<String>> = repository.leagues
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    var leagueStandings = MutableStateFlow((emptyList<LeagueResultDto>()))
-    var leagueName = MutableStateFlow("")
+    var leagueStandings = MutableStateFlow<Map<String, LeagueStandingsDto>>(emptyMap())
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
@@ -53,12 +57,13 @@ class FantasyPremierLeagueViewModel(
         viewModelScope.launch {
             if (leagues.value.isNotEmpty()) {
                 _isRefreshing.emit(true)
-                val leagueId = leagues.value[0]
-                val result = repository.getLeagueStandings(leagueId.toInt())
-                result.let {
-                    leagueName.value = result.league.name
-                    leagueStandings.value = result.standings.results
+
+                val leagueStandingsMap = mutableMapOf<String, LeagueStandingsDto>()
+                leagues.value.forEach { leagueId ->
+                    val result = repository.getLeagueStandings(leagueId.trim().toInt())
+                    leagueStandingsMap[leagueId] = result
                 }
+                leagueStandings.value = leagueStandingsMap
                 _isRefreshing.emit(false)
             }
         }
