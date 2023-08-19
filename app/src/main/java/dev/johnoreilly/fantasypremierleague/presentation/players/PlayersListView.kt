@@ -17,9 +17,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -34,15 +36,19 @@ fun PlayerListView(
     fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
     onPlayerSelected: (playerId: Int) -> Unit
 ) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
     val playerList = fantasyPremierLeagueViewModel.playerList.collectAsStateWithLifecycle()
     val playerSearchQuery = fantasyPremierLeagueViewModel.searchQuery.collectAsStateWithLifecycle()
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text("Fantasy Premier League")
-                }
+                },
+                scrollBehavior = scrollBehavior
             )
         }) {
         Column(Modifier.padding(it)) {
@@ -52,7 +58,6 @@ fun PlayerListView(
                 value = playerSearchQuery.value,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
                     .placeholder(
                         visible = isDataLoading,
                         color = lowfidelitygray
