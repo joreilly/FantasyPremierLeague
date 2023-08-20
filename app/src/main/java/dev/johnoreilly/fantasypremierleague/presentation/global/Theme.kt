@@ -9,7 +9,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 
 
-private val LightColors = lightColorScheme(
+private val lightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -40,7 +40,7 @@ private val LightColors = lightColorScheme(
 )
 
 
-private val DarkColors = darkColorScheme(
+private val darkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,
@@ -76,16 +76,16 @@ fun FantasyPremierLeagueTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     androidTheme: Boolean = false,
     disableDynamicTheming: Boolean = false,
-    content: @Composable() () -> Unit
+    content: @Composable () -> Unit
 ) {
 
     val colorScheme = if (androidTheme) {
-        if (darkTheme) DarkColors else LightColors
+        if (darkTheme) darkColors else lightColors
     } else if (!disableDynamicTheming && supportsDynamicTheming()) {
         val context = LocalContext.current
         if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     } else {
-        if (darkTheme) DarkColors else LightColors
+        if (darkTheme) darkColors else lightColors
     }
 
     CompositionLocalProvider {

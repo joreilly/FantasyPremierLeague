@@ -28,7 +28,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
         
         Task {
             // TEMP to set a particular league until settings screen added
-            //repository.updateLeagues(leagues: [""])
+            repository.updateLeagues(leagues: ["2263"])
             
             
             do {

@@ -1,14 +1,13 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package dev.johnoreilly.fantasypremierleague
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -36,6 +35,7 @@ import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLe
 import dev.johnoreilly.fantasypremierleague.presentation.leagues.LeagueListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
+import dev.johnoreilly.fantasypremierleague.presentation.settings.SettingsView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -59,69 +59,72 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
     val navController = rememberNavController()
 
     val leagues by viewModel.leagues.collectAsState()
 
-    // TEMP to set a particular league until settings screen added
-//    LaunchedEffect(viewModel) {
-//        viewModel.updateLeagues(listOf(""))
-//    }
-
     Scaffold(
         bottomBar = { FantasyPremierLeagueBottomNavigation(navController, leagues) },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
-
-        NavHost(navController, startDestination = Screen.PlayerListScreen.title) {
-            composable(Screen.PlayerListScreen.title) {
-                PlayerListView(
-                    fantasyPremierLeagueViewModel = viewModel,
-                    onPlayerSelected = { playerId ->
-                        navController.navigate(Screen.PlayerDetailsScreen.title + "/${playerId}")
-                    }
-                )
-            }
-            composable(
-                Screen.PlayerDetailsScreen.title + "/{playerId}",
-                arguments = listOf(navArgument("playerId") { type = NavType.IntType })
-            ) { navBackStackEntry ->
-                val playerId: Int? = navBackStackEntry.arguments?.getInt("playerId")
-                playerId?.let {
-                    val player = viewModel.getPlayer(playerId)
-                    player?.let {
-                        PlayerDetailsView(viewModel, player, popBackStack = { navController.popBackStack() })
+        Column(Modifier.padding(it)) {
+            NavHost(navController, startDestination = Screen.PlayerListScreen.title) {
+                composable(Screen.PlayerListScreen.title) {
+                    PlayerListView(
+                        fantasyPremierLeagueViewModel = viewModel,
+                        onPlayerSelected = { playerId ->
+                            navController.navigate(Screen.PlayerDetailsScreen.title + "/${playerId}")
+                        },
+                        onShowSettings = {
+                            navController.navigate(Screen.SettingsScreen.title)
+                        }
+                    )
+                }
+                composable(
+                    Screen.PlayerDetailsScreen.title + "/{playerId}",
+                    arguments = listOf(navArgument("playerId") { type = NavType.IntType })
+                ) { navBackStackEntry ->
+                    val playerId: Int? = navBackStackEntry.arguments?.getInt("playerId")
+                    playerId?.let {
+                        val player = viewModel.getPlayer(playerId)
+                        player?.let {
+                            PlayerDetailsView(
+                                viewModel,
+                                player,
+                                popBackStack = { navController.popBackStack() })
+                        }
                     }
                 }
-            }
-            composable(Screen.FixtureListScreen.title) {
-                FixturesListView(
-                    onFixtureSelected = { fixtureId ->
-                        navController.navigate(Screen.FixtureDetailsScreen.title + "/${fixtureId}")
-                    }
-                )
-            }
-            composable(
-                Screen.FixtureDetailsScreen.title + "/{fixtureId}",
-                arguments = listOf(navArgument("fixtureId") { type = NavType.IntType })
-            ) { navBackStackEntry ->
-                val fixtureId: Int? = navBackStackEntry.arguments?.getInt("fixtureId")
-                fixtureId?.let {
-                    val fixture = viewModel.getFixture(fixtureId)
-                    fixture?.let {
-                        FixtureDetailsView(fixture, popBackStack = { navController.popBackStack() })
+                composable(Screen.FixtureListScreen.title) {
+                    FixturesListView(
+                        onFixtureSelected = { fixtureId ->
+                            navController.navigate(Screen.FixtureDetailsScreen.title + "/${fixtureId}")
+                        }
+                    )
+                }
+                composable(
+                    Screen.FixtureDetailsScreen.title + "/{fixtureId}",
+                    arguments = listOf(navArgument("fixtureId") { type = NavType.IntType })
+                ) { navBackStackEntry ->
+                    val fixtureId: Int? = navBackStackEntry.arguments?.getInt("fixtureId")
+                    fixtureId?.let {
+                        val fixture = viewModel.getFixture(fixtureId)
+                        fixture?.let {
+                            FixtureDetailsView(
+                                fixture,
+                                popBackStack = { navController.popBackStack() })
+                        }
                     }
                 }
+                composable(Screen.LeagueStandingsListScreen.title) {
+                    LeagueListView(viewModel)
+                }
+                composable(Screen.SettingsScreen.title) {
+                    SettingsView(viewModel, popBackStack = { navController.popBackStack() })
+                }
             }
-            composable(Screen.LeagueStandingsListScreen.title) {
-                LeagueListView(
-                    viewModel = viewModel
-                )
-            }
-
         }
     }
 }

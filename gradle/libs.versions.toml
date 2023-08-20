@@ -57,7 +57,6 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 
 coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
-accompanist-swiperefresh = { group = "com.google.accompanist", name = "accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-placeholder = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }

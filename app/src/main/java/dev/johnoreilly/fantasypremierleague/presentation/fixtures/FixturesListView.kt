@@ -16,7 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,7 +39,7 @@ fun FixturesListView(
 
     val fixturesState = fixturesViewModel.gameweekToFixtures.collectAsStateWithLifecycle()
     val currentGameweek: State<Int> = fixturesViewModel.currentGameweek.collectAsStateWithLifecycle()
-    val selectedGameweek = remember { mutableStateOf(currentGameweek.value) }
+    val selectedGameweek = remember { mutableIntStateOf(currentGameweek.value) }
     val isLoading = fixturesState.value[currentGameweek.value] == null
     Scaffold(
         topBar = {
@@ -47,14 +47,14 @@ fun FixturesListView(
         }) {
         Column(Modifier.padding(it)) {
             GameweekSelector(
-                selectedGameweek = selectedGameweek.value,
+                selectedGameweek = selectedGameweek.intValue,
                 isDataLoading = isLoading,
-                onGameweekChanged = {
-                    if (it is GameweekChange.PastGameweek) selectedGameweek.value -= 1 else selectedGameweek.value += 1
+                onGameweekChanged = { gameweekChange ->
+                    if (gameweekChange is GameweekChange.PastGameweek) selectedGameweek.intValue -= 1 else selectedGameweek.intValue += 1
                 })
             LazyColumn {
                 val fixtureItems: List<GameFixture> = if(isLoading) placeholderFixtureList
-                    else fixturesState.value[selectedGameweek.value] ?: emptyList()
+                    else fixturesState.value[selectedGameweek.intValue] ?: emptyList()
                 items(
                     items = fixtureItems,
                     itemContent = { fixture ->
@@ -124,8 +124,8 @@ fun GameweekSelector(
 }
 
 sealed class GameweekChange {
-    object NextGameweek : GameweekChange()
-    object PastGameweek : GameweekChange()
+    data object NextGameweek : GameweekChange()
+    data object PastGameweek : GameweekChange()
 }
 
 private val placeholderKickoffTime = kotlinx.datetime.LocalDateTime(2022, 9, 5, 13, 30, 0)

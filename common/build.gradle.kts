@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
     kotlin("multiplatform")
     id("kotlinx-serialization")
@@ -18,7 +20,10 @@ android {
     namespace = "dev.johnoreilly.common"
 }
 
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    targetHierarchy.default()
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -68,6 +73,12 @@ kotlin {
             }
         }
 
+        val iosMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.ios)
+            }
+        }
+
         val jvmMain by getting {
             dependencies {
                 implementation(libs.ktor.client.java)
@@ -79,21 +90,6 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:multik-jvm:0.1.1")
             }
         }
-
-
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                implementation(libs.ktor.client.ios)
-            }
-        }
-
     }
 }
 

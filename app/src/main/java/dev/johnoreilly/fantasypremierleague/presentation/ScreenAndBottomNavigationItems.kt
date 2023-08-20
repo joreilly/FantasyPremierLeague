@@ -7,11 +7,12 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Screen(val title: String) {
-    object PlayerListScreen : Screen("PlayerListScreen")
-    object PlayerDetailsScreen : Screen("PlayerDetailsScreen")
-    object FixtureListScreen : Screen("FixtureListScreen")
-    object FixtureDetailsScreen : Screen("FixtureDetailsScreen")
-    object LeagueStandingsListScreen : Screen("LeagueStandingsListScreen")
+    data object PlayerListScreen : Screen("PlayerListScreen")
+    data object PlayerDetailsScreen : Screen("PlayerDetailsScreen")
+    data object FixtureListScreen : Screen("FixtureListScreen")
+    data object FixtureDetailsScreen : Screen("FixtureDetailsScreen")
+    data object LeagueStandingsListScreen : Screen("LeagueStandingsListScreen")
+    data object SettingsScreen : Screen("SettingsScreen")
 }
 
 data class BottomNavigationitem(
