@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.0"
+kotlin = "1.9.10"
 ksp = "1.9.0-1.0.12"
 coroutines = "1.7.3"
 kotlinxSerialization = "1.5.1"
