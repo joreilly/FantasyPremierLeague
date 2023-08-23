@@ -2,7 +2,10 @@
 
 package dev.johnoreilly.fantasypremierleague.presentation.players
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -24,12 +28,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
-import dev.johnoreilly.fantasypremierleague.presentation.settings.SettingsView
 
 @Composable
 fun PlayerListView(
@@ -39,7 +43,8 @@ fun PlayerListView(
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-    val playerList = fantasyPremierLeagueViewModel.playerList.collectAsStateWithLifecycle()
+    val allPlayers = fantasyPremierLeagueViewModel.allPlayers.collectAsStateWithLifecycle()
+    val playerList = fantasyPremierLeagueViewModel.visiblePlayerList.collectAsStateWithLifecycle()
     val playerSearchQuery = fantasyPremierLeagueViewModel.searchQuery.collectAsStateWithLifecycle()
 
     Scaffold(
@@ -60,7 +65,7 @@ fun PlayerListView(
             )
         }) {
         Column(Modifier.padding(it)) {
-            val isDataLoading = playerList.value.isEmpty()
+            val isDataLoading = allPlayers.value.isEmpty()
             TextField(
                 singleLine = true,
                 value = playerSearchQuery.value,
@@ -85,18 +90,41 @@ fun PlayerListView(
                 ),
                 onValueChange = { searchQuery ->
                     fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(searchQuery)
+
+                },
+                trailingIcon = {
+                    if (playerSearchQuery.value.isNotEmpty()) {
+                        Icon(
+                            modifier = Modifier.clickable {
+                                fantasyPremierLeagueViewModel.onPlayerSearchQueryChange("")
+                            },
+                            imageVector = Icons.Default.Clear,
+                            contentDescription = "Clear search"
+                        )
+                    }
                 }
             )
-            LazyColumn {
-                if (isDataLoading) {
-                    items(
-                        items = placeHolderPlayerList, itemContent = { player ->
+            if (!isDataLoading && playerList.value.isEmpty()) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(text = "No players found")
+                }
+            } else {
+                LazyColumn {
+                    if (isDataLoading) {
+                        items(
+                            items = placeHolderPlayerList, itemContent = { player ->
+                                PlayerView(player, onPlayerSelected, isDataLoading)
+                            })
+                    } else {
+                        items(items = playerList.value, itemContent = { player ->
                             PlayerView(player, onPlayerSelected, isDataLoading)
                         })
-                } else {
-                    items(items = playerList.value, itemContent = { player ->
-                        PlayerView(player, onPlayerSelected, isDataLoading)
-                    })
+                    }
                 }
             }
         }
