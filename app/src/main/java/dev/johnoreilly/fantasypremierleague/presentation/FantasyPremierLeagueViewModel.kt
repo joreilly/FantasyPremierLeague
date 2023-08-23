@@ -12,7 +12,14 @@ import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 
@@ -21,9 +28,10 @@ class FantasyPremierLeagueViewModel(
 ) : ViewModel() {
 
     val searchQuery = MutableStateFlow("")
-    val playerList: StateFlow<List<Player>> =
+    val allPlayers = repository.playerList
+    val visiblePlayerList: StateFlow<List<Player>> =
         searchQuery.debounce(250).flatMapLatest { searchQuery ->
-            repository.playerList.mapLatest { playerList ->
+            allPlayers.mapLatest { playerList ->
                 playerList
                     .filter { it.name.contains(searchQuery, ignoreCase = true) }
                     .sortedByDescending { it.points }
@@ -46,7 +54,7 @@ class FantasyPremierLeagueViewModel(
     }
 
     fun getPlayer(playerId: Int): Player? {
-        return playerList.value.find { it.id == playerId }
+        return visiblePlayerList.value.find { it.id == playerId }
     }
 
     suspend fun getPlayerHistory(playerId: Int): List<PlayerPastHistory> {
