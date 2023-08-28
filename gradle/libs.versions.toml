@@ -20,7 +20,7 @@ androidxNavigationCompose = "2.7.1"
 androidxLifecycle = "2.6.1"
 
 composeMultiplatform = "1.5.0"
-accompanist = "0.30.1"
+accompanist = "0.32.0"
 coilCompose = "2.4.0"
 junit = "4.13.2"
 
