@@ -25,8 +25,9 @@ struct LeagueListView: View {
                 .frame(height: 200)
             }
             
-            if let leagueStandings = viewModel.leagueStandings {
-                List {
+            let leagueStandingsList = viewModel.leagueStandings
+            List {
+                ForEach(leagueStandingsList) { leagueStandings in
                     Section(header: Text(leagueStandings.league.name), content: {
                         ForEach(leagueStandings.standings.results) { leagueResult in
                             LeagueReesultView(leagueResult: leagueResult)
@@ -34,9 +35,10 @@ struct LeagueListView: View {
 
                     })
                 }
-                .refreshable {
-                    await viewModel.getLeageStandings()
-                }
+                
+            }
+            .refreshable {
+                await viewModel.getLeageStandings()
             }
         }
         .task {

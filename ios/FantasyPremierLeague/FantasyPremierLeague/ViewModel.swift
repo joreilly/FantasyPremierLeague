@@ -2,10 +2,11 @@ import Foundation
 import FantasyPremierLeagueKit
 import KMPNativeCoroutinesAsync
 import AsyncAlgorithms
-
+import CollectionConcurrencyKit
 
 
 extension PlayerPastHistory: Identifiable { }
+extension LeagueStandingsDto: Identifiable { }
 
 
 @MainActor
@@ -15,7 +16,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     @Published var gameWeekFixtures = [Int: [GameFixture]]()
     
     @Published var playerHistory = [PlayerPastHistory]()
-    @Published var leagueStandings: LeagueStandingsDto? = nil
+    @Published var leagueStandings = [LeagueStandingsDto]()
     @Published var eventStatusList: EventStatusListDto? = nil
     
     @Published public var leagues = [String]()
@@ -28,7 +29,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
         
         Task {
             // TEMP to set a particular league until settings screen added
-            repository.updateLeagues(leagues: ["2263"])
+            repository.updateLeagues(leagues: ["622004", "2263"])
             
             
             do {
@@ -81,13 +82,17 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     
     func getLeageStandings() async {
         do {
-            let leagueId = Int32(leagues[0])! // first league for now
-            let leagueStandings = try await asyncFunction(for: repository.getLeagueStandings(leagueId: leagueId))
-            self.leagueStandings = leagueStandings
-            print(self.leagueStandings!)
-            
+            self.leagueStandings = try await leagues.asyncCompactMap { leagueIdString in
+                if let leagueId = Int32(leagueIdString) {
+                    return try await asyncFunction(for: repository.getLeagueStandings(leagueId: Int32(leagueId)))
+                    //self.leagueStandings = leagueStandings
+                    //print(self.leagueStandings!)
+                } else {
+                    return nil
+                }
+            }
         } catch {
-            print("Failed with error: \(error)")
+            print("Failed with error: \(error)")            
         }
     }
 

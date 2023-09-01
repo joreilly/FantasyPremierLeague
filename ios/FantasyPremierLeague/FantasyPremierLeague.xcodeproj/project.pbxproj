@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		1A7222DD288C0F84004A34A8 /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1A7222DC288C0F84004A34A8 /* AsyncAlgorithms */; };
 		1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */; };
 		1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670525C5F8FF009FA782 /* ViewModel.swift */; };
+		1AD9A1232AA2692800B14FE3 /* CollectionConcurrencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AD9A1222AA2692800B14FE3 /* CollectionConcurrencyKit */; };
 		1AE9AE7E2A29470800F439E1 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE9AE7D2A29470800F439E1 /* KMPNativeCoroutinesAsync */; };
 		1AE9AE802A29470800F439E1 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE9AE7F2A29470800F439E1 /* KMPNativeCoroutinesCore */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 				1AE9AE7E2A29470800F439E1 /* KMPNativeCoroutinesAsync in Frameworks */,
 				1A7222DD288C0F84004A34A8 /* AsyncAlgorithms in Frameworks */,
 				1AE9AE802A29470800F439E1 /* KMPNativeCoroutinesCore in Frameworks */,
+				1AD9A1232AA2692800B14FE3 /* CollectionConcurrencyKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +140,7 @@
 				1A7222DC288C0F84004A34A8 /* AsyncAlgorithms */,
 				1AE9AE7D2A29470800F439E1 /* KMPNativeCoroutinesAsync */,
 				1AE9AE7F2A29470800F439E1 /* KMPNativeCoroutinesCore */,
+				1AD9A1222AA2692800B14FE3 /* CollectionConcurrencyKit */,
 			);
 			productName = FantasyPremierLeague;
 			productReference = 1A0F7ADE25C5C96F00EB34CF /* FantasyPremierLeague.app */;
@@ -169,6 +172,7 @@
 			packageReferences = (
 				1A7222DB288C0F84004A34A8 /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
 				1AE9AE7C2A29470800F439E1 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
+				1AD9A1212AA2692800B14FE3 /* XCRemoteSwiftPackageReference "collectionconcurrencykit" */,
 			);
 			productRefGroup = 1A0F7ADF25C5C96F00EB34CF /* Products */;
 			projectDirPath = "";
@@ -435,6 +439,14 @@
 				version = 0.0.3;
 			};
 		};
+		1AD9A1212AA2692800B14FE3 /* XCRemoteSwiftPackageReference "collectionconcurrencykit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnsundell/collectionconcurrencykit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		1AE9AE7C2A29470800F439E1 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
@@ -450,6 +462,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1A7222DB288C0F84004A34A8 /* XCRemoteSwiftPackageReference "swift-async-algorithms" */;
 			productName = AsyncAlgorithms;
+		};
+		1AD9A1222AA2692800B14FE3 /* CollectionConcurrencyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1AD9A1212AA2692800B14FE3 /* XCRemoteSwiftPackageReference "collectionconcurrencykit" */;
+			productName = CollectionConcurrencyKit;
 		};
 		1AE9AE7D2A29470800F439E1 /* KMPNativeCoroutinesAsync */ = {
 			isa = XCSwiftPackageProductDependency;
