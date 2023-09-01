@@ -43,7 +43,7 @@ class FantasyPremierLeagueViewModel(
     val leagues: StateFlow<List<String>> = repository.leagues
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    var leagueStandings = MutableStateFlow<Map<String, LeagueStandingsDto>>(emptyMap())
+    var leagueStandings = MutableStateFlow<List<LeagueStandingsDto>>(emptyList())
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
@@ -66,12 +66,12 @@ class FantasyPremierLeagueViewModel(
             if (leagues.value.isNotEmpty()) {
                 _isRefreshing.emit(true)
 
-                val leagueStandingsMap = mutableMapOf<String, LeagueStandingsDto>()
+                val leagueStandingsList = mutableListOf<LeagueStandingsDto>()
                 leagues.value.forEach { leagueId ->
-                    val result = repository.getLeagueStandings(leagueId.trim().toInt())
-                    leagueStandingsMap[leagueId] = result
+                    val leagueStandings = repository.getLeagueStandings(leagueId.trim().toInt())
+                    leagueStandingsList.add(leagueStandings)
                 }
-                leagueStandings.value = leagueStandingsMap
+                leagueStandings.value = leagueStandingsList
                 _isRefreshing.emit(false)
             }
         }

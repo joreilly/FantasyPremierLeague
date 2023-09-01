@@ -38,7 +38,7 @@ import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueVie
 
 @Composable
 fun LeagueListView(viewModel: FantasyPremierLeagueViewModel) {
-    val leagueStandings by viewModel.leagueStandings.collectAsStateWithLifecycle(emptyMap())
+    val leagueStandings by viewModel.leagueStandings.collectAsStateWithLifecycle(emptyList())
     val leagues by viewModel.leagues.collectAsStateWithLifecycle(emptyList())
 
     val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
@@ -57,7 +57,7 @@ fun LeagueListView(viewModel: FantasyPremierLeagueViewModel) {
             Box(Modifier.pullRefresh(pullRefreshState).padding(it)) {
 
                 LazyColumn(Modifier.fillMaxSize()) {
-                    leagueStandings.forEach { (_, league) ->
+                    leagueStandings.forEach { league ->
                         stickyHeader {
                             Header(text = league.league.name)
                         }
