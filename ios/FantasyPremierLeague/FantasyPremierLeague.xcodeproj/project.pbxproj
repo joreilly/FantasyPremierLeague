@@ -19,6 +19,7 @@
 		1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */; };
 		1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670525C5F8FF009FA782 /* ViewModel.swift */; };
 		1AD9A1232AA2692800B14FE3 /* CollectionConcurrencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AD9A1222AA2692800B14FE3 /* CollectionConcurrencyKit */; };
+		1AD9A1252AA355F500B14FE3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9A1242AA355F500B14FE3 /* SettingsView.swift */; };
 		1AE9AE7E2A29470800F439E1 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE9AE7D2A29470800F439E1 /* KMPNativeCoroutinesAsync */; };
 		1AE9AE802A29470800F439E1 /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE9AE7F2A29470800F439E1 /* KMPNativeCoroutinesCore */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureListView.swift; sourceTree = "<group>"; };
 		1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDetailView.swift; sourceTree = "<group>"; };
 		1ABD670525C5F8FF009FA782 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		1AD9A1242AA355F500B14FE3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				1A0F7AEA25C5C97000EB34CF /* Info.plist */,
 				1A0F7AE725C5C97000EB34CF /* Preview Content */,
 				1ABD670525C5F8FF009FA782 /* ViewModel.swift */,
+				1AD9A1242AA355F500B14FE3 /* SettingsView.swift */,
 			);
 			path = FantasyPremierLeague;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				1A45B23B25CB3BF100A8C613 /* PlayerDetailsView.swift in Sources */,
 				1A1D2B32289EA235000149CC /* LeagueListView.swift in Sources */,
 				1A45B23825CB3BBE00A8C613 /* PlayerListView.swift in Sources */,
+				1AD9A1252AA355F500B14FE3 /* SettingsView.swift in Sources */,
 				1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */,
 				1A0F7AE425C5C96F00EB34CF /* ContentView.swift in Sources */,
 				1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */,

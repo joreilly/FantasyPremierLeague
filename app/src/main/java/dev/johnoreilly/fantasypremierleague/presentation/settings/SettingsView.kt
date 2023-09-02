@@ -54,7 +54,6 @@ fun SettingsView(viewModel: FantasyPremierLeagueViewModel, popBackStack: () -> U
                 })
             Button(onClick = {
                 viewModel.updateLeagues(leagueIdsString.value.split(", "))
-                //viewModel.updateLeagues(listOf("2263", "622004"))
             }) {
                 Text("Set Leagues")
             }
