@@ -8,42 +8,48 @@ extension LeagueResultDto: Identifiable { }
 extension EventStatusDto: Identifiable { }
 
 
-
 struct LeagueListView: View {
     @ObservedObject var viewModel: FantasyPremierLeagueViewModel
     
     var body: some View {
-        VStack(alignment: .center) {
-            if let eventStatusList = viewModel.eventStatusList {
-                List {
-                    Section(header: Text("Status"), content: {
-                        ForEach(eventStatusList.status) { eventStatus in
-                            InfoRowView(label: eventStatus.date, value: eventStatus.bonus_added.description)
-                        }
-                    })
-                }
-                .frame(height: 200)
-            }
-            
-            let leagueStandingsList = viewModel.leagueStandings
-            List {
-                ForEach(leagueStandingsList) { leagueStandings in
-                    Section(header: Text(leagueStandings.league.name), content: {
-                        ForEach(leagueStandings.standings.results) { leagueResult in
-                            LeagueReesultView(leagueResult: leagueResult)
-                        }
-
-                    })
+        NavigationStack {
+            VStack(alignment: .center) {
+                if let eventStatusList = viewModel.eventStatusList {
+                    List {
+                        Section(header: Text("Status"), content: {
+                            ForEach(eventStatusList.status) { eventStatus in
+                                InfoRowView(label: eventStatus.date, value: eventStatus.bonus_added.description)
+                            }
+                        })
+                    }
+                    .frame(height: 200)
                 }
                 
+                let leagueStandingsList = viewModel.leagueStandings
+                List {
+                    ForEach(leagueStandingsList) { leagueStandings in
+                        Section(header: Text(leagueStandings.league.name), content: {
+                            ForEach(leagueStandings.standings.results) { leagueResult in
+                                LeagueReesultView(leagueResult: leagueResult)
+                            }
+                            
+                        })
+                    }
+                    
+                }
+                .refreshable {
+                    await viewModel.getLeageStandings()
+                }
             }
-            .refreshable {
-                await viewModel.getLeageStandings()
-            }
+            .navigationBarTitle(Text("Leagues"))
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing:
+                NavigationLink(destination: SettingsView(viewModel: viewModel))  {
+                    Image(systemName: "gearshape")
+                }
+            )
         }
-        .task {
-            await viewModel.getLeageStandings()
-        }
+
     }
 }
 

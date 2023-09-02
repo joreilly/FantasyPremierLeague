@@ -19,7 +19,8 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     @Published var leagueStandings = [LeagueStandingsDto]()
     @Published var eventStatusList: EventStatusListDto? = nil
     
-    @Published public var leagues = [String]()
+    @Published var leagues = [String]()
+    @Published var leagueListString = ""
     
     @Published var query: String = ""
     
@@ -28,14 +29,12 @@ class FantasyPremierLeagueViewModel: ObservableObject {
         self.repository = repository
         
         Task {
-            // TEMP to set a particular league until settings screen added
-            repository.updateLeagues(leagues: ["622004", "2263"])
-            
-            
             do {
                 let leagueStream = asyncSequence(for: repository.leagues)
                 for try await data in leagueStream {
-                    self.leagues = data
+                    leagues = data
+                    leagueListString = leagues.joined(separator: ",")
+                    await getLeageStandings()
                 }
                 
             } catch {
@@ -82,11 +81,10 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     
     func getLeageStandings() async {
         do {
+            print("getLeageStandings, leagues = \(leagues)")
             self.leagueStandings = try await leagues.asyncCompactMap { leagueIdString in
                 if let leagueId = Int32(leagueIdString) {
                     return try await asyncFunction(for: repository.getLeagueStandings(leagueId: Int32(leagueId)))
-                    //self.leagueStandings = leagueStandings
-                    //print(self.leagueStandings!)
                 } else {
                     return nil
                 }
@@ -121,6 +119,11 @@ class FantasyPremierLeagueViewModel: ObservableObject {
     }
 
     
+    func setLeagues() {
+        let leagues = leagueListString.components(separatedBy:", ")
+        print("setLeagues, leagues = \(leagues)")
+        repository.updateLeagues(leagues: leagues)
+    }
 }
 
 

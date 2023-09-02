@@ -18,6 +18,12 @@ struct PlayerListView: View {
             }
             .searchable(text: $viewModel.query)
             .navigationBarTitle(Text("Players"))
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing:
+                NavigationLink(destination: SettingsView(viewModel: viewModel))  {
+                    Image(systemName: "gearshape")
+                }
+            )
         }
         .task {
             await viewModel.getPlayers()
