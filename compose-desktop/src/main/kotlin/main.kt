@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,25 +36,24 @@ import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
-//import io.github.koalaplot.core.ChartLayout
-//import io.github.koalaplot.core.bar.BarChartEntry
-//import io.github.koalaplot.core.bar.DefaultBarChartEntry
-//import io.github.koalaplot.core.bar.DefaultVerticalBar
-//import io.github.koalaplot.core.bar.VerticalBarChart
-//import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
-//import io.github.koalaplot.core.util.VerticalRotation
-//import io.github.koalaplot.core.util.generateHueColorPalette
-//import io.github.koalaplot.core.util.rotateVertically
-//import io.github.koalaplot.core.util.toString
-//import io.github.koalaplot.core.xychart.CategoryAxisModel
-//import io.github.koalaplot.core.xychart.LinearAxisModel
-//import io.github.koalaplot.core.xychart.TickPosition
-//import io.github.koalaplot.core.xychart.XYChart
-//import io.github.koalaplot.core.xychart.rememberAxisStyle
+import io.github.koalaplot.core.ChartLayout
+import io.github.koalaplot.core.bar.BarChartEntry
+import io.github.koalaplot.core.bar.DefaultBarChartEntry
+import io.github.koalaplot.core.bar.DefaultVerticalBar
+import io.github.koalaplot.core.bar.VerticalBarChart
+import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
+import io.github.koalaplot.core.util.VerticalRotation
+import io.github.koalaplot.core.util.rotateVertically
+import io.github.koalaplot.core.util.toString
+import io.github.koalaplot.core.xychart.CategoryAxisModel
+import io.github.koalaplot.core.xychart.LinearAxisModel
+import io.github.koalaplot.core.xychart.TickPosition
+import io.github.koalaplot.core.xychart.XYChart
+import io.github.koalaplot.core.xychart.rememberAxisStyle
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import presentation.players.PlayerView
 import presentation.players.fetchImage
-import kotlin.math.ceil
 
 
 private val koin = initKoin(enableNetworkLogs = true).koin
@@ -67,7 +68,6 @@ val lightThemeColors = lightColors(
 
 fun main() = application {
     val windowState = rememberWindowState()
-
 
     Window(
         onCloseRequest = ::exitApplication,
@@ -84,7 +84,7 @@ fun main() = application {
 
 @Composable
 fun MainLayout() {
-    val selectedPlayer by remember { mutableStateOf("") }
+    val selectedPlayer = remember { mutableStateOf<Player?>(null) }
     val repository = koin.get<FantasyPremierLeagueRepository>()
 
     val searchQuery = MutableStateFlow("")
@@ -98,32 +98,30 @@ fun MainLayout() {
 
     BoxWithConstraints {
         if (maxWidth.value > 700) {
-            TwoColumnsLayout(playerList, repository)
+            TwoColumnsLayout(playerList, selectedPlayer, repository)
         } else {
-            PlayerListView(playerList, {})
+            PlayerListView(playerList, selectedPlayer.value) {}
         }
     }
 }
 
 
 @Composable
-fun TwoColumnsLayout(playerList: List<Player>, repository: FantasyPremierLeagueRepository) {
-
-    val currentPlayer: MutableState<Player?> = remember { mutableStateOf(null) }
+fun TwoColumnsLayout(playerList: List<Player>, selectedPlayer: MutableState<Player?>, repository: FantasyPremierLeagueRepository) {
 
     Row(Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxWidth(0.3f), contentAlignment = Alignment.Center) {
-            PlayerListView(playerList) {
-                currentPlayer.value = it
+            PlayerListView(playerList, selectedPlayer.value) {
+                selectedPlayer.value = it
             }
         }
-        PlayerDetailsView(currentPlayer.value, repository)
+        PlayerDetailsView(selectedPlayer.value, repository)
     }
 }
 
 
 @Composable
-fun PlayerListView(playerList: List<Player>, playerSelected: (player: Player) -> Unit) {
+fun PlayerListView(playerList: List<Player>, selectedPlayer: Player?, playerSelected: (player: Player) -> Unit) {
     Box(modifier = Modifier
             .padding(3.dp)
             .background(color = Color.White)
@@ -131,7 +129,7 @@ fun PlayerListView(playerList: List<Player>, playerSelected: (player: Player) ->
     ) {
         LazyColumn {
             items(items = playerList, itemContent = { player ->
-                PlayerView(player, playerSelected)
+                PlayerView(player, selectedPlayer, playerSelected)
             })
         }
     }
@@ -139,25 +137,22 @@ fun PlayerListView(playerList: List<Player>, playerSelected: (player: Player) ->
 
 
 
-
-
-//@OptIn(ExperimentalKoalaPlotApi::class)
 @Composable
 fun PlayerDetailsView(player: Player?, repository: FantasyPremierLeagueRepository) {
 
     player?.let {
-//        var tickPositionState by remember {
-//            mutableStateOf(
-//                TickPositionState(
-//                    TickPosition.Outside,
-//                    TickPosition.Outside
-//                )
-//            )
-//        }
+        val tickPositionState by remember {
+            mutableStateOf(
+                TickPositionState(
+                    TickPosition.Outside,
+                    TickPosition.Outside
+                )
+            )
+        }
 
         var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }
 
-        LaunchedEffect(true) {
+        LaunchedEffect(player) {
             playerHistory = repository.getPlayerHistoryData(player.id)
             println(playerHistory)
         }
@@ -196,12 +191,11 @@ fun PlayerDetailsView(player: Player?, repository: FantasyPremierLeagueRepositor
             PlayerStatView("Goals Scored", player.goalsScored.toString())
             PlayerStatView("Assists", player.assists.toString())
 
-//            Spacer(modifier = Modifier.size(8.dp))
-//
-//            if (playerHistory.isNotEmpty()) {
-//                BarSamplePlot(playerHistory, tickPositionState, "Points by Season")
-//            }
+            Spacer(modifier = Modifier.size(8.dp))
 
+            if (playerHistory.isNotEmpty()) {
+                BarPlot(playerHistory, tickPositionState, "Points by Season")
+            }
         }
     }
 
@@ -235,7 +229,6 @@ fun PlayerStatView(statName: String, statValue: String) {
     }
 }
 
-/*
 
 private data class TickPositionState(
     val verticalAxis: TickPosition,
@@ -290,14 +283,8 @@ fun AxisLabel(label: String, modifier: Modifier = Modifier) {
     )
 }
 
-private val YAxisRange = 0f..25f
-
 internal val padding = 8.dp
 internal val paddingMod = Modifier.padding(padding)
-
-internal val fibonacci = mutableStateListOf(1.0f, 1.0f, 2.0f, 3.0f, 5.0f, 8.0f, 13.0f, 21.0f)
-
-private val colors = generateHueColorPalette(fibonacci.size)
 private const val BarWidth = 0.8f
 
 @Composable
@@ -317,12 +304,14 @@ fun HoverSurface(modifier: Modifier = Modifier, content: @Composable () -> Unit)
 
 @OptIn(ExperimentalKoalaPlotApi::class)
 @Composable
-private fun BarSamplePlot(
+private fun BarPlot(
     playerHistory: List<PlayerPastHistory>,
     tickPositionState: TickPositionState,
     title: String
 ) {
-    val barChartEntries = remember() { barChartEntries(playerHistory) }
+    val barChartEntries = produceState<List<BarChartEntry<String, Float>>>(emptyList(), playerHistory) {
+        value = barChartEntries(playerHistory)
+    }
 
     ChartLayout(
         modifier = paddingMod,
@@ -357,19 +346,19 @@ private fun BarSamplePlot(
             },
             verticalMajorGridLineStyle = null
         ) {
+
             VerticalBarChart(
-                series = listOf(barChartEntries),
+                series = listOf(barChartEntries.value),
                 bar = { series, _, value ->
                     DefaultVerticalBar(
-                        brush = SolidColor(colors[series]),
+                        brush = SolidColor(Color.Red),
                         modifier = Modifier.fillMaxWidth(BarWidth),
                     ) {
                         HoverSurface { Text(value.yMax.toString()) }
                     }
                 }
-
             )
         }
     }
 }
-*/
+

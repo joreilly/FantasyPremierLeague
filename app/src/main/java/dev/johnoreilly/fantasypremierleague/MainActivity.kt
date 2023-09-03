@@ -1,6 +1,5 @@
 package dev.johnoreilly.fantasypremierleague
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,7 +14,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
@@ -30,11 +28,11 @@ import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueVie
 import dev.johnoreilly.fantasypremierleague.presentation.Screen
 import dev.johnoreilly.fantasypremierleague.presentation.bottomNavigationItems
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixturesListView
-import dev.johnoreilly.fantasypremierleague.presentation.fixtures.fixtureDetails.FixtureDetailsView
+import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixtureDetails.FixtureDetailsView
 import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
 import dev.johnoreilly.fantasypremierleague.presentation.leagues.LeagueListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
-import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
+import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerDetails.PlayerDetailsView
 import dev.johnoreilly.fantasypremierleague.presentation.settings.SettingsView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -63,10 +61,8 @@ class MainActivity : ComponentActivity() {
 fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
     val navController = rememberNavController()
 
-    val leagues by viewModel.leagues.collectAsState()
-
     Scaffold(
-        bottomBar = { FantasyPremierLeagueBottomNavigation(navController, leagues) },
+        bottomBar = { FantasyPremierLeagueBottomNavigation(navController) },
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
     ) {
         Column(Modifier.padding(it)) {
@@ -131,7 +127,7 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
 
 
 @Composable
-private fun FantasyPremierLeagueBottomNavigation(navController: NavHostController, leagues: List<String>) {
+private fun FantasyPremierLeagueBottomNavigation(navController: NavHostController) {
 
     NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -139,27 +135,21 @@ private fun FantasyPremierLeagueBottomNavigation(navController: NavHostControlle
 
         bottomNavigationItems.forEach { bottomNavigationitem ->
 
-            val skipItem =  bottomNavigationitem.route == Screen.LeagueStandingsListScreen.title
-                    && leagues.isEmpty()
-
-            if (!skipItem) {
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            bottomNavigationitem.icon,
-                            contentDescription = bottomNavigationitem.iconContentDescription
-                        )
-                    },
-                    selected = currentRoute == bottomNavigationitem.route,
-                    onClick = {
-                        navController.navigate(bottomNavigationitem.route) {
-                            popUpTo(navController.graph.id)
-                            launchSingleTop = true
-                        }
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        bottomNavigationitem.icon,
+                        contentDescription = bottomNavigationitem.iconContentDescription
+                    )
+                },
+                selected = currentRoute == bottomNavigationitem.route,
+                onClick = {
+                    navController.navigate(bottomNavigationitem.route) {
+                        popUpTo(navController.graph.id)
+                        launchSingleTop = true
                     }
-                )
-            }
+                }
+            )
         }
     }
-
 }

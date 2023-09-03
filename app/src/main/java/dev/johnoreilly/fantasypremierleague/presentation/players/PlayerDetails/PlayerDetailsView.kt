@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails
+package dev.johnoreilly.fantasypremierleague.presentation.players.PlayerDetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,7 +18,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -44,18 +43,11 @@ import com.patrykandpatryk.vico.compose.axis.vertical.startAxis
 import com.patrykandpatryk.vico.compose.chart.Chart
 import com.patrykandpatryk.vico.compose.chart.column.columnChart
 import com.patrykandpatryk.vico.compose.component.lineComponent
-import com.patrykandpatryk.vico.core.DefaultDimens
-import com.patrykandpatryk.vico.core.component.shape.Shapes
-import com.patrykandpatryk.vico.core.entry.ChartEntry
 import com.patrykandpatryk.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatryk.vico.core.entry.FloatEntry
-import com.patrykandpatryk.vico.core.entry.composed.ComposedChartEntryModelProducer
-import com.patrykandpatryk.vico.core.entry.entryModelOf
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
-import kotlin.random.Random
-import kotlin.random.Random.Default.nextFloat
 
 
 @Composable
