@@ -21,14 +21,17 @@ import java.net.URL
 import javax.imageio.ImageIO
 
 @Composable
-fun PlayerView(player: Player, playerSelected: (player: Player) -> Unit) {
+fun PlayerView(player: Player,
+               selectedPlayer: Player?,
+               playerSelected: (player: Player) -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth().clickable(onClick = { playerSelected(player) })
             .padding(8.dp), verticalAlignment = Alignment.CenterVertically
     ) {
 
         Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
-            Text(player.name, style = MaterialTheme.typography.h6)
+            Text(player.name,
+                style = if (player.name == selectedPlayer?.name) MaterialTheme.typography.h5 else MaterialTheme.typography.h6)
             Text(player.team, style = MaterialTheme.typography.subtitle1, color = Color.DarkGray)
         }
     }

@@ -26,7 +26,7 @@ import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueVie
 fun SettingsView(viewModel: FantasyPremierLeagueViewModel, popBackStack: () -> Unit) {
 
     val leagueIdsString = remember {
-        mutableStateOf<String>(viewModel.leagues.value.joinToString())
+        mutableStateOf(viewModel.leagues.value.joinToString())
     }
 
     Scaffold(

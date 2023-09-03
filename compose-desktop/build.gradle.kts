@@ -11,7 +11,7 @@ group = "me.joreilly"
 version = "1.0-SNAPSHOT"
 
 dependencies {
-    //implementation("io.github.koalaplot:koalaplot-core:0.1.0-SNAPSHOT")
+    implementation("io.github.koalaplot:koalaplot-core:0.4.0-dev1")
     implementation(compose.desktop.currentOs)
     implementation(project(":common"))
 }

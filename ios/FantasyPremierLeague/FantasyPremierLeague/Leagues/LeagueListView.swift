@@ -14,19 +14,23 @@ struct LeagueListView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
-                if let eventStatusList = viewModel.eventStatusList {
-                    List {
+                let leagueStandingsList = viewModel.leagueStandings
+                List {
+                    if let eventStatusList = viewModel.eventStatusList {
                         Section(header: Text("Status"), content: {
-                            ForEach(eventStatusList.status) { eventStatus in
-                                InfoRowView(label: eventStatus.date, value: eventStatus.bonus_added.description)
+                            ForEach(eventStatusList.status) { eventStatus in                                
+                                HStack {
+                                    Text(eventStatus.date)
+                                    Spacer()
+                                    if eventStatus.bonus_added {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
                             }
                         })
                     }
-                    .frame(height: 200)
-                }
-                
-                let leagueStandingsList = viewModel.leagueStandings
-                List {
+
+                    
                     ForEach(leagueStandingsList) { leagueStandings in
                         Section(header: Text(leagueStandings.league.name), content: {
                             ForEach(leagueStandings.standings.results) { leagueResult in

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 
-package dev.johnoreilly.fantasypremierleague.presentation.fixtures.fixtureDetails
+package dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixtureDetails
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
