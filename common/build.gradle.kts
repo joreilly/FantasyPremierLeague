@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     id("kotlinx-serialization")
     id("com.android.library")
+    id("org.jetbrains.compose") version libs.versions.composeMultiplatform
     id("io.realm.kotlin")
     id("com.google.devtools.ksp")
     id("com.rickclephas.kmp.nativecoroutines")
@@ -40,6 +41,7 @@ kotlin {
 
     sourceSets {
 
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines)
@@ -53,6 +55,15 @@ kotlin {
                 implementation(libs.realm)
                 api(libs.bundles.multiplatformSettings)
                 api(libs.kermit)
+
+                implementation(compose.ui)
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.components.resources)
+
+                implementation("io.github.koalaplot:koalaplot-core:0.4.0-dev1")
+                implementation(libs.image.loader)
             }
         }
 
@@ -89,4 +100,9 @@ kotlin {
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
+
+compose {
+    kotlinCompilerPlugin.set(libs.versions.jbComposeCompiler.get())
+    //kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=1.9.10")
 }
