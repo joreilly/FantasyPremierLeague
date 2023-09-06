@@ -3,17 +3,17 @@ kotlin = "1.9.10"
 ksp = "1.9.10-1.0.13"
 coroutines = "1.7.3"
 kotlinxSerialization = "1.6.0"
-kotlinxDateTime = "0.4.0"
+kotlinxDateTime = "0.4.1"
 androidGradlePlugin = "8.1.1"
 koin = "3.4.3"
 koinCompose = "3.4.6"
 ktor = "2.3.4"
-slf4j = "2.0.7"
-realm = "1.10.2"
+slf4j = "2.0.9"
+realm = "1.11.0"
 kmpNativeCoroutines = "1.0.0-ALPHA-18"
 
 androidxActivity = "1.7.2"
-androidxComposeCompiler = "1.5.3-dev-k1.9.10-593b4c95fce"
+androidxComposeCompiler = "1.5.3"
 jbComposeCompiler = "1.5.2-beta01"
 androidxComposeBom = "2023.08.00"
 androidxNavigationCompose = "2.7.1"
@@ -22,6 +22,8 @@ androidxLifecycle = "2.6.1"
 composeMultiplatform = "1.5.0"
 accompanist = "0.32.0"
 coilCompose = "2.4.0"
+image-loader = "1.6.4"
+
 junit = "4.13.2"
 
 multiplatformSettings = "1.0.0"
@@ -58,6 +60,7 @@ androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-co
 
 coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
 accompanist-placeholder = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
+image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image-loader" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }

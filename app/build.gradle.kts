@@ -75,16 +75,12 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
 
-    //implementation("io.github.koalaplot:koalaplot-core:0.1.0-SNAPSHOT")
-    implementation("com.patrykandpatryk.vico:compose:1.11.2")
-
     testImplementation(libs.junit)
     testImplementation(libs.koin.test)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test)
     androidTestImplementation(libs.androidx.compose.ui.test.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-
 
 
     testImplementation("androidx.test:core:1.5.0")

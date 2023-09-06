@@ -2,7 +2,40 @@ import SwiftUI
 import Charts
 import FantasyPremierLeagueKit
 
+
 struct PlayerDetailsView: View {
+    @ObservedObject var viewModel: FantasyPremierLeagueViewModel
+    var player: Player
+    
+    @State var playerHistory = [PlayerPastHistory]()
+    
+    var body: some View {
+        PlayerDetailsViewShared(player: player, playerHistory: $viewModel.playerHistory)
+        .task {
+            await viewModel.getPlayerStats(playerId: player.id)
+        }
+        .navigationTitle(player.name)
+    }
+}
+
+
+// This version is using Compose for iOS....
+struct PlayerDetailsViewShared: UIViewControllerRepresentable {
+    var player: Player
+    @Binding var playerHistory: [PlayerPastHistory]
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        return SharedViewControllers().playerDetailsViewController(player: player)
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        SharedViewControllers().updatePlayerHistory(playerHistory: playerHistory)
+    }
+}
+
+
+
+struct PlayerDetailsViewSwiftUI: View {
     @ObservedObject var viewModel: FantasyPremierLeagueViewModel
     var player: Player
     

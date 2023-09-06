@@ -24,6 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.Screen
 import dev.johnoreilly.fantasypremierleague.presentation.bottomNavigationItems
@@ -32,9 +33,10 @@ import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixtureDetails
 import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
 import dev.johnoreilly.fantasypremierleague.presentation.leagues.LeagueListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
-import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerDetails.PlayerDetailsView
+import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
 import dev.johnoreilly.fantasypremierleague.presentation.settings.SettingsView
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.compose.koinInject
 
 class MainActivity : ComponentActivity() {
     private val fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel by viewModel()
@@ -60,6 +62,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
     val navController = rememberNavController()
+
+    val repository: FantasyPremierLeagueRepository = koinInject()
 
     Scaffold(
         bottomBar = { FantasyPremierLeagueBottomNavigation(navController) },
@@ -87,7 +91,7 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
                         val player = viewModel.getPlayer(playerId)
                         player?.let {
                             PlayerDetailsView(
-                                viewModel,
+                                repository,
                                 player,
                                 popBackStack = { navController.popBackStack() })
                         }
@@ -133,18 +137,18 @@ private fun FantasyPremierLeagueBottomNavigation(navController: NavHostControlle
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
-        bottomNavigationItems.forEach { bottomNavigationitem ->
+        bottomNavigationItems.forEach { bottomNavigationItem ->
 
             NavigationBarItem(
                 icon = {
                     Icon(
-                        bottomNavigationitem.icon,
-                        contentDescription = bottomNavigationitem.iconContentDescription
+                        bottomNavigationItem.icon,
+                        contentDescription = bottomNavigationItem.iconContentDescription
                     )
                 },
-                selected = currentRoute == bottomNavigationitem.route,
+                selected = currentRoute == bottomNavigationItem.route,
                 onClick = {
-                    navController.navigate(bottomNavigationitem.route) {
+                    navController.navigate(bottomNavigationItem.route) {
                         popUpTo(navController.graph.id)
                         launchSingleTop = true
                     }
