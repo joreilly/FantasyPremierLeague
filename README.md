@@ -29,6 +29,7 @@ Note that we're not handling realm db migrations yet so, for now, you may need t
 <img src="https://user-images.githubusercontent.com/6302/233188752-f18cb96d-cf2b-45a1-af7d-fdad0db06dfb.png" width=300/>|
 
 ### Desktop
-<img width="912" alt="Screenshot 2023-04-19 at 21 07 13" src="https://user-images.githubusercontent.com/6302/233188214-d003a631-5ccb-41a5-b0f4-a3b35ff709be.png">
+
+<img width="912" alt="Screenshot 2023-09-14 at 17 07 32" src="https://github.com/joreilly/FantasyPremierLeague/assets/6302/86582f04-60e7-480c-97ae-908c31dfd321">
 
 
