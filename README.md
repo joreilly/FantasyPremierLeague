@@ -11,6 +11,7 @@
 Related posts:
 * [Using Realm persistence library in a Kotlin Multiplatform project](https://johnoreilly.dev/posts/realm-kotlinmultiplatform/)
 * [Using new Swift Async Algorithms package to close the gap on Combine](https://johnoreilly.dev/posts/swift-async-algorithms-combine/)
+* [Displaying Charts on iOS, Android, and Desktop using Compose Multiplatform](https://johnoreilly.dev/posts/compose-multiplatform-chart/)
 
 
 ### Building
