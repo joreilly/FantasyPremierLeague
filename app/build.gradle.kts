@@ -47,6 +47,11 @@ android {
         }
     }
 
+    packaging {
+        resources {
+            excludes += "/META-INF/versions/**"
+        }
+    }
     namespace = "dev.johnoreilly.fantasypremierleague"
 }
 
