@@ -27,7 +27,7 @@ image-loader = "1.6.4"
 junit = "4.13.2"
 
 multiplatformSettings = "1.0.0"
-kermit = "1.2.2"
+kermit = "2.0.2"
 
 minSdk = "24"
 targetSdk = "34"
