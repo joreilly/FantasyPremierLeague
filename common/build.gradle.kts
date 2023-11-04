@@ -8,6 +8,9 @@ plugins {
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
+kotlin {
+    jvmToolchain(17)
+}
 
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
