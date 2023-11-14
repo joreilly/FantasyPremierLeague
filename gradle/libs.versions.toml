@@ -22,7 +22,7 @@ androidxLifecycle = "2.6.2"
 composeMultiplatform = "1.5.10"
 accompanist = "0.32.0"
 coilCompose = "2.5.0"
-image-loader = "1.6.8"
+image-loader = "1.7.1"
 
 junit = "4.13.2"
 
