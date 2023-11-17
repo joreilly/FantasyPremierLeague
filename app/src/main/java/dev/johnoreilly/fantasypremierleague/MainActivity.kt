@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -25,9 +27,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.ListDetailPaneScaffoldRole
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.navigation.suite.ExperimentalMaterial3AdaptiveNavigationSuiteApi
+import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteScaffold
+import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteScaffoldDefaults
 import androidx.compose.material3.adaptive.rememberListDetailPaneScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -67,27 +74,96 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             FantasyPremierLeagueTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colorScheme.background
+//                ) {
                     MainLayout(fantasyPremierLeagueViewModel)
-                }
+//                }
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+@OptIn(ExperimentalMaterial3AdaptiveApi::class,
+    ExperimentalMaterial3AdaptiveNavigationSuiteApi::class
+)
 @Composable
 fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
     val navController = rememberNavController()
 
     val repository: FantasyPremierLeagueRepository = koinInject()
 
-    val state = rememberListDetailPaneScaffoldState()
+
+
+    var selectedItem by rememberSaveable { mutableIntStateOf(0) }
+    val navItems = listOf("Songs", "Artists", "Playlists")
+    val navSuiteType =
+        NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfo())
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    NavigationSuiteScaffold(
+        navigationSuiteItems = {
+            bottomNavigationItems.forEach { bottomNavigationItem ->
+
+                item(
+                    icon = {
+                        Icon(
+                            bottomNavigationItem.icon,
+                            contentDescription = bottomNavigationItem.iconContentDescription
+                        )
+                    },
+                    selected = currentRoute == bottomNavigationItem.route,
+                    onClick = {
+                        navController.navigate(bottomNavigationItem.route) {
+                            popUpTo(navController.graph.id)
+                            launchSingleTop = true
+                        }
+                    }
+                )
+            }
+        }
+    ) {
+        // Screen content.
+        val state = rememberListDetailPaneScaffoldState()
+
+        var selectedPlayer: Int? by rememberSaveable { mutableStateOf(null) }
+
+        ListDetailPaneScaffold(
+            scaffoldState = state,
+            listPane = {
+
+                PlayerListView(
+                    fantasyPremierLeagueViewModel = viewModel,
+                    onPlayerSelected = { playerId ->
+                        selectedPlayer = playerId
+                        state.navigateTo(ListDetailPaneScaffoldRole.Detail)
+                    },
+                    onShowSettings = {
+                        navController.navigate(Screen.SettingsScreen.title)
+                    }
+                )
+            },
+            detailPane = {
+                // Show the details pane content if selected item is available
+                selectedPlayer?.let { selectedPlayer ->
+                    val player = viewModel.getPlayer(selectedPlayer)
+                    player?.let {
+                        PlayerDetailsView(
+                            repository,
+                            player,
+                            popBackStack = { navController.popBackStack() })
+                    }
+                }
+            },
+        )
+    }
 
 /*
+    val state = rememberListDetailPaneScaffoldState()
+
     var selectedPlayer: Int? by rememberSaveable { mutableStateOf(null) }
 
     ListDetailPaneScaffold(
@@ -104,17 +180,6 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
                     navController.navigate(Screen.SettingsScreen.title)
                 }
             )
-
-
-
-//            MyList(
-//                onItemClick = { id ->
-//                    // Set current item
-//                    selectedItem = id
-//                    // Display the details pane
-//                    state.navigateTo(ListDetailPaneScaffoldRole.Detail)
-//                }
-//            )
         },
         detailPane = {
             // Show the details pane content if selected item is available
@@ -129,33 +194,7 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
             }
         },
     )
-
- */
-
-
-    // Currently selected item
-    var selectedItem: MyItem? by rememberSaveable { mutableStateOf(null) }
-
-    ListDetailPaneScaffold(
-        scaffoldState = state,
-        listPane = {
-            MyList(
-                onItemClick = { id ->
-                    // Set current item
-                    selectedItem = id
-                    // Display the details pane
-                    state.navigateTo(ListDetailPaneScaffoldRole.Detail)
-                },
-            )
-        },
-        detailPane = {
-            // Show the details pane content if selected item is available
-            selectedItem?.let { item ->
-                MyDetails(item)
-            }
-        },
-    )
-
+*/
 
 /*
     Scaffold(
@@ -223,74 +262,6 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
 
  */
 }
-
-@Composable
-fun MyList(
-    onItemClick: (MyItem) -> Unit,
-) {
-    Card {
-        LazyColumn {
-            shortStrings.forEachIndexed { id, string ->
-                item {
-                    ListItem(
-                        modifier = Modifier
-                            .background(Color.Magenta)
-                            .clickable {
-                                onItemClick(MyItem(id))
-                            },
-                        headlineContent = {
-                            Text(
-                                text = string,
-                            )
-                        },
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun MyDetails(item: MyItem) {
-    val text = shortStrings[item.id]
-    Card {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "Details page for $text",
-                fontSize = 24.sp,
-            )
-            Spacer(Modifier.size(16.dp))
-            Text(
-                text = "TODO: Add great details here"
-            )
-        }
-    }
-}
-
-class MyItem(val id: Int)
-
-val shortStrings = listOf(
-    "Android",
-    "Petit four",
-    "Cupcake",
-    "Donut",
-    "Eclair",
-    "Froyo",
-    "Gingerbread",
-    "Honeycomb",
-    "Ice cream sandwich",
-    "Jelly bean",
-    "Kitkat",
-    "Lollipop",
-    "Marshmallow",
-    "Nougat",
-    "Oreo",
-    "Pie",
-)
 
 @Composable
 private fun FantasyPremierLeagueBottomNavigation(navController: NavHostController) {
