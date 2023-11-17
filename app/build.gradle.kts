@@ -69,6 +69,8 @@ dependencies {
 
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.windowSizeClass)
+    implementation("androidx.compose.material3:material3-adaptive:1.0.0-alpha01")
+    implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.0.0-alpha01")
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.compose)
