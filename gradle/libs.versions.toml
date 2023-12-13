@@ -16,7 +16,7 @@ androidxActivity = "1.8.1"
 androidxComposeCompiler = "1.5.5-dev-k1.9.21-163bb051fe5"
 jbComposeCompiler = "1.5.4"
 androidxComposeBom = "2023.10.01"
-androidxNavigationCompose = "2.7.5"
+androidxNavigationCompose = "2.7.6"
 androidxLifecycle = "2.6.2"
 
 composeMultiplatform = "1.5.10"
