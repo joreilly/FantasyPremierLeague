@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_1_9
+
 plugins {
     kotlin("multiplatform")
     id("kotlinx-serialization")
@@ -36,6 +38,10 @@ kotlin {
     androidTarget()
     jvm()
 
+
+    compilerOptions {
+        languageVersion.set(KOTLIN_1_9)
+    }
 
     sourceSets {
 
