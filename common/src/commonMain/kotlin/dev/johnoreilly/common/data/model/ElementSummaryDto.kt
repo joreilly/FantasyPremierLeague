@@ -4,5 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ElementSummaryDto(
+    val history: List<HistoryDto>,
     val history_past: List<HistoryPastDto>
 )
