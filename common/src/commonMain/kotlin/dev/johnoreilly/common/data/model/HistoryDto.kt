@@ -6,5 +6,8 @@ import kotlinx.serialization.Serializable
 data class HistoryDto(
     val element: Int,
     val fixture: Int,
-    val total_points: Int
+    val total_points: Int,
+    val round: Int,
+    val goals_scored: Int,
+    val assists: Int
 )
