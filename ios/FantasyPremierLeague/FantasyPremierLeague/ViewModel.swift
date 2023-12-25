@@ -1,6 +1,5 @@
 import Foundation
 import FantasyPremierLeagueKit
-import KMPNativeCoroutinesAsync
 import AsyncAlgorithms
 import CollectionConcurrencyKit
 
@@ -29,47 +28,37 @@ class FantasyPremierLeagueViewModel: ObservableObject {
         self.repository = repository
         
         Task {
-            do {
-                let leagueStream = asyncSequence(for: repository.leagues)
-                for try await data in leagueStream {
-                    leagues = data
-                    leagueListString = leagues.joined(separator: ",")
-                    await getLeageStandings()
-                }
-                
-            } catch {
-                print("Failed with error: \(error)")
+            for await data in repository.leagues {
+                leagues = data
+                leagueListString = leagues.joined(separator: ",")
+                await getLeageStandings()
             }
         }
         
         Task {
-            self.eventStatusList = try await asyncFunction(for: repository.getEventStatus())
+            self.eventStatusList = try await repository.getEventStatus()
         }
     }
 
     
     func getPlayers() async {
-        do {
-            let playerStream = asyncSequence(for: repository.playerList)
-                .map { $0.sorted { $0.points > $1.points } }
-            
-            let queryStream = $query
-                .debounce(for: 0.5, scheduler: DispatchQueue.main)
-                .values
-            
-            for try await (players, query) in combineLatest(playerStream, queryStream) {
-                self.playerList = players
-                    .filter { query.isEmpty || $0.name.localizedCaseInsensitiveContains(query) }
-            }
-        } catch {
-            print("Failed with error: \(error)")
+        let playerStream = repository.playerList
+            .map { $0.sorted { $0.points > $1.points } }
+        
+        let queryStream = $query
+            .debounce(for: 0.5, scheduler: DispatchQueue.main)
+            .values
+        
+        for await (players, query) in combineLatest(playerStream, queryStream) {
+            self.playerList = players
+                .filter { query.isEmpty || $0.name.localizedCaseInsensitiveContains(query) }
         }
     }
     
     
     func getPlayerStats(playerId: Int32) async {
         do {
-            let playerHistory = try await asyncFunction(for: repository.getPlayerHistoryData(playerId: playerId))
+            let playerHistory = try await repository.getPlayerHistoryData(playerId: playerId)
             self.playerHistory = playerHistory
             print(self.playerHistory)
             
@@ -84,7 +73,7 @@ class FantasyPremierLeagueViewModel: ObservableObject {
             print("getLeageStandings, leagues = \(leagues)")
             self.leagueStandings = try await leagues.asyncCompactMap { leagueIdString in
                 if let leagueId = Int32(leagueIdString) {
-                    return try await asyncFunction(for: repository.getLeagueStandings(leagueId: Int32(leagueId)))
+                    return try await repository.getLeagueStandings(leagueId: Int32(leagueId))
                 } else {
                     return nil
                 }
@@ -96,25 +85,15 @@ class FantasyPremierLeagueViewModel: ObservableObject {
 
     
     func getFixtures() async {
-        do {
-            let stream = asyncSequence(for: repository.fixtureList)
-            for try await data in stream {
-                self.fixtureList = data
-            }
-        } catch {
-            print("Failed with error: \(error)")
+        for await data in repository.fixtureList {
+            self.fixtureList = data
         }
     }
 
     
     func getGameWeekFixtures() async {
-        do {
-            let stream = asyncSequence(for: repository.gameweekToFixtures)
-            for try await data in stream {
-                self.gameWeekFixtures = data as! [Int : [GameFixture]]
-            }
-        } catch {
-            print("Failed with error: \(error)")
+        for await data in repository.gameweekToFixtures {
+            self.gameWeekFixtures = data as! [Int : [GameFixture]]
         }
     }
 

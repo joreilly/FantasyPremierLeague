@@ -7,7 +7,7 @@ plugins {
     id("org.jetbrains.compose") version libs.versions.composeMultiplatform
     id("io.realm.kotlin")
     id("com.google.devtools.ksp")
-    id("com.rickclephas.kmp.nativecoroutines")
+    id("co.touchlab.skie")
 }
 
 kotlin {
@@ -65,7 +65,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
 
-            implementation("io.github.koalaplot:koalaplot-core:0.4.0")
+            implementation("io.github.koalaplot:koalaplot-core:0.5.1")
             implementation(libs.image.loader)
         }
 

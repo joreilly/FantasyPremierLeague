@@ -1,7 +1,5 @@
 package dev.johnoreilly.common.data.repository
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutineScope
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import dev.johnoreilly.common.AppSettings
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.model.EventStatusListDto
@@ -21,7 +19,6 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -70,31 +67,23 @@ class FantasyPremierLeagueRepository : KoinComponent {
     private val realm: Realm by inject()
     private val appSettings: AppSettings by inject()
 
-    @NativeCoroutineScope
     val coroutineScope = CoroutineScope(Dispatchers.Default)
 
     private val _teamList = MutableStateFlow<List<Team>>(emptyList())
-    @NativeCoroutines
     val teamList = _teamList.asStateFlow()
 
     private val _playerList = MutableStateFlow<List<Player>>(emptyList())
-    @NativeCoroutines
     val playerList = _playerList.asStateFlow()
 
     private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
-    @NativeCoroutines
     val fixtureList = _fixtureList.asStateFlow()
 
     private val _gameweekToFixtureMap = MutableStateFlow<Map<Int, List<GameFixture>>>(emptyMap())
-    @NativeCoroutines
-    val gameweekToFixtures: StateFlow<Map<Int, List<GameFixture>>> =
-        _gameweekToFixtureMap.asStateFlow()
+    val gameweekToFixtures = _gameweekToFixtureMap.asStateFlow()
 
-    @NativeCoroutines
     val leagues = appSettings.leagues
 
     private var _currentGameweek: MutableStateFlow<Int> = MutableStateFlow(1)
-    @NativeCoroutines
     val currentGameweek = _currentGameweek.asStateFlow()
 
     init {
@@ -239,19 +228,16 @@ class FantasyPremierLeagueRepository : KoinComponent {
         }
     }
 
-    @NativeCoroutines
     suspend fun getPlayerHistoryData(playerId: Int): List<PlayerPastHistory> {
         return fantasyPremierLeagueApi.fetchPlayerData(playerId).history_past.map {
             PlayerPastHistory(it.season_name, it.total_points)
         }
     }
 
-    @NativeCoroutines
     suspend fun getLeagueStandings(leagueId: Int): LeagueStandingsDto {
         return fantasyPremierLeagueApi.fetchLeagueStandings(leagueId)
     }
 
-    @NativeCoroutines
     suspend fun getEventStatus(): EventStatusListDto {
         return fantasyPremierLeagueApi.fetchEventStatus()
     }
