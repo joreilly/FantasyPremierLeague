@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.9.21"
 ksp = "1.9.21-1.0.16"
-coroutines = "1.7.3"
+coroutines = "1.8.0-RC2"
 kotlinxSerialization = "1.6.2"
 kotlinxDateTime = "0.5.0"
 androidGradlePlugin = "8.2.0"
@@ -10,7 +10,7 @@ koinCompose = "3.5.3"
 ktor = "2.3.7"
 slf4j = "2.0.9"
 realm = "1.13.0"
-kmpNativeCoroutines = "1.0.0-ALPHA-22"
+skie = "0.6.1"
 
 androidxActivity = "1.8.2"
 androidxComposeCompiler = "1.5.5-dev-k1.9.21-163bb051fe5"
@@ -19,7 +19,7 @@ androidxComposeBom = "2023.10.01"
 androidxNavigationCompose = "2.7.6"
 androidxLifecycle = "2.6.2"
 
-composeMultiplatform = "1.5.10"
+composeMultiplatform = "1.5.11"
 accompanist = "0.32.0"
 coilCompose = "2.5.0"
 image-loader = "1.7.1"
@@ -96,5 +96,5 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kmpNativeCoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
 realm-kotlin = { id = "io.realm.kotlin", version.ref = "realm"}
+skie = { id = "co.touchlab.skie", version.ref = "skie"}
