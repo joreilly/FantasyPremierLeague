@@ -65,7 +65,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
 
-            implementation("io.github.koalaplot:koalaplot-core:0.5.1")
+            implementation("io.github.koalaplot:koalaplot-core:0.5.2")
             implementation(libs.image.loader)
         }
 
