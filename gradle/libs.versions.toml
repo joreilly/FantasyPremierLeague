@@ -9,7 +9,7 @@ koalaplot = "0.5.1"
 koin = "3.5.3"
 koinCompose = "3.5.3"
 ktor = "2.3.8"
-slf4j = "2.0.9"
+slf4j = "2.0.12"
 realm = "1.13.0"
 skie = "0.6.1"
 
