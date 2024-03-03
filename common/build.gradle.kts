@@ -65,7 +65,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
 
-            implementation("io.github.koalaplot:koalaplot-core:0.5.1")
+            implementation(libs.koalaplot.core)
             implementation(libs.image.loader)
         }
 
@@ -91,9 +91,4 @@ kotlin {
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
-}
-
-compose {
-    kotlinCompilerPlugin.set(libs.versions.jbComposeCompiler.get())
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=1.9.20")
 }

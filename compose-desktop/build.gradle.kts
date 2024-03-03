@@ -18,8 +18,3 @@ dependencies {
 application {
     mainClass.set("MainKt")
 }
-
-compose {
-    kotlinCompilerPlugin.set(libs.versions.jbComposeCompiler)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=1.9.21")
-}
