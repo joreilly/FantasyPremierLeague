@@ -1,12 +1,6 @@
 pluginManagement {
     repositories {
-        google {
-            mavenContent {
-                includeGroupByRegex(".*google.*")
-                includeGroupByRegex(".*android.*")
-            }
-        }
-
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -14,13 +8,7 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
-        google {
-            mavenContent {
-                includeGroupByRegex(".*google.*")
-                includeGroupByRegex(".*android.*")
-            }
-        }
-
+        google()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
