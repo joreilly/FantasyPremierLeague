@@ -21,7 +21,7 @@ androidxNavigationCompose = "2.7.7"
 androidxLifecycle = "2.7.0"
 
 composeMultiplatform = "1.6.1"
-accompanist = "0.32.0"
+accompanist = "0.34.0"
 coilCompose = "2.6.0"
 image-loader = "1.7.8"
 
