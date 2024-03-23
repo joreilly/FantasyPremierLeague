@@ -7,6 +7,7 @@ import dev.johnoreilly.common.data.repository.FixtureDb
 import dev.johnoreilly.common.data.repository.PlayerDb
 import dev.johnoreilly.common.data.repository.TeamDb
 import dev.johnoreilly.common.platformModule
+import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -36,6 +37,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single<Configuration> { RealmConfiguration.create(schema = setOf(PlayerDb::class, TeamDb::class, FixtureDb::class)) }
     single { Realm.open(get()) }
 
+    single { PlayerDetailsViewModel() }
     single { FantasyPremierLeagueRepository() }
     single { FantasyPremierLeagueApi(get()) }
 

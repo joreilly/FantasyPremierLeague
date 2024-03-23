@@ -78,8 +78,8 @@ class FantasyPremierLeagueRepository : KoinComponent {
     private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
     val fixtureList = _fixtureList.asStateFlow()
 
-    private val _gameweekToFixtureMap = MutableStateFlow<Map<Int, List<GameFixture>>>(emptyMap())
-    val gameweekToFixtures = _gameweekToFixtureMap.asStateFlow()
+    private val _gameWeekFixtures = MutableStateFlow<Map<Int, List<GameFixture>>>(emptyMap())
+    val gameWeekFixtures = _gameWeekFixtures.asStateFlow()
 
     val leagues = appSettings.leagues
 
@@ -152,7 +152,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
                             }
                         }
                         //Build gameweek to fixture map
-                        _gameweekToFixtureMap.value = _fixtureList.value
+                        _gameWeekFixtures.value = _fixtureList.value
                             .groupBy { it.event }
                 }
             }
@@ -243,7 +243,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
     }
 
     fun updateLeagues(leagues: List<String>) {
-        appSettings.updatesLeagesSetting(leagues)
+        appSettings.updatesLeaguesSetting(leagues)
     }
 
 }

@@ -22,12 +22,10 @@ import androidx.compose.ui.window.rememberWindowState
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
 import dev.johnoreilly.common.domain.entities.Player
-import dev.johnoreilly.common.domain.entities.PlayerPastHistory
 import dev.johnoreilly.common.ui.PlayerDetailsViewShared
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import presentation.players.PlayerView
 
 
@@ -74,7 +72,7 @@ fun MainLayout() {
 
     BoxWithConstraints {
         if (maxWidth.value > 700) {
-            TwoColumnsLayout(playerList, selectedPlayer, repository)
+            TwoColumnsLayout(playerList, selectedPlayer)
         } else {
             PlayerListView(playerList, selectedPlayer.value) {}
         }
@@ -83,29 +81,31 @@ fun MainLayout() {
 
 
 @Composable
-fun TwoColumnsLayout(playerList: List<Player>, selectedPlayer: MutableState<Player?>, repository: FantasyPremierLeagueRepository) {
-    val scope = rememberCoroutineScope()
-    var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }
-
+fun TwoColumnsLayout(
+    playerList: List<Player>,
+    selectedPlayer: MutableState<Player?>
+) {
     Row(Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxWidth(0.3f), contentAlignment = Alignment.Center) {
             PlayerListView(playerList, selectedPlayer.value) {
-                scope.launch {
-                    selectedPlayer.value = it
-                    playerHistory = repository.getPlayerHistoryData(it.id)
-                }
+                selectedPlayer.value = it
             }
         }
         selectedPlayer.value?.let { player ->
-            PlayerDetailsViewShared(player, playerHistory)
+            PlayerDetailsViewShared(player)
         }
     }
 }
 
 
 @Composable
-fun PlayerListView(playerList: List<Player>, selectedPlayer: Player?, playerSelected: (player: Player) -> Unit) {
-    Box(modifier = Modifier
+fun PlayerListView(
+    playerList: List<Player>,
+    selectedPlayer: Player?,
+    playerSelected: (player: Player) -> Unit
+) {
+    Box(
+        modifier = Modifier
             .padding(3.dp)
             .background(color = Color.White)
             .clip(shape = RoundedCornerShape(3.dp))

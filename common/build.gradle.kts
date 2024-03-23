@@ -44,6 +44,9 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+        }
 
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         commonMain.dependencies {
@@ -52,10 +55,13 @@ kotlin {
             api(libs.kotlinx.datetime)
 
             api(libs.koin.core)
+            implementation(libs.koin.compose)
             implementation(libs.koin.test)
 
             implementation(libs.bundles.ktor.common)
             implementation(libs.realm)
+            implementation(libs.androidx.lifecycle.viewmodel)
+
             api(libs.bundles.multiplatformSettings)
             api(libs.kermit)
 

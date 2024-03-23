@@ -32,20 +32,25 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.viewmodel.PlayerListViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
+import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PlayerListView(
-    fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel,
     onPlayerSelected: (playerId: Int) -> Unit,
     onShowSettings: () -> Unit
 ) {
+    val playerListViewModel = koinViewModel<PlayerListViewModel>()
+    val playerList = playerListViewModel.playerList.collectAsStateWithLifecycle()
+
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-    val allPlayers = fantasyPremierLeagueViewModel.allPlayers.collectAsStateWithLifecycle()
-    val playerList = fantasyPremierLeagueViewModel.visiblePlayerList.collectAsStateWithLifecycle()
-    val playerSearchQuery = fantasyPremierLeagueViewModel.searchQuery.collectAsStateWithLifecycle()
+    val allPlayers = playerListViewModel.allPlayers.collectAsStateWithLifecycle()
+    //val playerList = fantasyPremierLeagueViewModel.visiblePlayerList.collectAsStateWithLifecycle()
+    val playerSearchQuery = playerListViewModel.searchQuery.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -89,14 +94,14 @@ fun PlayerListView(
                     imeAction = ImeAction.Search
                 ),
                 onValueChange = { searchQuery ->
-                    fantasyPremierLeagueViewModel.onPlayerSearchQueryChange(searchQuery)
+                    playerListViewModel.onPlayerSearchQueryChange(searchQuery)
 
                 },
                 trailingIcon = {
                     if (playerSearchQuery.value.isNotEmpty()) {
                         Icon(
                             modifier = Modifier.clickable {
-                                fantasyPremierLeagueViewModel.onPlayerSearchQueryChange("")
+                                playerListViewModel.onPlayerSearchQueryChange("")
                             },
                             imageVector = Icons.Default.Clear,
                             contentDescription = "Clear search"

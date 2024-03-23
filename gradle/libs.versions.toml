@@ -6,19 +6,20 @@ kotlinxSerialization = "1.6.3"
 kotlinxDateTime = "0.5.0"
 androidGradlePlugin = "8.2.2"
 koalaplot = "0.5.3"
-koin = "3.5.3"
-koinCompose = "3.5.3"
+koin = "3.6.0-alpha3"
+koinCompose = "3.6.0-alpha3"
+koinComposeMultiplatform = "1.2.0-alpha3"
 ktor = "2.3.9"
 slf4j = "2.0.12"
 realm = "1.13.0"
 skie = "0.6.2"
 
-androidxActivity = "1.8.2"
+androidxActivity = "1.9.0-beta01"
 androidxComposeCompiler = "1.5.11-dev-k1.9.23-96ef9dc6af1"
 jbComposeCompiler = "1.5.8"
 androidxComposeBom = "2024.02.02"
-androidxNavigationCompose = "2.7.7"
-androidxLifecycle = "2.7.0"
+androidxNavigationCompose = "2.8.0-alpha05"
+androidxLifecycle = "2.8.0-alpha03"
 
 composeMultiplatform = "1.6.1"
 accompanist = "0.32.0"
@@ -58,6 +59,7 @@ androidx-compose-material3 =  { group = "androidx.compose.material3", name = "ma
 androidx-compose-material3-WindowSizeClass =  { group = "androidx.compose.material3", name="material3-window-size-class" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigationCompose" }
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidxLifecycle" }
 
 coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
 accompanist-placeholder = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
@@ -67,6 +69,7 @@ koalaplot-core = { module = "io.github.koalaplot:koalaplot-core", version.ref = 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeMultiplatform" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
