@@ -17,7 +17,6 @@
 		1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */; };
 		1A7222DD288C0F84004A34A8 /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 1A7222DC288C0F84004A34A8 /* AsyncAlgorithms */; };
 		1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */; };
-		1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD670525C5F8FF009FA782 /* ViewModel.swift */; };
 		1AD9A1232AA2692800B14FE3 /* CollectionConcurrencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AD9A1222AA2692800B14FE3 /* CollectionConcurrencyKit */; };
 		1AD9A1252AA355F500B14FE3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9A1242AA355F500B14FE3 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
@@ -34,7 +33,6 @@
 		1A45B23A25CB3BF100A8C613 /* PlayerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsView.swift; sourceTree = "<group>"; };
 		1A45B23E25CB3C9C00A8C613 /* FixtureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureListView.swift; sourceTree = "<group>"; };
 		1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDetailView.swift; sourceTree = "<group>"; };
-		1ABD670525C5F8FF009FA782 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1AD9A1242AA355F500B14FE3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,7 +76,6 @@
 				1A0F7AE525C5C97000EB34CF /* Assets.xcassets */,
 				1A0F7AEA25C5C97000EB34CF /* Info.plist */,
 				1A0F7AE725C5C97000EB34CF /* Preview Content */,
-				1ABD670525C5F8FF009FA782 /* ViewModel.swift */,
 				1AD9A1242AA355F500B14FE3 /* SettingsView.swift */,
 			);
 			path = FantasyPremierLeague;
@@ -222,7 +219,6 @@
 				1AD9A1252AA355F500B14FE3 /* SettingsView.swift in Sources */,
 				1A45B23F25CB3C9C00A8C613 /* FixtureListView.swift in Sources */,
 				1A0F7AE425C5C96F00EB34CF /* ContentView.swift in Sources */,
-				1ABD670625C5F8FF009FA782 /* ViewModel.swift in Sources */,
 				1A0F7AE225C5C96F00EB34CF /* FantasyPremierLeagueApp.swift in Sources */,
 				1AA7EE3E25D809D000B4DECB /* FixtureDetailView.swift in Sources */,
 			);

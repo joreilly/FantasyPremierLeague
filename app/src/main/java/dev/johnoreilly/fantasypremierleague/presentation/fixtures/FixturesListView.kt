@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,18 +26,19 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.domain.entities.GameFixture
+import dev.johnoreilly.common.viewmodel.FixturesViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 import dev.johnoreilly.fantasypremierleague.presentation.global.maroon200
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun FixturesListView(
     onFixtureSelected: (fixtureId: Int) -> Unit,
 ) {
-    val fixturesViewModel: FixturesViewModel = getViewModel()
+    val fixturesViewModel = koinViewModel<FixturesViewModel>()
 
-    val fixturesState = fixturesViewModel.gameweekToFixtures.collectAsStateWithLifecycle()
+    val fixturesState = fixturesViewModel.gameWeekFixtures.collectAsStateWithLifecycle()
     val currentGameweek: State<Int> = fixturesViewModel.currentGameweek.collectAsStateWithLifecycle()
     val selectedGameweek = remember { mutableIntStateOf(currentGameweek.value) }
     val isLoading = fixturesState.value[currentGameweek.value] == null
@@ -91,7 +92,7 @@ fun GameweekSelector(
                     .width(30.dp),
                 onClick = { onGameweekChanged(GameweekChange.PastGameweek) }) {
                 Icon(
-                    Icons.Filled.KeyboardArrowLeft,
+                    Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                     contentDescription = "Back arrow",
                     tint = maroon200
                 )
@@ -112,7 +113,7 @@ fun GameweekSelector(
                     .width(30.dp),
                 onClick = { onGameweekChanged(GameweekChange.NextGameweek) }) {
                 Icon(
-                    Icons.Filled.KeyboardArrowRight,
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     contentDescription = "Forward arrow",
                     tint = maroon200
                 )

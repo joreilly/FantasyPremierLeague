@@ -34,10 +34,21 @@ import io.github.koalaplot.core.xychart.rememberAxisStyle
 
 import dev.johnoreilly.common.domain.entities.Player
 import dev.johnoreilly.common.domain.entities.PlayerPastHistory
+import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
+import dev.johnoreilly.common.viewmodel.PlayerListViewModel
+import org.koin.compose.koinInject
 
 
 @Composable
-fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistory>) {
+fun PlayerDetailsViewShared(player: Player) {
+
+    val viewModel = koinInject<PlayerDetailsViewModel>()
+
+    var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }
+    LaunchedEffect(player) {
+        playerHistory = viewModel.getPlayerHistory(player.id)
+    }
+
 
     val tickPositionState by remember {
         mutableStateOf(

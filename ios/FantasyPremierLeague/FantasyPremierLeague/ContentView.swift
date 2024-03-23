@@ -1,25 +1,14 @@
 import SwiftUI
-import FantasyPremierLeagueKit
-
-
 
 struct ContentView: View {
-    @StateObject var viewModel = FantasyPremierLeagueViewModel(repository: FantasyPremierLeagueRepository())
-
     var body: some View {
         TabView {
-            PlayerListView(viewModel: viewModel)
-                .tabItem {
-                    Label("Players", systemImage: "person")
-                }
-            FixtureListView(viewModel: viewModel)
-                .tabItem {
-                    Label("Fixtues", systemImage: "clock")
-                }
-            LeagueListView(viewModel: viewModel)
-                .tabItem {
-                    Label("League", systemImage: "list.number")
-                }
+            PlayerListView()
+                .tabItem { Label("Players", systemImage: "person") }
+            FixtureListView()
+                .tabItem { Label("Fixtues", systemImage: "clock") }
+            LeagueListView()
+                .tabItem { Label("League", systemImage: "list.number") }
         }
     }
 }

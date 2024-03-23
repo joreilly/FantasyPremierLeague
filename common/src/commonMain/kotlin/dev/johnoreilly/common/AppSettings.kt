@@ -13,7 +13,7 @@ class AppSettings(val settings: ObservableSettings) {
         settings.getStringOrNullFlow(LEAGUES_SETTING).map { getLeaguesSettingFromString(it) }
 
 
-    fun updatesLeagesSetting(leagues: List<String>) {
+    fun updatesLeaguesSetting(leagues: List<String>) {
         settings.putString(LEAGUES_SETTING, leagues.joinToString(separator = ","))
     }
 

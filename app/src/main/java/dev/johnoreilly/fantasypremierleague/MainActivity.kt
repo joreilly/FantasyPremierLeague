@@ -73,7 +73,6 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
             NavHost(navController, startDestination = Screen.PlayerListScreen.title) {
                 composable(Screen.PlayerListScreen.title) {
                     PlayerListView(
-                        fantasyPremierLeagueViewModel = viewModel,
                         onPlayerSelected = { playerId ->
                             navController.navigate(Screen.PlayerDetailsScreen.title + "/${playerId}")
                         },
@@ -91,7 +90,6 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
                         val player = viewModel.getPlayer(playerId)
                         player?.let {
                             PlayerDetailsView(
-                                repository,
                                 player,
                                 popBackStack = { navController.popBackStack() })
                         }
@@ -119,7 +117,7 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
                     }
                 }
                 composable(Screen.LeagueStandingsListScreen.title) {
-                    LeagueListView(viewModel)
+                    LeagueListView()
                 }
                 composable(Screen.SettingsScreen.title) {
                     SettingsView(viewModel, popBackStack = { navController.popBackStack() })

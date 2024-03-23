@@ -3,30 +3,44 @@ import Combine
 import FantasyPremierLeagueKit
 
 
+@propertyWrapper
+struct MyPropertyWrapper: DynamicProperty {
+  var wrappedValue: String
+
+  func update() {
+    // called whenever the view will evaluate its body
+  }
+}
+
+
 
 extension Player: Identifiable { }
 
 struct PlayerListView: View {
-    @ObservedObject var viewModel: FantasyPremierLeagueViewModel
+    @State var viewModel = PlayerListViewModel()
+    @State var playerList = [Player]()
     
     var body: some View {
         NavigationView {
-            List(viewModel.playerList) { player in
-                NavigationLink(destination: PlayerDetailsView(viewModel: viewModel, player: player)) {
+            List(playerList) { player in
+                NavigationLink(destination: PlayerDetailsView(player: player)) {
                     PlayerView(player: player)
                 }
             }
-            .searchable(text: $viewModel.query)
+            //.searchable(text: $viewModel.query)
             .navigationBarTitle(Text("Players"))
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing:
-                NavigationLink(destination: SettingsView(viewModel: viewModel))  {
-                    Image(systemName: "gearshape")
-                }
-            )
+//            .navigationBarItems(trailing:
+//                NavigationLink(destination: SettingsView(viewModel: viewModel))  {
+//                    Image(systemName: "gearshape")
+//                }
+//            )
         }
         .task {
-            await viewModel.getPlayers()
+            for await playerList in viewModel.playerList {
+                self.playerList = playerList
+            }
+
         }
     }
 }

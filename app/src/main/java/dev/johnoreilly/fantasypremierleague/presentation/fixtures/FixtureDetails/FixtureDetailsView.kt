@@ -4,10 +4,10 @@ package dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixtureDetail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -33,7 +33,7 @@ fun FixtureDetailsView(fixture: GameFixture, popBackStack: () -> Unit) {
                 },
                 navigationIcon = {
                     IconButton(onClick = { popBackStack() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 }
             )
@@ -106,6 +106,6 @@ fun PastFixtureStatView(statName: String, statValue: String) {
                 )
             }
         }
-        Divider(thickness = 1.dp)
+        HorizontalDivider(thickness = 1.dp)
     }
 }

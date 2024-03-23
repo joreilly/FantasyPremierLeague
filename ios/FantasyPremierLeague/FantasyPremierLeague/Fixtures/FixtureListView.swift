@@ -3,11 +3,12 @@ import Combine
 import FantasyPremierLeagueKit
 
 
-
 extension GameFixture: Identifiable { }
 
 struct FixtureListView: View {
-    @ObservedObject var viewModel: FantasyPremierLeagueViewModel
+    @State var viewModel = FixturesViewModel()
+    
+    @State var gameWeekFixtures = [Int: [GameFixture]]()
     
     @State var gameWeek = 1
     
@@ -28,7 +29,7 @@ struct FixtureListView: View {
                           Image(systemName: "arrow.right")
                         }
                     }
-                    List(viewModel.gameWeekFixtures[gameWeek] ?? []) { fixture in
+                    List(gameWeekFixtures[gameWeek] ?? []) { fixture in
                         NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
                             FixtureView(fixture: fixture)
                         }
@@ -39,12 +40,11 @@ struct FixtureListView: View {
                         UITableView.appearance().separatorStyle = .none
                     }
                     .task {
-                        await viewModel.getGameWeekFixtures()
+                        for await data in viewModel.gameWeekFixtures {
+                            gameWeekFixtures = data as! [Int : [GameFixture]]
+                        }
                     }
                 }
-            }
-            .onAppear {
-                UITableView.appearance().separatorStyle = .none
             }
         }
     }

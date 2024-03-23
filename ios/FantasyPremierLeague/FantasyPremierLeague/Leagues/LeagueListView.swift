@@ -6,52 +6,60 @@ import FantasyPremierLeagueKit
 
 extension LeagueResultDto: Identifiable { }
 extension EventStatusDto: Identifiable { }
+extension LeagueStandingsDto: Identifiable { }
 
 
 struct LeagueListView: View {
-    @ObservedObject var viewModel: FantasyPremierLeagueViewModel
+    @State var viewModel = LeaguesViewModel()
+    
+    @State var leagueStandingsList = [LeagueStandingsDto]()
+    @State var eventStatusList = [EventStatusDto]()
+
     
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
-                let leagueStandingsList = viewModel.leagueStandings
                 List {
-                    if let eventStatusList = viewModel.eventStatusList {
-                        Section(header: Text("Status"), content: {
-                            ForEach(eventStatusList.status) { eventStatus in                                
-                                HStack {
-                                    Text(eventStatus.date)
-                                    Spacer()
-                                    if eventStatus.bonus_added {
-                                        Image(systemName: "checkmark")
-                                    }
+                    Section(header: Text("Status"), content: {
+                        ForEach(eventStatusList) { eventStatus in
+                            HStack {
+                                Text(eventStatus.date)
+                                Spacer()
+                                if eventStatus.bonus_added {
+                                    Image(systemName: "checkmark")
                                 }
                             }
-                        })
-                    }
-
+                        }
+                    })
                     
                     ForEach(leagueStandingsList) { leagueStandings in
                         Section(header: Text(leagueStandings.league.name), content: {
                             ForEach(leagueStandings.standings.results) { leagueResult in
                                 LeagueReesultView(leagueResult: leagueResult)
-                            }
-                            
+                            }                            
                         })
                     }
                     
-                }
-                .refreshable {
-                    await viewModel.getLeageStandings()
                 }
             }
             .navigationBarTitle(Text("Leagues"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing:
-                NavigationLink(destination: SettingsView(viewModel: viewModel))  {
+                NavigationLink(destination: SettingsView())  {
                     Image(systemName: "gearshape")
                 }
             )
+            .task {
+                do {
+                    try await eventStatusList = viewModel.getEventStatus()
+                    
+                    for await data in viewModel.leagueStandings {
+                        leagueStandingsList = data
+                    }
+                } catch {
+                    print("Error")
+                }
+            }
         }
 
     }
