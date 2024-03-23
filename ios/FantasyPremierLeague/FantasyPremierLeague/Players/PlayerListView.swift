@@ -18,27 +18,36 @@ extension Player: Identifiable { }
 
 struct PlayerListView: View {
     @State var viewModel = PlayerListViewModel()
-    @State var playerList = [Player]()
+    @State var playerListUIState: PlayerListUIState = PlayerListUIState.Loading()
     
     var body: some View {
         NavigationView {
-            List(playerList) { player in
-                NavigationLink(destination: PlayerDetailsView(player: player)) {
-                    PlayerView(player: player)
+            VStack {
+                switch onEnum(of: playerListUIState) {
+                case .loading:
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                case .error(let error):
+                    Text("Error: \(error)")
+                case .success(let success):
+                    List(success.result) { player in
+                        NavigationLink(destination: PlayerDetailsView(player: player)) {
+                            PlayerView(player: player)
+                        }
+                    }
                 }
             }
-            //.searchable(text: $viewModel.query)
             .navigationBarTitle(Text("Players"))
             .navigationBarTitleDisplayMode(.inline)
-//            .navigationBarItems(trailing:
-//                NavigationLink(destination: SettingsView(viewModel: viewModel))  {
-//                    Image(systemName: "gearshape")
-//                }
-//            )
+            .navigationBarItems(trailing:
+                NavigationLink(destination: SettingsView())  {
+                    Image(systemName: "gearshape")
+                }
+            )
         }
         .task {
-            for await playerList in viewModel.playerList {
-                self.playerList = playerList
+            for await playerListUIState in viewModel.playerListUIState {
+                self.playerListUIState = playerListUIState
             }
 
         }

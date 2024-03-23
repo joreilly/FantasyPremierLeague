@@ -16,6 +16,13 @@ import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+
+sealed class PlayerListUIState {
+    object Loading : PlayerListUIState()
+    data class Error(val message: String) : PlayerListUIState()
+    data class Success(val result: List<Player>) : PlayerListUIState()
+}
+
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 open class PlayerListViewModel : ViewModel(), KoinComponent {
     private val repository: FantasyPremierLeagueRepository by inject()
@@ -23,17 +30,21 @@ open class PlayerListViewModel : ViewModel(), KoinComponent {
     val allPlayers = repository.playerList
 
     val searchQuery = MutableStateFlow("")
-    val playerList: StateFlow<List<Player>> =
+    val playerListUIState: StateFlow<PlayerListUIState> =
         searchQuery.debounce(250).flatMapLatest { searchQuery ->
             allPlayers.mapLatest { playerList ->
-                playerList
-                    .filter { it.name.contains(searchQuery, ignoreCase = true) }
-                    .sortedByDescending { it.points }
+                if (playerList.isNotEmpty()) {
+                    val players = playerList
+                        .filter { it.name.contains(searchQuery, ignoreCase = true) }
+                        .sortedByDescending { it.points }
+                    PlayerListUIState.Success(players)
+                } else {
+                    PlayerListUIState.Loading
+                }
             }
-        }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, PlayerListUIState.Loading)
 
     fun onPlayerSearchQueryChange(query: String) {
         searchQuery.value = query
     }
-
 }
