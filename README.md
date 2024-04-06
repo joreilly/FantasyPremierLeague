@@ -32,4 +32,11 @@ Note that we're not handling realm db migrations yet so, for now, you may need t
 
 <img width="912" alt="Screenshot 2023-09-14 at 17 07 32" src="https://github.com/joreilly/FantasyPremierLeague/assets/6302/86582f04-60e7-480c-97ae-908c31dfd321">
 
+### Kotlin Notebook
+<img width="916" alt="Screenshot 2024-04-06 at 11 03 15" src="https://github.com/joreilly/FantasyPremierLeague/assets/6302/37fef7a1-190d-4c14-acdd-5dafc11e8e30">
+
+<img width="932" alt="Screenshot 2024-04-06 at 11 03 36" src="https://github.com/joreilly/FantasyPremierLeague/assets/6302/53cba0ea-1175-4349-ab1f-9aba4f8f0066">
+
+
+
 
