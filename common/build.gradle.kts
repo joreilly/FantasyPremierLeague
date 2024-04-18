@@ -62,7 +62,7 @@ kotlin {
             implementation(libs.realm)
             implementation(libs.androidx.lifecycle.viewmodel)
 
-            api(libs.bundles.multiplatformSettings)
+            implementation(libs.datastore.preferences)
             api(libs.kermit)
 
             implementation(compose.ui)
