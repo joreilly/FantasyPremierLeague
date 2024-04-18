@@ -1,20 +1,36 @@
 package dev.johnoreilly.common
 
-import com.russhwolf.settings.ExperimentalSettingsApi
-import com.russhwolf.settings.ObservableSettings
-import com.russhwolf.settings.coroutines.getStringOrNullFlow
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import okio.Path.Companion.toPath
 
-@OptIn(ExperimentalSettingsApi::class)
-class AppSettings(val settings: ObservableSettings) {
+
+fun createDataStore(
+    producePath: () -> String,
+): DataStore<Preferences> = PreferenceDataStoreFactory.createWithPath(
+    corruptionHandler = null,
+    migrations = emptyList(),
+    produceFile = { producePath().toPath() },
+)
+
+class AppSettings(private val dataStore: DataStore<Preferences>) {
 
     val leagues: Flow<List<String>> =
-        settings.getStringOrNullFlow(LEAGUES_SETTING).map { getLeaguesSettingFromString(it) }
+        dataStore.data
+            .map { preferences ->
+                getLeaguesSettingFromString(preferences[LEAGUES_SETTING])
+            }
 
 
-    fun updatesLeaguesSetting(leagues: List<String>) {
-        settings.putString(LEAGUES_SETTING, leagues.joinToString(separator = ","))
+    suspend fun updatesLeaguesSetting(leagues: List<String>) {
+        dataStore.edit { preferences ->
+            preferences[LEAGUES_SETTING] = leagues.joinToString(separator = ",")
+        }
     }
 
 
@@ -22,6 +38,6 @@ class AppSettings(val settings: ObservableSettings) {
         settingsString?.split(",") ?: emptyList()
 
     companion object {
-        const val LEAGUES_SETTING = "leagues"
+        val LEAGUES_SETTING = stringPreferencesKey("leagues")
     }
 }

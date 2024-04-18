@@ -1,16 +1,30 @@
 package dev.johnoreilly.common
 
-import com.russhwolf.settings.NSUserDefaultsSettings
-import com.russhwolf.settings.ObservableSettings
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import io.ktor.client.engine.darwin.*
 import org.koin.dsl.module
-import platform.Foundation.NSUserDefaults
+import platform.Foundation.NSDocumentDirectory
+import platform.Foundation.NSFileManager
+import platform.Foundation.NSURL
+import platform.Foundation.NSUserDomainMask
 
 
 actual fun platformModule() = module {
     single { Darwin.create() }
-    single<ObservableSettings> { NSUserDefaultsSettings(NSUserDefaults.standardUserDefaults) }
+    single { dataStore()}
 }
 
 
-
+fun dataStore(): DataStore<Preferences> = createDataStore(
+    producePath = {
+        val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
+            directory = NSDocumentDirectory,
+            inDomain = NSUserDomainMask,
+            appropriateForURL = null,
+            create = false,
+            error = null,
+        )
+        requireNotNull(documentDirectory).path + "/fpl.preferences_pb"
+    }
+)

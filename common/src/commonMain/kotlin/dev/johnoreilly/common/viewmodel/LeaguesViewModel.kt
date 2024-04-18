@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -23,7 +24,9 @@ open class LeaguesViewModel : ViewModel(), KoinComponent {
     private val _isRefreshing = MutableStateFlow(false)
 
     fun updateLeagues(leagues: List<String>) {
-        repository.updateLeagues(leagues)
+        viewModelScope.launch {
+            repository.updateLeagues(leagues)
+        }
     }
 
     suspend fun getEventStatus(): List<EventStatusDto> {

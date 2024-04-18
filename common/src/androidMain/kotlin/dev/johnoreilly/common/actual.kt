@@ -1,17 +1,17 @@
 package dev.johnoreilly.common
 
 import android.content.Context
-import com.russhwolf.settings.ObservableSettings
-import com.russhwolf.settings.SharedPreferencesSettings
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import io.ktor.client.engine.android.*
 import org.koin.dsl.module
 
 actual fun platformModule() = module {
     single { Android.create() }
-    single<ObservableSettings> { createObservableSettings(get()) }
+    single { dataStore(get())}
 }
 
-
-private fun createObservableSettings(context: Context): ObservableSettings {
-    return SharedPreferencesSettings(context.getSharedPreferences("AppSettings", Context.MODE_PRIVATE))
-}
+fun dataStore(context: Context): DataStore<Preferences> =
+    createDataStore(
+        producePath = { context.filesDir.resolve("fpl.preferences_pb").absolutePath }
+    )

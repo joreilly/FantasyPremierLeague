@@ -13,13 +13,14 @@ ktor = "2.3.9"
 slf4j = "2.0.12"
 realm = "1.13.0"
 skie = "0.6.2"
+datastore = "1.1.0"
 
-androidxActivity = "1.9.0-beta01"
+androidxActivity = "1.9.0-rc01"
 androidxComposeCompiler = "1.5.11-dev-k1.9.23-96ef9dc6af1"
 jbComposeCompiler = "1.5.8"
-androidxComposeBom = "2024.02.02"
-androidxNavigationCompose = "2.8.0-alpha05"
-androidxLifecycle = "2.8.0-alpha03"
+androidxComposeBom = "2024.04.01"
+androidxNavigationCompose = "2.8.0-alpha07"
+androidxLifecycle = "2.8.0-beta01"
 
 composeMultiplatform = "1.6.1"
 accompanist = "0.32.0"
@@ -28,7 +29,6 @@ image-loader = "1.7.8"
 
 junit = "4.13.2"
 
-multiplatformSettings = "1.1.1"
 kermit = "2.0.3"
 
 minSdk = "24"
@@ -61,6 +61,8 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidxLifecycle" }
 
+datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
+
 coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
 accompanist-placeholder = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
 image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image-loader" }
@@ -85,15 +87,12 @@ slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 
 realm = { group = "io.realm.kotlin", name = "library-base", version.ref = "realm" }
 
-multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
-multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 junit = { module = "junit:junit", version.ref = "junit" }
+androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
 
 [bundles]
-multiplatformSettings = ["multiplatform-settings", "multiplatform-settings-coroutines"]
 ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
-
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

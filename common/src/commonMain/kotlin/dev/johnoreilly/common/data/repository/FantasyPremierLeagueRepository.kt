@@ -242,7 +242,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
         return fantasyPremierLeagueApi.fetchEventStatus()
     }
 
-    fun updateLeagues(leagues: List<String>) {
+    suspend fun updateLeagues(leagues: List<String>) {
         appSettings.updatesLeaguesSetting(leagues)
     }
 

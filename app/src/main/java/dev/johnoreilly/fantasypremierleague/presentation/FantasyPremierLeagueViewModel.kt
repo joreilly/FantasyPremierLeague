@@ -82,7 +82,9 @@ class FantasyPremierLeagueViewModel(
     }
 
     fun updateLeagues(leagues: List<String>) {
-        repository.updateLeagues(leagues)
+        viewModelScope.launch {
+            repository.updateLeagues(leagues)
+        }
     }
 
 }
