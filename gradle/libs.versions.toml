@@ -15,7 +15,7 @@ realm = "1.13.0"
 skie = "0.6.2"
 datastore = "1.1.0"
 
-androidxActivity = "1.9.0-rc01"
+androidxActivity = "1.9.0"
 androidxComposeCompiler = "1.5.11-dev-k1.9.23-96ef9dc6af1"
 jbComposeCompiler = "1.5.8"
 androidxComposeBom = "2024.04.01"
