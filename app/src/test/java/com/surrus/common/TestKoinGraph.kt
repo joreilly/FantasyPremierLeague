@@ -20,7 +20,6 @@ class TestKoinGraph  {
             androidContext(context)
             modules(appModule)
         }
-        // temporarily disabling until Realm has JVM support
         //.checkModules {  }
     }
 }

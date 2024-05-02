@@ -24,22 +24,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
-import dev.johnoreilly.fantasypremierleague.presentation.FantasyPremierLeagueViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.Screen
 import dev.johnoreilly.fantasypremierleague.presentation.bottomNavigationItems
-import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixturesListView
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixtureDetails.FixtureDetailsView
+import dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixturesListView
 import dev.johnoreilly.fantasypremierleague.presentation.global.FantasyPremierLeagueTheme
 import dev.johnoreilly.fantasypremierleague.presentation.leagues.LeagueListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.PlayerListView
 import dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails.PlayerDetailsView
 import dev.johnoreilly.fantasypremierleague.presentation.settings.SettingsView
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.compose.koinInject
+
 
 class MainActivity : ComponentActivity() {
-    private val fantasyPremierLeagueViewModel: FantasyPremierLeagueViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,18 +48,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainLayout(fantasyPremierLeagueViewModel)
+                    MainLayout()
                 }
             }
         }
     }
 }
 
-@Composable
-fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
-    val navController = rememberNavController()
 
-    val repository: FantasyPremierLeagueRepository = koinInject()
+
+@Composable
+fun MainLayout() {
+    val navController = rememberNavController()
 
     Scaffold(
         bottomBar = { FantasyPremierLeagueBottomNavigation(navController) },
@@ -73,8 +69,8 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
             NavHost(navController, startDestination = Screen.PlayerListScreen.title) {
                 composable(Screen.PlayerListScreen.title) {
                     PlayerListView(
-                        onPlayerSelected = { playerId ->
-                            navController.navigate(Screen.PlayerDetailsScreen.title + "/${playerId}")
+                        onPlayerSelected = { player ->
+                            navController.navigate(Screen.PlayerDetailsScreen.title + "/${player.id}")
                         },
                         onShowSettings = {
                             navController.navigate(Screen.SettingsScreen.title)
@@ -87,12 +83,9 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
                 ) { navBackStackEntry ->
                     val playerId: Int? = navBackStackEntry.arguments?.getInt("playerId")
                     playerId?.let {
-                        val player = viewModel.getPlayer(playerId)
-                        player?.let {
-                            PlayerDetailsView(
-                                player,
-                                popBackStack = { navController.popBackStack() })
-                        }
+                        PlayerDetailsView(
+                            playerId,
+                            popBackStack = { navController.popBackStack() })
                     }
                 }
                 composable(Screen.FixtureListScreen.title) {
@@ -108,19 +101,16 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
                 ) { navBackStackEntry ->
                     val fixtureId: Int? = navBackStackEntry.arguments?.getInt("fixtureId")
                     fixtureId?.let {
-                        val fixture = viewModel.getFixture(fixtureId)
-                        fixture?.let {
-                            FixtureDetailsView(
-                                fixture,
-                                popBackStack = { navController.popBackStack() })
-                        }
+                        FixtureDetailsView(
+                            fixtureId,
+                            popBackStack = { navController.popBackStack() })
                     }
                 }
                 composable(Screen.LeagueStandingsListScreen.title) {
                     LeagueListView()
                 }
                 composable(Screen.SettingsScreen.title) {
-                    SettingsView(viewModel, popBackStack = { navController.popBackStack() })
+                    SettingsView(popBackStack = { navController.popBackStack() })
                 }
             }
         }
@@ -130,13 +120,11 @@ fun MainLayout(viewModel: FantasyPremierLeagueViewModel) {
 
 @Composable
 private fun FantasyPremierLeagueBottomNavigation(navController: NavHostController) {
-
     NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
         bottomNavigationItems.forEach { bottomNavigationItem ->
-
             NavigationBarItem(
                 icon = {
                     Icon(

@@ -3,7 +3,7 @@ package dev.johnoreilly.common.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
-import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.model.Player
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,7 +27,8 @@ sealed class PlayerListUIState {
 open class PlayerListViewModel : ViewModel(), KoinComponent {
     private val repository: FantasyPremierLeagueRepository by inject()
 
-    val allPlayers = repository.playerList
+    val allPlayers = repository.getPlayers()
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val searchQuery = MutableStateFlow("")
     val playerListUIState: StateFlow<PlayerListUIState> =

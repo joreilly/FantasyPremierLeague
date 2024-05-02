@@ -4,33 +4,30 @@ ksp = "1.9.23-1.0.19"
 coroutines = "1.8.0"
 kotlinxSerialization = "1.6.3"
 kotlinxDateTime = "0.5.0"
-androidGradlePlugin = "8.2.2"
+androidGradlePlugin = "8.4.0"
 koalaplot = "0.5.3"
 koin = "3.6.0-alpha3"
 koinCompose = "3.6.0-alpha3"
 koinComposeMultiplatform = "1.2.0-alpha3"
 ktor = "2.3.9"
 slf4j = "2.0.12"
-realm = "1.13.0"
 skie = "0.6.2"
-datastore = "1.1.0"
+datastore = "1.1.1"
 
-androidxActivity = "1.9.0-rc01"
+androidxActivity = "1.9.0"
 androidxComposeCompiler = "1.5.11-dev-k1.9.23-96ef9dc6af1"
 jbComposeCompiler = "1.5.8"
 androidxComposeBom = "2024.04.01"
-androidxNavigationCompose = "2.8.0-alpha07"
-androidxLifecycle = "2.8.0-beta01"
-
+androidxNavigationCompose = "2.8.0-alpha08"
+androidxLifecycle = "2.8.0-rc01"
+androidxRoom = "2.7.0-alpha01"
+sqlite = "2.5.0-SNAPSHOT"
 composeMultiplatform = "1.6.1"
 accompanist = "0.32.0"
 coilCompose = "2.6.0"
 image-loader = "1.7.8"
-
 junit = "4.13.2"
-
 kermit = "2.0.3"
-
 minSdk = "24"
 targetSdk = "34"
 compileSdk = "34"
@@ -38,7 +35,6 @@ compileSdk = "34"
 
 [libraries]
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDateTime" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
 
@@ -47,7 +43,6 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material" }
-androidx-compose-material-iconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test" }
@@ -60,6 +55,10 @@ androidx-compose-material3-WindowSizeClass =  { group = "androidx.compose.materi
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigationCompose" }
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidxLifecycle" }
+
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 
@@ -85,8 +84,6 @@ ktor-client-java = { group = "io.ktor", name = "ktor-client-java", version.ref =
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 
-realm = { group = "io.realm.kotlin", name = "library-base", version.ref = "realm" }
-
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
@@ -100,5 +97,5 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-realm-kotlin = { id = "io.realm.kotlin", version.ref = "realm"}
 skie = { id = "co.touchlab.skie", version.ref = "skie"}
+room = { id = "androidx.room", version.ref = "androidxRoom" }

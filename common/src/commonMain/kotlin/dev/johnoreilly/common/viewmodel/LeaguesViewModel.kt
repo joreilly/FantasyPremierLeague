@@ -6,6 +6,7 @@ import dev.johnoreilly.common.data.model.EventStatusDto
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -14,6 +15,11 @@ import org.koin.core.component.inject
 
 open class LeaguesViewModel : ViewModel(), KoinComponent {
     private val repository: FantasyPremierLeagueRepository by inject()
+
+
+    val leagues: StateFlow<List<String>> = repository.leagues
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
 
     var leagueStandings = repository.leagues.map { leagues ->
         leagues.map { leagueId ->

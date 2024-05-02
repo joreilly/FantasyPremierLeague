@@ -28,15 +28,16 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.placeholder.placeholder
-import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.viewmodel.PlayerListUIState
 import dev.johnoreilly.common.viewmodel.PlayerListViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 import org.koin.androidx.compose.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlayerListView(
-    onPlayerSelected: (playerId: Int) -> Unit,
+    onPlayerSelected: (player: Player) -> Unit,
     onShowSettings: () -> Unit
 ) {
     val playerListViewModel = koinViewModel<PlayerListViewModel>()
