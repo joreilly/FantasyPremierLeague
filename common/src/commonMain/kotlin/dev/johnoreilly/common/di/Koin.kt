@@ -3,19 +3,16 @@ package dev.johnoreilly.common.di
 import dev.johnoreilly.common.AppSettings
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
-import dev.johnoreilly.common.data.repository.FixtureDb
-import dev.johnoreilly.common.data.repository.PlayerDb
-import dev.johnoreilly.common.data.repository.TeamDb
 import dev.johnoreilly.common.platformModule
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
-import io.ktor.client.*
-import io.ktor.client.engine.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.plugins.logging.*
-import io.ktor.serialization.kotlinx.json.*
-import io.realm.kotlin.Configuration
-import io.realm.kotlin.Realm
-import io.realm.kotlin.RealmConfiguration
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.DEFAULT
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -33,9 +30,6 @@ fun initKoin() = initKoin(enableNetworkLogs = false) {}
 fun commonModule(enableNetworkLogs: Boolean) = module {
     single { createJson() }
     single { createHttpClient(get(), get(), enableNetworkLogs = enableNetworkLogs) }
-
-    single<Configuration> { RealmConfiguration.create(schema = setOf(PlayerDb::class, TeamDb::class, FixtureDb::class)) }
-    single { Realm.open(get()) }
 
     single { PlayerDetailsViewModel() }
     single { FantasyPremierLeagueRepository() }

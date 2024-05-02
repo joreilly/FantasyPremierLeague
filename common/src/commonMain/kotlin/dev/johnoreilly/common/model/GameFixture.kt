@@ -1,9 +1,11 @@
-package dev.johnoreilly.common.domain.entities
+package dev.johnoreilly.common.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.datetime.LocalDateTime
-
+@Entity
 data class GameFixture(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val localKickoffTime: LocalDateTime,
     val homeTeam: String,
     val awayTeam: String,

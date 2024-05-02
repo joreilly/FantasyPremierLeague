@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.placeholder.placeholder
-import dev.johnoreilly.common.domain.entities.GameFixture
+import dev.johnoreilly.common.model.GameFixture
 import dev.johnoreilly.common.viewmodel.FixturesViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 import dev.johnoreilly.fantasypremierleague.presentation.global.maroon200

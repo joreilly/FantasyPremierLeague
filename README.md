@@ -2,7 +2,7 @@
 
 ![kotlin-version](https://img.shields.io/badge/kotlin-1.9.20-blue)
 
-**Kotlin Multiplatform** project with Jetpack Compose, Compose for Desktop and SwiftUI clients (and using Ktor for remote API requests and Realm for persistence). Currently running on:
+**Kotlin Multiplatform** project with Jetpack Compose, Compose for Desktop and SwiftUI clients (and using Ktor for remote API requests and Room for persistence). Currently running on:
 * Android (Jetpack Compose)
 * iOS (SwiftUI)
 * Desktop (Compose for Desktop)
@@ -17,7 +17,6 @@ Related posts:
 ### Building
 This project currently uses iOS16 features (e.g. Swift Charts) so requires use of at least Xcode 14.
 
-Note that we're not handling realm db migrations yet so, for now, you may need to clear app data and re-run if you encounter "Migration is required" type errors.
 
 
 ## Screenshots

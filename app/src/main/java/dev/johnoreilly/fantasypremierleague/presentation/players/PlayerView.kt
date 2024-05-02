@@ -11,13 +11,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.google.accompanist.placeholder.placeholder
-import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 
 @Composable
 fun PlayerView(
     player: Player,
-    onPlayerSelected: (playerId: Int) -> Unit,
+    onPlayerSelected: (player: Player) -> Unit,
     isDataLoading: Boolean
 ) {
     Row(
@@ -25,7 +25,7 @@ fun PlayerView(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
-            .clickable { onPlayerSelected(player.id) }
+            .clickable { onPlayerSelected(player) }
     ) {
         AsyncImage(
             model = player.photoUrl,

@@ -1,4 +1,4 @@
-package dev.johnoreilly.common.domain.entities
+package dev.johnoreilly.common.model
 
 data class PlayerPastHistory(
     val seasonName: String,

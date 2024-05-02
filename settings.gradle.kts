@@ -19,4 +19,4 @@ dependencyResolutionManagement {
 rootProject.name = "FantasyPremierLeague"
 
 include(":app", ":common")
-include("compose-desktop")
+//include("compose-desktop")

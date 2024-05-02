@@ -3,7 +3,6 @@ package dev.johnoreilly.common.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -32,10 +31,9 @@ import io.github.koalaplot.core.xychart.TickPosition
 import io.github.koalaplot.core.xychart.XYChart
 import io.github.koalaplot.core.xychart.rememberAxisStyle
 
-import dev.johnoreilly.common.domain.entities.Player
-import dev.johnoreilly.common.domain.entities.PlayerPastHistory
+import dev.johnoreilly.common.model.PlayerPastHistory
+import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
-import dev.johnoreilly.common.viewmodel.PlayerListViewModel
 import org.koin.compose.koinInject
 
 

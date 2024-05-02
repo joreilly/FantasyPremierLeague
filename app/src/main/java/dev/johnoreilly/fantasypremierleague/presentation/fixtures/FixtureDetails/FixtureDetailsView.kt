@@ -2,7 +2,12 @@
 
 package dev.johnoreilly.fantasypremierleague.presentation.fixtures.FixtureDetails
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -13,71 +18,82 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.johnoreilly.common.domain.entities.GameFixture
+import dev.johnoreilly.common.model.GameFixture
+import dev.johnoreilly.common.viewmodel.FixturesViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.ClubInFixtureView
+import org.koin.compose.koinInject
 
 @Composable
-fun FixtureDetailsView(fixture: GameFixture, popBackStack: () -> Unit) {
+fun FixtureDetailsView(fixtureId: Int, popBackStack: () -> Unit) {
+    val viewModel = koinInject<FixturesViewModel>()
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(text = "Fixture details")
-                },
-                navigationIcon = {
-                    IconButton(onClick = { popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+    val fixture by produceState<GameFixture?>(initialValue = null) {
+        value = viewModel.getFixture(fixtureId)
+    }
+
+    fixture?.let { fixture ->
+        Scaffold(
+            topBar = {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(text = "Fixture details")
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { popBackStack() }) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        }
                     }
-                }
-            )
-        }) {
-        Column(
-            modifier = Modifier.padding(it).fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
+                )
+            }) {
+            Column(
+                modifier = Modifier.padding(it).fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ClubInFixtureView(
-                    fixture.homeTeam,
-                    fixture.homeTeamPhotoUrl
-                )
-                Text(
-                    text = "(${fixture.homeTeamScore})",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
-                )
-                Text(
-                    text = "vs",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
-                )
-                Text(
-                    text = "(${fixture.awayTeamScore})",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
-                )
-                ClubInFixtureView(
-                    fixture.awayTeam,
-                    fixture.awayTeamPhotoUrl
-                )
-            }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    ClubInFixtureView(
+                        fixture.homeTeam,
+                        fixture.homeTeamPhotoUrl
+                    )
+                    Text(
+                        text = "(${fixture.homeTeamScore})",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 25.sp
+                    )
+                    Text(
+                        text = "vs",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 25.sp
+                    )
+                    Text(
+                        text = "(${fixture.awayTeamScore})",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 25.sp
+                    )
+                    ClubInFixtureView(
+                        fixture.awayTeam,
+                        fixture.awayTeamPhotoUrl
+                    )
+                }
 
-            fixture.localKickoffTime?.let { localKickoffTime ->
-                val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
-                PastFixtureStatView(statName = "Date", statValue = localKickoffTime.date.toString())
-                PastFixtureStatView(statName = "Kick Off Time", statValue = formattedTime)
+                fixture.localKickoffTime.let { localKickoffTime ->
+                    val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
+                    PastFixtureStatView(statName = "Date", statValue = localKickoffTime.date.toString())
+                    PastFixtureStatView(statName = "Kick Off Time", statValue = formattedTime)
+                }
             }
         }
     }

@@ -5,9 +5,9 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("org.jetbrains.compose") version libs.versions.composeMultiplatform
-    id("io.realm.kotlin")
     id("com.google.devtools.ksp")
     id("co.touchlab.skie")
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -59,9 +59,9 @@ kotlin {
             implementation(libs.koin.test)
 
             implementation(libs.bundles.ktor.common)
-            implementation(libs.realm)
             implementation(libs.androidx.lifecycle.viewmodel)
-
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
             implementation(libs.datastore.preferences)
             api(libs.kermit)
 
@@ -97,4 +97,16 @@ kotlin {
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
+
+
+dependencies {
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspIosX64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
