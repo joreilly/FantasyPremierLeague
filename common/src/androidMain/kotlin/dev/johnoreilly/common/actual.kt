@@ -13,7 +13,7 @@ import org.koin.dsl.module
 
 actual fun platformModule() = module {
     single { Android.create() }
-    single { dataStore(get())}
+    single { dataStore(get()) }
 
     single<AppDatabase> { createRoomDatabase(get()) }
 }
