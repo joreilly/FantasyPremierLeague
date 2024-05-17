@@ -10,6 +10,7 @@ import dev.johnoreilly.common.database.AppDatabase
 import dev.johnoreilly.common.model.GameFixture
 import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.model.Player
+import dev.johnoreilly.common.model.Team
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -29,18 +30,6 @@ class FantasyPremierLeagueRepository : KoinComponent {
     private val appSettings: AppSettings by inject()
 
     val coroutineScope = CoroutineScope(Dispatchers.Default)
-
-//    private val _teamList = MutableStateFlow<List<Team>>(emptyList())
-//    val teamList = _teamList.asStateFlow()
-//
-//    private val _playerList = MutableStateFlow<List<Player>>(emptyList())
-//    val playerList = _playerList.asStateFlow()
-
-//    private val _fixtureList = MutableStateFlow<List<GameFixture>>(emptyList())
-//    val fixtureList = _fixtureList.asStateFlow()
-
-//    private val _gameWeekFixtures = MutableStateFlow<Map<Int, List<GameFixture>>>(emptyMap())
-//    val gameWeekFixtures = _gameWeekFixtures.asStateFlow()
 
     val leagues = appSettings.leagues
 
@@ -62,20 +51,20 @@ class FantasyPremierLeagueRepository : KoinComponent {
             // TODO surface this to UI/option to retry etc ?
             println("Exception reading data: $e")
         }
-
     }
 
 
     private suspend fun writeDataToDb(
         bootstrapStaticInfoDto: BootstrapStaticInfoDto,
         fixtures: List<FixtureDto>
-    )  {
+    ) {
         //store current gameweek
-        _currentGameweek.value = bootstrapStaticInfoDto.events.firstOrNull { it.is_current }?.id ?: 1
+        _currentGameweek.value =
+            bootstrapStaticInfoDto.events.firstOrNull { it.is_current }?.id ?: 1
 
         // store teams
         val teamList = bootstrapStaticInfoDto.teams.mapIndexed { teamIndex, teamDto ->
-            dev.johnoreilly.common.model.Team(teamDto.id, teamIndex + 1, teamDto.name, teamDto.code)
+            Team(teamDto.id, teamIndex + 1, teamDto.name, teamDto.code)
         }
         database.fantasyPremierLeagueDao().insertTeamList(teamList)
 
@@ -87,7 +76,16 @@ class FantasyPremierLeagueRepository : KoinComponent {
             val teamName = teamList.find { team -> team.code == playerDto.team_code }?.name ?: ""
             val currentPrice = playerDto.now_cost / 10.0
 
-            Player(playerDto.id, playerName, teamName, playerImageUrl, playerDto.total_points, currentPrice, playerDto.goals_scored, playerDto.assists)
+            Player(
+                playerDto.id,
+                playerName,
+                teamName,
+                playerImageUrl,
+                playerDto.total_points,
+                currentPrice,
+                playerDto.goals_scored,
+                playerDto.assists
+            )
         }
         database.fantasyPremierLeagueDao().insertPlayerList(playerList)
 
@@ -98,12 +96,11 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
             val homeTeamName = homeTeam?.name ?: ""
             val awayTeamName = awayTeam?.name ?: ""
-
             val homeTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${homeTeam?.code}.png"
             val awayTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${awayTeam?.code}.png"
 
             val localKickoffTime = fixtureDto.kickoff_time.toString().toInstant()
-                    .toLocalDateTime(TimeZone.currentSystemDefault())
+                .toLocalDateTime(TimeZone.currentSystemDefault())
 
             GameFixture(
                 fixtureDto.id,

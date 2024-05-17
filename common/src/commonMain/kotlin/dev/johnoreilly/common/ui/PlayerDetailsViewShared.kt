@@ -35,12 +35,14 @@ import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun PlayerDetailsViewShared(player: Player) {
-
-    val viewModel = koinInject<PlayerDetailsViewModel>()
+    val viewModel = koinViewModel<PlayerDetailsViewModel>()
 
     var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }
     LaunchedEffect(player) {
@@ -244,7 +246,7 @@ private fun BarSamplePlot(
                 series = listOf(barChartEntries.value),
                 bar = { _, _, value ->
                     DefaultVerticalBar(
-                        brush = SolidColor(Color(0xFF3179EA)),
+                        brush = SolidColor(Color.Blue),
                         modifier = Modifier.fillMaxWidth(barWidth),
                     ) {
                         HoverSurface { Text(value.yMax.toString()) }

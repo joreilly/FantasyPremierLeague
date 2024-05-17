@@ -56,6 +56,7 @@ kotlin {
 
             api(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.composeVM)
             implementation(libs.koin.test)
 
             implementation(libs.bundles.ktor.common)
