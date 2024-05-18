@@ -3,7 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
-    id("org.jetbrains.compose") version libs.versions.composeMultiplatform
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
     application
 }
 

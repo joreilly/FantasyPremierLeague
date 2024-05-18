@@ -11,8 +11,12 @@ import kotlinx.datetime.LocalDateTime
 
 @Database(entities = [Team::class, Player::class, GameFixture::class], version = 1)
 @TypeConverters(LocalDateTimeConverter::class)
-abstract class AppDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase(), DB {
     abstract fun fantasyPremierLeagueDao(): FantasyPremierLeagueDao
+
+    override fun clearAllTables() {
+        super.clearAllTables()
+    }
 }
 
 internal const val dbFileName = "fantasypremierleague.db"
@@ -28,4 +32,11 @@ class LocalDateTimeConverter {
     fun dateToTimestamp(date: LocalDateTime?): String? {
         return date?.toString()
     }
+}
+
+
+// FIXME: Added a hack to resolve below issue:
+// Class 'AppDatabase_Impl' is not abstract and does not implement abstract base class member 'clearAllTables'.
+interface DB {
+    fun clearAllTables(): Unit {}
 }

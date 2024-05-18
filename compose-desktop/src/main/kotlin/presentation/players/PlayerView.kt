@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.unit.dp
-import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.model.Player
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
