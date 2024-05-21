@@ -18,14 +18,14 @@ open class LeaguesViewModel : ViewModel(), KoinComponent {
 
 
     val leagues: StateFlow<List<String>> = repository.leagues
-        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
 
     var leagueStandings = repository.leagues.map { leagues ->
         leagues.map { leagueId ->
             repository.getLeagueStandings(leagueId.trim().toInt())
         }
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+    }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     private val _isRefreshing = MutableStateFlow(false)
 

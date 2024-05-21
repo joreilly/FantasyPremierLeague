@@ -28,7 +28,7 @@ open class PlayerListViewModel : ViewModel(), KoinComponent {
     private val repository: FantasyPremierLeagueRepository by inject()
 
     val allPlayers = repository.getPlayers()
-        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     val searchQuery = MutableStateFlow("")
     val playerListUIState: StateFlow<PlayerListUIState> =
@@ -43,7 +43,7 @@ open class PlayerListViewModel : ViewModel(), KoinComponent {
                     PlayerListUIState.Loading
                 }
             }
-        }.stateIn(viewModelScope, SharingStarted.Eagerly, PlayerListUIState.Loading)
+        }.stateIn(viewModelScope, SharingStarted.Lazily, PlayerListUIState.Loading)
 
     fun onPlayerSearchQueryChange(query: String) {
         searchQuery.value = query
