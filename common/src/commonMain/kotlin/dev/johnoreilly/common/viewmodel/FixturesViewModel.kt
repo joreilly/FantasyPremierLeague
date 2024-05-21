@@ -16,7 +16,7 @@ open class FixturesViewModel : ViewModel(), KoinComponent {
 
     val gameWeekFixtures = repository.getFixtures().map {
         it.groupBy { it.event }
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+    }.stateIn(viewModelScope, SharingStarted.Lazily, emptyMap())
 
     val currentGameweek: StateFlow<Int>
         get() = repository.currentGameweek
