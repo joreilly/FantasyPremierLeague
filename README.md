@@ -36,6 +36,19 @@ This project currently uses iOS16 features (e.g. Swift Charts) so requires use o
 
 <img width="932" alt="Screenshot 2024-04-06 at 11 03 36" src="https://github.com/joreilly/FantasyPremierLeague/assets/6302/53cba0ea-1175-4349-ab1f-9aba4f8f0066">
 
+## Full set of Kotlin Multiplatform/Compose/SwiftUI samples
+
+*  PeopleInSpace (https://github.com/joreilly/PeopleInSpace)
+*  GalwayBus (https://github.com/joreilly/GalwayBus)
+*  Confetti (https://github.com/joreilly/Confetti)
+*  BikeShare (https://github.com/joreilly/BikeShare)
+*  FantasyPremierLeague (https://github.com/joreilly/FantasyPremierLeague)
+*  ClimateTrace (https://github.com/joreilly/ClimateTraceKMP)
+*  GeminiKMP (https://github.com/joreilly/GeminiKMP)
+*  MortyComposeKMM (https://github.com/joreilly/MortyComposeKMM)
+*  StarWars (https://github.com/joreilly/StarWars)
+*  WordMasterKMP (https://github.com/joreilly/WordMasterKMP)
+*  Chip-8 (https://github.com/joreilly/chip-8)
 
 
 
