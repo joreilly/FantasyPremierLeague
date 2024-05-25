@@ -1,13 +1,15 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_1_9
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    kotlin("multiplatform")
-    id("kotlinx-serialization")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinx.serialization)
     id("com.android.library")
-    id("org.jetbrains.compose") version libs.versions.composeMultiplatform
-    id("com.google.devtools.ksp")
-    id("co.touchlab.skie")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.skie)
     alias(libs.plugins.room)
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -39,11 +41,16 @@ kotlin {
     jvm()
 
 
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
-        languageVersion.set(KOTLIN_1_9)
+        languageVersion.set(KotlinVersion.KOTLIN_2_0)
     }
 
     sourceSets {
+        sourceSets.commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata")
+        }
+
         all {
             languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
         }
@@ -102,12 +109,16 @@ kotlin.sourceSets.all {
 
 
 dependencies {
-    add("kspAndroid", libs.androidx.room.compiler)
-    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
-    add("kspIosX64", libs.androidx.room.compiler)
-    add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspCommonMainMetadata", libs.androidx.room.compiler)
 }
+
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata" ) {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }

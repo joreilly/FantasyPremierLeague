@@ -21,7 +21,7 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
-import dev.johnoreilly.common.domain.entities.Player
+import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.ui.PlayerDetailsViewShared
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -63,12 +63,13 @@ fun MainLayout() {
 
     val searchQuery = MutableStateFlow("")
     val playerList by searchQuery.debounce(250).flatMapLatest { searchQueryValue ->
-        repository.playerList.mapLatest { playerList ->
+        repository.getPlayers().mapLatest { playerList ->
             playerList
                 .filter { it.name.contains(searchQueryValue, ignoreCase = true) }
                 .sortedByDescending { it.points }
         }
     }.collectAsState(emptyList())
+
 
     BoxWithConstraints {
         if (maxWidth.value > 700) {

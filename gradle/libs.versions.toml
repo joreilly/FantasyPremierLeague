@@ -1,28 +1,27 @@
 [versions]
-kotlin = "1.9.23"
-ksp = "1.9.23-1.0.19"
-coroutines = "1.8.0"
-kotlinxSerialization = "1.6.3"
-kotlinxDateTime = "0.5.0"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.21"
+kotlinx-coroutines = "1.8.1"
+kotlinx-serialization = "1.6.3"
+kotlinx-dateTime = "0.6.0"
+
 androidGradlePlugin = "8.2.2"
 koalaplot = "0.5.3"
 koin = "3.6.0-Beta4"
 koinCompose = "3.6.0-Beta4"
 koinComposeMultiplatform = "1.2.0-Beta4"
-ktor = "2.3.9"
+ktor = "2.3.11"
 slf4j = "2.0.12"
-skie = "0.6.2"
+skie = "0.8.0"
 datastore = "1.1.1"
 
 androidxActivity = "1.9.0"
-androidxComposeCompiler = "1.5.11-dev-k1.9.23-96ef9dc6af1"
-jbComposeCompiler = "1.5.8"
-androidxComposeBom = "2024.04.01"
-androidxNavigationCompose = "2.8.0-alpha08"
-androidxLifecycle = "2.8.0-rc01"
-androidxRoom = "2.7.0-alpha01"
+androidxComposeBom = "2024.05.00"
+androidxNavigationCompose = "2.8.0-beta01"
+androidxLifecycle = "2.8.0"
+androidxRoom = "2.7.0-alpha02"
 sqlite = "2.5.0-SNAPSHOT"
-composeMultiplatform = "1.6.1"
+compose-plugin = "1.6.10"
 accompanist = "0.32.0"
 coilCompose = "2.6.0"
 image-loader = "1.7.8"
@@ -34,9 +33,9 @@ compileSdk = "34"
 
 
 [libraries]
-kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
-kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDateTime" }
-kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-dateTime" }
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
@@ -97,6 +96,8 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 skie = { id = "co.touchlab.skie", version.ref = "skie"}
 room = { id = "androidx.room", version.ref = "androidxRoom" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
