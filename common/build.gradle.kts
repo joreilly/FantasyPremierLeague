@@ -107,6 +107,11 @@ kotlin.sourceSets.all {
     languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
 }
 
+skie {
+    features {
+        enableSwiftUIObservingPreview = true
+    }
+}
 
 dependencies {
     add("kspCommonMainMetadata", libs.androidx.room.compiler)
