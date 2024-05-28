@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		113C59A62C05E19700101B4E /* SharedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113C59A52C05E19700101B4E /* SharedViewModel.swift */; };
 		1A0F7AE225C5C96F00EB34CF /* FantasyPremierLeagueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0F7AE125C5C96F00EB34CF /* FantasyPremierLeagueApp.swift */; };
 		1A0F7AE425C5C96F00EB34CF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0F7AE325C5C96F00EB34CF /* ContentView.swift */; };
 		1A0F7AE625C5C97000EB34CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0F7AE525C5C97000EB34CF /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		113C59A52C05E19700101B4E /* SharedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewModel.swift; sourceTree = "<group>"; };
 		1A0F7ADE25C5C96F00EB34CF /* FantasyPremierLeague.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FantasyPremierLeague.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0F7AE125C5C96F00EB34CF /* FantasyPremierLeagueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FantasyPremierLeagueApp.swift; sourceTree = "<group>"; };
 		1A0F7AE325C5C96F00EB34CF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				1A0F7AEA25C5C97000EB34CF /* Info.plist */,
 				1A0F7AE725C5C97000EB34CF /* Preview Content */,
 				1AD9A1242AA355F500B14FE3 /* SettingsView.swift */,
+				113C59A52C05E19700101B4E /* SharedViewModel.swift */,
 			);
 			path = FantasyPremierLeague;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A45B23B25CB3BF100A8C613 /* PlayerDetailsView.swift in Sources */,
+				113C59A62C05E19700101B4E /* SharedViewModel.swift in Sources */,
 				1A1D2B32289EA235000149CC /* LeagueListView.swift in Sources */,
 				1A45B23825CB3BBE00A8C613 /* PlayerListView.swift in Sources */,
 				1AD9A1252AA355F500B14FE3 /* SettingsView.swift in Sources */,

@@ -2,7 +2,7 @@ import SwiftUI
 import FantasyPremierLeagueKit
 
 struct SettingsView: View {
-    @State var viewModel = LeaguesViewModel()
+    @StateObject var viewModel = SharedViewModel<LeaguesViewModel>()
     @State var leagueListString = ""
     
     var body: some View {
@@ -12,7 +12,7 @@ struct SettingsView: View {
                 
                 Button("Save") {
                     let leagues = leagueListString.components(separatedBy:", ")
-                    viewModel.updateLeagues(leagues: leagues)
+                    viewModel.instance.updateLeagues(leagues: leagues)
                 }
             }
             .navigationBarTitle("Settings")

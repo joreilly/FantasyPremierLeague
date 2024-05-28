@@ -6,7 +6,7 @@ import FantasyPremierLeagueKit
 extension GameFixture: Identifiable { }
 
 struct FixtureListView: View {
-    @State var viewModel = FixturesViewModel()
+    @StateObject var viewModel = SharedViewModel<FixturesViewModel>()
     
     @State var gameWeekFixtures = [Int: [GameFixture]]()
     
@@ -40,7 +40,7 @@ struct FixtureListView: View {
                         UITableView.appearance().separatorStyle = .none
                     }
                     .task {
-                        for await data in viewModel.gameWeekFixtures {
+                        for await data in viewModel.instance.gameWeekFixtures {
                             gameWeekFixtures = data as! [Int : [GameFixture]]
                         }
                     }
