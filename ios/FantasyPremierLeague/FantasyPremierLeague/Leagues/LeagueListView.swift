@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import FantasyPremierLeagueKit
 
 
@@ -10,11 +9,16 @@ extension LeagueStandingsDto: Identifiable { }
 
 
 struct LeagueListView: View {
-    @State var viewModel = LeaguesViewModel()
+    @StateObject var viewModelStoreOwner = SharedViewModelStoreOwner<LeaguesViewModel>()
+    @State var viewModel: LeaguesViewModel = .init()
+
     
     @State var leagueStandingsList = [LeagueStandingsDto]()
     @State var eventStatusList = [EventStatusDto]()
 
+    init() {
+        viewModel = viewModelStoreOwner.instance
+    }
     
     var body: some View {
         NavigationStack {
@@ -36,10 +40,9 @@ struct LeagueListView: View {
                         Section(header: Text(leagueStandings.league.name), content: {
                             ForEach(leagueStandings.standings.results) { leagueResult in
                                 LeagueReesultView(leagueResult: leagueResult)
-                            }                            
+                            }
                         })
                     }
-                    
                 }
             }
             .navigationBarTitle(Text("Leagues"))
