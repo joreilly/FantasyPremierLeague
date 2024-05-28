@@ -2,7 +2,7 @@
 //  SharedViewModel.swift
 //  FantasyPremierLeague
 //
-//  Created by François Dabonot on 28/05/2024.
+//  Created by frankois944 on 28/05/2024.
 //
 
 import Foundation
