@@ -10,7 +10,7 @@ extension LeagueStandingsDto: Identifiable { }
 
 
 struct LeagueListView: View {
-    @State var viewModel = LeaguesViewModel()
+    @StateObject var viewModel = SharedViewModel<LeaguesViewModel>()
     
     @State var leagueStandingsList = [LeagueStandingsDto]()
     @State var eventStatusList = [EventStatusDto]()
@@ -51,9 +51,9 @@ struct LeagueListView: View {
             )
             .task {
                 do {
-                    try await eventStatusList = viewModel.getEventStatus()
+                    try await eventStatusList = viewModel.instance.getEventStatus()
                     
-                    for await data in viewModel.leagueStandings {
+                    for await data in viewModel.instance.leagueStandings {
                         leagueStandingsList = data
                     }
                 } catch {
