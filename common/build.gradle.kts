@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
@@ -33,6 +35,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
+            export(libs.androidx.lifecycle.viewmodel)
             baseName = "FantasyPremierLeagueKit"
         }
     }
@@ -67,7 +70,7 @@ kotlin {
             implementation(libs.koin.test)
 
             implementation(libs.bundles.ktor.common)
-            implementation(libs.androidx.lifecycle.viewmodel)
+            api(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.datastore.preferences)

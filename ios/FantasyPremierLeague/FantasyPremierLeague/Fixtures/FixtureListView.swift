@@ -1,16 +1,18 @@
 import SwiftUI
-import Combine
 import FantasyPremierLeagueKit
 
 
 extension GameFixture: Identifiable { }
 
 struct FixtureListView: View {
-    @State var viewModel = FixturesViewModel()
-    
-    @State var gameWeekFixtures = [Int: [GameFixture]]()
-    
+    @StateObject var viewModelStoreOwner = SharedViewModelStoreOwner<FixturesViewModel>()
+    @State var viewModel: FixturesViewModel = .init()
     @State var gameWeek = 1
+    
+    init() {
+        viewModel = viewModelStoreOwner.instance
+    }
+
     
     var body: some View {
         VStack {
@@ -29,19 +31,17 @@ struct FixtureListView: View {
                           Image(systemName: "arrow.right")
                         }
                     }
-                    List(gameWeekFixtures[gameWeek] ?? []) { fixture in
-                        NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
-                            FixtureView(fixture: fixture)
+                    
+                    Observing(viewModel.gameWeekFixtures) { gameWeekFixtures  in
+                        List(gameWeekFixtures[KotlinInt(integerLiteral: gameWeek)] ?? []) { fixture in
+                            NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
+                                FixtureView(fixture: fixture)
+                            }
                         }
-                    }
-                    .listStyle(.plain)
-                    .navigationBarTitle(Text("Fixtures"))
-                    .onAppear {
-                        UITableView.appearance().separatorStyle = .none
-                    }
-                    .task {
-                        for await data in viewModel.gameWeekFixtures {
-                            gameWeekFixtures = data as! [Int : [GameFixture]]
+                        .listStyle(.plain)
+                        .navigationBarTitle(Text("Fixtures"))
+                        .onAppear {
+                            UITableView.appearance().separatorStyle = .none
                         }
                     }
                 }

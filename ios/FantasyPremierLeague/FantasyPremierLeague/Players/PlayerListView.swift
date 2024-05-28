@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import FantasyPremierLeagueKit
 
 
@@ -17,8 +16,13 @@ struct MyPropertyWrapper: DynamicProperty {
 extension Player: Identifiable { }
 
 struct PlayerListView: View {
-    @State var viewModel = PlayerListViewModel()
-    
+    @StateObject var viewModelStoreOwner = SharedViewModelStoreOwner<PlayerListViewModel>()
+    @State var viewModel: PlayerListViewModel = .init()
+     
+    init() {
+        viewModel = viewModelStoreOwner.instance
+    }
+
     var body: some View {
         NavigationView {
             VStack {
