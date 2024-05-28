@@ -28,7 +28,7 @@ open class PlayerListViewModel : ViewModel(), KoinComponent {
     private val repository: FantasyPremierLeagueRepository by inject()
 
     val allPlayers = repository.getPlayers()
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     val searchQuery = MutableStateFlow("")
     val playerListUIState: StateFlow<PlayerListUIState> =

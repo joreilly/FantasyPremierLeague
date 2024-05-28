@@ -18,7 +18,7 @@ open class LeaguesViewModel : ViewModel(), KoinComponent {
 
 
     val leagues: StateFlow<List<String>> = repository.leagues
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
 
     var leagueStandings = repository.leagues.map { leagues ->
