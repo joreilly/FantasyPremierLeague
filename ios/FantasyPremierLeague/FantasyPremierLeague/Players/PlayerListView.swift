@@ -17,16 +17,11 @@ extension Player: Identifiable { }
 
 struct PlayerListView: View {
     @StateObject var viewModelStoreOwner = SharedViewModelStoreOwner<PlayerListViewModel>()
-    @State var viewModel: PlayerListViewModel = .init()
      
-    init() {
-        viewModel = viewModelStoreOwner.instance
-    }
-
     var body: some View {
         NavigationView {
             VStack {
-                Observing(viewModel.playerListUIState) { playerListUIState in
+                Observing(viewModelStoreOwner.instance.playerListUIState) { playerListUIState in
                     switch onEnum(of: playerListUIState) {
                     case .loading:
                         ProgressView()
