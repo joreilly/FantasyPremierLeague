@@ -6,13 +6,7 @@ extension GameFixture: Identifiable { }
 
 struct FixtureListView: View {
     @StateObject var viewModelStoreOwner = SharedViewModelStoreOwner<FixturesViewModel>()
-    @State var viewModel: FixturesViewModel = .init()
     @State var gameWeek = 1
-    
-    init() {
-        viewModel = viewModelStoreOwner.instance
-    }
-
     
     var body: some View {
         VStack {
@@ -32,7 +26,7 @@ struct FixtureListView: View {
                         }
                     }
                     
-                    Observing(viewModel.gameWeekFixtures) { gameWeekFixtures  in
+                    Observing(viewModelStoreOwner.instance.gameWeekFixtures) { gameWeekFixtures  in
                         List(gameWeekFixtures[KotlinInt(integerLiteral: gameWeek)] ?? []) { fixture in
                             NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
                                 FixtureView(fixture: fixture)
