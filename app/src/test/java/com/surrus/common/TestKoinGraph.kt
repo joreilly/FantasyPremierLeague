@@ -1,25 +1,17 @@
 package com.surrus.common
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
-import dev.johnoreilly.common.di.initKoin
 import dev.johnoreilly.fantasypremierleague.di.appModule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
-import org.koin.test.check.checkModules
+import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.test.verify.verify
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class TestKoinGraph  {
-    private val context = getApplicationContext<Context>()
-
+    @OptIn(KoinExperimentalAPI::class)
     @Test
     fun `checking koin modules`() {
-        initKoin {
-            androidContext(context)
-            modules(appModule)
-        }
-        //.checkModules {  }
+        appModule.verify()
     }
 }
