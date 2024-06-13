@@ -12,6 +12,7 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 .idea
+.kotlin
 *.iml
 .gradle
 /local.properties
