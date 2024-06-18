@@ -106,9 +106,9 @@ kotlin {
     }
 }
 
-kotlin.sourceSets.all {
-    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
-}
+//kotlin.sourceSets.all {
+//    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+//}
 
 skie {
     features {
