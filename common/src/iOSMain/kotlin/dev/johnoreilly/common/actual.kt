@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import dev.johnoreilly.common.database.AppDatabase
 import dev.johnoreilly.common.database.dbFileName
-import dev.johnoreilly.common.database.instantiateImpl
 import io.ktor.client.engine.darwin.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -19,7 +18,7 @@ import platform.Foundation.NSUserDomainMask
 
 actual fun platformModule() = module {
     single { Darwin.create() }
-    single { dataStore()}
+    single { dataStore() }
 
     single<AppDatabase> { createRoomDatabase() }
 }
@@ -27,10 +26,8 @@ actual fun platformModule() = module {
 
 fun createRoomDatabase(): AppDatabase {
     val dbFile = "${fileDirectory()}/$dbFileName"
-    return Room.databaseBuilder<AppDatabase>(
-        name = dbFile,
-        factory =  { AppDatabase::class.instantiateImpl() }
-    ).setDriver(BundledSQLiteDriver())
+    return Room.databaseBuilder<AppDatabase>(name = dbFile)
+        .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
         .build()
 }
