@@ -6,12 +6,12 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinx.serialization)
-    id("com.android.library")
     alias(libs.plugins.ksp)
     alias(libs.plugins.skie)
     alias(libs.plugins.room)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    id("com.android.library")
 }
 
 kotlin {
@@ -50,10 +50,6 @@ kotlin {
     }
 
     sourceSets {
-        sourceSets.commonMain {
-            kotlin.srcDir("build/generated/ksp/metadata")
-        }
-
         all {
             languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
         }
@@ -106,10 +102,6 @@ kotlin {
     }
 }
 
-//kotlin.sourceSets.all {
-//    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
-//}
-
 skie {
     features {
         enableSwiftUIObservingPreview = true
@@ -117,16 +109,13 @@ skie {
 }
 
 dependencies {
-    add("kspCommonMainMetadata", libs.androidx.room.compiler)
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspIosX64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspJvm", libs.androidx.room.compiler)
 }
-
 
 room {
     schemaDirectory("$projectDir/schemas")
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
-    if (name != "kspCommonMainKotlinMetadata" ) {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
 }
