@@ -1,29 +1,27 @@
 [versions]
-kotlin = "2.0.0"
-ksp = "2.0.0-1.0.23"
-kotlinx-coroutines = "1.9.0-RC"
-kotlinx-serialization = "1.7.1"
+kotlin = "2.0.20"
+ksp = "2.0.20-1.0.24"
+kotlinx-coroutines = "1.9.0"
+kotlinx-serialization = "1.7.2"
 kotlinx-dateTime = "0.6.0"
 
-androidGradlePlugin = "8.5.1"
+androidGradlePlugin = "8.5.2"
 koalaplot = "0.5.3"
-koin = "3.6.0-Beta4"
-koinCompose = "3.6.0-Beta4"
-koinComposeMultiplatform = "1.2.0-Beta4"
+koin = "4.0.0-RC2"
 ktor = "2.3.12"
 slf4j = "2.0.13"
-skie = "0.8.3"
+skie = "0.9.0-RC.3"
 datastore = "1.1.1"
 
-androidxActivity = "1.9.1"
-androidxComposeBom = "2024.06.00"
-androidxNavigationCompose = "2.8.0-beta06"
-androidxLifecycle = "2.8.4"
+androidxActivity = "1.9.2"
+androidxComposeBom = "2024.09.01"
+androidxNavigationCompose = "2.8.0"
+androidxLifecycle = "2.8.5"
 androidxRoom = "2.7.0-alpha07"
-sqlite = "2.5.0-SNAPSHOT"
-compose-plugin = "1.6.11"
+sqlite = "2.5.0-alpha07"
+compose-plugin = "1.7.0-beta02"
 accompanist = "0.32.0"
-coilCompose = "2.6.0"
+coilCompose = "2.7.0"
 image-loader = "1.7.8"
 junit = "4.13.2"
 kermit = "2.0.4"
@@ -31,8 +29,14 @@ minSdk = "24"
 targetSdk = "34"
 compileSdk = "34"
 
+multikApi = "0.1.1"
+multikJvm = "0.1.1"
+okalgo = "0.0.2"
+kotlinStatistics = "1.2.1"
+
 
 [libraries]
+kotlin-statistics = { module = "org.nield:kotlin-statistics", version.ref = "kotlinStatistics" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-dateTime" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
@@ -57,6 +61,9 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
+multik-api = { module = "org.jetbrains.kotlinx:multik-api", version.ref = "multikApi" }
+multik-jvm = { module = "org.jetbrains.kotlinx:multik-jvm", version.ref = "multikJvm" }
+okalgo = { module = "org.ojalgo:okalgo", version.ref = "okalgo" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
@@ -67,10 +74,10 @@ image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imag
 koalaplot-core = { module = "io.github.koalaplot:koalaplot-core", version.ref = "koalaplot" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeMultiplatform" }
-koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeMultiplatform" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
