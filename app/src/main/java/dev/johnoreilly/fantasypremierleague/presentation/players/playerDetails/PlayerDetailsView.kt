@@ -13,10 +13,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import dev.johnoreilly.common.model.Player
+import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.ui.PlayerDetailsViewShared
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 import org.koin.compose.koinInject
@@ -32,6 +37,11 @@ fun PlayerDetailsView(playerId: Int, popBackStack: () -> Unit) {
     }
 
     player?.let { player ->
+        var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }
+        LaunchedEffect(player) {
+            playerHistory = viewModel.getPlayerHistory(player.id)
+        }
+
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
@@ -46,7 +56,7 @@ fun PlayerDetailsView(playerId: Int, popBackStack: () -> Unit) {
                 )
             }) {
             Column(Modifier.padding(it)) {
-                PlayerDetailsViewShared(player)
+                PlayerDetailsViewShared(player, playerHistory)
             }
         }
     }

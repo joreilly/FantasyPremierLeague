@@ -22,6 +22,7 @@ import androidx.compose.ui.window.rememberWindowState
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
 import dev.johnoreilly.common.model.Player
+import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.ui.PlayerDetailsViewShared
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -58,8 +59,15 @@ fun main() = application {
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 @Composable
 fun MainLayout() {
-    val selectedPlayer = remember { mutableStateOf<Player?>(null) }
+    var selectedPlayer by remember { mutableStateOf<Player?>(null) }
     val repository = koin.get<FantasyPremierLeagueRepository>()
+
+    var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }
+    LaunchedEffect(selectedPlayer) {
+        selectedPlayer?.let {
+            playerHistory = repository.getPlayerHistoryData(it.id)
+        }
+    }
 
     val searchQuery = MutableStateFlow("")
     val playerList by searchQuery.debounce(250).flatMapLatest { searchQueryValue ->
@@ -73,9 +81,11 @@ fun MainLayout() {
 
     BoxWithConstraints {
         if (maxWidth.value > 700) {
-            TwoColumnsLayout(playerList, selectedPlayer)
+            TwoColumnsLayout(playerList, selectedPlayer, playerHistory) {
+                selectedPlayer = it
+            }
         } else {
-            PlayerListView(playerList, selectedPlayer.value) {}
+            PlayerListView(playerList, selectedPlayer) {}
         }
     }
 }
@@ -84,16 +94,18 @@ fun MainLayout() {
 @Composable
 fun TwoColumnsLayout(
     playerList: List<Player>,
-    selectedPlayer: MutableState<Player?>
+    selectedPlayer: Player?,
+    playerHistory: List<PlayerPastHistory>,
+    playerSelected: (player: Player) -> Unit
 ) {
     Row(Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxWidth(0.3f), contentAlignment = Alignment.Center) {
-            PlayerListView(playerList, selectedPlayer.value) {
-                selectedPlayer.value = it
+            PlayerListView(playerList, selectedPlayer) {
+                playerSelected(it)
             }
         }
-        selectedPlayer.value?.let { player ->
-            PlayerDetailsViewShared(player)
+        selectedPlayer?.let { player ->
+            PlayerDetailsViewShared(player, playerHistory)
         }
     }
 }
