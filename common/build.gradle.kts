@@ -84,6 +84,7 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
+            implementation(libs.androidx.compose.ui.tooling)
         }
 
         iosMain.dependencies {

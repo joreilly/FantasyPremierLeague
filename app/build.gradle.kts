@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.screenshot)
 }
 
 android {
@@ -49,6 +50,9 @@ android {
             excludes += "/META-INF/versions/**"
         }
     }
+
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
+
     namespace = "dev.johnoreilly.fantasypremierleague"
 }
 
