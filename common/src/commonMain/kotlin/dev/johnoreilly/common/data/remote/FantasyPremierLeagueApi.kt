@@ -17,11 +17,16 @@ class FantasyPremierLeagueApi(
     private val baseUrl: String = "https://fantasy.premierleague.com/api",
 ) : KoinComponent {
 
-    suspend fun fetchBootstrapStaticInfo() = client.get("$baseUrl/bootstrap-static/").body<BootstrapStaticInfoDto>()
-    suspend fun fetchFixtures() = client.get("$baseUrl/fixtures").body<List<FixtureDto>>()
-    suspend fun fetchUpcomingFixtures() = client.get("$baseUrl/fixtures?future=1").body<List<FixtureDto>>()
-    suspend fun fetchGameWeekLiveData(eventId: Int) = client.get("$baseUrl/event/$eventId/live/").body<GameWeekLiveDataDto>()
-    suspend fun fetchPlayerData(playerId: Int) = client.get("$baseUrl/element-summary/$playerId/").body<ElementSummaryDto>()
-    suspend fun fetchLeagueStandings(leagueId: Int) = client.get("$baseUrl/leagues-classic/$leagueId/standings/").body<LeagueStandingsDto>()
-    suspend fun fetchEventStatus() = client.get("$baseUrl/event-status/").body<EventStatusListDto>()
+    private suspend inline fun <reified T> fetchData(endpoint: String): T {
+        return client.get("$baseUrl/$endpoint").body()
+    }
+
+    suspend fun fetchBootstrapStaticInfo() = fetchData<BootstrapStaticInfoDto>("bootstrap-static/")
+    suspend fun fetchFixtures() = fetchData<List<FixtureDto>>("fixtures")
+    suspend fun fetchUpcomingFixtures() = fetchData<List<FixtureDto>>("fixtures?future=1")
+    suspend fun fetchGameWeekLiveData(eventId: Int) = fetchData<GameWeekLiveDataDto>("event/$eventId/live/")
+    suspend fun fetchPlayerData(playerId: Int) = fetchData<ElementSummaryDto>("element-summary/$playerId/")
+    suspend fun fetchLeagueStandings(leagueId: Int) = fetchData<LeagueStandingsDto>("leagues-classic/$leagueId/standings/")
+    suspend fun fetchEventStatus() = fetchData<EventStatusListDto>("event-status/")
 }
+
