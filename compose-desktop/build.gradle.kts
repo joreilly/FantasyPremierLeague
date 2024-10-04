@@ -13,7 +13,7 @@ version = "1.0-SNAPSHOT"
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation(project(":common"))
+    implementation(projects.common)
 }
 
 application {
