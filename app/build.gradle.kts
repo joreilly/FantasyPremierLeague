@@ -93,5 +93,5 @@ dependencies {
     testImplementation("org.robolectric:robolectric:4.13")
     androidTestImplementation("androidx.test:runner:1.6.2")
 
-    implementation(project(":common"))
+    implementation(projects.common)
 }
