@@ -69,7 +69,7 @@ fun FixtureDetailsView(fixtureId: Int, popBackStack: () -> Unit) {
                         fixture.homeTeamPhotoUrl
                     )
                     Text(
-                        text = "(${fixture.homeTeamScore})",
+                        text = "${fixture.homeTeamScore ?: ""}",
                         fontWeight = FontWeight.Bold,
                         fontSize = 25.sp
                     )
@@ -79,7 +79,7 @@ fun FixtureDetailsView(fixtureId: Int, popBackStack: () -> Unit) {
                         fontSize = 25.sp
                     )
                     Text(
-                        text = "(${fixture.awayTeamScore})",
+                        text = "${fixture.awayTeamScore ?: ""}",
                         fontWeight = FontWeight.Bold,
                         fontSize = 25.sp
                     )

@@ -56,7 +56,7 @@ fun FixtureView(
                     fixture.homeTeamPhotoUrl
                 )
                 Text(
-                    text = "${fixture.homeTeamScore}",
+                    text = "${fixture.homeTeamScore ?: ""}",
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp
                 )
@@ -67,7 +67,7 @@ fun FixtureView(
                         .background(color = maroon200)
                 )
                 Text(
-                    text = "${fixture.awayTeamScore}",
+                    text = "${fixture.awayTeamScore ?: ""}",
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp
                 )
