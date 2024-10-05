@@ -26,19 +26,19 @@ val bottomNavigationItems = listOf(
     BottomNavigationitem(
         Screen.PlayerListScreen.title,
         Icons.Default.Person,
-        "Player",
+        iconContentDescription = "Player",
         label = "Players"
     ),
     BottomNavigationitem(
         Screen.FixtureListScreen.title,
         Icons.Filled.DateRange,
-        "Fixtures",
+        iconContentDescription = "Fixtures",
         label = "Fixtures"
     ),
     BottomNavigationitem(
         Screen.LeagueStandingsListScreen.title,
         Icons.Filled.List,
-        "League",
+        iconContentDescription = "League",
         label = "League"
     )
 )
