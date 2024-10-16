@@ -13,7 +13,7 @@ slf4j = "2.0.16"
 skie = "0.9.3"
 datastore = "1.1.1"
 
-androidxActivity = "1.9.2"
+androidxActivity = "1.9.3"
 androidxComposeBom = "2024.09.03"
 androidxNavigationCompose = "2.8.2"
 androidxLifecycle = "2.8.6"
