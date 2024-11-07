@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -133,6 +134,7 @@ private fun FantasyPremierLeagueBottomNavigation(navController: NavHostControlle
                     )
                 },
                 selected = currentRoute == bottomNavigationItem.route,
+                label = { Text(text = bottomNavigationItem.label)},
                 onClick = {
                     navController.navigate(bottomNavigationItem.route) {
                         popUpTo(navController.graph.id)
