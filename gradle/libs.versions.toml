@@ -28,7 +28,7 @@ kermit = "2.0.4"
 minSdk = "24"
 targetSdk = "34"
 compileSdk = "34"
-screenshot = "0.0.1-alpha07"
+screenshot = "0.0.1-alpha08"
 
 multikApi = "0.1.1"
 multikJvm = "0.1.1"
