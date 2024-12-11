@@ -14,7 +14,7 @@ skie = "0.9.3"
 datastore = "1.1.1"
 
 androidxActivity = "1.9.3"
-androidxComposeBom = "2024.10.01"
+androidxComposeBom = "2024.12.01"
 androidxNavigationCompose = "2.8.3"
 androidxLifecycle = "2.8.7"
 androidxRoom = "2.7.0-alpha11"
