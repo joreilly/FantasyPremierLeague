@@ -18,6 +18,6 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - name: Build iOS app
-        run: xcodebuild -allowProvisioningUpdates -workspace ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj/project.xcworkspace -configuration Debug -scheme FantasyPremierLeague -sdk iphoneos -destination name='iPhone 14' build
+        run: xcodebuild -allowProvisioningUpdates -workspace ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj/project.xcworkspace -configuration Debug -scheme FantasyPremierLeague -sdk iphoneos -destination name='iPhone 15 Pro' build
 
 
