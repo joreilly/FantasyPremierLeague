@@ -6,7 +6,7 @@ kotlinx-serialization = "1.7.3"
 kotlinx-dateTime = "0.6.1"
 
 androidGradlePlugin = "8.7.3"
-koalaplot = "0.5.3"
+koalaplot = "0.8.0"
 koin = "4.0.0"
 ktor = "3.0.1"
 slf4j = "2.0.16"
