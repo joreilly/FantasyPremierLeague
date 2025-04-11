@@ -9,7 +9,7 @@ androidGradlePlugin = "8.9.0"
 koalaplot = "0.5.3"
 koin = "4.0.4"
 ktor = "3.1.1"
-slf4j = "2.0.16"
+slf4j = "2.0.17"
 skie = "0.10.1"
 datastore = "1.1.4"
 
