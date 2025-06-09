@@ -26,13 +26,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.placeholder.placeholder
+import dev.johnoreilly.common.di.commonModule
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.viewmodel.PlayerListUIState
 import dev.johnoreilly.common.viewmodel.PlayerListViewModel
+import dev.johnoreilly.fantasypremierleague.di.appModule
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinApplicationPreview
+
+
+@Preview
+@Composable
+fun PreviewPlayerListView() {
+    KoinApplicationPreview(application = { modules(appModule, commonModule(false)) }) {
+        SomeComposable()
+    }
+}
+
+@Composable
+fun SomeComposable() {
+    val playerListViewModel = koinViewModel<PlayerListViewModel>()
+    Text("hey there")
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
