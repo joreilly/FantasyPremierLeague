@@ -23,9 +23,8 @@ gradle-app.setting
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
 /captures
-
+**/build/
 
 *.xcuserstate
 *.xcscheme

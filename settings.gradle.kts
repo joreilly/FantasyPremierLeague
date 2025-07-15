@@ -18,3 +18,4 @@ rootProject.name = "FantasyPremierLeague"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app", ":common")
 include("compose-desktop")
+include("mcp-server")
