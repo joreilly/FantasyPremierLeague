@@ -1,0 +1,38 @@
+{
+  "dxt_version": "0.1",
+  "name": "desktop-extension",
+  "display_name": "FantasyPremierLeague",
+  "version": "1.0.0",
+  "description": "FantasyPremierLeague MCP Server",
+  "author": {
+    "name": "John O'Reilly"
+  },
+  "server": {
+    "type": "binary",
+    "entry_point": "server/serverAll.jar",
+    "mcp_config": {
+      "command": "java",
+      "args": [
+        "-jar",
+        "${__dirname}/server/serverAll.jar",
+        "--stdio"
+      ],
+      "env": {}
+    }
+  },
+  "tools": [
+    {
+      "name": "get-players",
+      "description": "List of players"
+    },
+    {
+      "name": "get-fixtures",
+      "description": "List of fixtures"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joreilly/FantasyPremierLeague"
+  }
+}

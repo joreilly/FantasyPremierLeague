@@ -5,10 +5,10 @@ kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-dateTime = "0.6.0"
 
-androidGradlePlugin = "8.11.0"
+androidGradlePlugin = "8.11.1"
 koalaplot = "0.5.3"
 koin = "4.1.0"
-ktor = "3.2.1"
+ktor = "3.2.2"
 slf4j = "2.0.17"
 skie = "0.10.4"
 datastore = "1.1.7"
@@ -34,6 +34,8 @@ multikApi = "0.1.1"
 multikJvm = "0.1.1"
 okalgo = "0.0.2"
 kotlinStatistics = "1.2.1"
+mcp = "0.5.0"
+shadowPlugin = "8.1.1"
 
 
 [libraries]
@@ -95,6 +97,8 @@ slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
+mcp-kotlin = { group = "io.modelcontextprotocol", name = "kotlin-sdk", version.ref = "mcp" }
+
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
@@ -110,3 +114,5 @@ room = { id = "androidx.room", version.ref = "androidxRoom" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm" }
+shadowPlugin = { id = "com.github.johnrengelman.shadow", version.ref = "shadowPlugin" }
