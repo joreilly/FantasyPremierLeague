@@ -21,11 +21,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.johnoreilly.common.viewmodel.LeaguesViewModel
-import org.koin.compose.koinInject
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SettingsView(popBackStack: () -> Unit) {
-    val viewModel = koinInject<LeaguesViewModel>()
+    val viewModel = koinViewModel<LeaguesViewModel>()
 
     val leagueIdsString = remember {
         mutableStateOf(viewModel.leagues.value.joinToString())

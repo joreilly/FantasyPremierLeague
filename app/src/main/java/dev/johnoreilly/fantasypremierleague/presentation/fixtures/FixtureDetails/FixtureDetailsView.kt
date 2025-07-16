@@ -29,11 +29,11 @@ import androidx.compose.ui.unit.sp
 import dev.johnoreilly.common.model.GameFixture
 import dev.johnoreilly.common.viewmodel.FixturesViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.ClubInFixtureView
-import org.koin.compose.koinInject
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun FixtureDetailsView(fixtureId: Int, popBackStack: () -> Unit) {
-    val viewModel = koinInject<FixturesViewModel>()
+    val viewModel = koinViewModel<FixturesViewModel>()
 
     val fixture by produceState<GameFixture?>(initialValue = null) {
         value = viewModel.getFixture(fixtureId)
