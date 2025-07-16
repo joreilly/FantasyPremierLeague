@@ -1,5 +1,7 @@
 package com.surrus.common
 
+import dev.johnoreilly.common.di.commonModule
+import dev.johnoreilly.common.di.initKoin
 import dev.johnoreilly.common.di.viewModelModule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -12,6 +14,6 @@ class TestKoinGraph  {
     @OptIn(KoinExperimentalAPI::class)
     @Test
     fun `checking koin modules`() {
-        viewModelModule.verify()
+        commonModule(false).verify()
     }
 }

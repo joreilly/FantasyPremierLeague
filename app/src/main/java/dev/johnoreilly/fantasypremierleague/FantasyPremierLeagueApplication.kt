@@ -16,7 +16,6 @@ class FantasyPremierLeagueApplication : Application(), KoinComponent {
         initKoin {
             androidLogger()
             androidContext(this@FantasyPremierLeagueApplication)
-            modules(viewModelModule)
         }
 
         Logger.d { "FantasyPremierLeagueApplication" }

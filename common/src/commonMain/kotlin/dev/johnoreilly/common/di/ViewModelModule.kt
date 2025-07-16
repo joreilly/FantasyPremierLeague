@@ -1,6 +1,5 @@
 package dev.johnoreilly.common.di
 
-import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.johnoreilly.common.viewmodel.FixturesViewModel
 import dev.johnoreilly.common.viewmodel.LeaguesViewModel
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
