@@ -19,12 +19,13 @@ import androidx.compose.ui.Modifier
 import dev.johnoreilly.common.ui.PlayerDetailsViewShared
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlayerDetailsView(playerId: Int, popBackStack: () -> Unit) {
-    val viewModel = koinViewModel<PlayerDetailsViewModel>()
+    val viewModel = koinViewModel<PlayerDetailsViewModel>(parameters = { parametersOf(playerId) })
 
     val state = viewModel.state.collectAsState()
 
