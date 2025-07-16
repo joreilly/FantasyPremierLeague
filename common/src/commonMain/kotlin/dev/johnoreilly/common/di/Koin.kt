@@ -20,7 +20,7 @@ import org.koin.dsl.module
 fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
-        modules(commonModule(enableNetworkLogs = enableNetworkLogs), platformModule())
+        modules(commonModule(enableNetworkLogs = enableNetworkLogs))
     }
 
 // called by iOS etc
@@ -36,6 +36,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single { AppSettings(get()) }
 
     includes(viewModelModule)
+    includes(platformModule())
 }
 
 fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
