@@ -16,7 +16,7 @@ struct MyPropertyWrapper: DynamicProperty {
 extension Player: Identifiable { }
 
 struct PlayerListView: View {
-    @EnvironmentObject var viewModelStoreOwner: IOSViewModelStoreOwner
+    @StateObject var viewModelStoreOwner = IOSViewModelStoreOwner()
     
     var body: some View {
         NavigationView {

@@ -9,8 +9,7 @@ extension LeagueStandingsDto: Identifiable { }
 
 
 struct LeagueListView: View {
-    @EnvironmentObject var viewModelStoreOwner : IOSViewModelStoreOwner
-    
+    @StateObject var viewModelStoreOwner = IOSViewModelStoreOwner()
     @State var leagueStandingsList = [LeagueStandingsDto]()
     @State var eventStatusList = [EventStatusDto]()
 

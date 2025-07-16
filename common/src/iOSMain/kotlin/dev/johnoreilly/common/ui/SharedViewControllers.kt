@@ -10,6 +10,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import platform.UIKit.UIViewController
 
+@Suppress("unused") // Used from Swift code
 object SharedViewControllers {
 
     fun playerDetailsViewController(player: Player): UIViewController =

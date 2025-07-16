@@ -20,6 +20,7 @@
 		1AD9A1232AA2692800B14FE3 /* CollectionConcurrencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AD9A1222AA2692800B14FE3 /* CollectionConcurrencyKit */; };
 		1AD9A1252AA355F500B14FE3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD9A1242AA355F500B14FE3 /* SettingsView.swift */; };
 		2D9F54F02E27A02000B2749E /* ViewModelStoreOwnerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F54EF2E27A02000B2749E /* ViewModelStoreOwnerProvider.swift */; };
+		2D9F54F52E282D2900B2749E /* IOSViewModelStoreOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F54F42E282D2200B2749E /* IOSViewModelStoreOwner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		1AA7EE3D25D809D000B4DECB /* FixtureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDetailView.swift; sourceTree = "<group>"; };
 		1AD9A1242AA355F500B14FE3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2D9F54EF2E27A02000B2749E /* ViewModelStoreOwnerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelStoreOwnerProvider.swift; sourceTree = "<group>"; };
+		2D9F54F42E282D2200B2749E /* IOSViewModelStoreOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSViewModelStoreOwner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				1A0F7AE725C5C97000EB34CF /* Preview Content */,
 				1AD9A1242AA355F500B14FE3 /* SettingsView.swift */,
 				2D9F54EF2E27A02000B2749E /* ViewModelStoreOwnerProvider.swift */,
+				2D9F54F42E282D2200B2749E /* IOSViewModelStoreOwner.swift */,
 			);
 			path = FantasyPremierLeague;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D9F54F52E282D2900B2749E /* IOSViewModelStoreOwner.swift in Sources */,
 				1A45B23B25CB3BF100A8C613 /* PlayerDetailsView.swift in Sources */,
 				2D9F54F02E27A02000B2749E /* ViewModelStoreOwnerProvider.swift in Sources */,
 				1A1D2B32289EA235000149CC /* LeagueListView.swift in Sources */,

@@ -2,7 +2,7 @@ import SwiftUI
 import FantasyPremierLeagueKit
 
 struct SettingsView: View {
-    @EnvironmentObject var viewModelStoreOwner: IOSViewModelStoreOwner
+    @StateObject var viewModelStoreOwner = IOSViewModelStoreOwner()
     @State var leagueListString = ""
 
     var body: some View {

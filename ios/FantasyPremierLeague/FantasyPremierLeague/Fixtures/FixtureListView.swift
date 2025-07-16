@@ -5,7 +5,7 @@ import FantasyPremierLeagueKit
 extension GameFixture: Identifiable { }
 
 struct FixtureListView: View {
-    @EnvironmentObject var viewModelStoreOwner: IOSViewModelStoreOwner
+    @StateObject var viewModelStoreOwner = IOSViewModelStoreOwner()
     @State var gameWeek = 1
     
     var body: some View {
