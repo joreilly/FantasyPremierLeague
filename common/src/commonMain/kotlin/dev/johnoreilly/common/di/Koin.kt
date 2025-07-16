@@ -26,13 +26,14 @@ fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclarat
     }
 
 // called by iOS etc
-fun initKoin() = initKoin(enableNetworkLogs = false) {}
+fun initKoin() = initKoin(enableNetworkLogs = false) {
+    modules(viewModelModule)
+}
 
 fun commonModule(enableNetworkLogs: Boolean) = module {
     single { createJson() }
     single { createHttpClient(get(), get(), enableNetworkLogs = enableNetworkLogs) }
 
-    viewModelOf(::PlayerDetailsViewModel)
     single { FantasyPremierLeagueRepository() }
     single { FantasyPremierLeagueApi(get()) }
 
