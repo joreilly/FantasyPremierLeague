@@ -9,14 +9,14 @@ import androidx.compose.ui.window.ComposeUIViewController
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 import platform.UIKit.UIViewController
 
 object SharedViewControllers {
 
     fun playerDetailsViewController(player: Player): UIViewController =
         ComposeUIViewController {
-            val viewModel = koinInject<PlayerDetailsViewModel>()
+            val viewModel = koinViewModel<PlayerDetailsViewModel>()
 
             // TODO cleaner way of managing this?
             var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }

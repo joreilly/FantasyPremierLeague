@@ -24,13 +24,13 @@ import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.ui.PlayerDetailsViewShared
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
-import org.koin.compose.koinInject
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlayerDetailsView(playerId: Int, popBackStack: () -> Unit) {
-    val viewModel = koinInject<PlayerDetailsViewModel>()
+    val viewModel = koinViewModel<PlayerDetailsViewModel>()
 
     val player by produceState<Player?>(initialValue = null) {
         value = viewModel.getPlayer(playerId)
