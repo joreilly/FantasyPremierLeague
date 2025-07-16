@@ -2,6 +2,7 @@ package dev.johnoreilly.common.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.model.GameFixture
 import kotlinx.coroutines.flow.SharingStarted
@@ -11,8 +12,9 @@ import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-open class FixturesViewModel : ViewModel(), KoinComponent {
-    private val repository: FantasyPremierLeagueRepository by inject()
+open class FixturesViewModel(
+    private val repository: FantasyPremierLeagueRepository
+) : ViewModel(), KoinComponent {
 
     val gameWeekFixtures = repository.getFixtures().map {
         it.groupBy { it.event }
@@ -24,5 +26,4 @@ open class FixturesViewModel : ViewModel(), KoinComponent {
     suspend fun getFixture(id: Int): GameFixture {
         return repository.getFixture(id)
     }
-
 }
