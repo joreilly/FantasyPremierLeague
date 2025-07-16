@@ -6,6 +6,7 @@
 * Android (Jetpack Compose)
 * iOS (SwiftUI)
 * Desktop (Compose for Desktop)
+* Kotlin Notebook
 * MCP Server
 
 
@@ -43,9 +44,6 @@ This project currently uses iOS16 features (e.g. Swift Charts) so requires use o
 
 The `mcp-server` module uses the [Kotlin MCP SDK](https://github.com/modelcontextprotocol/kotlin-sdk) to expose an MCP tools endpoint (returning player/fixture info) that
 can for example be plugged in to Claude Desktop as shown below.  That module uses same KMP shared code.
-
-<img width="1608" alt="Screenshot 2025-07-06 at 17 24 20" src="https://github.com/user-attachments/assets/7e4fd599-3ade-47b7-bbe3-a4f36148c170" />
-
 
 To integrate the MCP server with Claude Desktop for example you need to firstly run gradle `shadowJar` task and then select "Edit Config" under Developer Settings and add something
 like the following (update with your path)
