@@ -9,12 +9,13 @@ extension LeagueStandingsDto: Identifiable { }
 
 
 struct LeagueListView: View {
-    @StateObject var viewModelStoreOwner = SharedViewModelStoreOwner<LeaguesViewModel>()
-    
+    @StateObject var viewModelStoreOwner = IOSViewModelStoreOwner()
     @State var leagueStandingsList = [LeagueStandingsDto]()
     @State var eventStatusList = [EventStatusDto]()
 
     var body: some View {
+        let viewModel : LeaguesViewModel = viewModelStoreOwner.viewModel()
+        
         NavigationStack {
             VStack(alignment: .center) {
                 List {
@@ -48,9 +49,9 @@ struct LeagueListView: View {
             )
             .task {
                 do {
-                    try await eventStatusList = viewModelStoreOwner.instance.getEventStatus()
+                    try await eventStatusList = viewModel.getEventStatus()
                     
-                    for await data in viewModelStoreOwner.instance.leagueStandings {
+                    for await data in viewModel.leagueStandings {
                         leagueStandingsList = data
                     }
                 } catch {

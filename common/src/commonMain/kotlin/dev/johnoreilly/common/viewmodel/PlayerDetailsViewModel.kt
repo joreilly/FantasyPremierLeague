@@ -1,20 +1,35 @@
 package dev.johnoreilly.common.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
-import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.model.Player
+import dev.johnoreilly.common.model.PlayerPastHistory
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-open class PlayerDetailsViewModel : ViewModel(), KoinComponent {
-    private val repository: FantasyPremierLeagueRepository by inject()
+open class PlayerDetailsViewModel(
+    private val playerId: Int,
+    private val repository: FantasyPremierLeagueRepository,
+) : ViewModel(), KoinComponent {
 
-    suspend fun getPlayer(id: Int): Player {
-        return repository.getPlayer(id)
-    }
+    data class PlayerWithHistory(
+        val player: Player,
+        val history: List<PlayerPastHistory>
+    )
 
-    suspend fun getPlayerHistory(playerId: Int): List<PlayerPastHistory> {
-        return repository.getPlayerHistoryData(playerId)
-    }
+    val state =
+        combine(
+            flow { emit(repository.getPlayer(playerId)) },
+            flow { emit(repository.getPlayerHistoryData(playerId)) }
+        ) { player, history ->
+            PlayerWithHistory(
+                player = player,
+                history = history,
+            )
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 }

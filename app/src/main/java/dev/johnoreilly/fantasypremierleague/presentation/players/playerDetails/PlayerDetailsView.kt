@@ -4,6 +4,7 @@ package dev.johnoreilly.fantasypremierleague.presentation.players.playerDetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -13,40 +14,27 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import dev.johnoreilly.common.model.Player
-import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.ui.PlayerDetailsViewShared
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlayerDetailsView(playerId: Int, popBackStack: () -> Unit) {
-    val viewModel = koinViewModel<PlayerDetailsViewModel>()
+    val viewModel = koinViewModel<PlayerDetailsViewModel>(parameters = { parametersOf(playerId) })
 
-    val player by produceState<Player?>(initialValue = null) {
-        value = viewModel.getPlayer(playerId)
-    }
+    val state = viewModel.state.collectAsState()
 
-    player?.let { player ->
-        var playerHistory by remember { mutableStateOf(emptyList<PlayerPastHistory>()) }
-        LaunchedEffect(player) {
-            playerHistory = viewModel.getPlayerHistory(player.id)
-        }
-
+    state.value?.let { state ->
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
                     title = {
-                        Text(text = player.name)
+                        Text(text = state.player.name)
                     },
                     navigationIcon = {
                         IconButton(onClick = { popBackStack() }) {
@@ -56,8 +44,8 @@ fun PlayerDetailsView(playerId: Int, popBackStack: () -> Unit) {
                 )
             }) {
             Column(Modifier.padding(it)) {
-                PlayerDetailsViewShared(player, playerHistory)
+                PlayerDetailsViewShared(state.player, state.history)
             }
         }
-    }
+    } ?: CircularProgressIndicator()
 }

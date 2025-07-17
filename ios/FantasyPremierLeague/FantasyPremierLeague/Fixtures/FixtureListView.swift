@@ -5,7 +5,7 @@ import FantasyPremierLeagueKit
 extension GameFixture: Identifiable { }
 
 struct FixtureListView: View {
-    @StateObject var viewModelStoreOwner = SharedViewModelStoreOwner<FixturesViewModel>()
+    @StateObject var viewModelStoreOwner = IOSViewModelStoreOwner()
     @State var gameWeek = 1
     
     var body: some View {
@@ -25,8 +25,9 @@ struct FixtureListView: View {
                           Image(systemName: "arrow.right")
                         }
                     }
-                    
-                    Observing(viewModelStoreOwner.instance.gameWeekFixtures) { gameWeekFixtures  in
+                    let viewModel: FixturesViewModel = viewModelStoreOwner.viewModel()
+
+                    Observing(viewModel.gameWeekFixtures) { gameWeekFixtures  in
                         List(gameWeekFixtures[KotlinInt(integerLiteral: gameWeek)] ?? []) { fixture in
                             NavigationLink(destination: FixtureDetailView(fixture: fixture)) {
                                 FixtureView(fixture: fixture)

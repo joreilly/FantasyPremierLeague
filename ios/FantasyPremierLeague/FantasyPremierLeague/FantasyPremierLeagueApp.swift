@@ -8,7 +8,9 @@ struct FantasyPremierLeagueApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ViewModelStoreOwnerProvider {
+                ContentView()
+            }
         }
     }
 }

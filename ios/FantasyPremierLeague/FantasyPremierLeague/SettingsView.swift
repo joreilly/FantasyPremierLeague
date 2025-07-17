@@ -2,11 +2,13 @@ import SwiftUI
 import FantasyPremierLeagueKit
 
 struct SettingsView: View {
-    @State var viewModel = LeaguesViewModel()
+    @StateObject var viewModelStoreOwner = IOSViewModelStoreOwner()
     @State var leagueListString = ""
-    
+
     var body: some View {
         NavigationStack {
+            let viewModel: LeaguesViewModel = viewModelStoreOwner.viewModel()
+            
             Form {
                 TextField("Leagues", text: $leagueListString)
                 

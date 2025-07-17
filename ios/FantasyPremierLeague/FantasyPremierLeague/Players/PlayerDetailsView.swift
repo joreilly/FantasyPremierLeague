@@ -20,7 +20,7 @@ struct PlayerDetailsViewShared: UIViewControllerRepresentable {
     var player: Player
     
     func makeUIViewController(context: Context) -> UIViewController {
-        return SharedViewControllers().playerDetailsViewController(player: player)
+        return SharedViewControllers.shared.playerDetailsViewController(player: player)
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {

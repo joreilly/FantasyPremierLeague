@@ -16,12 +16,14 @@ struct MyPropertyWrapper: DynamicProperty {
 extension Player: Identifiable { }
 
 struct PlayerListView: View {
-    @StateObject var viewModelStoreOwner = SharedViewModelStoreOwner<PlayerListViewModel>()
-     
+    @StateObject var viewModelStoreOwner = IOSViewModelStoreOwner()
+    
     var body: some View {
         NavigationView {
             VStack {
-                Observing(viewModelStoreOwner.instance.playerListUIState) { playerListUIState in
+                let viewModel : PlayerListViewModel = viewModelStoreOwner.viewModel()
+                
+                Observing(viewModel.playerListUIState) { playerListUIState in
                     switch onEnum(of: playerListUIState) {
                     case .loading:
                         ProgressView()

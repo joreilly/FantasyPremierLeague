@@ -13,10 +13,9 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-open class LeaguesViewModel : ViewModel(), KoinComponent {
-    private val repository: FantasyPremierLeagueRepository by inject()
-
-
+open class LeaguesViewModel(
+    private val repository: FantasyPremierLeagueRepository
+) : ViewModel(), KoinComponent {
     val leagues: StateFlow<List<String>> = repository.leagues
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 

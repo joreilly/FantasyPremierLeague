@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 
 sealed class PlayerListUIState {
@@ -24,8 +23,10 @@ sealed class PlayerListUIState {
 }
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-open class PlayerListViewModel : ViewModel(), KoinComponent {
-    private val repository: FantasyPremierLeagueRepository by inject()
+open class PlayerListViewModel(
+    private val repository: FantasyPremierLeagueRepository
+) : ViewModel(), KoinComponent {
+
 
     val allPlayers = repository.getPlayers()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
