@@ -93,7 +93,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
 
-    testImplementation("androidx.test:core:1.6.1")
+    testImplementation("androidx.test:core:1.7.0")
     testImplementation("org.robolectric:robolectric:4.13")
     androidTestImplementation("androidx.test:runner:1.6.2")
 
