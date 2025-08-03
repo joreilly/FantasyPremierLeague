@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.compose.material3.windowSizeClass)
 
     implementation(libs.androidx.navigation.compose)
@@ -96,6 +97,10 @@ dependencies {
     testImplementation("androidx.test:core:1.6.1")
     testImplementation("org.robolectric:robolectric:4.13")
     androidTestImplementation("androidx.test:runner:1.6.2")
+
+    screenshotTestImplementation(libs.screenshot.validation.api)
+    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
+
 
     implementation(projects.common)
 }

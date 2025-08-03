@@ -1,5 +1,6 @@
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
+import com.android.build.api.dsl.androidLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
@@ -11,24 +12,48 @@ plugins {
     alias(libs.plugins.room)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    id("com.android.library")
+    //id("com.android.library")
+    alias(libs.plugins.android.kotlin.multiplatform.library)
 }
 
 kotlin {
     jvmToolchain(17)
 }
+//
+//android {
+//    compileSdk = libs.versions.compileSdk.get().toInt()
+//    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+//    defaultConfig {
+//        minSdk = libs.versions.minSdk.get().toInt()
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//    }
+//    namespace = "dev.johnoreilly.common"
+//
+//
+//}
 
-android {
-    compileSdk = libs.versions.compileSdk.get().toInt()
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    namespace = "dev.johnoreilly.common"
+
+compose.resources {
+    publicResClass = true
+    generateResClass = auto
 }
 
 kotlin {
+
+    androidLibrary {
+        compileSdk = libs.versions.compileSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
+        //sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+//        defaultConfig {
+//            minSdk = libs.versions.minSdk.get().toInt()
+//            //testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        }
+        namespace = "dev.johnoreilly.common"
+
+        androidResources.enable = true
+    }
+
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -40,7 +65,7 @@ kotlin {
         }
     }
 
-    androidTarget()
+    //androidTarget()
     jvm()
 
 

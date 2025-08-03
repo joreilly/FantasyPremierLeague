@@ -10,7 +10,7 @@ import dev.johnoreilly.common.model.PlayerPastHistory
 fun PlayerDetailsViewSharedPreview() {
     val player = Player(
         1, "Mo Salah", "Liverpool",
-        "", 98, 10.0, 14, 1
+        "", 98, 200.0, 14, 1
     )
     val playerPastHistory1 = PlayerPastHistory("2021", 50)
     val playerPastHistory2 = PlayerPastHistory("2022", 75)

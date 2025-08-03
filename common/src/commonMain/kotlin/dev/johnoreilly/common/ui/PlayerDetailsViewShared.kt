@@ -85,7 +85,6 @@ fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistor
             )
         }
         PlayerStatView(stringResource(Res.string.team),  player.team)
-        //PlayerStatView("Team",  player.team)
         PlayerStatView("CurrentPrice", player.currentPrice.toString())
         PlayerStatView("Points", player.points.toString())
         PlayerStatView("Goals Scored", player.goalsScored.toString())

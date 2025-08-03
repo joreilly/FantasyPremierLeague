@@ -14,9 +14,9 @@ skie = "0.10.4"
 datastore = "1.1.7"
 
 androidxActivity = "1.10.1"
-androidxComposeBom = "2025.06.01"
-androidxNavigationCompose = "2.9.1"
-androidxLifecycle = "2.9.1"
+androidxComposeBom = "2025.07.00"
+androidxNavigationCompose = "2.9.3"
+androidxLifecycle = "2.9.2"
 androidxRoom = "2.7.2"
 sqlite = "2.5.2"
 compose-plugin = "1.8.2"
@@ -28,7 +28,7 @@ kermit = "2.0.6"
 minSdk = "24"
 targetSdk = "36"
 compileSdk = "36"
-screenshot = "0.0.1-alpha10"
+screenshot = "0.0.1-alpha11"
 
 multikApi = "0.1.1"
 multikJvm = "0.1.1"
@@ -57,6 +57,7 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material3 =  { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-material-iconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-compose-material3-WindowSizeClass =  { group = "androidx.compose.material3", name="material3-window-size-class" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigationCompose" }
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
@@ -98,6 +99,8 @@ kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
 mcp-kotlin = { group = "io.modelcontextprotocol", name = "kotlin-sdk", version.ref = "mcp" }
+screenshot-validation-api = { group = "com.android.tools.screenshot", name = "screenshot-validation-api", version.ref = "screenshot"}
+
 
 
 [bundles]
@@ -116,3 +119,4 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm" }
 shadowPlugin = { id = "com.github.johnrengelman.shadow", version.ref = "shadowPlugin" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "androidGradlePlugin" }
