@@ -5,18 +5,18 @@ kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-dateTime = "0.6.0"
 
-androidGradlePlugin = "8.11.1"
+androidGradlePlugin = "8.12.0"
 koalaplot = "0.5.3"
 koin = "4.1.0"
-ktor = "3.2.2"
+ktor = "3.2.3"
 slf4j = "2.0.17"
-skie = "0.10.4"
+skie = "0.10.5"
 datastore = "1.1.7"
 
 androidxActivity = "1.10.1"
-androidxComposeBom = "2025.06.01"
-androidxNavigationCompose = "2.9.1"
-androidxLifecycle = "2.9.1"
+androidxComposeBom = "2025.07.00"
+androidxNavigationCompose = "2.9.3"
+androidxLifecycle = "2.9.2"
 androidxRoom = "2.7.2"
 sqlite = "2.5.2"
 compose-plugin = "1.8.2"
@@ -34,8 +34,8 @@ multikApi = "0.1.1"
 multikJvm = "0.1.1"
 okalgo = "0.0.2"
 kotlinStatistics = "1.2.1"
-mcp = "0.5.0"
-shadowPlugin = "8.1.1"
+mcp = "0.6.0"
+shadowPlugin = "9.0.0-rc3"
 
 
 [libraries]
@@ -115,4 +115,4 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm" }
-shadowPlugin = { id = "com.github.johnrengelman.shadow", version.ref = "shadowPlugin" }
+shadowPlugin = { id = "com.gradleup.shadow", version.ref = "shadowPlugin" }
