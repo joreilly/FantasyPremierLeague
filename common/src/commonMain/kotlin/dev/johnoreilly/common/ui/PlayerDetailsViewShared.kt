@@ -12,7 +12,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Divider
+import androidx.compose.material3.DividerDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,19 +34,18 @@ import dev.johnoreilly.common.model.PlayerPastHistory
 import fantasypremierleague.common.generated.resources.Res
 import fantasypremierleague.common.generated.resources.team
 import io.github.koalaplot.core.ChartLayout
-import io.github.koalaplot.core.bar.BarChartEntry
-import io.github.koalaplot.core.bar.DefaultBarChartEntry
 import io.github.koalaplot.core.bar.DefaultVerticalBar
-import io.github.koalaplot.core.bar.VerticalBarChart
+import io.github.koalaplot.core.bar.VerticalBarPlot
+import io.github.koalaplot.core.bar.VerticalBarPlotEntry
+import io.github.koalaplot.core.bar.verticalBarPlotEntry
 import io.github.koalaplot.core.util.ExperimentalKoalaPlotApi
 import io.github.koalaplot.core.util.VerticalRotation
 import io.github.koalaplot.core.util.rotateVertically
-import io.github.koalaplot.core.util.toString
-import io.github.koalaplot.core.xychart.CategoryAxisModel
-import io.github.koalaplot.core.xychart.LinearAxisModel
-import io.github.koalaplot.core.xychart.TickPosition
-import io.github.koalaplot.core.xychart.XYChart
-import io.github.koalaplot.core.xychart.rememberAxisStyle
+import io.github.koalaplot.core.xygraph.CategoryAxisModel
+import io.github.koalaplot.core.xygraph.IntLinearAxisModel
+import io.github.koalaplot.core.xygraph.TickPosition
+import io.github.koalaplot.core.xygraph.XYGraph
+import io.github.koalaplot.core.xygraph.rememberAxisStyle
 import org.jetbrains.compose.resources.stringResource
 
 
@@ -94,7 +94,7 @@ fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistor
         Spacer(modifier = Modifier.size(8.dp))
 
         if (playerHistory.isNotEmpty()) {
-            BarSamplePlot(playerHistory, tickPositionState, "Points by Season")
+            PlayerHistoryBarPlot(playerHistory, tickPositionState, "Points by Season")
         }
     }
 }
@@ -123,21 +123,21 @@ fun PlayerStatView(statName: String, statValue: String) {
                 )
             }
         }
-        Divider(thickness = 1.dp)
+        HorizontalDivider(Modifier, 1.dp, DividerDefaults.color)
     }
 }
 
 
 
-private fun barChartEntries(playerHistory: List<PlayerPastHistory>): List<BarChartEntry<String, Float>> {
-    val list = mutableListOf<BarChartEntry<String, Float>>()
+private fun barChartEntries(playerHistory: List<PlayerPastHistory>): List<VerticalBarPlotEntry<String, Int>> {
+    val list = mutableListOf<VerticalBarPlotEntry<String, Int>>()
 
     playerHistory.forEach { player ->
         list.add(
-            DefaultBarChartEntry(
-                xValue = player.seasonName.takeLast(2),
-                yMin = 0f,
-                yMax = player.totalPoints.toFloat(),
+            verticalBarPlotEntry(
+                x = player.seasonName.takeLast(2),
+                yMin = 0,
+                yMax = player.totalPoints,
             )
         )
     }
@@ -177,18 +177,15 @@ fun AxisLabel(label: String, modifier: Modifier = Modifier) {
     )
 }
 
-internal val padding = 8.dp
-internal val barWidth = 0.8f
-
 @Composable
 fun HoverSurface(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Surface(
         tonalElevation = 2.dp,
         shape = MaterialTheme.shapes.medium,
         color = Color.LightGray,
-        modifier = modifier.padding(padding)
+        modifier = modifier.padding(8.dp)
     ) {
-        Box(modifier = Modifier.padding(padding)) {
+        Box(modifier = Modifier.padding(8.dp)) {
             content()
         }
     }
@@ -202,25 +199,25 @@ private data class TickPositionState(
 
 @OptIn(ExperimentalKoalaPlotApi::class)
 @Composable
-private fun BarSamplePlot(
+private fun PlayerHistoryBarPlot(
     playerHistory: List<PlayerPastHistory>,
     tickPositionState: TickPositionState,
     title: String
 ) {
-    val barChartEntries = remember(playerHistory) { mutableStateOf(barChartEntries(playerHistory)) }
+    val barChartEntries by remember(playerHistory) { mutableStateOf(barChartEntries(playerHistory)) }
 
     ChartLayout(
         modifier = Modifier.padding(8.dp),
         title = { ChartTitle(title) }
     ) {
 
-        XYChart(
+        XYGraph(
             xAxisModel = CategoryAxisModel(playerHistory.map {
                 it.seasonName.takeLast(2)
             }),
-            yAxisModel = LinearAxisModel(
-                0f..playerHistory.maxOf { it.totalPoints }.toFloat(),
-                minimumMajorTickIncrement = 1f,
+            yAxisModel = IntLinearAxisModel(
+                0..playerHistory.maxOf { it.totalPoints },
+                minimumMajorTickIncrement = 1,
                 minorTickCount = 0
             ),
             xAxisStyle = rememberAxisStyle(
@@ -233,25 +230,25 @@ private fun BarSamplePlot(
             xAxisTitle = { AxisTitle("Season") },
             yAxisStyle = rememberAxisStyle(tickPosition = tickPositionState.verticalAxis),
             yAxisLabels = {
-                AxisLabel(it.toString(1), Modifier.absolutePadding(right = 2.dp))
+                AxisLabel(it.toString(), Modifier.absolutePadding(right = 2.dp))
             },
             yAxisTitle = {
                 AxisTitle(
                     "Points",
                     modifier = Modifier.rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
-                        .padding(bottom = padding)
+                        .padding(bottom = 8.dp)
                 )
             },
             verticalMajorGridLineStyle = null
         ) {
-            VerticalBarChart(
-                series = listOf(barChartEntries.value),
-                bar = { _, _, value ->
+            VerticalBarPlot(
+                barChartEntries,
+                bar = { index ->
                     DefaultVerticalBar(
                         brush = SolidColor(Color.Blue),
-                        modifier = Modifier.fillMaxWidth(barWidth),
+                        modifier = Modifier.fillMaxWidth(),
                     ) {
-                        HoverSurface { Text(value.yMax.toString()) }
+                        HoverSurface { Text(barChartEntries[index].y.yMax.toString()) }
                     }
                 }
             )
