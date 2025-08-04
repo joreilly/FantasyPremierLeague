@@ -24,10 +24,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-//    kotlinOptions {
-//        jvmTarget = "17"
-//    }
-
     buildFeatures {
         compose = true
     }
@@ -93,9 +89,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
 
-    testImplementation("androidx.test:core:1.6.1")
-    testImplementation("org.robolectric:robolectric:4.13")
-    androidTestImplementation("androidx.test:runner:1.6.2")
+    testImplementation("androidx.test:core:1.7.0")
+    testImplementation("org.robolectric:robolectric:4.15.1")
+    androidTestImplementation("androidx.test:runner:1.7.0")
 
     implementation(projects.common)
 }
