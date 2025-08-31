@@ -35,7 +35,7 @@ multikJvm = "0.1.1"
 okalgo = "0.0.2"
 kotlinStatistics = "1.2.1"
 mcp = "0.6.0"
-shadowPlugin = "9.0.2"
+shadowPlugin = "9.1.0"
 
 
 [libraries]
