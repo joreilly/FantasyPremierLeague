@@ -6,7 +6,9 @@ import dev.johnoreilly.common.di.initKoin
 import kotlinx.datetime.*
 import org.ojalgo.okalgo.*
 import org.ojalgo.optimisation.Variable
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 suspend fun main() {
     val koin = initKoin(enableNetworkLogs = true).koin
 

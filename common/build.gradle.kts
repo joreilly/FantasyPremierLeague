@@ -43,12 +43,6 @@ kotlin {
     androidTarget()
     jvm()
 
-
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    compilerOptions {
-        languageVersion.set(KotlinVersion.KOTLIN_2_0)
-    }
-
     sourceSets {
         all {
             languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")

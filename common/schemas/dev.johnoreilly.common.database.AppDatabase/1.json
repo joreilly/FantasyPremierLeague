@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1d6755f9cf99963261ab91735a13f1a9",
+    "identityHash": "99d7047cc9aebd2bf9feb7a16411f0f0",
     "entities": [
       {
         "tableName": "Team",
@@ -102,7 +102,7 @@
       },
       {
         "tableName": "GameFixture",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `localKickoffTime` TEXT NOT NULL, `homeTeam` TEXT NOT NULL, `awayTeam` TEXT NOT NULL, `homeTeamPhotoUrl` TEXT NOT NULL, `awayTeamPhotoUrl` TEXT NOT NULL, `homeTeamScore` INTEGER, `awayTeamScore` INTEGER, `event` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `localKickoffTime` TEXT, `homeTeam` TEXT NOT NULL, `awayTeam` TEXT NOT NULL, `homeTeamPhotoUrl` TEXT NOT NULL, `awayTeamPhotoUrl` TEXT NOT NULL, `homeTeamScore` INTEGER, `awayTeamScore` INTEGER, `event` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -113,8 +113,7 @@
           {
             "fieldPath": "localKickoffTime",
             "columnName": "localKickoffTime",
-            "affinity": "TEXT",
-            "notNull": true
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "homeTeam",
@@ -167,7 +166,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1d6755f9cf99963261ab91735a13f1a9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '99d7047cc9aebd2bf9feb7a16411f0f0')"
     ]
   }
 }

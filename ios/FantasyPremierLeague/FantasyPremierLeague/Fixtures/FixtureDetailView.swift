@@ -20,15 +20,16 @@ struct FixtureDetailView: View {
             }
         }
         
-        List {
-            let formattedTime = String(format: "%02d:%02d", fixture.localKickoffTime.hour, fixture.localKickoffTime.minute)
-            Section(header: Text("Info"), content: {
-                InfoRowView(label: "Date", value:fixture.localKickoffTime.date.description())
-                InfoRowView(label: "Kick-off Time", value: formattedTime)
-                
-            })
+        if let localKickoffTime = fixture.localKickoffTime {
+            List {
+                let formattedTime = String(format: "%02d:%02d", localKickoffTime.hour, localKickoffTime.minute)
+                Section(header: Text("Info"), content: {
+                    InfoRowView(label: "Date", value: localKickoffTime.date.description())
+                    InfoRowView(label: "Kick-off Time", value: formattedTime)
+                    
+                })
+            }
         }
-
     }
 }
 
