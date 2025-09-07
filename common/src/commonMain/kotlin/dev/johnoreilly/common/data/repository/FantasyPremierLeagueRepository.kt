@@ -22,6 +22,7 @@ import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import kotlin.time.ExperimentalTime
 
 
 class FantasyPremierLeagueRepository : KoinComponent {
@@ -54,6 +55,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
     }
 
 
+    @OptIn(ExperimentalTime::class)
     private suspend fun writeDataToDb(
         bootstrapStaticInfoDto: BootstrapStaticInfoDto,
         fixtures: List<FixtureDto>
@@ -99,8 +101,9 @@ class FantasyPremierLeagueRepository : KoinComponent {
             val homeTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${homeTeam?.code}.png"
             val awayTeamPhotoUrl = "https://resources.premierleague.com/premierleague/badges/t${awayTeam?.code}.png"
 
-            val localKickoffTime = fixtureDto.kickoff_time.toString().toInstant()
-                .toLocalDateTime(TimeZone.currentSystemDefault())
+
+                //.toString().toInstant(TimeZone.currentSystemDefault())
+            val localKickoffTime = fixtureDto.kickoff_time?.toLocalDateTime(TimeZone.currentSystemDefault())
 
             GameFixture(
                 fixtureDto.id,

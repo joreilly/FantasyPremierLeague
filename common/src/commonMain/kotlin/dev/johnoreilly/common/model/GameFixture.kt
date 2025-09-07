@@ -6,7 +6,7 @@ import kotlinx.datetime.LocalDateTime
 @Entity
 data class GameFixture(
     @PrimaryKey val id: Int,
-    val localKickoffTime: LocalDateTime,
+    val localKickoffTime: LocalDateTime?,
     val homeTeam: String,
     val awayTeam: String,
     val homeTeamPhotoUrl: String,

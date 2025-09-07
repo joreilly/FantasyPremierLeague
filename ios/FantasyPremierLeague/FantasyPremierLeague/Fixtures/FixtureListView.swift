@@ -62,9 +62,11 @@ struct FixtureView: View {
                 Spacer()
                 ClubInFixtureView(teamName: fixture.awayTeam, teamPhotoUrl: fixture.awayTeamPhotoUrl)
             }
-            let formattedTime = String(format: "%02d:%02d", fixture.localKickoffTime.hour, fixture.localKickoffTime.minute)
-            Text(fixture.localKickoffTime.date.description()).font(.system(size: 14)).padding(.top, 10)
-            Text(formattedTime).font(.system(size: 14))
+            if let localKickoffTime = fixture.localKickoffTime {
+                let formattedTime = String(format: "%02d:%02d", localKickoffTime.hour, localKickoffTime.minute)
+                Text(localKickoffTime.date.description()).font(.system(size: 14)).padding(.top, 10)
+                Text(formattedTime).font(.system(size: 14))
+            }
         }.padding(8)
     }
 }

@@ -89,7 +89,7 @@ fun FixtureDetailsView(fixtureId: Int, popBackStack: () -> Unit) {
                     )
                 }
 
-                fixture.localKickoffTime.let { localKickoffTime ->
+                fixture.localKickoffTime?.let { localKickoffTime ->
                     val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
                     PastFixtureStatView(statName = "Date", statValue = localKickoffTime.date.toString())
                     PastFixtureStatView(statName = "Kick Off Time", statValue = formattedTime)

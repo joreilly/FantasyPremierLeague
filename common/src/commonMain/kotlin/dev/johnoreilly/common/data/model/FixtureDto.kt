@@ -1,7 +1,10 @@
+@file:OptIn(ExperimentalTime::class)
+
 package dev.johnoreilly.common.data.model
 
-import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 @Serializable
 data class FixtureDto(

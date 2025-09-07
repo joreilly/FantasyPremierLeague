@@ -76,14 +76,15 @@ fun FixtureView(
                     fixture.awayTeamPhotoUrl
                 )
             }
-            Text(
-                modifier = Modifier.padding(top = 16.dp),
-                text = fixture.localKickoffTime.date.toString(),
-                fontWeight = FontWeight.Light,
-                fontSize = 14.sp
-            )
 
-            fixture.localKickoffTime.let { localKickoffTime ->
+            fixture.localKickoffTime?.let { localKickoffTime ->
+                Text(
+                    modifier = Modifier.padding(top = 16.dp),
+                    text = localKickoffTime.date.toString(),
+                    fontWeight = FontWeight.Light,
+                    fontSize = 14.sp
+                )
+
                 val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
                 Text(
                     modifier = Modifier.padding(bottom = 16.dp),
