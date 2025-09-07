@@ -7,7 +7,7 @@ kotlinx-dateTime = "0.6.0"
 
 androidGradlePlugin = "8.12.1"
 koalaplot = "0.9.0"
-koin = "4.1.0"
+koin = "4.1.1"
 ktor = "3.2.3"
 slf4j = "2.0.17"
 skie = "0.10.6"
