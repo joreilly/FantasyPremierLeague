@@ -5,7 +5,7 @@ kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-dateTime = "0.7.1-0.6.x-compat"
 
-androidGradlePlugin = "8.12.3"
+androidGradlePlugin = "8.13.0"
 koalaplot = "0.9.1"
 koin = "4.1.1"
 ktor = "3.3.1"
