@@ -15,7 +15,6 @@ fun main(args: Array<String>) {
     val command = args.firstOrNull() ?: "--sse-server"
     val port = args.getOrNull(1)?.toIntOrNull() ?: 3001
     when (command) {
-        "--sse-server" -> `run sse mcp server`(port)
         "--stdio" -> `run mcp server using stdio`()
         else -> {
             System.err.println("Unknown command: $command")

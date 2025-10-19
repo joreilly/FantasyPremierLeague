@@ -1,15 +1,35 @@
 package dev.johnoreilly.common
 
+import dev.johnoreilly.climatetrace.agent.FantasyPremierLeagueAgent
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
+import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
 import kotlinx.datetime.*
 import org.ojalgo.okalgo.*
 import org.ojalgo.optimisation.Variable
 import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalTime::class)
+
+
 suspend fun main() {
+    val koin = initKoin(enableNetworkLogs = true).koin
+
+    val fantasyPremierLeagueRepository = koin.get<FantasyPremierLeagueRepository>()
+
+    val agent = FantasyPremierLeagueAgent(fantasyPremierLeagueRepository)
+
+
+    val prompt = "What are the next set of fixtures"
+    val result = agent.runAgent(prompt)
+
+    println(result)
+}
+
+
+
+@OptIn(ExperimentalTime::class)
+suspend fun main2() {
     val koin = initKoin(enableNetworkLogs = true).koin
 
     val api = koin.get<FantasyPremierLeagueApi>()

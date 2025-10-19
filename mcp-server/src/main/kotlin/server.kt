@@ -1,7 +1,5 @@
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
-import io.ktor.server.cio.*
-import io.ktor.server.engine.*
 import io.ktor.utils.io.streams.*
 import io.modelcontextprotocol.kotlin.sdk.*
 import io.modelcontextprotocol.kotlin.sdk.server.*
@@ -99,20 +97,4 @@ fun `run mcp server using stdio`() {
         }
         done.join()
     }
-}
-
-/**
- * Launches an SSE (Server-Sent Events) MCP (Model Context Protocol) server on the specified port.
- * This server enables clients to connect via SSE for real-time communication and provides endpoints
- * for handling specific messages.
- *
- * @param port The port number on which the SSE server should be started.
- */
-fun `run sse mcp server`(port: Int): Unit = runBlocking {
-    val server = configureServer()
-    embeddedServer(CIO, host = "0.0.0.0", port = port) {
-        mcp {
-            server
-        }
-    }.start(wait = true)
 }

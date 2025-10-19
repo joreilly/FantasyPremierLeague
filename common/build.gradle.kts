@@ -74,6 +74,8 @@ kotlin {
 
             implementation(libs.koalaplot.core)
             implementation(libs.image.loader)
+
+            implementation(libs.koog.agents)
         }
 
         androidMain.dependencies {
