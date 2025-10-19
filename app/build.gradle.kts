@@ -47,9 +47,14 @@ android {
 
     packaging {
         resources {
-            excludes += "/META-INF/versions/**"
+            excludes += listOf(
+                "/META-INF/INDEX.LIST",
+                "/META-INF/versions/**",
+                "/META-INF/io.netty.versions.properties"
+            )
         }
     }
+
 
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
 
@@ -64,6 +69,7 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.foundation.layout)
     implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling)
