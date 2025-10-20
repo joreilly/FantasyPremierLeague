@@ -12,32 +12,59 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.model.GameFixture
+import dev.johnoreilly.fantasypremierleague.presentation.global.CornerRadius
+import dev.johnoreilly.fantasypremierleague.presentation.global.DividerThickness
+import dev.johnoreilly.fantasypremierleague.presentation.global.ImageSize
+import dev.johnoreilly.fantasypremierleague.presentation.global.Spacing
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 import dev.johnoreilly.fantasypremierleague.presentation.global.maroon200
 
+/**
+ * Displays a fixture card showing teams, scores, and kickoff time.
+ *
+ * @param fixture The fixture data to display
+ * @param onFixtureSelected Callback when the fixture is clicked
+ * @param isDataLoading Whether data is still loading (shows placeholder)
+ */
 @Composable
 fun FixtureView(
     fixture: GameFixture,
     onFixtureSelected: (fixtureId: Int) -> Unit,
     isDataLoading: Boolean
 ) {
+    val scoreText = if (fixture.homeTeamScore != null && fixture.awayTeamScore != null) {
+        "${fixture.homeTeam} ${fixture.homeTeamScore} - ${fixture.awayTeamScore} ${fixture.awayTeam}"
+    } else {
+        "${fixture.homeTeam} vs ${fixture.awayTeam}, scheduled for ${fixture.localKickoffTime?.date}"
+    }
+
+    val semanticDescription = if (!isDataLoading) {
+        "Fixture: $scoreText"
+    } else {
+        "Loading fixture data"
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-            .clickable { onFixtureSelected(fixture.id) }
-            .placeholder(visible = isDataLoading, lowfidelitygray),
+            .padding(start = Spacing.mediumLarge, top = Spacing.mediumLarge, end = Spacing.mediumLarge)
+            .clickable(enabled = !isDataLoading) { onFixtureSelected(fixture.id) }
+            .placeholder(visible = isDataLoading, lowfidelitygray)
+            .semantics(mergeDescendants = true) {
+                contentDescription = semanticDescription
+            },
         color = MaterialTheme.colorScheme.surfaceVariant,
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape(CornerRadius.large)
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -47,73 +74,83 @@ fun FixtureView(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .padding(top = Spacing.mediumLarge),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 ClubInFixtureView(
-                    fixture.homeTeam,
-                    fixture.homeTeamPhotoUrl
+                    teamName = fixture.homeTeam,
+                    teamPhotoUrl = fixture.homeTeamPhotoUrl
                 )
                 Text(
                     text = "${fixture.homeTeamScore ?: ""}",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold
                 )
                 HorizontalDivider(
                     modifier = Modifier
                         .heightIn(min = 20.dp, max = 30.dp)
-                        .width(1.dp)
-                        .background(color = maroon200)
+                        .width(DividerThickness.standard)
+                        .background(color = MaterialTheme.colorScheme.primary)
                 )
                 Text(
                     text = "${fixture.awayTeamScore ?: ""}",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold
                 )
                 ClubInFixtureView(
-                    fixture.awayTeam,
-                    fixture.awayTeamPhotoUrl
+                    teamName = fixture.awayTeam,
+                    teamPhotoUrl = fixture.awayTeamPhotoUrl
                 )
             }
 
             fixture.localKickoffTime?.let { localKickoffTime ->
                 Text(
-                    modifier = Modifier.padding(top = 16.dp),
+                    modifier = Modifier.padding(top = Spacing.mediumLarge),
                     text = localKickoffTime.date.toString(),
-                    fontWeight = FontWeight.Light,
-                    fontSize = 14.sp
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Light
                 )
 
                 val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
                 Text(
-                    modifier = Modifier.padding(bottom = 16.dp),
+                    modifier = Modifier.padding(bottom = Spacing.mediumLarge),
                     text = formattedTime,
-                    fontWeight = FontWeight.Light,
-                    fontSize = 14.sp
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Light
                 )
             }
         }
     }
 }
 
+/**
+ * Displays a team's badge and name in a fixture.
+ *
+ * @param teamName The name of the team
+ * @param teamPhotoUrl URL for the team's badge image
+ */
 @Composable
 fun ClubInFixtureView(
     teamName: String,
     teamPhotoUrl: String
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.semantics(mergeDescendants = true) { }
+    ) {
         AsyncImage(
             model = teamPhotoUrl,
-            contentDescription = teamName,
+            contentDescription = null, // Team name will be read from text below
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(60.dp)
+            modifier = Modifier.size(ImageSize.medium)
         )
         Text(
             modifier = Modifier
                 .width(100.dp)
-                .padding(top = 4.dp),
+                .padding(top = Spacing.extraSmall),
             text = teamName,
+            style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis

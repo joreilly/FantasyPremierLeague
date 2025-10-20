@@ -75,13 +75,13 @@ fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistor
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.LightGray)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(4.dp)
         ) {
             Text(
                 text = "INFO",
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
         PlayerStatView(stringResource(Res.string.team),  player.team)
@@ -118,7 +118,7 @@ fun PlayerStatView(statName: String, statValue: String) {
             Column {
                 Text(
                     text = statValue,
-                    color = Color(0xFF3179EA),
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -182,7 +182,7 @@ fun HoverSurface(modifier: Modifier = Modifier, content: @Composable () -> Unit)
     Surface(
         tonalElevation = 2.dp,
         shape = MaterialTheme.shapes.medium,
-        color = Color.LightGray,
+        color = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier.padding(8.dp)
     ) {
         Box(modifier = Modifier.padding(8.dp)) {
@@ -222,7 +222,7 @@ private fun PlayerHistoryBarPlot(
             ),
             xAxisStyle = rememberAxisStyle(
                 tickPosition = tickPositionState.horizontalAxis,
-                color = Color.LightGray
+                color = MaterialTheme.colorScheme.surfaceVariant
             ),
             xAxisLabels = {
                 AxisLabel(it, Modifier.padding(top = 2.dp))
@@ -245,7 +245,7 @@ private fun PlayerHistoryBarPlot(
                 barChartEntries,
                 bar = { index ->
                     DefaultVerticalBar(
-                        brush = SolidColor(Color.Blue),
+                        brush = SolidColor(MaterialTheme.colorScheme.primary),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         HoverSurface { Text(barChartEntries[index].y.yMax.toString()) }

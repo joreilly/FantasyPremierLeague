@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
@@ -17,6 +16,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -31,6 +31,8 @@ import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.viewmodel.PlayerListUIState
 import dev.johnoreilly.common.viewmodel.PlayerListViewModel
+import dev.johnoreilly.fantasypremierleague.presentation.global.ErrorType
+import dev.johnoreilly.fantasypremierleague.presentation.global.ErrorView
 import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
 import org.koin.androidx.compose.koinViewModel
 
@@ -57,10 +59,13 @@ fun PlayerListView(
                 },
                 scrollBehavior = scrollBehavior,
                 actions = {
-                    IconButton(onClick = {
-                        onShowSettings()
-                    }) {
-                        Icon(Icons.Filled.Settings, contentDescription = "Settings")
+                    IconButton(
+                        onClick = { onShowSettings() }
+                    ) {
+                        Icon(
+                            Icons.Filled.Settings,
+                            contentDescription = "Open settings"
+                        )
                     }
                 }
             )
@@ -95,20 +100,27 @@ fun PlayerListView(
                 },
                 trailingIcon = {
                     if (playerSearchQuery.value.isNotEmpty()) {
-                        Icon(
-                            modifier = Modifier.clickable {
+                        IconButton(
+                            onClick = {
                                 playerListViewModel.onPlayerSearchQueryChange("")
-                            },
-                            imageVector = Icons.Default.Clear,
-                            contentDescription = "Clear search"
-                        )
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Clear,
+                                contentDescription = "Clear search query"
+                            )
+                        }
                     }
                 }
             )
 
             when (val uiState = playerListUIState.value) {
                 is PlayerListUIState.Error -> {
-                    Text("Error: ${uiState.message}")
+                    ErrorView(
+                        message = uiState.message,
+                        errorType = ErrorType.SERVER,
+                        onRetry = { playerListViewModel.loadPlayers() }
+                    )
                 }
 
                 PlayerListUIState.Loading -> {
