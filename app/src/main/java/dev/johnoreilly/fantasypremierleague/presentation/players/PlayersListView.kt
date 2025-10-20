@@ -119,7 +119,7 @@ fun PlayerListView(
                     ErrorView(
                         message = uiState.message,
                         errorType = ErrorType.SERVER,
-                        onRetry = { playerListViewModel.loadPlayers() }
+                        onRetry = null // No retry mechanism available in current implementation
                     )
                 }
 
