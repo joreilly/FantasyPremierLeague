@@ -15,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,13 +23,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.johnoreilly.common.model.GameFixture
 import dev.johnoreilly.common.viewmodel.FixturesViewModel
 import dev.johnoreilly.fantasypremierleague.presentation.fixtures.ClubInFixtureView
+import dev.johnoreilly.fantasypremierleague.presentation.global.Spacing
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -60,7 +61,7 @@ fun FixtureDetailsView(fixtureId: Int, popBackStack: () -> Unit) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .padding(top = Spacing.mediumLarge),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
@@ -70,18 +71,18 @@ fun FixtureDetailsView(fixtureId: Int, popBackStack: () -> Unit) {
                     )
                     Text(
                         text = "${fixture.homeTeamScore ?: ""}",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold
                     )
                     Text(
                         text = "vs",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold
                     )
                     Text(
                         text = "${fixture.awayTeamScore ?: ""}",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold
                     )
                     ClubInFixtureView(
                         fixture.awayTeam,
@@ -99,28 +100,30 @@ fun FixtureDetailsView(fixtureId: Int, popBackStack: () -> Unit) {
     }
 }
 
+/**
+ * Displays a stat row with a name and value, separated by a divider.
+ * This component is used for displaying fixture statistics.
+ */
 @Composable
 fun PastFixtureStatView(statName: String, statValue: String) {
     Column {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .padding(Spacing.medium),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
-                Text(
-                    text = statName,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            Column {
-                Text(
-                    text = statValue,
-                    color = Color(0xFF3179EA),
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            Text(
+                text = statName,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = statValue,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold
+            )
         }
         HorizontalDivider(thickness = 1.dp)
     }
