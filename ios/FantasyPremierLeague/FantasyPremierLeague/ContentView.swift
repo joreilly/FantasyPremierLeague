@@ -1,15 +1,20 @@
 import SwiftUI
+import FantasyPremierLeagueKit
+
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            PlayerListView()
-                .tabItem { Label("Players", systemImage: "person") }
-            FixtureListView()
-                .tabItem { Label("Fixtues", systemImage: "clock") }
-            LeagueListView()
-                .tabItem { Label("League", systemImage: "list.number") }
-        }
+        ComposeUI().ignoresSafeArea()
+    }
+}
+
+
+struct ComposeUI: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        return SharedViewControllers.shared.mainViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
 }
 

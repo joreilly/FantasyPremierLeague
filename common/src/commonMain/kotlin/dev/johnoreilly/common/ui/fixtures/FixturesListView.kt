@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package dev.johnoreilly.fantasypremierleague.presentation.fixtures
+package dev.johnoreilly.common.ui.fixtures
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,18 +24,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.accompanist.placeholder.placeholder
 import dev.johnoreilly.common.model.GameFixture
+import dev.johnoreilly.common.ui.global.maroon200
 import dev.johnoreilly.common.viewmodel.FixturesViewModel
-import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
-import dev.johnoreilly.fantasypremierleague.presentation.global.maroon200
-import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
-fun FixturesListView(
-    onFixtureSelected: (fixtureId: Int) -> Unit,
-) {
+fun FixturesListView() {
     val fixturesViewModel = koinViewModel<FixturesViewModel>()
 
     val fixturesState = fixturesViewModel.gameWeekFixtures.collectAsStateWithLifecycle()
@@ -59,11 +55,7 @@ fun FixturesListView(
                 items(
                     items = fixtureItems,
                     itemContent = { fixture ->
-                        FixtureView(
-                            fixture = fixture,
-                            onFixtureSelected = onFixtureSelected,
-                            isDataLoading = isLoading
-                        )
+                        FixtureView(fixture = fixture)
                     })
             }
         }
@@ -80,8 +72,7 @@ fun GameweekSelector(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 10.dp)
-            .placeholder(visible = isDataLoading, lowfidelitygray),
+            .padding(top = 10.dp),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {

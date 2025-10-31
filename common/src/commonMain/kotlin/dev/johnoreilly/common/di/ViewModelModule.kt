@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModelOf(::PlayerListViewModel)
-    viewModel { parameters -> PlayerDetailsViewModel(parameters.get(), get()) }
+    viewModelOf(::PlayerDetailsViewModel)
     viewModelOf(::FixturesViewModel)
     viewModelOf(::LeaguesViewModel)
 }

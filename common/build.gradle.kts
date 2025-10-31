@@ -1,13 +1,11 @@
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.skie)
     alias(libs.plugins.room)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
@@ -54,6 +52,9 @@ kotlin {
             implementation(libs.kotlinx.serialization)
             api(libs.kotlinx.datetime)
 
+            implementation(libs.androidx.navigation3.ui)
+            implementation(libs.androidx.navigation3.event)
+
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.composeVM)
@@ -61,6 +62,7 @@ kotlin {
 
             implementation(libs.bundles.ktor.common)
             api(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.compose)
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.datastore.preferences)
@@ -71,6 +73,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.components.resources)
+            implementation(compose.materialIconsExtended)
 
             implementation(libs.koalaplot.core)
             implementation(libs.image.loader)
@@ -96,12 +99,6 @@ kotlin {
             implementation(libs.multik.api)
             implementation(libs.multik.jvm)
         }
-    }
-}
-
-skie {
-    features {
-        enableSwiftUIObservingPreview = true
     }
 }
 

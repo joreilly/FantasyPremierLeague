@@ -1,5 +1,6 @@
-package dev.johnoreilly.fantasypremierleague.presentation.players
+package dev.johnoreilly.common.ui.players
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -11,12 +12,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import com.google.accompanist.placeholder.placeholder
+import com.seiko.imageloader.rememberImagePainter
+//import coil3.compose.AsyncImage
 import dev.johnoreilly.common.model.Player
-import dev.johnoreilly.fantasypremierleague.presentation.global.ImageSize
-import dev.johnoreilly.fantasypremierleague.presentation.global.Spacing
-import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
+import dev.johnoreilly.common.ui.global.ImageSize
+import dev.johnoreilly.common.ui.global.Spacing
 
 /**
  * Displays a player item in the list with photo, name, team, and points.
@@ -41,20 +41,18 @@ fun PlayerView(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
+            .clickable(enabled = !isDataLoading) { onPlayerSelected(player) }
             .padding(Spacing.mediumLarge)
             .fillMaxWidth()
-            .clickable(enabled = !isDataLoading) { onPlayerSelected(player) }
             .semantics(mergeDescendants = true) {
                 contentDescription = semanticDescription
             }
     ) {
-        AsyncImage(
-            model = player.photoUrl,
-            contentDescription = null, // Merged into parent semantics
+        val painter = rememberImagePainter(player.photoUrl)
+        Image(
+            painter, null,
+            modifier = Modifier.size(ImageSize.medium),
             contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .size(ImageSize.medium)
-                .placeholder(visible = isDataLoading, lowfidelitygray)
         )
         Spacer(modifier = Modifier.width(Spacing.medium))
         Column(
@@ -63,20 +61,17 @@ fun PlayerView(
                 .padding(start = Spacing.small)
         ) {
             Text(
-                modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
                 text = player.name,
                 style = MaterialTheme.typography.titleMedium
             )
             Spacer(modifier = Modifier.height(Spacing.extraSmall))
             Text(
-                modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
                 text = player.team,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
         Text(
-            modifier = Modifier.placeholder(visible = isDataLoading, lowfidelitygray),
             text = player.points.toString(),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.primary

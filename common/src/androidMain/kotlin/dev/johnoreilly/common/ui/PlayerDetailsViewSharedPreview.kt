@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.model.PlayerPastHistory
+import dev.johnoreilly.common.ui.players.playerDetails.PlayerDetailsViewShared
 
 @Preview
 @Composable

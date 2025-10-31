@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.presentation.leagues
+package dev.johnoreilly.common.ui.leagues
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -6,9 +6,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import dev.johnoreilly.common.data.model.LeagueResultDto
-import dev.johnoreilly.fantasypremierleague.presentation.global.Spacing
+import dev.johnoreilly.common.ui.global.Spacing
 
 @Composable
 fun LeagueResultView(leagueResult: LeagueResultDto) {

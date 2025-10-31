@@ -1,4 +1,4 @@
-package dev.johnoreilly.fantasypremierleague.presentation.global
+package dev.johnoreilly.common.ui.global
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

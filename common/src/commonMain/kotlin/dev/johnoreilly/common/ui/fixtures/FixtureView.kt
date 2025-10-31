@@ -1,7 +1,7 @@
-package dev.johnoreilly.fantasypremierleague.presentation.fixtures
+package dev.johnoreilly.common.ui.fixtures
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
@@ -17,51 +17,33 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import com.google.accompanist.placeholder.placeholder
+import com.seiko.imageloader.rememberImagePainter
 import dev.johnoreilly.common.model.GameFixture
-import dev.johnoreilly.fantasypremierleague.presentation.global.CornerRadius
-import dev.johnoreilly.fantasypremierleague.presentation.global.DividerThickness
-import dev.johnoreilly.fantasypremierleague.presentation.global.ImageSize
-import dev.johnoreilly.fantasypremierleague.presentation.global.Spacing
-import dev.johnoreilly.fantasypremierleague.presentation.global.lowfidelitygray
-import dev.johnoreilly.fantasypremierleague.presentation.global.maroon200
+import dev.johnoreilly.common.ui.global.CornerRadius
+import dev.johnoreilly.common.ui.global.DividerThickness
+import dev.johnoreilly.common.ui.global.ImageSize
+import dev.johnoreilly.common.ui.global.Spacing
 
 /**
  * Displays a fixture card showing teams, scores, and kickoff time.
  *
  * @param fixture The fixture data to display
- * @param onFixtureSelected Callback when the fixture is clicked
- * @param isDataLoading Whether data is still loading (shows placeholder)
  */
 @Composable
-fun FixtureView(
-    fixture: GameFixture,
-    onFixtureSelected: (fixtureId: Int) -> Unit,
-    isDataLoading: Boolean
-) {
+fun FixtureView(fixture: GameFixture) {
     val scoreText = if (fixture.homeTeamScore != null && fixture.awayTeamScore != null) {
         "${fixture.homeTeam} ${fixture.homeTeamScore} - ${fixture.awayTeamScore} ${fixture.awayTeam}"
     } else {
         "${fixture.homeTeam} vs ${fixture.awayTeam}, scheduled for ${fixture.localKickoffTime?.date}"
     }
 
-    val semanticDescription = if (!isDataLoading) {
-        "Fixture: $scoreText"
-    } else {
-        "Loading fixture data"
-    }
-
     Surface(
         modifier = Modifier
             .fillMaxSize()
             .padding(start = Spacing.mediumLarge, top = Spacing.mediumLarge, end = Spacing.mediumLarge)
-            .clickable(enabled = !isDataLoading) { onFixtureSelected(fixture.id) }
-            .placeholder(visible = isDataLoading, lowfidelitygray)
             .semantics(mergeDescendants = true) {
-                contentDescription = semanticDescription
+                contentDescription = "Fixture: $scoreText"
             },
         color = MaterialTheme.colorScheme.surfaceVariant,
         shape = RoundedCornerShape(CornerRadius.large)
@@ -112,7 +94,7 @@ fun FixtureView(
                     fontWeight = FontWeight.Light
                 )
 
-                val formattedTime = "%02d:%02d".format(localKickoffTime.hour, localKickoffTime.minute)
+                val formattedTime = "${localKickoffTime.hour.toString().padStart(2, '0')}:${localKickoffTime.minute.toString().padStart(2, '0')}"
                 Text(
                     modifier = Modifier.padding(bottom = Spacing.mediumLarge),
                     text = formattedTime,
@@ -139,11 +121,11 @@ fun ClubInFixtureView(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.semantics(mergeDescendants = true) { }
     ) {
-        AsyncImage(
-            model = teamPhotoUrl,
-            contentDescription = null, // Team name will be read from text below
+        val painter = rememberImagePainter(teamPhotoUrl)
+        Image(
+            painter, null,
+            modifier = Modifier.size(ImageSize.medium),
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(ImageSize.medium)
         )
         Text(
             modifier = Modifier
@@ -158,25 +140,3 @@ fun ClubInFixtureView(
     }
 }
 
-@Preview
-@Composable
-fun PreviewFixtureView() {
-    val placeholderKickoffTime = kotlinx.datetime.LocalDateTime(2022, 9, 5, 13, 30, 0)
-    Column(modifier = Modifier.height(200.dp)) {
-        FixtureView(
-            fixture = GameFixture(
-                id = 1,
-                localKickoffTime = placeholderKickoffTime,
-                homeTeam = "Liverpool",
-                "Spurs",
-                "",
-                "",
-                3,
-                0,
-                5
-            ),
-            onFixtureSelected = {},
-            isDataLoading = false
-        )
-    }
-}

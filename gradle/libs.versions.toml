@@ -1,34 +1,30 @@
 [versions]
-kotlin = "2.2.10"
-ksp = "2.2.10-2.0.2"
+kotlin = "2.2.21"
+ksp = "2.3.0"
 kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-dateTime = "0.7.1-0.6.x-compat"
 
-androidGradlePlugin = "8.12.3"
+androidGradlePlugin = "8.13.0"
 koalaplot = "0.9.1"
 koin = "4.1.1"
 ktor = "3.3.1"
 slf4j = "2.0.17"
-skie = "0.10.6"
 datastore = "1.1.7"
 
 androidxActivity = "1.11.0"
-androidxComposeBom = "2025.10.00"
-androidxNavigationCompose = "2.9.5"
 androidxLifecycle = "2.9.4"
-androidxRoom = "2.8.2"
+androidxRoom = "2.8.3"
+androidxNavigation3UI = "1.0.0-alpha03"
+androidxNavigation3Event = "1.0.0-alpha03"
 sqlite = "2.6.1"
-compose-plugin = "1.9.0"
-accompanist = "0.36.0"
-coilCompose = "2.7.0"
+compose-plugin = "1.9.2"
 image-loader = "1.10.0"
 junit = "4.13.2"
 kermit = "2.0.8"
 minSdk = "24"
 targetSdk = "36"
 compileSdk = "36"
-screenshot = "0.0.1-alpha11"
 
 multikApi = "0.1.1"
 multikJvm = "0.1.1"
@@ -46,23 +42,12 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
-androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
-androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
-androidx-compose-material = { group = "androidx.compose.material", name = "material" }
-androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
-androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
-androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test" }
-androidx-compose-ui-test-junit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-compose-material3 =  { group = "androidx.compose.material3", name = "material3" }
-androidx-compose-material3-WindowSizeClass =  { group = "androidx.compose.material3", name="material3-window-size-class" }
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigationCompose" }
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidxLifecycle" }
+androidx-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "androidxNavigation3UI" }
+androidx-navigation3-event = { module = "org.jetbrains.androidx.navigationevent:navigationevent-compose", version.ref = "androidxNavigation3Event" }
+
 
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
@@ -73,13 +58,10 @@ sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sql
 
 datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 
-coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
-accompanist-placeholder = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
 image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image-loader" }
 koalaplot-core = { module = "io.github.koalaplot:koalaplot-core", version.ref = "koalaplot" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
@@ -98,7 +80,6 @@ slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 junit = { module = "junit:junit", version.ref = "junit" }
-androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
 mcp-kotlin = { group = "io.modelcontextprotocol", name = "kotlin-sdk", version.ref = "mcp" }
 koog-agents = { module = "ai.koog:koog-agents", version.ref = "koogAgents" }
 
@@ -112,10 +93,8 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-skie = { id = "co.touchlab.skie", version.ref = "skie"}
 room = { id = "androidx.room", version.ref = "androidxRoom" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm" }
 shadowPlugin = { id = "com.gradleup.shadow", version.ref = "shadowPlugin" }
