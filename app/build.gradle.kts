@@ -4,7 +4,10 @@ plugins {
     id("com.android.application")
     kotlin("android")
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.screenshot)
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 android {
@@ -20,8 +23,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -55,49 +58,16 @@ android {
         }
     }
 
-
-    experimentalProperties["android.experimental.enableScreenshotTest"] = true
-
     namespace = "dev.johnoreilly.fantasypremierleague"
 }
 
 dependencies {
-
     implementation(libs.androidx.activity.compose)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.foundation.layout)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling)
-
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.windowSizeClass)
-
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.lifecycle.compose)
-    implementation(libs.coilCompose)
-
-    implementation(libs.accompanist.placeholder)
-
-    implementation(libs.koin.core)
     implementation(libs.koin.android)
-    implementation(libs.koin.androidx.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.koin.test)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-
-
-    testImplementation("androidx.test:core:1.7.0")
-    testImplementation("org.robolectric:robolectric:4.15.1")
-    androidTestImplementation("androidx.test:runner:1.7.0")
+    testImplementation("org.robolectric:robolectric:4.16")
 
     implementation(projects.common)
 }

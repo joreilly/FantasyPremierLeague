@@ -1,4 +1,4 @@
-package dev.johnoreilly.common.ui
+package dev.johnoreilly.common.ui.players.playerDetails
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,8 +10,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -23,7 +26,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -61,7 +63,9 @@ fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistor
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.size(16.dp))
@@ -85,7 +89,6 @@ fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistor
             )
         }
         PlayerStatView(stringResource(Res.string.team),  player.team)
-        //PlayerStatView("Team",  player.team)
         PlayerStatView("CurrentPrice", player.currentPrice.toString())
         PlayerStatView("Points", player.points.toString())
         PlayerStatView("Goals Scored", player.goalsScored.toString())
@@ -207,7 +210,7 @@ private fun PlayerHistoryBarPlot(
     val barChartEntries by remember(playerHistory) { mutableStateOf(barChartEntries(playerHistory)) }
 
     ChartLayout(
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier.padding(8.dp).height(200.dp),
         title = { ChartTitle(title) }
     ) {
 
