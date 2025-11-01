@@ -1,6 +1,6 @@
 # Fantasy Premier League
 
-![kotlin-version](https://img.shields.io/badge/kotlin-2.2.10-blue?logo=kotlin)
+![kotlin-version](https://img.shields.io/badge/kotlin-2.2.21-blue?logo=kotlin)
 
 **Compose Multiplatform** project running on following
 * Android 
@@ -27,14 +27,18 @@ Related posts:
 ## Screenshots
 
 ### Android
-<img src="https://user-images.githubusercontent.com/6302/210137422-7c289cbb-d428-4ae3-9183-6c481184b5fa.png" width=300/>|
+<img width="300" height="2400" alt="Screenshot_20251101_204058" src="https://github.com/user-attachments/assets/e75753e5-badb-4641-9b16-6cf23608d2ed" />
+
 
 ### iOS
-<img src="https://user-images.githubusercontent.com/6302/233188752-f18cb96d-cf2b-45a1-af7d-fdad0db06dfb.png" width=300/>|
+<img width="300" height="2622" alt="Simulator Screenshot - iPhone 17 Pro - 2025-11-01 at 20 37 58" src="https://github.com/user-attachments/assets/8a94c51c-b087-407a-ad7e-8caf2c793bc8" />
+
 
 ### Desktop
 
-<img width="912" alt="Screenshot 2023-09-14 at 17 07 32" src="https://github.com/joreilly/FantasyPremierLeague/assets/6302/86582f04-60e7-480c-97ae-908c31dfd321">
+<img width="912" height="888" alt="Screenshot 2025-11-01 at 20 38 24" src="https://github.com/user-attachments/assets/d9cbc228-7d1c-4b25-929b-d090ed99bf64" />
+
+
 
 ### Kotlin Notebook
 <img width="916" alt="Screenshot 2024-04-06 at 11 03 15" src="https://github.com/joreilly/FantasyPremierLeague/assets/6302/37fef7a1-190d-4c14-acdd-5dafc11e8e30">
