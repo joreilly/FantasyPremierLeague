@@ -4,7 +4,7 @@ import FantasyPremierLeagueKit
 
 struct ContentView: View {
     var body: some View {
-        ComposeUI().ignoresSafeArea()
+        ComposeUI().ignoresSafeArea(.all)
     }
 }
 
