@@ -54,6 +54,7 @@ kotlin {
 
             implementation(libs.androidx.navigation3.ui)
             implementation(libs.androidx.navigation3.event)
+            implementation(libs.androidx.navigation3.material3.adaptive)
 
             api(libs.koin.core)
             implementation(libs.koin.compose)

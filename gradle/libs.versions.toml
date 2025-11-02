@@ -17,6 +17,7 @@ androidxLifecycle = "2.9.4"
 androidxRoom = "2.8.3"
 androidxNavigation3UI = "1.0.0-alpha03"
 androidxNavigation3Event = "1.0.0-alpha03"
+androidxNavigation3Material = "1.3.0-alpha01+dev3197"
 sqlite = "2.6.1"
 compose-plugin = "1.9.2"
 image-loader = "1.10.0"
@@ -47,6 +48,7 @@ androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-co
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidxLifecycle" }
 androidx-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "androidxNavigation3UI" }
 androidx-navigation3-event = { module = "org.jetbrains.androidx.navigationevent:navigationevent-compose", version.ref = "androidxNavigation3Event" }
+androidx-navigation3-material3-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "androidxNavigation3Material" }
 
 
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
