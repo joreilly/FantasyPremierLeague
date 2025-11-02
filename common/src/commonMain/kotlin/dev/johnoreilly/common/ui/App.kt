@@ -17,11 +17,9 @@ import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
 import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
@@ -33,31 +31,42 @@ import dev.johnoreilly.common.ui.players.PlayerListView
 import dev.johnoreilly.common.ui.players.playerDetails.PlayerDetailsView
 import dev.johnoreilly.common.ui.settings.SettingsView
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
+import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
 
 
-private sealed interface TopLevelRoute {
+@Serializable
+private sealed interface Route : NavKey
+
+@Serializable
+private sealed interface TopLevelRoute: Route {
     val icon: ImageVector
     val contentDescription: String
 }
 
+@Serializable
 private data object PlayerList : TopLevelRoute {
     override val icon = Icons.Default.Person
     override val contentDescription = "Players"
 }
 
-private data class PlayerDetails(val playerId: Int)
+@Serializable
+private data class PlayerDetails(val playerId: Int) : Route
+
+@Serializable
 private data object FixtureList : TopLevelRoute {
     override val icon = Icons.Filled.DateRange
     override val contentDescription = "Fixtures"
 }
 
+@Serializable
 private data object League : TopLevelRoute {
     override val icon = Icons.AutoMirrored.Filled.List
     override val contentDescription = "Leagues"
 }
 
-private data object Settings
+@Serializable
+private data object Settings : Route
 
 private val topLevelRoutes: List<TopLevelRoute> = listOf(PlayerList, FixtureList, League)
 
@@ -66,7 +75,7 @@ private val topLevelRoutes: List<TopLevelRoute> = listOf(PlayerList, FixtureList
 @Composable
 fun App() {
     MaterialTheme {
-        val backStack = mutableStateListOf<Any>(PlayerList)
+        val backStack = rememberNavBackStack<Route>(PlayerList)
 
         val windowAdaptiveInfo = currentWindowAdaptiveInfo()
         val directive = remember(windowAdaptiveInfo) {
@@ -77,7 +86,7 @@ fun App() {
 
         Scaffold(
             bottomBar = { FantasyPremierLeagueBottomNavigation(topLevelRoutes, backStack) }
-        ) {
+        ) { _ ->
             NavDisplay(
                 backStack = backStack,
                 onBack = { backStack.removeLastOrNull() },
@@ -119,7 +128,7 @@ fun App() {
 @Composable
 private fun FantasyPremierLeagueBottomNavigation(
     topLevelRoutes: List<TopLevelRoute>,
-    backStack: SnapshotStateList<Any>
+    backStack: MutableList<Route>
 ) {
     var selectedType by remember { mutableStateOf<TopLevelRoute>(PlayerList) }
     NavigationBar {
