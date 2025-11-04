@@ -1,5 +1,8 @@
 package dev.johnoreilly.common.ui
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.DateRange
@@ -20,10 +23,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import dev.johnoreilly.common.ui.fixtures.FixturesListView
 import dev.johnoreilly.common.ui.leagues.LeagueListView
@@ -95,7 +102,15 @@ fun App() {
                     entry<PlayerList>(
                         metadata = ListDetailSceneStrategy.listPane(
                             detailPlaceholder = {
-                                Text("Choose a player from the list")
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "Choose a player from the list",
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
                             }
                         )
                     ) {
