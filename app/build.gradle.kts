@@ -48,12 +48,15 @@ android {
         }
     }
 
+
     packaging {
         resources {
             excludes += listOf(
                 "/META-INF/INDEX.LIST",
                 "/META-INF/versions/**",
-                "/META-INF/io.netty.versions.properties"
+                "/META-INF/io.netty.versions.properties",
+                "/META-INF/{AL2.0,LGPL2.1}",
+                "/META-INF/DEPENDENCIES",
             )
         }
     }

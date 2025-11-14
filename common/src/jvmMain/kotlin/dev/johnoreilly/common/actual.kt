@@ -18,7 +18,7 @@ actual fun platformModule() = module {
 
 
 fun createRoomDatabase(): AppDatabase {
-    val dbFile = File(dbFileName)
+    val dbFile = File(System.getProperty("java.io.tmpdir"), dbFileName)
     return Room.databaseBuilder<AppDatabase>(name = dbFile.absolutePath,)
         .setDriver(BundledSQLiteDriver())
         .build()

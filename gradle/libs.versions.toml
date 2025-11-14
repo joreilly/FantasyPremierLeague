@@ -5,10 +5,10 @@ kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-dateTime = "0.7.1-0.6.x-compat"
 
-androidGradlePlugin = "8.13.0"
+androidGradlePlugin = "8.13.1"
 koalaplot = "0.9.1"
 koin = "4.1.1"
-ktor = "3.3.1"
+ktor = "3.3.2"
 slf4j = "2.0.17"
 datastore = "1.1.7"
 
@@ -31,8 +31,8 @@ multikApi = "0.1.1"
 multikJvm = "0.1.1"
 okalgo = "0.0.2"
 kotlinStatistics = "1.2.1"
-mcp = "0.7.2"
-koogAgents = "0.5.0"
+mcp = "0.7.7"
+koogAgents = "0.5.2"
 shadowPlugin = "9.2.2"
 
 
@@ -78,6 +78,8 @@ ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version
 ktor-client-ios = { group = "io.ktor", name = "ktor-client-ios", version.ref = "ktor" }
 ktor-client-java = { group = "io.ktor", name = "ktor-client-java", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-server-cio = { group = "io.ktor", name = "ktor-server-cio", version.ref = "ktor" }
+ktor-server-sse = { group = "io.ktor", name = "ktor-server-sse", version.ref = "ktor" }
 slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
