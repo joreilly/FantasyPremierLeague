@@ -15,7 +15,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.putJsonObject
 
 
-private val koin = initKoin(enableNetworkLogs = true).koin
+private val koin = initKoin(enableNetworkLogs = false).koin
 
 fun configureServer(): Server {
     val fantasyPremierLeagueRepository = koin.get<FantasyPremierLeagueRepository>()

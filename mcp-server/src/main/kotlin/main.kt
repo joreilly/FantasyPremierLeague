@@ -12,7 +12,7 @@
 
 
 fun main(args: Array<String>) {
-    val command = args.firstOrNull() ?: "--sse-server"
+    val command = args.firstOrNull() ?: "--stdio"
     val port = args.getOrNull(1)?.toIntOrNull() ?: 3001
     when (command) {
         "--stdio" -> `run mcp server using stdio`()

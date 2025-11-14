@@ -6,8 +6,11 @@ plugins {
 }
 
 dependencies {
+    implementation(libs.ktor.client.java)
     implementation(libs.mcp.kotlin)
     implementation(libs.koin.core)
+    implementation(libs.ktor.server.cio)
+    implementation(libs.ktor.server.sse)
     implementation(projects.common)
 }
 

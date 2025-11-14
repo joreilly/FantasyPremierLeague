@@ -50,7 +50,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
             writeDataToDb(bootstrapStaticInfoDto, fixtures)
         } catch (e: Exception) {
             // TODO surface this to UI/option to retry etc ?
-            println("Exception reading data: $e")
+            //println("Exception reading data: $e")
         }
     }
 
