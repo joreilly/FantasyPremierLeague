@@ -1,7 +1,6 @@
 package dev.johnoreilly.common.ui
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
@@ -20,18 +19,19 @@ import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
 import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import dev.johnoreilly.common.ui.fixtures.FixturesListView
 import dev.johnoreilly.common.ui.leagues.LeagueListView
 import dev.johnoreilly.common.ui.players.PlayerListView
@@ -43,7 +43,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 
 @Serializable
-private sealed interface Route : NavKey
+private sealed interface Route
 
 @Serializable
 private sealed interface TopLevelRoute: Route {
@@ -82,7 +82,10 @@ private val topLevelRoutes: List<TopLevelRoute> = listOf(PlayerList, FixtureList
 @Composable
 fun App() {
     MaterialTheme {
-        val backStack = rememberNavBackStack<Route>(PlayerList)
+        val backStack: MutableList<Route> =
+            rememberSerializable(serializer = SnapshotStateListSerializer()) {
+                mutableStateListOf(PlayerList)
+            }
 
         val windowAdaptiveInfo = currentWindowAdaptiveInfo()
         val directive = remember(windowAdaptiveInfo) {
