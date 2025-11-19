@@ -29,7 +29,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import dev.johnoreilly.common.ui.fixtures.FixturesListView
@@ -40,6 +42,7 @@ import dev.johnoreilly.common.ui.settings.SettingsView
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 
 @Serializable
@@ -101,6 +104,10 @@ fun App() {
                 backStack = backStack,
                 onBack = { backStack.removeLastOrNull() },
                 sceneStrategy = listDetailStrategy,
+                entryDecorators = listOf(
+                    rememberSaveableStateHolderNavEntryDecorator(),
+                    rememberViewModelStoreNavEntryDecorator(),
+                ),
                 entryProvider = entryProvider {
                     entry<PlayerList>(
                         metadata = ListDetailSceneStrategy.listPane(
@@ -127,8 +134,9 @@ fun App() {
                     entry<PlayerDetails>(
                         metadata = ListDetailSceneStrategy.detailPane()
                     ) { key ->
-                        val viewModel = koinViewModel<PlayerDetailsViewModel>()
-                        viewModel.setPlayer(key.playerId)
+                        val viewModel = koinViewModel<PlayerDetailsViewModel>(
+                            parameters = { parametersOf(key.playerId) }
+                        )
                         PlayerDetailsView(
                             viewModel,
                             popBackStack = { backStack.removeLastOrNull() })
