@@ -1,7 +1,5 @@
 package dev.johnoreilly.common.ui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.DateRange
@@ -11,12 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.compose.material3.adaptive.layout.calculatePaneScaffoldDirective
-import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
-import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -24,11 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
@@ -81,7 +69,6 @@ private data object Settings : Route
 private val topLevelRoutes: List<TopLevelRoute> = listOf(PlayerList, FixtureList, League)
 
 
-@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun App() {
     MaterialTheme {
@@ -89,13 +76,7 @@ fun App() {
             rememberSerializable(serializer = SnapshotStateListSerializer()) {
                 mutableStateListOf(PlayerList)
             }
-
-        val windowAdaptiveInfo = currentWindowAdaptiveInfo()
-        val directive = remember(windowAdaptiveInfo) {
-            calculatePaneScaffoldDirective(windowAdaptiveInfo)
-                .copy(horizontalPartitionSpacerSize = 0.dp)
-        }
-        val listDetailStrategy = rememberListDetailSceneStrategy<Any>(directive = directive)
+        val listDetailStrategy = rememberListDetailSceneStrategy<Route>()
 
         Scaffold(
             bottomBar = { FantasyPremierLeagueBottomNavigation(topLevelRoutes, backStack) }
@@ -110,19 +91,7 @@ fun App() {
                 ),
                 entryProvider = entryProvider {
                     entry<PlayerList>(
-                        metadata = ListDetailSceneStrategy.listPane(
-                            detailPlaceholder = {
-                                Box(
-                                    modifier = Modifier.fillMaxSize(),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Text(
-                                        text = "Choose a player from the list",
-                                        textAlign = TextAlign.Center
-                                    )
-                                }
-                            }
-                        )
+                        metadata = ListDetailScene.listPane()
                     ) {
                         PlayerListView(
                             onPlayerSelected = { player ->
@@ -132,7 +101,7 @@ fun App() {
                         )
                     }
                     entry<PlayerDetails>(
-                        metadata = ListDetailSceneStrategy.detailPane()
+                        metadata = ListDetailScene.detailPane()
                     ) { key ->
                         val viewModel = koinViewModel<PlayerDetailsViewModel>(
                             parameters = { parametersOf(key.playerId) }

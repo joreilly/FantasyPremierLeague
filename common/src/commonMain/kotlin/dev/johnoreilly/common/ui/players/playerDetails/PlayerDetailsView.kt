@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.johnoreilly.common.ui.LocalBackButtonVisibility
 import dev.johnoreilly.common.viewmodel.PlayerDetailsUiState
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 
@@ -64,8 +65,10 @@ fun PlayerDetailsViewSuccess(uiState: PlayerDetailsUiState.Success, popBackStack
                     Text(text = uiState.player.name)
                 },
                 navigationIcon = {
-                    IconButton(onClick = { popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    if (LocalBackButtonVisibility.current) {
+                        IconButton(onClick = { popBackStack() }) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        }
                     }
                 }
             )
