@@ -22,7 +22,7 @@ Related posts:
 * [Using new Swift Async Algorithms package to close the gap on Combine](https://johnoreilly.dev/posts/swift-async-algorithms-combine/)
 * [Displaying Charts on iOS, Android, and Desktop using Compose Multiplatform](https://johnoreilly.dev/posts/compose-multiplatform-chart/)
 * [Using Jetpack Room in Kotlin Multiplatform shared code](https://johnoreilly.dev/posts/jetpack_room_kmp/)
-
+* [Using Navigation 3 with Compose Multiplatform](https://johnoreilly.dev/posts/navigation3-cmp/)
 
 ## Screenshots
 
