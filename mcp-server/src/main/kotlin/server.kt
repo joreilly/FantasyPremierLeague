@@ -1,8 +1,14 @@
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.di.initKoin
 import io.ktor.utils.io.streams.*
-import io.modelcontextprotocol.kotlin.sdk.*
-import io.modelcontextprotocol.kotlin.sdk.server.*
+import io.modelcontextprotocol.kotlin.sdk.server.Server
+import io.modelcontextprotocol.kotlin.sdk.server.ServerOptions
+import io.modelcontextprotocol.kotlin.sdk.server.StdioServerTransport
+import io.modelcontextprotocol.kotlin.sdk.types.CallToolResult
+import io.modelcontextprotocol.kotlin.sdk.types.Implementation
+import io.modelcontextprotocol.kotlin.sdk.types.ServerCapabilities
+import io.modelcontextprotocol.kotlin.sdk.types.TextContent
+import io.modelcontextprotocol.kotlin.sdk.types.ToolSchema
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -56,14 +62,14 @@ fun configureServer(): Server {
     server.addTool(
         name = "get-player-history-data",
         description = "List of fixtures",
-        inputSchema = Tool.Input(
+        inputSchema = ToolSchema(
             properties = buildJsonObject {
                 putJsonObject("playerId") { put("type", JsonPrimitive("int")) }
             },
             required = listOf("playerId")
         )
     ) { request ->
-        val playerId = request.arguments["playerId"]?.jsonPrimitive?.int ?: -1
+        val playerId = request.arguments?.get("playerId")?.jsonPrimitive?.int ?: -1
         val playerHistoryData = fantasyPremierLeagueRepository.getPlayerHistoryData(playerId)
         CallToolResult(
             content = listOf(TextContent(playerHistoryData.toString()))
@@ -90,7 +96,7 @@ fun `run mcp server using stdio`() {
     )
 
     runBlocking {
-        server.connect(transport)
+        server.createSession(transport)
         val done = Job()
         server.onClose {
             done.complete()
