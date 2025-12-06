@@ -32,7 +32,7 @@ okalgo = "0.0.2"
 kotlinStatistics = "1.2.1"
 mcp = "0.8.1"
 koogAgents = "0.5.4"
-shadowPlugin = "9.2.2"
+shadowPlugin = "9.3.0"
 
 
 [libraries]
