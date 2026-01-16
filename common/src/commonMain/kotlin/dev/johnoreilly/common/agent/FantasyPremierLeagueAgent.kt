@@ -11,6 +11,8 @@ import ai.koog.agents.core.dsl.extension.sendMultipleToolResults
 import ai.koog.agents.core.tools.ToolRegistry
 import ai.koog.prompt.executor.model.PromptExecutor
 import ai.koog.prompt.llm.LLModel
+import dev.johnoreilly.common.agent.GetFixturesTool
+import dev.johnoreilly.common.agent.GetPlayersTool
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 
 

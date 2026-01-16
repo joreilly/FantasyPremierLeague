@@ -1,6 +1,6 @@
 # Fantasy Premier League
 
-![kotlin-version](https://img.shields.io/badge/kotlin-2.2.21-blue?logo=kotlin)
+![kotlin-version](https://img.shields.io/badge/kotlin-2.3.0-blue?logo=kotlin)
 
 **Compose Multiplatform** project running on following
 * Android 
