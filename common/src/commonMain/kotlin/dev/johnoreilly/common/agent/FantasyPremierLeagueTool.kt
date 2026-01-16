@@ -1,4 +1,4 @@
-package dev.johnoreilly.climatetrace.agent
+package dev.johnoreilly.common.agent
 
 import ai.koog.agents.core.tools.SimpleTool
 import ai.koog.agents.core.tools.Tool
@@ -7,13 +7,14 @@ import dev.johnoreilly.common.model.Player
 import kotlinx.coroutines.flow.first
 
 
-class GetPlayersTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Tool.EmptyArgs>() {
-    override val argsSerializer = EmptyArgs.serializer()
-    override val description = "Get the list of players"
-
+class GetPlayersTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Tool.EmptyArgs>(
+    argsSerializer = EmptyArgs.serializer(),
+    name = "getPlayers",
+    description = "Get the list of players"
+) {
     private var playerList: List<Player>? = null
 
-    override suspend fun doExecute(args: EmptyArgs): String {
+    override suspend fun execute(args: EmptyArgs): String {
         try {
             if (playerList == null) {
                 playerList = fantasyPremierLeagueRepository.getPlayers().first()
@@ -28,11 +29,12 @@ class GetPlayersTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRep
 }
 
 
-class GetFixturesTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Tool.EmptyArgs>() {
-    override val argsSerializer = EmptyArgs.serializer()
-    override val description = "Get the list of fixtures"
-
-    override suspend fun doExecute(args: EmptyArgs): String {
+class GetFixturesTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Tool.EmptyArgs>(
+    argsSerializer = EmptyArgs.serializer(),
+    name = "getFixtures",
+    description = "Get the list of fixtures"
+) {
+    override suspend fun execute(args: EmptyArgs): String {
         try {
             val fixtures = fantasyPremierLeagueRepository.getFixtures().first()
             return fixtures.toString()
