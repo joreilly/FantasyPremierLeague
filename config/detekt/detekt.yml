@@ -1,0 +1,43 @@
+config:
+  validation: true
+  warningsAsErrors: false
+  checkExhaustiveness: false
+
+modifier-test-tag:
+  active: true
+  StaticModifierTestTagRule:
+    active: false
+    functionNamesFile: config/detekt/composable.txt
+  FullModifierTestTagRule:
+    active: true
+    packages:
+      - androidx.compose.material
+      - androidx.compose.material3
+      - androidx.compose.ui.window
+      - androidx.compose.foundation
+      - androidx.compose.foundation.lazy.grid
+    packagesWithin:
+  ComposableRootModifierRule:
+    active: true
+    acceptableFirstComposables:
+      - Row
+      - Column
+      - Box
+      - Surface
+      - Card
+      - Scaffold
+  LazyListIndexedTestTagRule:
+    active: true
+  ConditionalLayoutTestTagRule:
+    active: true
+    layoutComposables:
+      - Row
+      - Column
+      - Box
+      - Surface
+      - Card
+      - Scaffold
+    minimumChildCount: 2
+    checkLayoutsContainingConditionals: true
+  DuplicateTestTagRule:
+    active: true

@@ -33,6 +33,7 @@ kotlinStatistics = "1.2.1"
 mcp = "0.8.1"
 koogAgents = "0.6.0"
 shadowPlugin = "9.3.1"
+detekt = "2.0.0-alpha.1"
 
 
 [libraries]
@@ -86,7 +87,6 @@ junit = { module = "junit:junit", version.ref = "junit" }
 mcp-kotlin = { group = "io.modelcontextprotocol", name = "kotlin-sdk", version.ref = "mcp" }
 koog-agents = { module = "ai.koog:koog-agents", version.ref = "koogAgents" }
 
-
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
 
@@ -101,3 +101,4 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "composeMultipl
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm" }
 shadowPlugin = { id = "com.gradleup.shadow", version.ref = "shadowPlugin" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
