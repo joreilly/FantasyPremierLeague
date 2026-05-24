@@ -1,13 +1,12 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(24)
 }
 
 android {
@@ -55,7 +54,8 @@ android {
                 "/META-INF/INDEX.LIST",
                 "/META-INF/versions/**",
                 "/META-INF/io.netty.versions.properties",
-                "/META-INF/{AL2.0,LGPL2.1}",
+                "/META-INF/AL2.0",
+                "/META-INF/LGPL2.1",
                 "/META-INF/DEPENDENCIES",
             )
         }

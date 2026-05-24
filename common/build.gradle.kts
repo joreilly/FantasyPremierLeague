@@ -9,24 +9,12 @@ plugins {
     alias(libs.plugins.room)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    id("com.android.library")
+    alias(libs.plugins.android.kotlin.multiplatform.library)
 }
 
 kotlin {
-    jvmToolchain(17)
-}
+    jvmToolchain(24)
 
-android {
-    compileSdk = libs.versions.compileSdk.get().toInt()
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    namespace = "dev.johnoreilly.common"
-}
-
-kotlin {
     listOf(
         iosX64(),
         iosArm64(),
@@ -38,7 +26,14 @@ kotlin {
         }
     }
 
-    androidTarget()
+    android {
+        namespace = "dev.johnoreilly.common"
+        compileSdk = libs.versions.compileSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
+        androidResources {
+            enable = true
+        }
+    }
     jvm()
 
     sourceSets {

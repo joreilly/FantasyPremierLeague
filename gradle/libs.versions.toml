@@ -1,11 +1,11 @@
 [versions]
 kotlin = "2.3.0"
-ksp = "2.3.0"
+ksp = "2.3.6"
 kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-dateTime = "0.7.1-0.6.x-compat"
 
-androidGradlePlugin = "8.12.3"
+androidGradlePlugin = "9.0.1"
 koalaplot = "0.9.1"
 koin = "4.1.1"
 ktor = "3.3.3"
@@ -92,7 +92,7 @@ ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "k
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
-android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "androidGradlePlugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
