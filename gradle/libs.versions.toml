@@ -10,7 +10,7 @@ koalaplot = "0.9.1"
 koin = "4.1.1"
 ktor = "3.3.3"
 slf4j = "2.0.17"
-datastore = "1.2.0"
+datastore = "1.2.1"
 
 androidxActivity = "1.12.2"
 androidxLifecycle = "2.10.0-alpha04"
