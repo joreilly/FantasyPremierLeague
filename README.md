@@ -37,11 +37,11 @@ Note: to use the AI agent you need a Gemini API key — set `apiKeyGoogle` in `F
 ## Screenshots
 
 ### Android
-<img width="300" height="2400" alt="Screenshot_20251101_204058" src="https://github.com/user-attachments/assets/e75753e5-badb-4641-9b16-6cf23608d2ed" />
+<img width="300" alt="Screenshot_20251101_204058" src="https://github.com/user-attachments/assets/e75753e5-badb-4641-9b16-6cf23608d2ed" />
 
 
 ### iOS
-<img width="300" height="2622" alt="Simulator Screenshot - iPhone 17 Pro - 2025-11-01 at 20 37 58" src="https://github.com/user-attachments/assets/8a94c51c-b087-407a-ad7e-8caf2c793bc8" />
+<img width="300" alt="Simulator Screenshot - iPhone 17 Pro - 2025-11-01 at 20 37 58" src="https://github.com/user-attachments/assets/8a94c51c-b087-407a-ad7e-8caf2c793bc8" />
 
 
 ### Desktop
