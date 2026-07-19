@@ -70,7 +70,7 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.koin.test)
-    testImplementation("org.robolectric:robolectric:4.16")
+    testImplementation(libs.robolectric)
 
     implementation(projects.common)
 }

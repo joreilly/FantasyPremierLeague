@@ -1,6 +1,6 @@
 # Fantasy Premier League
 
-![kotlin-version](https://img.shields.io/badge/kotlin-2.3.0-blue?logo=kotlin)
+![kotlin-version](https://img.shields.io/badge/kotlin-2.4.10-blue?logo=kotlin)
 
 **Compose Multiplatform** project running on following
 * Android 
@@ -8,6 +8,7 @@
 * Desktop 
 
 Also includes
+* AI agent built with [Koog](https://github.com/JetBrains/koog) (Gemini + tool calling, running in shared KMP code)
 * Kotlin Notebook
 * MCP Server
 
@@ -23,6 +24,15 @@ Related posts:
 * [Displaying Charts on iOS, Android, and Desktop using Compose Multiplatform](https://johnoreilly.dev/posts/compose-multiplatform-chart/)
 * [Using Jetpack Room in Kotlin Multiplatform shared code](https://johnoreilly.dev/posts/jetpack_room_kmp/)
 * [Using Navigation 3 with Compose Multiplatform](https://johnoreilly.dev/posts/navigation3-cmp/)
+
+## Running the app
+
+* **Android**: open the project in Android Studio and run the `app` configuration
+* **iOS**: open `ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj` in Xcode and run
+* **Desktop**: `./gradlew :compose-desktop:run`
+* **MCP Server**: `./gradlew :mcp-server:shadowJar` (see MCP Server section below)
+
+Note: to use the AI agent you need a Gemini API key — set `apiKeyGoogle` in `FantasyPremierLeagueAgent`.
 
 ## Screenshots
 
@@ -63,7 +73,7 @@ like the following (update with your path)
 ```
 {
   "mcpServers": {
-    "kotlin-peopleinspace": {
+    "fantasy-premier-league": {
       "command": "java",
       "args": [
         "-jar",

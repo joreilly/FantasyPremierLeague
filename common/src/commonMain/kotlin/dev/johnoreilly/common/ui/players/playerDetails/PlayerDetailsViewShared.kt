@@ -36,7 +36,7 @@ import dev.johnoreilly.common.model.PlayerPastHistory
 import fantasypremierleague.common.generated.resources.Res
 import fantasypremierleague.common.generated.resources.team
 import io.github.koalaplot.core.ChartLayout
-import io.github.koalaplot.core.bar.DefaultVerticalBar
+import io.github.koalaplot.core.bar.DefaultBar
 import io.github.koalaplot.core.bar.VerticalBarPlot
 import io.github.koalaplot.core.bar.VerticalBarPlotEntry
 import io.github.koalaplot.core.bar.verticalBarPlotEntry
@@ -246,12 +246,12 @@ private fun PlayerHistoryBarPlot(
         ) {
             VerticalBarPlot(
                 barChartEntries,
-                bar = { index ->
-                    DefaultVerticalBar(
+                bar = { _, _, value ->
+                    DefaultBar(
                         brush = SolidColor(MaterialTheme.colorScheme.primary),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        HoverSurface { Text(barChartEntries[index].y.yMax.toString()) }
+                        HoverSurface { Text(value.y.end.toString()) }
                     }
                 }
             )

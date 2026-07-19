@@ -87,7 +87,7 @@ fun App() {
                 modifier = Modifier.padding(bottom = padding.calculateBottomPadding()),
                 backStack = backStack,
                 onBack = { backStack.removeLastOrNull() },
-                sceneStrategy = listDetailStrategy,
+                sceneStrategies = listOf(listDetailStrategy),
                 entryDecorators = listOf(
                     rememberSaveableStateHolderNavEntryDecorator(),
                     rememberViewModelStoreNavEntryDecorator(),

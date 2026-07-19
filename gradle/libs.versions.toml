@@ -1,38 +1,39 @@
 [versions]
-kotlin = "2.3.0"
-ksp = "2.3.6"
-kotlinx-coroutines = "1.10.2"
-kotlinx-serialization = "1.9.0"
-kotlinx-dateTime = "0.7.1-0.6.x-compat"
+kotlin = "2.4.10"
+ksp = "2.3.10"
+kotlinx-coroutines = "1.11.0"
+kotlinx-serialization = "1.11.0"
+kotlinx-dateTime = "0.8.0-0.6.x-compat"
 
-androidGradlePlugin = "9.0.1"
-koalaplot = "0.9.1"
-koin = "4.1.1"
-ktor = "3.3.3"
-slf4j = "2.0.17"
-datastore = "1.2.0"
+androidGradlePlugin = "9.1.1"
+koalaplot = "0.11.2"
+koin = "4.2.2"
+ktor = "3.5.1"
+slf4j = "2.0.18"
+datastore = "1.2.1"
 
-androidxActivity = "1.12.2"
-androidxLifecycle = "2.10.0-alpha04"
+androidxActivity = "1.13.0"
+androidxLifecycle = "2.11.0"
 androidxRoom = "2.8.4"
-androidxNavigation3UI = "1.0.0-alpha06"
-androidxNavigation3Material = "1.3.0-alpha03"
-sqlite = "2.6.2"
-composeMultiplatform = "1.10.0"
+androidxNavigation3UI = "1.1.1"
+androidxNavigation3Material = "1.3.0-beta02"
+sqlite = "2.7.0"
+composeMultiplatform = "1.11.1"
 image-loader = "1.10.0"
 junit = "4.13.2"
-kermit = "2.0.8"
-minSdk = "24"
+kermit = "2.1.0"
+robolectric = "4.16.1"
+minSdk = "35"
 targetSdk = "36"
-compileSdk = "36"
+compileSdk = "37"
 
-multikApi = "0.1.1"
-multikJvm = "0.1.1"
+multik = "0.1.1"
 okalgo = "0.0.2"
 kotlinStatistics = "1.2.1"
-mcp = "0.8.1"
-koogAgents = "0.6.0"
-shadowPlugin = "9.3.1"
+mcp = "0.14.0"
+koogAgents = "1.0.0"
+koogExecutors = "1.0.0-beta"
+shadowPlugin = "9.6.0"
 
 
 [libraries]
@@ -45,15 +46,15 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidxLifecycle" }
-androidx-lifecycle-viewmodel-navigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidxLifecycle" }
 androidx-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "androidxNavigation3UI" }
 androidx-navigation3-material3-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "androidxNavigation3Material" }
 
 
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
-multik-api = { module = "org.jetbrains.kotlinx:multik-api", version.ref = "multikApi" }
-multik-jvm = { module = "org.jetbrains.kotlinx:multik-jvm", version.ref = "multikJvm" }
+multik-api = { module = "org.jetbrains.kotlinx:multik-api", version.ref = "multik" }
+multik-jvm = { module = "org.jetbrains.kotlinx:multik-jvm", version.ref = "multik" }
 okalgo = { module = "org.ojalgo:okalgo", version.ref = "okalgo" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
@@ -69,9 +70,7 @@ koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
-ktor-client-json = { group = "io.ktor", name = "ktor-client-json", version.ref = "ktor" }
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
-ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktor" }
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
 ktor-client-ios = { group = "io.ktor", name = "ktor-client-ios", version.ref = "ktor" }
@@ -83,12 +82,14 @@ slf4j = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 junit = { module = "junit:junit", version.ref = "junit" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 mcp-kotlin = { group = "io.modelcontextprotocol", name = "kotlin-sdk", version.ref = "mcp" }
 koog-agents = { module = "ai.koog:koog-agents", version.ref = "koogAgents" }
+koog-executor-llms-all = { module = "ai.koog:prompt-executor-llms-all", version.ref = "koogExecutors" }
 
 
 [bundles]
-ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
+ktor-common = ["ktor-client-core", "ktor-client-logging", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
