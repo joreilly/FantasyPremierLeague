@@ -16,7 +16,6 @@ kotlin {
     jvmToolchain(24)
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
@@ -54,7 +53,6 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.composeVM)
-            implementation(libs.koin.test)
 
             implementation(libs.bundles.ktor.common)
             api(libs.androidx.lifecycle.viewmodel)
@@ -75,6 +73,7 @@ kotlin {
             implementation(libs.image.loader)
 
             implementation(libs.koog.agents)
+            implementation(libs.koog.executor.llms.all)
         }
 
         androidMain.dependencies {
@@ -99,7 +98,10 @@ kotlin {
 }
 
 dependencies {
-    ksp(libs.androidx.room.compiler)
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspJvm", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
 }
 
 room {

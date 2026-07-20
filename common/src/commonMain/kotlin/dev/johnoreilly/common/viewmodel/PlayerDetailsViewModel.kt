@@ -7,6 +7,7 @@ import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.model.PlayerPastHistory
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
@@ -23,7 +24,7 @@ open class PlayerDetailsViewModel(
     private val repository: FantasyPremierLeagueRepository,
 ) : ViewModel() {
 
-    val state =
+    val state: StateFlow<PlayerDetailsUiState> =
         combine(
             flow { emit(repository.getPlayer(playerId)) },
             flow { emit(repository.getPlayerHistoryData(playerId)) }
@@ -32,5 +33,5 @@ open class PlayerDetailsViewModel(
                 player = player,
                 history = history,
             )
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PlayerDetailsUiState.Loading)
 }

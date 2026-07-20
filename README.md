@@ -1,6 +1,6 @@
 # Fantasy Premier League
 
-![kotlin-version](https://img.shields.io/badge/kotlin-2.3.0-blue?logo=kotlin)
+![kotlin-version](https://img.shields.io/badge/kotlin-2.4.10-blue?logo=kotlin)
 
 **Compose Multiplatform** project running on following
 * Android 
@@ -8,6 +8,7 @@
 * Desktop 
 
 Also includes
+* AI agent built with [Koog](https://github.com/JetBrains/koog) (Gemini + tool calling, running in shared KMP code)
 * Kotlin Notebook
 * MCP Server
 
@@ -24,14 +25,23 @@ Related posts:
 * [Using Jetpack Room in Kotlin Multiplatform shared code](https://johnoreilly.dev/posts/jetpack_room_kmp/)
 * [Using Navigation 3 with Compose Multiplatform](https://johnoreilly.dev/posts/navigation3-cmp/)
 
+## Running the app
+
+* **Android**: open the project in Android Studio and run the `app` configuration
+* **iOS**: open `ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj` in Xcode and run
+* **Desktop**: `./gradlew :compose-desktop:run`
+* **MCP Server**: `./gradlew :mcp-server:shadowJar` (see MCP Server section below)
+
+Note: to use the AI agent you need a Gemini API key — set `apiKeyGoogle` in `FantasyPremierLeagueAgent`.
+
 ## Screenshots
 
 ### Android
-<img width="300" height="2400" alt="Screenshot_20251101_204058" src="https://github.com/user-attachments/assets/e75753e5-badb-4641-9b16-6cf23608d2ed" />
+<img width="300" alt="Screenshot_20251101_204058" src="https://github.com/user-attachments/assets/e75753e5-badb-4641-9b16-6cf23608d2ed" />
 
 
 ### iOS
-<img width="300" height="2622" alt="Simulator Screenshot - iPhone 17 Pro - 2025-11-01 at 20 37 58" src="https://github.com/user-attachments/assets/8a94c51c-b087-407a-ad7e-8caf2c793bc8" />
+<img width="300" alt="Simulator Screenshot - iPhone 17 Pro - 2025-11-01 at 20 37 58" src="https://github.com/user-attachments/assets/8a94c51c-b087-407a-ad7e-8caf2c793bc8" />
 
 
 ### Desktop
@@ -63,7 +73,7 @@ like the following (update with your path)
 ```
 {
   "mcpServers": {
-    "kotlin-peopleinspace": {
+    "fantasy-premier-league": {
       "command": "java",
       "args": [
         "-jar",
