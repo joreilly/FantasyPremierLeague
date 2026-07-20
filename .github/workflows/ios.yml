@@ -21,6 +21,6 @@ jobs:
         with:
           xcode-version: latest-stable
       - name: Build iOS app
-        run: xcodebuild -workspace ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj/project.xcworkspace -configuration Debug -scheme FantasyPremierLeague -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15 Pro' CODE_SIGNING_ALLOWED=NO build
+        run: xcodebuild -workspace ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj/project.xcworkspace -configuration Debug -scheme FantasyPremierLeague -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
 
 
