@@ -18,6 +18,6 @@ jobs:
           distribution: 'zulu'
           java-version: 24
       - name: Build iOS app
-        run: xcodebuild -allowProvisioningUpdates -workspace ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj/project.xcworkspace -configuration Debug -scheme FantasyPremierLeague -sdk iphoneos -destination name='iPhone 15 Pro' build
+        run: xcodebuild -workspace ios/FantasyPremierLeague/FantasyPremierLeague.xcodeproj/project.xcworkspace -configuration Debug -scheme FantasyPremierLeague -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15 Pro' CODE_SIGNING_ALLOWED=NO build
 
 
