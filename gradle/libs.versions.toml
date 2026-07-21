@@ -31,7 +31,7 @@ multik = "0.1.1"
 okalgo = "0.0.2"
 kotlinStatistics = "1.2.1"
 mcp = "0.14.0"
-koogAgents = "1.0.0"
+koogAgents = "1.1.1"
 koogExecutors = "1.0.0-beta"
 shadowPlugin = "9.6.0"
 
