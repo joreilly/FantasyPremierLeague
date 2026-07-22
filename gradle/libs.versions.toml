@@ -33,7 +33,7 @@ kotlinStatistics = "1.2.1"
 mcp = "0.14.0"
 koogAgents = "1.0.0"
 koogExecutors = "1.0.0-beta"
-shadowPlugin = "9.6.0"
+shadowPlugin = "9.6.1"
 
 
 [libraries]
