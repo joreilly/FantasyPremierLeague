@@ -1,6 +1,8 @@
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -10,6 +12,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -106,4 +109,25 @@ dependencies {
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+buildkonfig {
+    packageName = "dev.johnoreilly.common"
+
+    val localPropsFile = rootProject.file("local.properties")
+    val localProperties = Properties()
+    if (localPropsFile.exists()) {
+        runCatching {
+            localProperties.load(localPropsFile.inputStream())
+        }.getOrElse {
+            it.printStackTrace()
+        }
+    }
+    defaultConfigs {
+        buildConfigField(
+            FieldSpec.Type.STRING,
+            "GEMINI_API_KEY",
+            localProperties["gemini_api_key"]?.toString() ?: ""
+        )
+    }
 }

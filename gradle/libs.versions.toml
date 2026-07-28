@@ -33,6 +33,7 @@ kotlinStatistics = "1.2.1"
 mcp = "0.14.0"
 koogAgents = "1.1.1"
 koogExecutors = "1.1.1-beta"
+buildkonfig = "0.22.0"
 shadowPlugin = "9.6.1"
 
 
@@ -101,4 +102,5 @@ room = { id = "androidx.room", version.ref = "androidxRoom" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 shadowPlugin = { id = "com.gradleup.shadow", version.ref = "shadowPlugin" }

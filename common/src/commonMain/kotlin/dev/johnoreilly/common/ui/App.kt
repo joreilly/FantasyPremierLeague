@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +25,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
+import dev.johnoreilly.common.ui.agent.AgentScreen
 import dev.johnoreilly.common.ui.fixtures.FixturesListView
 import dev.johnoreilly.common.ui.leagues.LeagueListView
 import dev.johnoreilly.common.ui.players.PlayerListView
@@ -66,9 +68,15 @@ private data object League : TopLevelRoute {
 }
 
 @Serializable
+private data object Assistant : TopLevelRoute {
+    override val icon = Icons.Filled.Face
+    override val contentDescription = "Assistant"
+}
+
+@Serializable
 private data object Settings : Route
 
-private val topLevelRoutes: List<TopLevelRoute> = listOf(PlayerList, FixtureList, League)
+private val topLevelRoutes: List<TopLevelRoute> = listOf(PlayerList, FixtureList, League, Assistant)
 
 
 @Composable
@@ -115,6 +123,7 @@ fun App() {
                     }
                     entry<FixtureList> { FixturesListView() }
                     entry<League> { LeagueListView() }
+                    entry<Assistant> { AgentScreen() }
                     entry<Settings> { SettingsView { backStack.removeLastOrNull() } }
                 },
             )
