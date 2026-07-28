@@ -46,6 +46,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.material3.ElevatedCard
+import dev.johnoreilly.common.model.Player
+import dev.johnoreilly.common.ui.players.PlayerView
 import dev.johnoreilly.common.viewmodel.AgentViewModel
 import dev.johnoreilly.common.viewmodel.Message
 import org.koin.compose.viewmodel.koinViewModel
@@ -126,7 +129,7 @@ private fun AgentScreenContent(
                 items(messages) { message ->
                     when (message) {
                         is Message.UserMessage -> UserMessageBubble(message.text)
-                        is Message.AgentMessage -> AgentMessageBubble(message.text)
+                        is Message.AgentMessage -> AgentMessageBubble(message.text, message.players)
                         is Message.SystemMessage -> SystemMessageItem(message.text)
                         is Message.ErrorMessage -> LabelledBubble("Error", message.text, MaterialTheme.colorScheme.error, MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.onErrorContainer)
                         is Message.ToolCallMessage -> LabelledBubble("Tool call", message.text, MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.tertiaryContainer, MaterialTheme.colorScheme.onTertiaryContainer)
@@ -182,18 +185,30 @@ private fun UserMessageBubble(text: String) {
 }
 
 @Composable
-private fun AgentMessageBubble(text: String) {
+private fun AgentMessageBubble(text: String, players: List<Player> = emptyList()) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
         Avatar(isUser = false)
         Spacer(Modifier.width(8.dp))
-        Box(
-            modifier = Modifier
-                .widthIn(max = 300.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .padding(12.dp)
-        ) {
-            Text(text, color = MaterialTheme.colorScheme.onPrimaryContainer, style = MaterialTheme.typography.bodyLarge)
+        Column(Modifier.widthIn(max = 320.dp)) {
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+                    .padding(12.dp)
+            ) {
+                Text(text, color = MaterialTheme.colorScheme.onPrimaryContainer, style = MaterialTheme.typography.bodyLarge)
+            }
+            // Rich cards for any players the answer referenced
+            if (players.isNotEmpty()) {
+                Spacer(Modifier.height(8.dp))
+                ElevatedCard {
+                    Column {
+                        players.forEach { player ->
+                            PlayerView(player = player, onPlayerSelected = {}, isDataLoading = false)
+                        }
+                    }
+                }
+            }
         }
     }
 }

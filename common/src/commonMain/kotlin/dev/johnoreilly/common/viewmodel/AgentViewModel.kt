@@ -3,6 +3,8 @@ package dev.johnoreilly.common.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.johnoreilly.common.agent.AgentProvider
+import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
+import dev.johnoreilly.common.model.Player
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +17,8 @@ import kotlinx.coroutines.withContext
 // Chat message types
 sealed class Message {
     data class UserMessage(val text: String) : Message()
-    data class AgentMessage(val text: String) : Message()
+    // An agent answer, optionally enriched with players it referenced (rendered as cards)
+    data class AgentMessage(val text: String, val players: List<Player> = emptyList()) : Message()
     data class SystemMessage(val text: String) : Message()
     data class ErrorMessage(val text: String) : Message()
     data class ToolCallMessage(val text: String) : Message()
@@ -34,12 +37,28 @@ data class AgentUiState(
     val currentUserResponse: String? = null,
 )
 
-class AgentViewModel(private val agentProvider: AgentProvider) : ViewModel() {
+class AgentViewModel(
+    private val agentProvider: AgentProvider,
+    private val repository: FantasyPremierLeagueRepository,
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
         AgentUiState(messages = listOf(Message.SystemMessage(agentProvider.description)))
     )
     val uiState: StateFlow<AgentUiState> = _uiState.asStateFlow()
+
+    // Cached player list, used to enrich answers with player cards
+    private var players: List<Player>? = null
+
+    /** Players referenced by name in [text], in order of appearance (max 5). */
+    private suspend fun playersMentionedIn(text: String): List<Player> {
+        val all = players ?: runCatching { repository.getPlayers().first() }.getOrNull().orEmpty()
+            .also { players = it }
+        return all.filter { text.contains(it.name, ignoreCase = true) }
+            .distinctBy { it.id }
+            .sortedBy { text.indexOf(it.name, ignoreCase = true) }
+            .take(5)
+    }
 
     fun updateInputText(text: String) {
         _uiState.update { it.copy(inputText = text) }
@@ -95,9 +114,10 @@ class AgentViewModel(private val agentProvider: AgentProvider) : ViewModel() {
                         }
                     },
                     onAssistantMessage = { message ->
+                        val mentioned = playersMentionedIn(message)
                         _uiState.update {
                             it.copy(
-                                messages = it.messages + Message.AgentMessage(message),
+                                messages = it.messages + Message.AgentMessage(message, mentioned),
                                 isInputEnabled = true,
                                 isLoading = false,
                                 userResponseRequested = true

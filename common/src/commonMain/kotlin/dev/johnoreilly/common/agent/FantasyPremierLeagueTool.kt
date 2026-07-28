@@ -45,3 +45,32 @@ class GetFixturesTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRe
     }
 
 }
+
+
+class GetLeagueStandingsTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Unit>(
+    argsType = typeToken<Unit>(),
+    name = "getLeagueStandings",
+    description = "Get the standings for the user's tracked mini-leagues"
+) {
+    override suspend fun execute(args: Unit): String {
+        try {
+            val leagueIds = fantasyPremierLeagueRepository.leagues.first()
+            if (leagueIds.isEmpty()) {
+                return "The user is not tracking any mini-leagues."
+            }
+            return leagueIds.mapNotNull { leagueId ->
+                runCatching {
+                    val standings = fantasyPremierLeagueRepository.getLeagueStandings(leagueId.trim().toInt())
+                    val rows = standings.standings.results.joinToString("\n") { result ->
+                        "${result.rank}. ${result.entryName} (${result.playerName}) - ${result.total} pts"
+                    }
+                    "League '${standings.league.name}':\n$rows"
+                }.getOrNull()
+            }.joinToString("\n\n").ifEmpty { "No league standings available." }
+        } catch (e: Exception) {
+            println("Error: $e")
+            return ""
+        }
+    }
+
+}

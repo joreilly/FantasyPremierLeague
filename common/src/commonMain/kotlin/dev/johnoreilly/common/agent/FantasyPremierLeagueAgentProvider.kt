@@ -24,6 +24,7 @@ class FantasyPremierLeagueAgentProvider(
         val toolRegistry = ToolRegistry {
             tool(GetPlayersTool(repository))
             tool(GetFixturesTool(repository))
+            tool(GetLeagueStandingsTool(repository))
         }
 
         val agentConfig = AIAgentConfig(
@@ -31,7 +32,7 @@ class FantasyPremierLeagueAgentProvider(
                 system(
                     """
                     You are an AI assistant specialising in the Fantasy Premier League competition.
-                    Only use the tools provided to get player and fixture data.
+                    Only use the tools provided to get player, fixture and mini-league standings data.
                     Keep answers concise and, where useful, present players or fixtures as a short list.
                     """.trimIndent(),
                 )
