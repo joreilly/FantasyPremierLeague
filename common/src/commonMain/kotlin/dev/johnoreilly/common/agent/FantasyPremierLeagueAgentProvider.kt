@@ -6,6 +6,7 @@ import ai.koog.agents.core.agent.functionalStrategy
 import ai.koog.agents.core.tools.ToolRegistry
 import ai.koog.agents.features.eventHandler.feature.EventHandler
 import ai.koog.prompt.dsl.prompt
+import ai.koog.prompt.executor.model.StructureFixingParser
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 
 class FantasyPremierLeagueAgentProvider(
@@ -18,7 +19,7 @@ class FantasyPremierLeagueAgentProvider(
     override suspend fun provideAgent(
         onToolCallEvent: suspend (String) -> Unit,
         onErrorEvent: suspend (String) -> Unit,
-        onAssistantMessage: suspend (String) -> String,
+        onAssistantMessage: suspend (FplAnswer) -> String,
     ): AIAgent<String, String> {
 
         val toolRegistry = ToolRegistry {
@@ -61,12 +62,13 @@ class FantasyPremierLeagueAgentProvider(
     /**
      * Two-level conversation strategy: the outer loop continues while the user keeps
      * replying (an empty reply ends the chat); the inner loop runs agentic tool calls,
-     * feeding results back to the LLM until it produces a plain text answer.
+     * feeding results back to the LLM until it has an answer. The answer is then requested
+     * as structured [FplAnswer] data so the UI gets the exact player ids to render as cards.
      */
-    private fun createStrategy(onAssistantMessage: suspend (String) -> String) =
+    private fun createStrategy(onAssistantMessage: suspend (FplAnswer) -> String) =
         functionalStrategy<String, String> { initialInput ->
             var inputMessage = initialInput
-            var assistantMessage = ""
+            var lastText = ""
 
             while (inputMessage.isNotEmpty()) {
                 var response = requestLLM(inputMessage)
@@ -76,9 +78,16 @@ class FantasyPremierLeagueAgentProvider(
                     response = sendToolResults(results)
                 }
 
-                assistantMessage = response.textContent()
-                inputMessage = onAssistantMessage(assistantMessage)
+                // Ask the model to express its answer as structured data (deterministic player ids)
+                val answer = requestLLMStructured<FplAnswer>(
+                    "Return your final answer as structured data: put the user-facing markdown answer in 'text', " +
+                        "and the FPL 'id' of every player you referenced in 'playerIds' (empty if none).",
+                    fixingParser = StructureFixingParser(getLLModel(), retries = 2),
+                ).getOrNull()?.data ?: FplAnswer(text = response.textContent())
+
+                lastText = answer.text
+                inputMessage = onAssistantMessage(answer)
             }
-            assistantMessage
+            lastText
         }
 }
