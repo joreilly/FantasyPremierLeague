@@ -47,6 +47,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.ElevatedCard
+import com.mikepenz.markdown.m3.Markdown
+import com.mikepenz.markdown.m3.markdownColor
+import com.mikepenz.markdown.m3.markdownTypography
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.ui.players.PlayerView
 import dev.johnoreilly.common.viewmodel.AgentViewModel
@@ -196,7 +199,11 @@ private fun AgentMessageBubble(text: String, players: List<Player> = emptyList()
                     .background(MaterialTheme.colorScheme.primaryContainer)
                     .padding(12.dp)
             ) {
-                Text(text, color = MaterialTheme.colorScheme.onPrimaryContainer, style = MaterialTheme.typography.bodyLarge)
+                Markdown(
+                    content = text,
+                    colors = markdownColor(text = MaterialTheme.colorScheme.onPrimaryContainer),
+                    typography = markdownTypography(text = MaterialTheme.typography.bodyLarge)
+                )
             }
             // Rich cards for any players the answer referenced
             if (players.isNotEmpty()) {

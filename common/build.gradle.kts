@@ -77,6 +77,8 @@ kotlin {
 
             implementation(libs.koog.agents)
             implementation(libs.koog.executor.llms.all)
+
+            implementation(libs.markdown.renderer)
         }
 
         androidMain.dependencies {

@@ -34,6 +34,7 @@ mcp = "0.14.0"
 koogAgents = "1.1.1"
 koogExecutors = "1.1.1-beta"
 buildkonfig = "0.22.0"
+markdownRenderer = "0.43.0"
 shadowPlugin = "9.6.1"
 
 
@@ -86,6 +87,7 @@ junit = { module = "junit:junit", version.ref = "junit" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 mcp-kotlin = { group = "io.modelcontextprotocol", name = "kotlin-sdk", version.ref = "mcp" }
 koog-agents = { module = "ai.koog:koog-agents", version.ref = "koogAgents" }
+markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version.ref = "markdownRenderer" }
 koog-executor-llms-all = { module = "ai.koog:prompt-executor-llms-all", version.ref = "koogExecutors" }
 
 
