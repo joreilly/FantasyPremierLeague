@@ -20,6 +20,8 @@ data class FplAnswer(
     val text: String,
     @property:LLMDescription("The FPL 'id' of every player referenced in the answer, to display as cards; empty if none")
     val playerIds: List<Int> = emptyList(),
+    @property:LLMDescription("The 'id' of every fixture referenced in the answer, to display as cards; empty if none")
+    val fixtureIds: List<Int> = emptyList(),
 )
 
 /**

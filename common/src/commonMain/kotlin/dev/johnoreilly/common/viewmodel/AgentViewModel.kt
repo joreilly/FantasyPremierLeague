@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.johnoreilly.common.agent.AgentProvider
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
+import dev.johnoreilly.common.model.GameFixture
 import dev.johnoreilly.common.model.Player
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +18,12 @@ import kotlinx.coroutines.withContext
 // Chat message types
 sealed class Message {
     data class UserMessage(val text: String) : Message()
-    // An agent answer, optionally enriched with players it referenced (rendered as cards)
-    data class AgentMessage(val text: String, val players: List<Player> = emptyList()) : Message()
+    // An agent answer, optionally enriched with players/fixtures it referenced (rendered as cards)
+    data class AgentMessage(
+        val text: String,
+        val players: List<Player> = emptyList(),
+        val fixtures: List<GameFixture> = emptyList(),
+    ) : Message()
     data class SystemMessage(val text: String) : Message()
     data class ErrorMessage(val text: String) : Message()
     data class ToolCallMessage(val text: String) : Message()
@@ -47,14 +52,24 @@ class AgentViewModel(
     )
     val uiState: StateFlow<AgentUiState> = _uiState.asStateFlow()
 
-    // Cached player list, used to resolve the ids the agent returns into player cards
+    // Cached lists, used to resolve the ids the agent returns into cards
     private var players: List<Player>? = null
+    private var fixtures: List<GameFixture>? = null
 
     /** Resolve the agent-provided player [ids] to players, preserving the agent's order (max 5). */
     private suspend fun playersByIds(ids: List<Int>): List<Player> {
         if (ids.isEmpty()) return emptyList()
         val all = players ?: runCatching { repository.getPlayers().first() }.getOrNull().orEmpty()
             .also { players = it }
+        val byId = all.associateBy { it.id }
+        return ids.mapNotNull { byId[it] }.take(5)
+    }
+
+    /** Resolve the agent-provided fixture [ids] to fixtures, preserving the agent's order (max 5). */
+    private suspend fun fixturesByIds(ids: List<Int>): List<GameFixture> {
+        if (ids.isEmpty()) return emptyList()
+        val all = fixtures ?: runCatching { repository.getFixtures().first() }.getOrNull().orEmpty()
+            .also { fixtures = it }
         val byId = all.associateBy { it.id }
         return ids.mapNotNull { byId[it] }.take(5)
     }
@@ -113,10 +128,11 @@ class AgentViewModel(
                         }
                     },
                     onAssistantMessage = { answer ->
-                        val cards = playersByIds(answer.playerIds)
+                        val playerCards = playersByIds(answer.playerIds)
+                        val fixtureCards = fixturesByIds(answer.fixtureIds)
                         _uiState.update {
                             it.copy(
-                                messages = it.messages + Message.AgentMessage(answer.text, cards),
+                                messages = it.messages + Message.AgentMessage(answer.text, playerCards, fixtureCards),
                                 isInputEnabled = true,
                                 isLoading = false,
                                 userResponseRequested = true

@@ -50,7 +50,9 @@ import androidx.compose.material3.ElevatedCard
 import com.mikepenz.markdown.m3.Markdown
 import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
+import dev.johnoreilly.common.model.GameFixture
 import dev.johnoreilly.common.model.Player
+import dev.johnoreilly.common.ui.fixtures.ClubInFixtureView
 import dev.johnoreilly.common.ui.players.PlayerView
 import dev.johnoreilly.common.viewmodel.AgentViewModel
 import dev.johnoreilly.common.viewmodel.Message
@@ -132,7 +134,7 @@ private fun AgentScreenContent(
                 items(messages) { message ->
                     when (message) {
                         is Message.UserMessage -> UserMessageBubble(message.text)
-                        is Message.AgentMessage -> AgentMessageBubble(message.text, message.players)
+                        is Message.AgentMessage -> AgentMessageBubble(message.text, message.players, message.fixtures)
                         is Message.SystemMessage -> SystemMessageItem(message.text)
                         is Message.ErrorMessage -> LabelledBubble("Error", message.text, MaterialTheme.colorScheme.error, MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.onErrorContainer)
                         is Message.ToolCallMessage -> LabelledBubble("Tool call", message.text, MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.tertiaryContainer, MaterialTheme.colorScheme.onTertiaryContainer)
@@ -188,7 +190,11 @@ private fun UserMessageBubble(text: String) {
 }
 
 @Composable
-private fun AgentMessageBubble(text: String, players: List<Player> = emptyList()) {
+private fun AgentMessageBubble(
+    text: String,
+    players: List<Player> = emptyList(),
+    fixtures: List<GameFixture> = emptyList(),
+) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
         Avatar(isUser = false)
         Spacer(Modifier.width(8.dp))
@@ -205,17 +211,44 @@ private fun AgentMessageBubble(text: String, players: List<Player> = emptyList()
                     typography = markdownTypography(text = MaterialTheme.typography.bodyLarge)
                 )
             }
-            // Rich cards for any players the answer referenced
-            if (players.isNotEmpty()) {
+            // Rich cards for any players/fixtures the answer referenced
+            if (players.isNotEmpty() || fixtures.isNotEmpty()) {
                 Spacer(Modifier.height(8.dp))
                 ElevatedCard {
                     Column {
                         players.forEach { player ->
                             PlayerView(player = player, onPlayerSelected = {}, isDataLoading = false)
                         }
+                        fixtures.forEach { fixture -> FixtureCard(fixture) }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun FixtureCard(fixture: GameFixture) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
+    ) {
+        Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
+            ClubInFixtureView(teamName = fixture.homeTeam, teamPhotoUrl = fixture.homeTeamPhotoUrl)
+        }
+        val middle = if (fixture.homeTeamScore != null && fixture.awayTeamScore != null) {
+            "${fixture.homeTeamScore} - ${fixture.awayTeamScore}"
+        } else {
+            fixture.localKickoffTime?.date?.toString() ?: "v"
+        }
+        Text(
+            text = middle,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
+            ClubInFixtureView(teamName = fixture.awayTeam, teamPhotoUrl = fixture.awayTeamPhotoUrl)
         }
     }
 }
