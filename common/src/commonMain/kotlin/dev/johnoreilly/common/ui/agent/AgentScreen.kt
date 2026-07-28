@@ -232,26 +232,40 @@ private fun AgentMessageBubble(
 
 @Composable
 private fun FixtureCard(fixture: GameFixture) {
-    Row(
+    Column(
         modifier = Modifier.fillMaxWidth().padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
-            ClubInFixtureView(teamName = fixture.homeTeam, teamPhotoUrl = fixture.homeTeamPhotoUrl)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                ClubInFixtureView(teamName = fixture.homeTeam, teamPhotoUrl = fixture.homeTeamPhotoUrl)
+            }
+            val score = if (fixture.homeTeamScore != null && fixture.awayTeamScore != null) {
+                "${fixture.homeTeamScore} - ${fixture.awayTeamScore}"
+            } else {
+                "v"
+            }
+            Text(
+                text = score,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                ClubInFixtureView(teamName = fixture.awayTeam, teamPhotoUrl = fixture.awayTeamPhotoUrl)
+            }
         }
-        val middle = if (fixture.homeTeamScore != null && fixture.awayTeamScore != null) {
-            "${fixture.homeTeamScore} - ${fixture.awayTeamScore}"
-        } else {
-            fixture.localKickoffTime?.date?.toString() ?: "v"
-        }
-        Text(
-            text = middle,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
-            ClubInFixtureView(teamName = fixture.awayTeam, teamPhotoUrl = fixture.awayTeamPhotoUrl)
+        fixture.localKickoffTime?.let { kickoff ->
+            val time = "${kickoff.hour.toString().padStart(2, '0')}:${kickoff.minute.toString().padStart(2, '0')}"
+            Text(
+                text = "${kickoff.date} $time",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 4.dp),
+            )
         }
     }
 }
