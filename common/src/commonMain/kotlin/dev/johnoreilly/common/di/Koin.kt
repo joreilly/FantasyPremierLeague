@@ -1,6 +1,8 @@
 package dev.johnoreilly.common.di
 
 import dev.johnoreilly.common.AppSettings
+import dev.johnoreilly.common.agent.AgentProvider
+import dev.johnoreilly.common.agent.FantasyPremierLeagueAgentProvider
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
 import dev.johnoreilly.common.platformModule
@@ -34,6 +36,8 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single { FantasyPremierLeagueApi(get()) }
 
     single { AppSettings(get()) }
+
+    single<AgentProvider> { FantasyPremierLeagueAgentProvider(get()) }
 
     includes(viewModelModule)
     includes(platformModule())
