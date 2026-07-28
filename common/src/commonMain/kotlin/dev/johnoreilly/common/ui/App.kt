@@ -123,7 +123,9 @@ fun App() {
                     }
                     entry<FixtureList> { FixturesListView() }
                     entry<League> { LeagueListView() }
-                    entry<Assistant> { AgentScreen() }
+                    entry<Assistant> {
+                        AgentScreen(onPlayerSelected = { playerId -> backStack.add(PlayerDetails(playerId)) })
+                    }
                     entry<Settings> { SettingsView { backStack.removeLastOrNull() } }
                 },
             )

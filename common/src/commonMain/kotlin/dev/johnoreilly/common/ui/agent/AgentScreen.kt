@@ -65,7 +65,7 @@ private val suggestions = listOf(
 )
 
 @Composable
-fun AgentScreen() {
+fun AgentScreen(onPlayerSelected: (playerId: Int) -> Unit = {}) {
     val viewModel = koinViewModel<AgentViewModel>()
     val uiState by viewModel.uiState.collectAsState()
 
@@ -81,7 +81,8 @@ fun AgentScreen() {
         onSuggestionClicked = {
             viewModel.updateInputText(it)
             viewModel.sendMessage()
-        }
+        },
+        onPlayerSelected = onPlayerSelected,
     )
 }
 
@@ -97,6 +98,7 @@ private fun AgentScreenContent(
     onSendClicked: () -> Unit,
     onRestartClicked: () -> Unit,
     onSuggestionClicked: (String) -> Unit,
+    onPlayerSelected: (playerId: Int) -> Unit,
 ) {
     val listState = rememberLazyListState()
 
@@ -134,7 +136,7 @@ private fun AgentScreenContent(
                 items(messages) { message ->
                     when (message) {
                         is Message.UserMessage -> UserMessageBubble(message.text)
-                        is Message.AgentMessage -> AgentMessageBubble(message.text, message.players, message.fixtures)
+                        is Message.AgentMessage -> AgentMessageBubble(message.text, message.players, message.fixtures, onPlayerSelected)
                         is Message.SystemMessage -> SystemMessageItem(message.text)
                         is Message.ErrorMessage -> LabelledBubble("Error", message.text, MaterialTheme.colorScheme.error, MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.onErrorContainer)
                         is Message.ToolCallMessage -> LabelledBubble("Tool call", message.text, MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.tertiaryContainer, MaterialTheme.colorScheme.onTertiaryContainer)
@@ -194,6 +196,7 @@ private fun AgentMessageBubble(
     text: String,
     players: List<Player> = emptyList(),
     fixtures: List<GameFixture> = emptyList(),
+    onPlayerSelected: (playerId: Int) -> Unit = {},
 ) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
         Avatar(isUser = false)
@@ -217,7 +220,7 @@ private fun AgentMessageBubble(
                 ElevatedCard {
                     Column {
                         players.forEach { player ->
-                            PlayerView(player = player, onPlayerSelected = {}, isDataLoading = false)
+                            PlayerView(player = player, onPlayerSelected = { onPlayerSelected(it.id) }, isDataLoading = false)
                         }
                         fixtures.forEach { fixture -> FixtureCard(fixture) }
                     }
