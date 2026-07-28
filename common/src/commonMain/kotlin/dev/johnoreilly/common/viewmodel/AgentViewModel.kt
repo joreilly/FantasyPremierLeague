@@ -56,22 +56,22 @@ class AgentViewModel(
     private var players: List<Player>? = null
     private var fixtures: List<GameFixture>? = null
 
-    /** Resolve the agent-provided player [ids] to players, preserving the agent's order (max 5). */
+    /** Resolve the agent-provided player [ids] to players, preserving the agent's order. */
     private suspend fun playersByIds(ids: List<Int>): List<Player> {
         if (ids.isEmpty()) return emptyList()
         val all = players ?: runCatching { repository.getPlayers().first() }.getOrNull().orEmpty()
             .also { players = it }
         val byId = all.associateBy { it.id }
-        return ids.mapNotNull { byId[it] }.take(5)
+        return ids.mapNotNull { byId[it] }
     }
 
-    /** Resolve the agent-provided fixture [ids] to fixtures, preserving the agent's order (max 5). */
+    /** Resolve the agent-provided fixture [ids] to fixtures, preserving the agent's order. */
     private suspend fun fixturesByIds(ids: List<Int>): List<GameFixture> {
         if (ids.isEmpty()) return emptyList()
         val all = fixtures ?: runCatching { repository.getFixtures().first() }.getOrNull().orEmpty()
             .also { fixtures = it }
         val byId = all.associateBy { it.id }
-        return ids.mapNotNull { byId[it] }.take(5)
+        return ids.mapNotNull { byId[it] }
     }
 
     fun updateInputText(text: String) {
