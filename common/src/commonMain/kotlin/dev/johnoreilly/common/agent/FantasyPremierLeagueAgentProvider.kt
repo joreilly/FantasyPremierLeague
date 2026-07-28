@@ -80,9 +80,11 @@ class FantasyPremierLeagueAgentProvider(
 
                 // Ask the model to express its answer as structured data (deterministic player ids)
                 val answer = requestLLMStructured<FplAnswer>(
-                    "Return your final answer as structured data: put the user-facing markdown answer in 'text', " +
-                        "the FPL 'id' of every player you referenced in 'playerIds', and the 'id' of every fixture " +
-                        "you referenced in 'fixtureIds' (empty lists if none).",
+                    "Return your final answer as structured data. Put the FPL 'id' of every player you " +
+                        "referenced in 'playerIds' and every fixture in 'fixtureIds'. Those players/fixtures are " +
+                        "shown to the user as cards, so 'text' should be a brief markdown lead-in or summary and " +
+                        "must NOT re-list the individual players or fixtures. If there are no ids, put the full " +
+                        "answer in 'text'.",
                     fixingParser = StructureFixingParser(getLLModel(), retries = 2),
                 ).getOrNull()?.data ?: FplAnswer(text = response.textContent())
 
