@@ -50,14 +50,39 @@ class AgentViewModel(
     // Cached player list, used to enrich answers with player cards
     private var players: List<Player>? = null
 
-    /** Players referenced by name in [text], in order of appearance (max 5). */
+    /** Players referenced in [text] by full name or surname, in order of appearance (max 5). */
     private suspend fun playersMentionedIn(text: String): List<Player> {
         val all = players ?: runCatching { repository.getPlayers().first() }.getOrNull().orEmpty()
             .also { players = it }
-        return all.filter { text.contains(it.name, ignoreCase = true) }
-            .distinctBy { it.id }
-            .sortedBy { text.indexOf(it.name, ignoreCase = true) }
+        return all.map { it to matchIndex(text, it) }
+            .filter { it.second >= 0 }
+            .distinctBy { it.first.id }
+            .sortedBy { it.second }
+            .map { it.first }
             .take(5)
+    }
+
+    /** Index of the first match of the player's full name, else its surname as a whole word; -1 if none. */
+    private fun matchIndex(text: String, player: Player): Int {
+        val full = text.indexOf(player.name, ignoreCase = true)
+        if (full >= 0) return full
+        val surname = player.name.substringAfterLast(' ')
+        // Only fall back to surname if it's distinctive enough to avoid false positives
+        return if (surname.length >= 4) wholeWordIndex(text, surname) else -1
+    }
+
+    /** Index of [word] in [text] where it isn't part of a longer word; -1 if absent. KMP-safe (no regex). */
+    private fun wholeWordIndex(text: String, word: String): Int {
+        var from = 0
+        while (true) {
+            val i = text.indexOf(word, from, ignoreCase = true)
+            if (i < 0) return -1
+            val okBefore = i == 0 || !text[i - 1].isLetter()
+            val end = i + word.length
+            val okAfter = end >= text.length || !text[end].isLetter()
+            if (okBefore && okAfter) return i
+            from = i + 1
+        }
     }
 
     fun updateInputText(text: String) {
