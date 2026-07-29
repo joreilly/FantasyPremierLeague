@@ -55,6 +55,11 @@ private data object PlayerList : TopLevelRoute {
 @Serializable
 private data class PlayerDetails(val playerId: Int) : Route
 
+// Full-screen player details reached from the assistant (not a list-detail pane),
+// so it opens as a dedicated screen you can navigate back from.
+@Serializable
+private data class AssistantPlayerDetails(val playerId: Int) : Route
+
 @Serializable
 private data object FixtureList : TopLevelRoute {
     override val icon = Icons.Filled.DateRange
@@ -124,7 +129,15 @@ fun App() {
                     entry<FixtureList> { FixturesListView() }
                     entry<League> { LeagueListView() }
                     entry<Assistant> {
-                        AgentScreen(onPlayerSelected = { playerId -> backStack.add(PlayerDetails(playerId)) })
+                        AgentScreen(onPlayerSelected = { playerId -> backStack.add(AssistantPlayerDetails(playerId)) })
+                    }
+                    entry<AssistantPlayerDetails> { key ->
+                        val viewModel = koinViewModel<PlayerDetailsViewModel>(
+                            parameters = { parametersOf(key.playerId) }
+                        )
+                        PlayerDetailsView(
+                            viewModel,
+                            popBackStack = { backStack.removeLastOrNull() })
                     }
                     entry<Settings> { SettingsView { backStack.removeLastOrNull() } }
                 },
