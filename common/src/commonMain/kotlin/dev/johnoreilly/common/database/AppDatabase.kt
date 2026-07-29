@@ -13,7 +13,7 @@ import kotlinx.datetime.LocalDateTime
 
 internal expect object AppDatabaseCtor : RoomDatabaseConstructor<AppDatabase>
 
-@Database(entities = [Team::class, Player::class, GameFixture::class], version = 1)
+@Database(entities = [Team::class, Player::class, GameFixture::class], version = 2)
 @ConstructedBy(AppDatabaseCtor::class)
 @TypeConverters(LocalDateTimeConverter::class)
 abstract class AppDatabase : RoomDatabase() {

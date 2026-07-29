@@ -6,6 +6,7 @@ import dev.johnoreilly.common.data.model.EventStatusListDto
 import dev.johnoreilly.common.data.model.FixtureDto
 import dev.johnoreilly.common.data.model.GameWeekLiveDataDto
 import dev.johnoreilly.common.data.model.LeagueStandingsDto
+import dev.johnoreilly.common.data.model.RegionDto
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -22,6 +23,7 @@ class FantasyPremierLeagueApi(
     }
 
     suspend fun fetchBootstrapStaticInfo() = fetchData<BootstrapStaticInfoDto>("bootstrap-static/")
+    suspend fun fetchRegions() = fetchData<List<RegionDto>>("regions/")
     suspend fun fetchFixtures() = fetchData<List<FixtureDto>>("fixtures")
     suspend fun fetchUpcomingFixtures() = fetchData<List<FixtureDto>>("fixtures?future=1")
     suspend fun fetchGameWeekLiveData(eventId: Int) = fetchData<GameWeekLiveDataDto>("event/$eventId/live/")

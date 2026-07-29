@@ -13,5 +13,6 @@ data class Player(
     val points: Int,
     val currentPrice: Double,
     val goalsScored: Int,
-    val assists: Int
+    val assists: Int,
+    val nationality: String? = null
 )

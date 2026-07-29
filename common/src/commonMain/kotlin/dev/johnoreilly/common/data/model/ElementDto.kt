@@ -70,5 +70,6 @@ data class ElementDto(
     val value_form: String,
     val value_season: String,
     val web_name: String,
-    val yellow_cards: Int
+    val yellow_cards: Int,
+    val region: Int? = null
 )

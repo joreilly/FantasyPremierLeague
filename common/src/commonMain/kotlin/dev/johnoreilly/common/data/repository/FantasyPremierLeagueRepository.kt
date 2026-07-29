@@ -47,7 +47,12 @@ class FantasyPremierLeagueRepository : KoinComponent {
         try {
             val bootstrapStaticInfoDto = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
             val fixtures = fantasyPremierLeagueApi.fetchFixtures()
-            writeDataToDb(bootstrapStaticInfoDto, fixtures)
+            // region -> country name, used to populate player nationality (best-effort)
+            // region -> country name, used to populate player nationality (best-effort)
+            val regionNames = runCatching { fantasyPremierLeagueApi.fetchRegions() }
+                .getOrDefault(emptyList())
+                .associate { it.id to it.name }
+            writeDataToDb(bootstrapStaticInfoDto, fixtures, regionNames)
         } catch (e: Exception) {
             // TODO surface this to UI/option to retry etc ?
             //println("Exception reading data: $e")
@@ -58,7 +63,8 @@ class FantasyPremierLeagueRepository : KoinComponent {
     @OptIn(ExperimentalTime::class)
     private suspend fun writeDataToDb(
         bootstrapStaticInfoDto: BootstrapStaticInfoDto,
-        fixtures: List<FixtureDto>
+        fixtures: List<FixtureDto>,
+        regionNames: Map<Int, String>
     ) {
         //store current gameweek
         _currentGameweek.value =
@@ -86,7 +92,8 @@ class FantasyPremierLeagueRepository : KoinComponent {
                 playerDto.total_points,
                 currentPrice,
                 playerDto.goals_scored,
-                playerDto.assists
+                playerDto.assists,
+                playerDto.region?.let { regionNames[it] }
             )
         }
         database.fantasyPremierLeagueDao().insertPlayerList(playerList)
