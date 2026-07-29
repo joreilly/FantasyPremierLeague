@@ -29,6 +29,7 @@ fun createRoomDatabase(): AppDatabase {
     return Room.databaseBuilder<AppDatabase>(name = dbFile)
         .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
+        .fallbackToDestructiveMigration(dropAllTables = true)
         .build()
 }
 

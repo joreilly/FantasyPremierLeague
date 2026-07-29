@@ -15,7 +15,7 @@ data class TeamDto(
     val position: Int,
     val pulse_id: Int,
     val short_name: String,
-    val strength: Int,
+    val strength: Int?,
     val strength_attack_away: Int,
     val strength_attack_home: Int,
     val strength_defence_away: Int,

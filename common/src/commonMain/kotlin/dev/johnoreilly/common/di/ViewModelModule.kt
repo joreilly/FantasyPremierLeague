@@ -1,5 +1,6 @@
 package dev.johnoreilly.common.di
 
+import dev.johnoreilly.common.viewmodel.AgentViewModel
 import dev.johnoreilly.common.viewmodel.FixturesViewModel
 import dev.johnoreilly.common.viewmodel.LeaguesViewModel
 import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
@@ -13,4 +14,5 @@ val viewModelModule = module {
     viewModelOf(::PlayerDetailsViewModel)
     viewModelOf(::FixturesViewModel)
     viewModelOf(::LeaguesViewModel)
+    viewModelOf(::AgentViewModel)
 }

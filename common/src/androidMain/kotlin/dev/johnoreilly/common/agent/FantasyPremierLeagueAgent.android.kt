@@ -1,12 +1,12 @@
-package dev.johnoreilly.climatetrace.agent
+package dev.johnoreilly.common.agent
 
 import ai.koog.prompt.executor.clients.google.GoogleModels
 import ai.koog.prompt.executor.llms.all.simpleGoogleAIExecutor
 import ai.koog.prompt.executor.model.PromptExecutor
-import ai.koog.prompt.llm.LLModel
+import dev.johnoreilly.common.BuildKonfig
 
 actual fun getLLModel() = GoogleModels.Gemini2_5Flash
 
-actual fun getPromptExecutor(apiKey: String): PromptExecutor {
-    return simpleGoogleAIExecutor(apiKey)
+actual fun getPromptExecutor(): PromptExecutor {
+    return simpleGoogleAIExecutor(BuildKonfig.GEMINI_API_KEY)
 }

@@ -1,6 +1,6 @@
 package dev.johnoreilly.common
 
-import dev.johnoreilly.climatetrace.agent.FantasyPremierLeagueAgent
+import dev.johnoreilly.common.agent.FantasyPremierLeagueAgent
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
 import dev.johnoreilly.common.data.remote.FantasyPremierLeagueApi
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
