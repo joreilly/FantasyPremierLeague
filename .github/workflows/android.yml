@@ -1,23 +1,34 @@
 name: Android CI
 
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+# Cancel superseded runs for the same PR/branch
+concurrency:
+  group: android-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   build:
-
-    runs-on: macos-latest
-
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-    - uses: actions/checkout@v7
-    - name: set up JDK 24
-      uses: actions/setup-java@v5
-      with:
-        distribution: 'zulu'
-        java-version: 24
-    - name: Build android app
-      run: ./gradlew assembleDebug
-    - name: Run Unit Tests
-      run: ./gradlew test
-    - name: Build iOS shared code
-      run: ./gradlew :common:compileKotlinIosSimulatorArm64
-
+      - uses: actions/checkout@v7
+      - name: set up JDK 24
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: 24
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Build android app
+        run: ./gradlew assembleDebug
+      - name: Run Unit Tests
+        run: ./gradlew test
+      # iOS Kotlin/Native is compiled by the iOS workflow (xcodebuild on macOS).
+      # FantasyPremierLeague's Koog agent expect/actual only provides the Native
+      # actual on a macOS host, so this target can't compile on the Linux runner.
