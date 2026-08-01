@@ -29,5 +29,6 @@ jobs:
         run: ./gradlew assembleDebug
       - name: Run Unit Tests
         run: ./gradlew test
-      - name: Build iOS shared code
-        run: ./gradlew :common:compileKotlinIosSimulatorArm64
+      # iOS Kotlin/Native is compiled by the iOS workflow (xcodebuild on macOS).
+      # FantasyPremierLeague's Koog agent expect/actual only provides the Native
+      # actual on a macOS host, so this target can't compile on the Linux runner.
