@@ -34,7 +34,7 @@ mcp = "0.14.0"
 koogAgents = "1.1.1"
 koogExecutors = "1.1.1-beta"
 buildkonfig = "0.22.0"
-markdownRenderer = "0.43.0"
+markdownRenderer = "0.44.0"
 shadowPlugin = "9.6.1"
 
 
