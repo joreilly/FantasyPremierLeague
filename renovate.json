@@ -5,11 +5,10 @@
   ],
   "packageRules": [
     {
-      "description": "AGP 9.3.x+ outruns what the locally installed Android Studio supports — sync fails with unsupported-AGP-version and \"could not find compile target\" errors. Hold AGP updates until Studio's bundled support catches up.",
-      "matchPackageNames": [
-        "agp",
+      "description": "AGP 9.3.x+ outruns what the locally installed Android Studio supports — sync fails with unsupported-AGP-version and \"could not find compile target\" errors. Hold AGP updates until Studio's bundled support catches up. Matched on depName with an unanchored prefix: Renovate names a Gradle plugin com.android.application:com.android.application.gradle.plugin, so the previous $-anchored matchPackageNames pattern never matched and AGP PRs kept being opened.",
+      "matchDepNames": [
         "com.android.tools.build:gradle",
-        "/^com\\.android\\.(application|library|test|dynamic-feature|kotlin\\.multiplatform\\.library|lint)$/"
+        "/^com\\.android\\./"
       ],
       "enabled": false
     }
