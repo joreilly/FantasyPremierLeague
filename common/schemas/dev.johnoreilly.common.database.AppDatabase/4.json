@@ -1,0 +1,322 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "da9115ad5308eacbb2aac324ff483fc8",
+    "entities": [
+      {
+        "tableName": "Team",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `index` INTEGER NOT NULL, `name` TEXT NOT NULL, `code` INTEGER NOT NULL, `shortName` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "index",
+            "columnName": "index",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "code",
+            "columnName": "code",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shortName",
+            "columnName": "shortName",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "Player",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `team` TEXT NOT NULL, `photoUrl` TEXT NOT NULL, `points` INTEGER NOT NULL, `currentPrice` REAL NOT NULL, `goalsScored` INTEGER NOT NULL, `assists` INTEGER NOT NULL, `nationality` TEXT, `elementType` INTEGER NOT NULL, `teamId` INTEGER NOT NULL, `status` TEXT NOT NULL, `chanceOfPlayingNextRound` INTEGER, `webName` TEXT NOT NULL, `form` REAL NOT NULL, `pointsPerGame` REAL NOT NULL, `minutes` INTEGER NOT NULL, `selectedByPercent` REAL NOT NULL, `expectedPointsNext` REAL, `news` TEXT NOT NULL, `bonus` INTEGER NOT NULL, `bps` INTEGER NOT NULL, `cleanSheets` INTEGER NOT NULL, `goalsConceded` INTEGER NOT NULL, `saves` INTEGER NOT NULL, `penaltiesOrder` INTEGER, `directFreekicksOrder` INTEGER, `cornersOrder` INTEGER, `expectedGoalInvolvementsPer90` REAL NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "team",
+            "columnName": "team",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "photoUrl",
+            "columnName": "photoUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentPrice",
+            "columnName": "currentPrice",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goalsScored",
+            "columnName": "goalsScored",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "assists",
+            "columnName": "assists",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nationality",
+            "columnName": "nationality",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "elementType",
+            "columnName": "elementType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "teamId",
+            "columnName": "teamId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chanceOfPlayingNextRound",
+            "columnName": "chanceOfPlayingNextRound",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "webName",
+            "columnName": "webName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "form",
+            "columnName": "form",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pointsPerGame",
+            "columnName": "pointsPerGame",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minutes",
+            "columnName": "minutes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "selectedByPercent",
+            "columnName": "selectedByPercent",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expectedPointsNext",
+            "columnName": "expectedPointsNext",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "news",
+            "columnName": "news",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bonus",
+            "columnName": "bonus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bps",
+            "columnName": "bps",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cleanSheets",
+            "columnName": "cleanSheets",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goalsConceded",
+            "columnName": "goalsConceded",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "saves",
+            "columnName": "saves",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "penaltiesOrder",
+            "columnName": "penaltiesOrder",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "directFreekicksOrder",
+            "columnName": "directFreekicksOrder",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "cornersOrder",
+            "columnName": "cornersOrder",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "expectedGoalInvolvementsPer90",
+            "columnName": "expectedGoalInvolvementsPer90",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "GameFixture",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `localKickoffTime` TEXT, `homeTeam` TEXT NOT NULL, `awayTeam` TEXT NOT NULL, `homeTeamPhotoUrl` TEXT NOT NULL, `awayTeamPhotoUrl` TEXT NOT NULL, `homeTeamScore` INTEGER, `awayTeamScore` INTEGER, `event` INTEGER NOT NULL, `homeTeamId` INTEGER NOT NULL, `awayTeamId` INTEGER NOT NULL, `homeDifficulty` INTEGER NOT NULL, `awayDifficulty` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "localKickoffTime",
+            "columnName": "localKickoffTime",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "homeTeam",
+            "columnName": "homeTeam",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "awayTeam",
+            "columnName": "awayTeam",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "homeTeamPhotoUrl",
+            "columnName": "homeTeamPhotoUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "awayTeamPhotoUrl",
+            "columnName": "awayTeamPhotoUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "homeTeamScore",
+            "columnName": "homeTeamScore",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "awayTeamScore",
+            "columnName": "awayTeamScore",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "event",
+            "columnName": "event",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "homeTeamId",
+            "columnName": "homeTeamId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "awayTeamId",
+            "columnName": "awayTeamId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "homeDifficulty",
+            "columnName": "homeDifficulty",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "awayDifficulty",
+            "columnName": "awayDifficulty",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'da9115ad5308eacbb2aac324ff483fc8')"
+    ]
+  }
+}

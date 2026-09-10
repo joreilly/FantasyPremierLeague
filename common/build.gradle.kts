@@ -81,6 +81,10 @@ kotlin {
             implementation(libs.markdown.renderer)
         }
 
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+        }
+
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
             implementation(libs.androidx.compose.ui.tooling)

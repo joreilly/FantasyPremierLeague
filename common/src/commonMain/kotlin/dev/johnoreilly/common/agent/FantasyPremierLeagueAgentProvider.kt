@@ -26,6 +26,7 @@ class FantasyPremierLeagueAgentProvider(
             tool(GetPlayersTool(repository))
             tool(GetFixturesTool(repository))
             tool(GetLeagueStandingsTool(repository))
+            tool(BuildSquadTool(repository))
         }
 
         val agentConfig = AIAgentConfig(
@@ -35,6 +36,16 @@ class FantasyPremierLeagueAgentProvider(
                     You are an AI assistant specialising in the Fantasy Premier League competition.
                     Only use the tools provided to get player, fixture and mini-league standings data.
                     Keep answers concise and, where useful, present players or fixtures as a short list.
+
+                    For squad-building requests (e.g. "pick my team", "build me a squad"), call the
+                    buildSquad tool rather than selecting players yourself - it runs a real optimiser
+                    under budget, position and club-limit constraints, which you cannot reliably do by
+                    reasoning over the player list. Pass lookaheadGameweeks when the user asks for a
+                    squad geared toward upcoming/opening fixtures; omit it for a season-long best squad.
+                    The tool also returns the best starting XI, formation and captain/vice-captain for
+                    the next gameweek - mention these when the user asks about a starting lineup or
+                    captain, not just the full 15-man squad. Put every player id you reference (full
+                    squad or just the starting XI) in playerIds so they render as cards.
                     """.trimIndent(),
                 )
             },

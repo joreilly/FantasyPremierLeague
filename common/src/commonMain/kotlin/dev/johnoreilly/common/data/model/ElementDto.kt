@@ -71,5 +71,8 @@ data class ElementDto(
     val value_season: String,
     val web_name: String,
     val yellow_cards: Int,
-    val region: Int? = null
+    val region: Int? = null,
+    // Defaulted: these arrived in a later season's API than the fields above.
+    val expected_goal_involvements_per_90: Double = 0.0,
+    val expected_goals_conceded_per_90: Double = 0.0
 )
