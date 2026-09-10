@@ -12,14 +12,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import com.seiko.imageloader.rememberImagePainter
 //import coil3.compose.AsyncImage
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.ui.global.ImageSize
+import dev.johnoreilly.common.ui.global.rememberPlayerPhotoPainter
 import dev.johnoreilly.common.ui.global.Spacing
 
 /**
- * Displays a player item in the list with photo, name, team, and points.
+ * Displays a player item in the list with photo, name, team, points, and price.
  * Supports loading states with placeholder animations.
  *
  * @param player The player data to display
@@ -33,7 +33,7 @@ fun PlayerView(
     isDataLoading: Boolean
 ) {
     val semanticDescription = if (!isDataLoading) {
-        "${player.name}, ${player.team}, ${player.points} points"
+        "${player.name}, ${player.team}, ${player.points} points, £${player.currentPrice}m"
     } else {
         "Loading player data"
     }
@@ -48,7 +48,7 @@ fun PlayerView(
                 contentDescription = semanticDescription
             }
     ) {
-        val painter = rememberImagePainter(player.photoUrl)
+        val painter = rememberPlayerPhotoPainter(player.photoUrl)
         Image(
             painter, null,
             modifier = Modifier.size(ImageSize.medium),
@@ -71,10 +71,17 @@ fun PlayerView(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
-        Text(
-            text = player.points.toString(),
-            style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.primary
-        )
+        Column(horizontalAlignment = Alignment.End) {
+            Text(
+                text = player.points.toString(),
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = "£${player.currentPrice}m",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
     }
 }

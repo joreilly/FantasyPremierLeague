@@ -30,9 +30,9 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.seiko.imageloader.rememberImagePainter
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.model.PlayerPastHistory
+import dev.johnoreilly.common.ui.global.rememberPlayerPhotoPainter
 import fantasypremierleague.common.generated.resources.Res
 import fantasypremierleague.common.generated.resources.team
 import io.github.koalaplot.core.ChartLayout
@@ -69,7 +69,7 @@ fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistor
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.size(16.dp))
-        val painter = rememberImagePainter(player.photoUrl)
+        val painter = rememberPlayerPhotoPainter(player.photoUrl)
         Image(
             painter, null,
             modifier = Modifier.size(150.dp),
