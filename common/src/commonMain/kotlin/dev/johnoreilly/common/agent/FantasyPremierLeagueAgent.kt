@@ -43,6 +43,7 @@ class FantasyPremierLeagueAgent(private val fantasyPremierLeagueRepository: Fant
         return ToolRegistry {
             tool(GetPlayersTool(fantasyPremierLeagueRepository))
             tool(GetFixturesTool(fantasyPremierLeagueRepository))
+            tool(BuildSquadTool(fantasyPremierLeagueRepository))
         }
     }
 }

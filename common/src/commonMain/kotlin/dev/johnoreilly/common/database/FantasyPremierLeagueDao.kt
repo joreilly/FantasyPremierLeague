@@ -22,6 +22,9 @@ interface FantasyPremierLeagueDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFixtureList(fixtureList: List<GameFixture>)
 
+    @Query("SELECT * FROM Team")
+    fun getTeamListAsFlow(): Flow<List<Team>>
+
     @Query("SELECT * FROM Player")
     fun getPlayerListAsFlow(): Flow<List<Player>>
 
