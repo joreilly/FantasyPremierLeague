@@ -24,6 +24,7 @@ Related posts:
 * [Displaying Charts on iOS, Android, and Desktop using Compose Multiplatform](https://johnoreilly.dev/posts/compose-multiplatform-chart/)
 * [Using Jetpack Room in Kotlin Multiplatform shared code](https://johnoreilly.dev/posts/jetpack_room_kmp/)
 * [Using Navigation 3 with Compose Multiplatform](https://johnoreilly.dev/posts/navigation3-cmp/)
+* [Adding a Koog AI assistant (with structured output) to the FantasyPremierLeague CMP sample](https://johnoreilly.dev/posts/fpl-koog-structured-output/)
 
 ## Running the app
 
