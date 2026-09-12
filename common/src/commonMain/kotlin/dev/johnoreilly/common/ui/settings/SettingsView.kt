@@ -3,6 +3,7 @@
 package dev.johnoreilly.common.ui.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import dev.johnoreilly.common.viewmodel.LeaguesViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -27,8 +29,8 @@ import org.koin.compose.viewmodel.koinViewModel
 fun SettingsView(popBackStack: () -> Unit) {
     val viewModel = koinViewModel<LeaguesViewModel>()
 
-    val leagueIdsString = remember {
-        mutableStateOf(viewModel.leagues.value.joinToString())
+    val entryIdString = remember {
+        mutableStateOf(viewModel.entryId.value?.toString().orEmpty())
     }
 
     Scaffold(
@@ -50,14 +52,21 @@ fun SettingsView(popBackStack: () -> Unit) {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = leagueIdsString.value,
-                onValueChange = { leagueIds ->
-                    leagueIdsString.value = leagueIds
-                })
+                value = entryIdString.value,
+                onValueChange = { entryId ->
+                    entryIdString.value = entryId.filter { it.isDigit() }
+                },
+                singleLine = true,
+                label = { Text("Your team id") },
+                supportingText = {
+                    Text("The number in your FPL url: fantasy.premierleague.com/entry/1234567/…")
+                },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
             Button(onClick = {
-                viewModel.updateLeagues(leagueIdsString.value.split(", "))
+                viewModel.updateEntryId(entryIdString.value.toIntOrNull())
             }) {
-                Text("Set Leagues")
+                Text("Set Team")
             }
         }
     }

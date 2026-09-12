@@ -56,21 +56,30 @@ class GetFixturesTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRe
 class GetLeagueStandingsTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Unit>(
     argsType = typeToken<Unit>(),
     name = "getLeagueStandings",
-    description = "Get the standings for the user's tracked mini-leagues"
+    description = "Get the user's own mini-league standings, discovered from the team id they have set"
 ) {
     override suspend fun execute(args: Unit): String {
         try {
-            val leagueIds = fantasyPremierLeagueRepository.leagues.first()
-            if (leagueIds.isEmpty()) {
-                return "The user is not tracking any mini-leagues."
+            val entryId = fantasyPremierLeagueRepository.entryId.first()
+                ?: return "The user has not set their FPL team id, so their leagues aren't known."
+
+            val manager = fantasyPremierLeagueRepository.getManager(entryId)
+                ?: return "No FPL team found with id $entryId."
+            // Invitational leagues only - the automatically-joined ones run to millions of entries,
+            // where the top 50 strangers tell the user nothing.
+            val leagues = manager.leagues.filter { it.isInvitational }
+            if (leagues.isEmpty()) {
+                return "${manager.teamName} is not in any mini-leagues."
             }
-            return leagueIds.mapNotNull { leagueId ->
+
+            return leagues.mapNotNull { league ->
                 runCatching {
-                    val standings = fantasyPremierLeagueRepository.getLeagueStandings(leagueId.trim().toInt())
+                    val standings = fantasyPremierLeagueRepository.getLeagueStandings(league.id)
                     val rows = standings.standings.results.joinToString("\n") { result ->
                         "${result.rank}. ${result.entryName} (${result.playerName}) - ${result.total} pts"
                     }
-                    "League '${standings.league.name}':\n$rows"
+                    "League '${league.name}' (${manager.teamName} is ${league.entryRank ?: "unranked"} " +
+                        "of ${league.entryCount ?: "?"}):\n$rows"
                 }.getOrNull()
             }.joinToString("\n\n").ifEmpty { "No league standings available." }
         } catch (e: Exception) {

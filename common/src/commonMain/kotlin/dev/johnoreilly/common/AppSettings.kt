@@ -20,24 +20,24 @@ fun createDataStore(
 
 class AppSettings(private val dataStore: DataStore<Preferences>) {
 
-    val leagues: Flow<List<String>> =
-        dataStore.data
-            .map { preferences ->
-                getLeaguesSettingFromString(preferences[LEAGUES_SETTING])
-            }
+    /**
+     * The manager's own entry id. Their leagues are read from it, rather than being typed in one
+     * league id at a time - `entry/{id}/` already knows every league they're in.
+     */
+    val entryId: Flow<Int?> =
+        dataStore.data.map { preferences -> preferences[ENTRY_ID_SETTING]?.toIntOrNull() }
 
-
-    suspend fun updatesLeaguesSetting(leagues: List<String>) {
+    suspend fun updateEntryIdSetting(entryId: Int?) {
         dataStore.edit { preferences ->
-            preferences[LEAGUES_SETTING] = leagues.joinToString(separator = ",")
+            if (entryId == null) {
+                preferences.remove(ENTRY_ID_SETTING)
+            } else {
+                preferences[ENTRY_ID_SETTING] = entryId.toString()
+            }
         }
     }
 
-
-    private fun getLeaguesSettingFromString(settingsString: String?) =
-        settingsString?.split(",") ?: emptyList()
-
     companion object {
-        val LEAGUES_SETTING = stringPreferencesKey("leagues")
+        val ENTRY_ID_SETTING = stringPreferencesKey("entryId")
     }
 }

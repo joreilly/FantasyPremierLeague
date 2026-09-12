@@ -2,6 +2,8 @@ package dev.johnoreilly.common.data.repository
 
 import dev.johnoreilly.common.AppSettings
 import dev.johnoreilly.common.data.model.BootstrapStaticInfoDto
+import dev.johnoreilly.common.data.model.EntryDto
+import dev.johnoreilly.common.data.model.EntryLeagueDto
 import dev.johnoreilly.common.data.model.EventStatusListDto
 import dev.johnoreilly.common.data.model.FixtureDto
 import dev.johnoreilly.common.data.model.GameSettingsDto
@@ -11,6 +13,8 @@ import dev.johnoreilly.common.database.AppDatabase
 import dev.johnoreilly.common.model.GameFixture
 import dev.johnoreilly.common.model.GameRules
 import dev.johnoreilly.common.model.Gameweek
+import dev.johnoreilly.common.model.League
+import dev.johnoreilly.common.model.Manager
 import dev.johnoreilly.common.model.PlayerPastHistory
 import dev.johnoreilly.common.model.Player
 import dev.johnoreilly.common.model.PositionRule
@@ -37,7 +41,7 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     val coroutineScope = CoroutineScope(Dispatchers.Default)
 
-    val leagues = appSettings.leagues
+    val entryId = appSettings.entryId
 
     private var _currentGameweek: MutableStateFlow<Int> = MutableStateFlow(1)
     val currentGameweek = _currentGameweek.asStateFlow()
@@ -256,7 +260,38 @@ class FantasyPremierLeagueRepository : KoinComponent {
         return fantasyPremierLeagueApi.fetchEventStatus()
     }
 
-    suspend fun updateLeagues(leagues: List<String>) {
-        appSettings.updatesLeaguesSetting(leagues)
+    suspend fun updateEntryId(entryId: Int?) {
+        appSettings.updateEntryIdSetting(entryId)
+    }
+
+    /**
+     * The manager and every league they're in, from one call. Rank and league size come back on
+     * this response, so a league list needs no per-league standings fetch.
+     *
+     * Null when no team has that id.
+     */
+    suspend fun getManager(entryId: Int): Manager? {
+        val entry = fantasyPremierLeagueApi.fetchEntry(entryId) ?: return null
+        fun EntryLeagueDto.toLeague(headToHead: Boolean) = League(
+            id = id,
+            name = name,
+            entryRank = entry_rank,
+            lastRank = entry_last_rank,
+            entryCount = rank_count,
+            isInvitational = league_type == "x",
+            isHeadToHead = headToHead
+        )
+        return Manager(
+            id = entry.id,
+            teamName = entry.name,
+            playerName = "${entry.player_first_name} ${entry.player_last_name}".trim(),
+            overallPoints = entry.summary_overall_points,
+            overallRank = entry.summary_overall_rank,
+            // Tenths of a million on the wire, as with player prices.
+            bank = entry.last_deadline_bank?.let { it / 10.0 },
+            teamValue = entry.last_deadline_value?.let { it / 10.0 },
+            leagues = entry.leagues.classic.map { it.toLeague(headToHead = false) } +
+                entry.leagues.h2h.map { it.toLeague(headToHead = true) }
+        )
     }
 }
