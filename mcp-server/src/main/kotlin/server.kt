@@ -220,6 +220,60 @@ fun configureServer(): Server {
     }
 
     server.addTool(
+        name = "get-manager-leagues",
+        description = "Every league a manager is in - mini-leagues they were invited to plus the " +
+            "ones joined automatically (Overall, their country, their club) - with their rank in " +
+            "each. Also returns their squad value, money in the bank and overall points. Needs the " +
+            "manager's team id, the number in their FPL url: fantasy.premierleague.com/entry/1234567/",
+        inputSchema = optionalIntSchema(
+            "entryId",
+            "The manager's team (entry) id. Omit to use the team id saved in the app's settings."
+        )
+    ) { request ->
+        repository.awaitInitialLoad()
+        val entryId = intArg(request, "entryId") ?: repository.entryId.first()
+        if (entryId == null) {
+            return@addTool text(
+                "No team id given, and none saved in the app's settings. Ask the user for the " +
+                    "number in their FPL url, e.g. fantasy.premierleague.com/entry/1234567/"
+            )
+        }
+
+        val manager = runCatching { repository.getManager(entryId) }.getOrElse { error ->
+            return@addTool text("Could not load team $entryId: ${error.message}")
+        } ?: return@addTool text(
+            "No FPL team has id $entryId. The team id is the number in the manager's FPL url, " +
+                "e.g. fantasy.premierleague.com/entry/1234567/"
+        )
+
+        val rows = manager.leagues.map { league ->
+            listOf(
+                league.id.toString(),
+                csvSafe(league.name),
+                league.entryRank?.toString() ?: "",
+                league.entryCount?.toString() ?: "",
+                league.lastRank?.toString() ?: "",
+                if (league.isInvitational) "mini" else "auto",
+                if (league.isHeadToHead) "h2h" else "classic"
+            ).joinToString(",")
+        }
+
+        text(
+            (listOf(
+                "${manager.teamName} (${manager.playerName}), team id ${manager.id}.",
+                "Overall: ${manager.overallPoints ?: "?"} points, rank ${manager.overallRank ?: "?"}.",
+                "Squad value £${manager.teamValue?.toFixed(1) ?: "?"}m, £${manager.bank?.toFixed(1) ?: "?"}m in the bank.",
+                "",
+                "${manager.leagues.size} leagues. kind: mini = invited by someone, auto = joined on " +
+                    "signup (Overall, country, club, starting gameweek).",
+                "rank is this manager's position; n is how many managers are in the league.",
+                "",
+                "id,name,rank,n,lastRank,kind,type"
+            ) + rows).joinToString("\n")
+        )
+    }
+
+    server.addTool(
         name = "get-fixtures",
         description = "Full fixture list for the season, including results for matches already played"
     ) {
