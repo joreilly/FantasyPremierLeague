@@ -2,6 +2,9 @@ package dev.johnoreilly.common.ui.players.playerDetails
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,7 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,7 +39,7 @@ import dev.johnoreilly.common.ui.global.rememberPlayerPhotoPainter
 import fantasypremierleague.common.generated.resources.Res
 import fantasypremierleague.common.generated.resources.team
 import io.github.koalaplot.core.ChartLayout
-import io.github.koalaplot.core.bar.DefaultBar
+import io.github.koalaplot.core.bar.BarScope
 import io.github.koalaplot.core.bar.VerticalBarPlot
 import io.github.koalaplot.core.bar.VerticalBarPlotEntry
 import io.github.koalaplot.core.bar.verticalBarPlotEntry
@@ -47,7 +50,9 @@ import io.github.koalaplot.core.xygraph.CategoryAxisModel
 import io.github.koalaplot.core.xygraph.IntLinearAxisModel
 import io.github.koalaplot.core.xygraph.TickPosition
 import io.github.koalaplot.core.xygraph.XYGraph
+import io.github.koalaplot.core.xygraph.rememberAxisContent
 import io.github.koalaplot.core.xygraph.rememberAxisStyle
+import io.github.koalaplot.core.xygraph.rememberGridStyle
 import org.jetbrains.compose.resources.stringResource
 
 
@@ -180,6 +185,30 @@ fun AxisLabel(label: String, modifier: Modifier = Modifier) {
     )
 }
 
+/**
+ * A single season's bar, showing its points total on hover.
+ *
+ * koalaplot 0.12 dropped DefaultBar's hoverElement slot along with the hoverableElement modifier
+ * behind it, so the tooltip is wired up here with ordinary Compose hover state. Only desktop and
+ * web can hover, so touch simply gets the bar.
+ */
+@Composable
+private fun BarScope.SeasonBar(points: Int, color: Color) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isHovered by interactionSource.collectIsHoveredAsState()
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .hoverable(interactionSource)
+            .background(color)
+    ) {
+        if (isHovered) {
+            HoverSurface(Modifier.align(Alignment.TopCenter)) { Text(points.toString()) }
+        }
+    }
+}
+
 @Composable
 fun HoverSurface(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Surface(
@@ -223,36 +252,34 @@ private fun PlayerHistoryBarPlot(
                 minimumMajorTickIncrement = 1,
                 minorTickCount = 0
             ),
-            xAxisStyle = rememberAxisStyle(
-                tickPosition = tickPositionState.horizontalAxis,
-                color = MaterialTheme.colorScheme.surfaceVariant
-            ),
-            xAxisLabels = {
-                AxisLabel(it, Modifier.padding(top = 2.dp))
-            },
-            xAxisTitle = { AxisTitle("Season") },
-            yAxisStyle = rememberAxisStyle(tickPosition = tickPositionState.verticalAxis),
-            yAxisLabels = {
-                AxisLabel(it.toString(), Modifier.absolutePadding(right = 2.dp))
-            },
-            yAxisTitle = {
-                AxisTitle(
-                    "Points",
-                    modifier = Modifier.rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
-                        .padding(bottom = 8.dp)
+            xAxisContent = rememberAxisContent(
+                labels = { AxisLabel(it, Modifier.padding(top = 2.dp)) },
+                title = { AxisTitle("Season") },
+                style = rememberAxisStyle(
+                    tickPosition = tickPositionState.horizontalAxis,
+                    color = MaterialTheme.colorScheme.surfaceVariant
                 )
-            },
-            verticalMajorGridLineStyle = null
+            ),
+            yAxisContent = rememberAxisContent(
+                labels = { AxisLabel(it.toString(), Modifier.absolutePadding(right = 2.dp)) },
+                title = {
+                    AxisTitle(
+                        "Points",
+                        modifier = Modifier.rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
+                            .padding(bottom = 8.dp)
+                    )
+                },
+                style = rememberAxisStyle(tickPosition = tickPositionState.verticalAxis)
+            ),
+            gridStyle = rememberGridStyle(verticalMajorStyle = null)
         ) {
             VerticalBarPlot(
                 barChartEntries,
                 bar = { _, _, value ->
-                    DefaultBar(
-                        brush = SolidColor(MaterialTheme.colorScheme.primary),
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        HoverSurface { Text(value.y.end.toString()) }
-                    }
+                    SeasonBar(
+                        points = value.y.end,
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 }
             )
         }
