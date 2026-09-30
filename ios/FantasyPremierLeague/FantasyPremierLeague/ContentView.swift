@@ -4,7 +4,11 @@ import FantasyPremierLeagueKit
 
 struct ContentView: View {
     var body: some View {
-        ComposeUI().ignoresSafeArea(.all)
+        ComposeUI()
+            .ignoresSafeArea(.all)
+            .onOpenURL { url in
+                SharedViewControllers.shared.handleDeepLink(url: url.absoluteString)
+            }
     }
 }
 

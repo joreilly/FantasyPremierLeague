@@ -12,11 +12,13 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.deeplink.DeepLinkRequest
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
@@ -34,48 +36,48 @@ import org.koin.core.parameter.parametersOf
 
 
 @Serializable
-private sealed interface Route
+internal sealed interface Route
 
 @Serializable
-private sealed interface TopLevelRoute: Route {
+internal sealed interface TopLevelRoute: Route {
     val icon: ImageVector
     val contentDescription: String
 }
 
 @Serializable
-private data object PlayerList : TopLevelRoute {
+internal data object PlayerList : TopLevelRoute {
     override val icon = Icons.Default.Person
     override val contentDescription = "Players"
 }
 
 @Serializable
-private data class PlayerDetails(val playerId: Int) : Route
+internal data class PlayerDetails(val playerId: Int) : Route
 
 // Full-screen player details reached from the assistant (not a list-detail pane),
 // so it opens as a dedicated screen you can navigate back from.
 @Serializable
-private data class AssistantPlayerDetails(val playerId: Int) : Route
+internal data class AssistantPlayerDetails(val playerId: Int) : Route
 
 @Serializable
-private data object FixtureList : TopLevelRoute {
+internal data object FixtureList : TopLevelRoute {
     override val icon = Icons.Filled.DateRange
     override val contentDescription = "Fixtures"
 }
 
 @Serializable
-private data object League : TopLevelRoute {
+internal data object League : TopLevelRoute {
     override val icon = Icons.AutoMirrored.Filled.List
     override val contentDescription = "Leagues"
 }
 
 @Serializable
-private data object Assistant : TopLevelRoute {
+internal data object Assistant : TopLevelRoute {
     override val icon = Icons.Filled.Face
     override val contentDescription = "Assistant"
 }
 
 @Serializable
-private data object Settings : Route
+internal data object Settings : Route
 
 private val topLevelRoutes: List<TopLevelRoute> = listOf(PlayerList, FixtureList, League, Assistant)
 
@@ -116,14 +118,36 @@ private fun MutableList<Route>.switchToTopLevelRoute(route: TopLevelRoute) {
     while (size > 1) removeAt(0)
 }
 
+/** Replaces the whole stack, adding before removing for the same reason as above. */
+private fun MutableList<Route>.replaceWith(routes: List<Route>) {
+    if (this == routes) return
+    val oldSize = size
+    addAll(routes)
+    repeat(oldSize) { removeAt(0) }
+}
 
+
+/**
+ * @param deepLink a link to open (see [backStackFor]); links that don't match are ignored.
+ * @param onDeepLinkHandled called once [deepLink] has been applied, so the caller can clear it and
+ * a restored or recomposed App doesn't open it again over wherever the user has since navigated.
+ */
 @Composable
-fun App() {
+fun App(deepLink: DeepLinkRequest? = null, onDeepLinkHandled: () -> Unit = {}) {
     MaterialTheme {
         val backStack: MutableList<Route> =
             rememberSerializable(serializer = SnapshotStateListSerializer()) {
-                mutableStateListOf(PlayerList)
+                // Seed from a launch link directly, so a cold start doesn't flash the player list.
+                val initial = deepLink?.let(::backStackFor) ?: listOf(PlayerList)
+                mutableStateListOf(*initial.toTypedArray())
             }
+        // Links arriving while the app is already running.
+        LaunchedEffect(deepLink) {
+            if (deepLink != null) {
+                backStackFor(deepLink)?.let { backStack.replaceWith(it) }
+                onDeepLinkHandled()
+            }
+        }
         val listDetailStrategy = rememberListDetailSceneStrategy<Route>()
 
         Scaffold(
