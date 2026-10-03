@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-open class FixturesViewModel(
+internal open class FixturesViewModel(
     private val repository: FantasyPremierLeagueRepository
 ) : ViewModel(), KoinComponent {
 

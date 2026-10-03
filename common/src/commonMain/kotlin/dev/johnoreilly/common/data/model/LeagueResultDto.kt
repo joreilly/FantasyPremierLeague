@@ -2,7 +2,9 @@ package dev.johnoreilly.common.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.native.HiddenFromObjC
 
+@HiddenFromObjC
 @Serializable
 data class LeagueResultDto(
     // The manager's entry id. FPL used to send this as "id"; requiring that name made every

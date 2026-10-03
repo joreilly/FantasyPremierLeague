@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import okio.Path.Companion.toPath
 
 
-fun createDataStore(
+internal fun createDataStore(
     producePath: () -> String,
 ): DataStore<Preferences> = PreferenceDataStoreFactory.createWithPath(
     corruptionHandler = null,
@@ -18,7 +18,7 @@ fun createDataStore(
     produceFile = { producePath().toPath() },
 )
 
-class AppSettings(private val dataStore: DataStore<Preferences>) {
+internal class AppSettings(private val dataStore: DataStore<Preferences>) {
 
     /**
      * The manager's own entry id. Their leagues are read from it, rather than being typed in one

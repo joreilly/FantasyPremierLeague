@@ -30,7 +30,7 @@ import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlayerDetailsView(viewModel: PlayerDetailsViewModel, popBackStack: () -> Unit) {
+internal fun PlayerDetailsView(viewModel: PlayerDetailsViewModel, popBackStack: () -> Unit) {
     val uiState by viewModel.state.collectAsStateWithLifecycle()
 
     when (val state = uiState) {
@@ -57,7 +57,7 @@ fun PlayerDetailsView(viewModel: PlayerDetailsViewModel, popBackStack: () -> Uni
 
 
 @Composable
-fun PlayerDetailsViewSuccess(uiState: PlayerDetailsUiState.Success, popBackStack: () -> Unit) {
+internal fun PlayerDetailsViewSuccess(uiState: PlayerDetailsUiState.Success, popBackStack: () -> Unit) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(

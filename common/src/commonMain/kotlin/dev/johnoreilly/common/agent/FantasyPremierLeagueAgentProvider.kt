@@ -8,7 +8,9 @@ import ai.koog.agents.features.eventHandler.feature.EventHandler
 import ai.koog.prompt.dsl.prompt
 import ai.koog.prompt.executor.model.StructureFixingParser
 import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
+import kotlin.native.HiddenFromObjC
 
+@HiddenFromObjC
 class FantasyPremierLeagueAgentProvider(
     private val repository: FantasyPremierLeagueRepository
 ) : AgentProvider {

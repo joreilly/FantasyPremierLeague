@@ -26,7 +26,7 @@ import dev.johnoreilly.common.viewmodel.LeaguesViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun SettingsView(popBackStack: () -> Unit) {
+internal fun SettingsView(popBackStack: () -> Unit) {
     val viewModel = koinViewModel<LeaguesViewModel>()
 
     val entryIdString = remember {

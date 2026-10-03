@@ -15,7 +15,7 @@ import io.ktor.http.*
 import org.koin.core.component.KoinComponent
 
 
-class FantasyPremierLeagueApi(
+internal class FantasyPremierLeagueApi(
     private val client: HttpClient,
     private val baseUrl: String = "https://fantasy.premierleague.com/api",
 ) : KoinComponent {

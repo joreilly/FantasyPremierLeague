@@ -27,7 +27,7 @@ import dev.johnoreilly.common.ui.global.Spacing
  * @param isDataLoading Whether data is still loading (shows placeholder)
  */
 @Composable
-fun PlayerView(
+internal fun PlayerView(
     player: Player,
     onPlayerSelected: (player: Player) -> Unit,
     isDataLoading: Boolean

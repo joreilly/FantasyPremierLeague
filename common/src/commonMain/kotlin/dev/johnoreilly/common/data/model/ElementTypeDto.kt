@@ -3,7 +3,7 @@ package dev.johnoreilly.common.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ElementTypeDto(
+internal data class ElementTypeDto(
     val element_count: Int,
     val id: Int,
     val plural_name: String,

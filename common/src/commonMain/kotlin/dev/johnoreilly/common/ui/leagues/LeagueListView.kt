@@ -33,7 +33,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LeagueListView() {
+internal fun LeagueListView() {
     val viewModel = koinViewModel<LeaguesViewModel>()
     val leagueStandings by viewModel.leagueStandings.collectAsStateWithLifecycle(emptyList())
     val entryId by viewModel.entryId.collectAsStateWithLifecycle(null)

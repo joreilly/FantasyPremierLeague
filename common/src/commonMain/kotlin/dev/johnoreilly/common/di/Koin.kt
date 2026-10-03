@@ -18,7 +18,9 @@ import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
+import kotlin.native.HiddenFromObjC
 
+@HiddenFromObjC
 fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
@@ -26,8 +28,11 @@ fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclarat
     }
 
 // called by iOS etc
-fun initKoin() = initKoin(enableNetworkLogs = false, appDeclaration = {})
+fun initKoin() {
+    initKoin(enableNetworkLogs = false, appDeclaration = {})
+}
 
+@HiddenFromObjC
 fun commonModule(enableNetworkLogs: Boolean) = module {
     single { createJson() }
     single { createHttpClient(get(), get(), enableNetworkLogs = enableNetworkLogs) }
@@ -43,9 +48,9 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     includes(platformModule())
 }
 
-fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
+internal fun createJson() = Json { isLenient = true; ignoreUnknownKeys = true }
 
-fun createHttpClient(httpClientEngine: HttpClientEngine, json: Json, enableNetworkLogs: Boolean) = HttpClient(httpClientEngine) {
+internal fun createHttpClient(httpClientEngine: HttpClientEngine, json: Json, enableNetworkLogs: Boolean) = HttpClient(httpClientEngine) {
     install(ContentNegotiation) {
         json(json)
     }

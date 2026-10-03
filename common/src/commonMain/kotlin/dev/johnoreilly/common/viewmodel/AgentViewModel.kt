@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 // Chat message types
-sealed class Message {
+internal sealed class Message {
     data class UserMessage(val text: String) : Message()
     // An agent answer, optionally enriched with players/fixtures it referenced (rendered as cards)
     data class AgentMessage(
@@ -30,7 +30,7 @@ sealed class Message {
     data class ResultMessage(val text: String) : Message()
 }
 
-data class AgentUiState(
+internal data class AgentUiState(
     val messages: List<Message> = emptyList(),
     val inputText: String = "Who are the top scoring players?",
     val isInputEnabled: Boolean = true,
@@ -42,7 +42,7 @@ data class AgentUiState(
     val currentUserResponse: String? = null,
 )
 
-class AgentViewModel(
+internal class AgentViewModel(
     private val agentProvider: AgentProvider,
     private val repository: FantasyPremierLeagueRepository,
 ) : ViewModel() {

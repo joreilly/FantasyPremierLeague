@@ -13,13 +13,13 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 
 
-sealed class PlayerDetailsUiState {
+internal sealed class PlayerDetailsUiState {
     object Loading : PlayerDetailsUiState()
     data class Error(val message: String) : PlayerDetailsUiState()
     data class Success(val player: Player, val history: List<PlayerPastHistory>) : PlayerDetailsUiState()
 }
 
-open class PlayerDetailsViewModel(
+internal open class PlayerDetailsViewModel(
     private val playerId: Int,
     private val repository: FantasyPremierLeagueRepository,
 ) : ViewModel() {

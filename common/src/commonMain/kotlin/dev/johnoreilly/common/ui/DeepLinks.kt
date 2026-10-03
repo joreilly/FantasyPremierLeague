@@ -8,7 +8,7 @@ import androidx.navigation3.runtime.deeplink.UriDeepLinkMatcher
 import androidx.navigation3.runtime.deeplink.withBackStack
 import kotlinx.serialization.serializer
 
-const val DEEP_LINK_SCHEME = "fplapp"
+internal const val DEEP_LINK_SCHEME = "fplapp"
 
 private val deepLinkMatchers: List<DeepLinkMatcher<*, *>> = listOf(
     // A player link lands on the details pane with the list beneath it: side by side on a wide

@@ -11,7 +11,7 @@ import dev.johnoreilly.common.model.Team
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface FantasyPremierLeagueDao {
+internal interface FantasyPremierLeagueDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTeamList(teamList: List<Team>)

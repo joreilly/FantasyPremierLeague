@@ -3,7 +3,7 @@ package dev.johnoreilly.common.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TeamDto(
+internal data class TeamDto(
     val code: Int,
     val draw: Int,
     val form: String?,

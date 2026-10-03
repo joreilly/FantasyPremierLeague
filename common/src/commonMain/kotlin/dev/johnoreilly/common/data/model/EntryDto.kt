@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * entry id, which a manager reads off their own FPL url. There is no way to look one up by name.
  */
 @Serializable
-data class EntryDto(
+internal data class EntryDto(
     val id: Int,
     val name: String,
     val player_first_name: String = "",
@@ -22,13 +22,13 @@ data class EntryDto(
 
 /** `cup` is an object rather than a list of leagues, so only the two league lists are modelled. */
 @Serializable
-data class EntryLeaguesDto(
+internal data class EntryLeaguesDto(
     val classic: List<EntryLeagueDto> = emptyList(),
     val h2h: List<EntryLeagueDto> = emptyList()
 )
 
 @Serializable
-data class EntryLeagueDto(
+internal data class EntryLeagueDto(
     val id: Int,
     val name: String,
     val short_name: String? = null,

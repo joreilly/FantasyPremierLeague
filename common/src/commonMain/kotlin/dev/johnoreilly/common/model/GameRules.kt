@@ -1,9 +1,11 @@
 package dev.johnoreilly.common.model
+import kotlin.native.HiddenFromObjC
 
 /**
  * The squad-construction constraints, as reported by FPL itself rather than hardcoded, so a rule
  * change on their side flows through without a code change.
  */
+@HiddenFromObjC
 data class GameRules(
     val budget: Double,
     val squadSize: Int,
@@ -14,6 +16,7 @@ data class GameRules(
     val positions: List<PositionRule>
 )
 
+@HiddenFromObjC
 data class PositionRule(
     val elementType: Int,
     val name: String,

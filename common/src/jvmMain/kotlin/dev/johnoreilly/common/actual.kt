@@ -10,14 +10,14 @@ import org.koin.dsl.module
 import java.io.File
 
 
-actual fun platformModule() = module {
+internal actual fun platformModule() = module {
     single { Java.create() }
     single { dataStore()}
     single<AppDatabase> { createRoomDatabase() }
 }
 
 
-fun createRoomDatabase(): AppDatabase {
+internal fun createRoomDatabase(): AppDatabase {
     val dbFile = File(System.getProperty("java.io.tmpdir"), dbFileName)
     return Room.databaseBuilder<AppDatabase>(name = dbFile.absolutePath,)
         .setDriver(BundledSQLiteDriver())

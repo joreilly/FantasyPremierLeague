@@ -11,9 +11,9 @@ import dev.johnoreilly.common.BuildKonfig
 
 
 
-actual fun getLLModel() = GoogleModels.Gemini2_5Flash
+internal actual fun getLLModel() = GoogleModels.Gemini2_5Flash
 
-actual fun getPromptExecutor(): PromptExecutor {
+internal actual fun getPromptExecutor(): PromptExecutor {
     return simpleGoogleAIExecutor(BuildKonfig.GEMINI_API_KEY)
 }
 //

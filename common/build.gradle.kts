@@ -23,7 +23,6 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            export(libs.androidx.lifecycle.viewmodel)
             baseName = "FantasyPremierLeagueKit"
         }
     }
@@ -41,6 +40,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCRefinement")
         }
 
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)

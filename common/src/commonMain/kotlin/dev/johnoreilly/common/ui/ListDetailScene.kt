@@ -42,7 +42,7 @@ import dev.johnoreilly.common.ui.ListDetailScene.Companion.LIST_KEY
  * A [Scene] that displays a list and a detail [NavEntry] side-by-side in a 40/60 split.
  *
  */
-class ListDetailScene<T : Any>(
+internal class ListDetailScene<T : Any>(
     override val key: Any,
     override val previousEntries: List<NavEntry<T>>,
     val listEntry: NavEntry<T>,
@@ -98,10 +98,10 @@ class ListDetailScene<T : Any>(
  * a back button. Default is `true`. It is set to `false` for a detail `NavEntry` when being
  * displayed in a `ListDetailScene`.
  */
-val LocalBackButtonVisibility = compositionLocalOf{ true }
+internal val LocalBackButtonVisibility = compositionLocalOf{ true }
 
 @Composable
-fun <T : Any> rememberListDetailSceneStrategy(): ListDetailSceneStrategy<T> {
+internal fun <T : Any> rememberListDetailSceneStrategy(): ListDetailSceneStrategy<T> {
     val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
 
     return remember(windowSizeClass) {
@@ -120,7 +120,7 @@ fun <T : Any> rememberListDetailSceneStrategy(): ListDetailSceneStrategy<T> {
  * Notably, when the detail entry changes the scene's key does not change. This allows the scene,
  * rather than the NavDisplay, to handle animations when the detail entry changes.
  */
-class ListDetailSceneStrategy<T : Any>(val windowSizeClass: WindowSizeClass) : SceneStrategy<T> {
+internal class ListDetailSceneStrategy<T : Any>(val windowSizeClass: WindowSizeClass) : SceneStrategy<T> {
 
     override fun SceneStrategyScope<T>.calculateScene(entries: List<NavEntry<T>>): Scene<T>? {
 

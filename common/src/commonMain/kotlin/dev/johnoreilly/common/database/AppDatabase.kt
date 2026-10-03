@@ -16,14 +16,14 @@ internal expect object AppDatabaseCtor : RoomDatabaseConstructor<AppDatabase>
 @Database(entities = [Team::class, Player::class, GameFixture::class], version = 4)
 @ConstructedBy(AppDatabaseCtor::class)
 @TypeConverters(LocalDateTimeConverter::class)
-abstract class AppDatabase : RoomDatabase() {
+internal abstract class AppDatabase : RoomDatabase() {
     abstract fun fantasyPremierLeagueDao(): FantasyPremierLeagueDao
 }
 
 internal const val dbFileName = "fantasypremierleague.db"
 
 
-class LocalDateTimeConverter {
+internal class LocalDateTimeConverter {
     @TypeConverter
     fun fromTimestamp(value: String?): LocalDateTime? {
         return value?.let { LocalDateTime.parse(it) }

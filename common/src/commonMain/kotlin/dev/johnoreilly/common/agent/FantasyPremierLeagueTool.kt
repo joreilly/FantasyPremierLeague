@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.serialization.Serializable
 
 
-class GetPlayersTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Unit>(
+internal class GetPlayersTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Unit>(
     argsType = typeToken<Unit>(),
     name = "getPlayers",
     description = "Get every player with the stats needed to compare them: price, total points, " +
@@ -35,7 +35,7 @@ class GetPlayersTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRep
 }
 
 
-class GetFixturesTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Unit>(
+internal class GetFixturesTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Unit>(
     argsType = typeToken<Unit>(),
     name = "getFixtures",
     description = "Get the list of fixtures"
@@ -53,7 +53,7 @@ class GetFixturesTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRe
 }
 
 
-class GetLeagueStandingsTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Unit>(
+internal class GetLeagueStandingsTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<Unit>(
     argsType = typeToken<Unit>(),
     name = "getLeagueStandings",
     description = "Get the user's own mini-league standings, discovered from the team id they have set"
@@ -92,12 +92,12 @@ class GetLeagueStandingsTool(val fantasyPremierLeagueRepository: FantasyPremierL
 
 
 @Serializable
-data class BuildSquadArgs(
+internal data class BuildSquadArgs(
     @property:LLMDescription("Number of upcoming gameweeks to optimise for. Scores players by season points PLUS fixture ease over this window, so form and an easy run both count. Omit to rank by season points alone.")
     val lookaheadGameweeks: Int? = null
 )
 
-class BuildSquadTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<BuildSquadArgs>(
+internal class BuildSquadTool(val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) : SimpleTool<BuildSquadArgs>(
     argsType = typeToken<BuildSquadArgs>(),
     name = "buildSquad",
     description = "Pick an optimal 15-player FPL squad (2 GK/5 DEF/5 MID/3 FWD) within budget and max 3 players per club, " +

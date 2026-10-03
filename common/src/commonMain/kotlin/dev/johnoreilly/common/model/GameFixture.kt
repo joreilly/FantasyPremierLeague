@@ -3,6 +3,8 @@ package dev.johnoreilly.common.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.datetime.LocalDateTime
+import kotlin.native.HiddenFromObjC
+@HiddenFromObjC
 @Entity
 data class GameFixture(
     @PrimaryKey val id: Int,

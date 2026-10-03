@@ -5,14 +5,16 @@ import ai.koog.agents.core.tools.annotations.LLMDescription
 import ai.koog.prompt.executor.model.PromptExecutor
 import ai.koog.prompt.llm.LLModel
 import kotlinx.serialization.Serializable
+import kotlin.native.HiddenFromObjC
 
-expect fun getLLModel(): LLModel
-expect fun getPromptExecutor(): PromptExecutor
+internal expect fun getLLModel(): LLModel
+internal expect fun getPromptExecutor(): PromptExecutor
 
 /**
  * Structured assistant answer. The model fills [playerIds] with the exact FPL ids of any
  * players it referenced, so the UI can render player cards deterministically (no name matching).
  */
+@HiddenFromObjC
 @Serializable
 @LLMDescription("A Fantasy Premier League assistant answer")
 data class FplAnswer(
@@ -28,6 +30,7 @@ data class FplAnswer(
  * Factory for the Fantasy Premier League Koog agent. The callbacks let the UI stream
  * intermediate events (tool calls, errors) and drive a multi-turn conversation.
  */
+@HiddenFromObjC
 interface AgentProvider {
     val description: String
 

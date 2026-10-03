@@ -32,8 +32,10 @@ import kotlinx.datetime.toLocalDateTime
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import kotlin.time.ExperimentalTime
+import kotlin.native.HiddenFromObjC
 
 
+@HiddenFromObjC
 class FantasyPremierLeagueRepository : KoinComponent {
     private val fantasyPremierLeagueApi: FantasyPremierLeagueApi by inject()
     private val database: AppDatabase by inject()

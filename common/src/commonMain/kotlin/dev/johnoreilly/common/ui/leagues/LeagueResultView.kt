@@ -10,7 +10,7 @@ import dev.johnoreilly.common.data.model.LeagueResultDto
 import dev.johnoreilly.common.ui.global.Spacing
 
 @Composable
-fun LeagueResultView(leagueResult: LeagueResultDto) {
+internal fun LeagueResultView(leagueResult: LeagueResultDto) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
