@@ -16,7 +16,7 @@ import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
 
 
-actual fun platformModule() = module {
+internal actual fun platformModule() = module {
     single { Darwin.create() }
     single { dataStore() }
 
@@ -24,7 +24,7 @@ actual fun platformModule() = module {
 }
 
 
-fun createRoomDatabase(): AppDatabase {
+internal fun createRoomDatabase(): AppDatabase {
     val dbFile = "${fileDirectory()}/$dbFileName"
     return Room.databaseBuilder<AppDatabase>(name = dbFile)
         .setDriver(BundledSQLiteDriver())
@@ -46,7 +46,7 @@ private fun fileDirectory(): String {
 }
 
 
-fun dataStore(): DataStore<Preferences> = createDataStore(
+internal fun dataStore(): DataStore<Preferences> = createDataStore(
     producePath = {
         val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
             directory = NSDocumentDirectory,

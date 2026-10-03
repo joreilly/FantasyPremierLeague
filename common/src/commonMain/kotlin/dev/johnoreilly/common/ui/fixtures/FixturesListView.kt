@@ -31,7 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
-fun FixturesListView() {
+internal fun FixturesListView() {
     val fixturesViewModel = koinViewModel<FixturesViewModel>()
 
     val fixturesState = fixturesViewModel.gameWeekFixtures.collectAsStateWithLifecycle()
@@ -63,7 +63,7 @@ fun FixturesListView() {
 }
 
 @Composable
-fun GameweekSelector(
+internal fun GameweekSelector(
     selectedGameweek: Int,
     onGameweekChanged: (gameweekChange: GameweekChange) -> Unit,
     isDataLoading: Boolean
@@ -115,7 +115,7 @@ fun GameweekSelector(
     }
 }
 
-sealed class GameweekChange {
+internal sealed class GameweekChange {
     data object NextGameweek : GameweekChange()
     data object PastGameweek : GameweekChange()
 }

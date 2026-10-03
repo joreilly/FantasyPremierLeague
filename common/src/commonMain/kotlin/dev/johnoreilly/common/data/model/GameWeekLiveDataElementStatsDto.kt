@@ -3,7 +3,7 @@ package dev.johnoreilly.common.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GameWeekLiveDataElementStatsDto(
+internal data class GameWeekLiveDataElementStatsDto(
     val minutes: Int,
     val goals_scored: Int,
     val assists: Int,

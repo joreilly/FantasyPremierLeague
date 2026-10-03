@@ -5,6 +5,7 @@ import dev.johnoreilly.common.model.Player
 import kotlinx.coroutines.flow.first
 import kotlin.math.abs
 import kotlin.math.floor
+import kotlin.native.HiddenFromObjC
 
 /**
  * Renders the player pool as compact CSV for LLM consumption, shared by the Koog agent's
@@ -15,7 +16,7 @@ import kotlin.math.floor
  * window alongside the model's actual reasoning.
  */
 
-const val PLAYER_CSV_HEADER: String =
+internal const val PLAYER_CSV_HEADER: String =
     "id,name,pos,team,price,pts,form,ppg,mins,sel,ep,xgi90,bonus,cs,gc,saves,pen,sp,status,news"
 
 private val DEFAULT_POSITION_NAMES = mapOf(1 to "GKP", 2 to "DEF", 3 to "MID", 4 to "FWD")
@@ -25,6 +26,7 @@ private val DEFAULT_POSITION_NAMES = mapOf(1 to "GKP", 2 to "DEF", 3 to "MID", 4
  * is JVM-only and, worse, locale-sensitive - a comma-decimal default locale would emit "6,0" and
  * silently corrupt every row of the CSV.
  */
+@HiddenFromObjC
 fun Double.toFixed(decimals: Int): String {
     if (isNaN() || isInfinite()) return "0"
     var factor = 1L
@@ -40,10 +42,11 @@ fun Double.toFixed(decimals: Int): String {
 }
 
 /** Commas and newlines would break the row apart; news text in particular contains both. */
+@HiddenFromObjC
 fun csvSafe(value: String): String = value.replace(',', ';').replace('\n', ' ').trim()
 
 /** Position short names as FPL reports them, falling back if the bootstrap load failed. */
-fun FantasyPremierLeagueRepository.positionShortNames(): Map<Int, String> =
+internal fun FantasyPremierLeagueRepository.positionShortNames(): Map<Int, String> =
     gameRules.value?.positions?.associate { it.elementType to it.shortName }
         ?: DEFAULT_POSITION_NAMES
 
@@ -51,10 +54,11 @@ fun FantasyPremierLeagueRepository.positionShortNames(): Map<Int, String> =
  * Team abbreviations keyed by the index fixtures reference them by, which is what both the fixture
  * list and [Player.teamId] were matched on when the repository built them - not the primary key.
  */
+@HiddenFromObjC
 suspend fun FantasyPremierLeagueRepository.teamShortNames(): Map<Int, String> =
     getTeams().first().associate { it.index to it.shortName.ifEmpty { it.name } }
 
-fun playerCsvLegend(playerCount: Int, formDays: Int): List<String> = listOf(
+internal fun playerCsvLegend(playerCount: Int, formDays: Int): List<String> = listOf(
     "$playerCount players, best first. price is in £m. form = points per match over the " +
         "last $formDays days. sel = percent of managers who own him.",
     "ep = FPL's expected points for the next gameweek. xgi90 = expected goal involvements per 90 minutes.",
@@ -66,7 +70,7 @@ fun playerCsvLegend(playerCount: Int, formDays: Int): List<String> = listOf(
     PLAYER_CSV_HEADER
 )
 
-fun playerCsvRow(player: Player, positionName: String, teamName: String): String = listOf(
+internal fun playerCsvRow(player: Player, positionName: String, teamName: String): String = listOf(
     player.id.toString(),
     csvSafe(player.webName.ifEmpty { player.name }),
     positionName,
@@ -95,6 +99,7 @@ fun playerCsvRow(player: Player, positionName: String, teamName: String): String
  * @param minMinutes drops players below this many minutes played; 1 excludes everyone who has
  *   never featured, 0 (the default) keeps the full pool so nothing is hidden from the model.
  */
+@HiddenFromObjC
 suspend fun FantasyPremierLeagueRepository.playersAsCsv(minMinutes: Int = 0): String {
     awaitInitialLoad()
 

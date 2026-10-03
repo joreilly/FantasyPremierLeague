@@ -57,7 +57,7 @@ import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
-fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistory>) {
+internal fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistory>) {
     val tickPositionState by remember {
         mutableStateOf(
             TickPositionState(
@@ -109,7 +109,7 @@ fun PlayerDetailsViewShared(player: Player, playerHistory: List<PlayerPastHistor
 
 
 @Composable
-fun PlayerStatView(statName: String, statValue: String) {
+internal fun PlayerStatView(statName: String, statValue: String) {
     Column {
         Row(
             modifier = Modifier
@@ -154,7 +154,7 @@ private fun barChartEntries(playerHistory: List<PlayerPastHistory>): List<Vertic
 
 
 @Composable
-fun ChartTitle(title: String) {
+internal fun ChartTitle(title: String) {
     Column {
         Text(
             title,
@@ -166,7 +166,7 @@ fun ChartTitle(title: String) {
 }
 
 @Composable
-fun AxisTitle(title: String, modifier: Modifier = Modifier) {
+internal fun AxisTitle(title: String, modifier: Modifier = Modifier) {
     Text(
         title,
         color = MaterialTheme.colorScheme.onBackground,
@@ -176,7 +176,7 @@ fun AxisTitle(title: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun AxisLabel(label: String, modifier: Modifier = Modifier) {
+internal fun AxisLabel(label: String, modifier: Modifier = Modifier) {
     Text(
         label,
         color = MaterialTheme.colorScheme.onBackground,
@@ -210,7 +210,7 @@ private fun BarScope.SeasonBar(points: Int, color: Color) {
 }
 
 @Composable
-fun HoverSurface(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+internal fun HoverSurface(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Surface(
         tonalElevation = 2.dp,
         shape = MaterialTheme.shapes.medium,

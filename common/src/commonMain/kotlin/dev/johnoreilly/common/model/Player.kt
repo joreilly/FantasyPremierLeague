@@ -2,8 +2,10 @@ package dev.johnoreilly.common.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlin.native.HiddenFromObjC
 
 
+@HiddenFromObjC
 @Entity
 data class Player(
     @PrimaryKey val id: Int,

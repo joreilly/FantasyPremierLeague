@@ -31,7 +31,7 @@ import dev.johnoreilly.common.ui.global.Spacing
  * @param fixture The fixture data to display
  */
 @Composable
-fun FixtureView(fixture: GameFixture) {
+internal fun FixtureView(fixture: GameFixture) {
     val scoreText = if (fixture.homeTeamScore != null && fixture.awayTeamScore != null) {
         "${fixture.homeTeam} ${fixture.homeTeamScore} - ${fixture.awayTeamScore} ${fixture.awayTeam}"
     } else {
@@ -113,7 +113,7 @@ fun FixtureView(fixture: GameFixture) {
  * @param teamPhotoUrl URL for the team's badge image
  */
 @Composable
-fun ClubInFixtureView(
+internal fun ClubInFixtureView(
     teamName: String,
     teamPhotoUrl: String
 ) {

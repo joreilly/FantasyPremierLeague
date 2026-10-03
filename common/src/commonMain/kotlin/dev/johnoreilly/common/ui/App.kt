@@ -33,6 +33,7 @@ import dev.johnoreilly.common.viewmodel.PlayerDetailsViewModel
 import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
+import kotlin.native.HiddenFromObjC
 
 
 @Serializable
@@ -132,6 +133,7 @@ private fun MutableList<Route>.replaceWith(routes: List<Route>) {
  * @param onDeepLinkHandled called once [deepLink] has been applied, so the caller can clear it and
  * a restored or recomposed App doesn't open it again over wherever the user has since navigated.
  */
+@HiddenFromObjC
 @Composable
 fun App(deepLink: DeepLinkRequest? = null, onDeepLinkHandled: () -> Unit = {}) {
     MaterialTheme {

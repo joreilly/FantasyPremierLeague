@@ -16,14 +16,14 @@ import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 
 
-sealed class PlayerListUIState {
+internal sealed class PlayerListUIState {
     object Loading : PlayerListUIState()
     data class Error(val message: String) : PlayerListUIState()
     data class Success(val result: List<Player>) : PlayerListUIState()
 }
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-open class PlayerListViewModel(
+internal open class PlayerListViewModel(
     private val repository: FantasyPremierLeagueRepository
 ) : ViewModel(), KoinComponent {
 

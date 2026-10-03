@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 /**
  * Type of error to display appropriate icon and message
  */
-enum class ErrorType {
+internal enum class ErrorType {
     NETWORK,      // Network connectivity issues
     SERVER,       // Server/API errors
     UNKNOWN       // Generic/unknown errors
@@ -31,7 +31,7 @@ enum class ErrorType {
  * @param modifier Additional modifiers
  */
 @Composable
-fun ErrorView(
+internal fun ErrorView(
     message: String? = null,
     errorType: ErrorType = ErrorType.UNKNOWN,
     onRetry: (() -> Unit)? = null,
@@ -121,7 +121,7 @@ private fun ErrorViewContent(
  * @param modifier Additional modifiers
  */
 @Composable
-fun CompactErrorView(
+internal fun CompactErrorView(
     message: String,
     onRetry: (() -> Unit)? = null,
     modifier: Modifier = Modifier

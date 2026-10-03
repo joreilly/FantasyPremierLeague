@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.dp
  * Centralized design tokens for consistent spacing, sizing, and dimensions throughout the app.
  * Following Material Design 3 spacing guidelines.
  */
-object Spacing {
+internal object Spacing {
     val none: Dp = 0.dp
     val extraSmall: Dp = 4.dp
     val small: Dp = 8.dp
@@ -22,7 +22,7 @@ object Spacing {
 /**
  * Standard elevation values for surfaces and cards
  */
-object Elevation {
+internal object Elevation {
     val none: Dp = 0.dp
     val small: Dp = 2.dp
     val medium: Dp = 4.dp
@@ -32,7 +32,7 @@ object Elevation {
 /**
  * Standard corner radius values
  */
-object CornerRadius {
+internal object CornerRadius {
     val small: Dp = 4.dp
     val medium: Dp = 8.dp
     val large: Dp = 10.dp
@@ -43,7 +43,7 @@ object CornerRadius {
 /**
  * Standard icon sizes
  */
-object IconSize {
+internal object IconSize {
     val small: Dp = 16.dp
     val medium: Dp = 24.dp
     val large: Dp = 32.dp
@@ -53,7 +53,7 @@ object IconSize {
 /**
  * Image and avatar sizes
  */
-object ImageSize {
+internal object ImageSize {
     val small: Dp = 40.dp
     val medium: Dp = 60.dp
     val large: Dp = 80.dp
@@ -63,7 +63,7 @@ object ImageSize {
 /**
  * Button heights
  */
-object ButtonHeight {
+internal object ButtonHeight {
     val small: Dp = 32.dp
     val medium: Dp = 40.dp
     val large: Dp = 48.dp
@@ -72,7 +72,7 @@ object ButtonHeight {
 /**
  * Divider thickness
  */
-object DividerThickness {
+internal object DividerThickness {
     val thin: Dp = 0.5.dp
     val standard: Dp = 1.dp
     val thick: Dp = 2.dp

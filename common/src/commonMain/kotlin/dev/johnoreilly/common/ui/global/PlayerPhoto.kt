@@ -17,7 +17,7 @@ private const val MISSING_PLAYER_PHOTO_URL =
     "https://resources.premierleague.com/premierleague/photos/players/110x140/Photo-Missing.png"
 
 @Composable
-fun rememberPlayerPhotoPainter(photoUrl: String): Painter =
+internal fun rememberPlayerPhotoPainter(photoUrl: String): Painter =
     rememberImagePainter(
         photoUrl,
         errorPainter = { rememberImagePainter(MISSING_PLAYER_PHOTO_URL) },

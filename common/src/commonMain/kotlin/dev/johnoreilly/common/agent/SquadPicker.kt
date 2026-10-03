@@ -7,13 +7,13 @@ import dev.johnoreilly.common.model.Player
 // which hasn't changed in FPL's history.
 private val POSITION_QUOTAS = mapOf(1 to 2, 2 to 5, 3 to 5, 4 to 3)
 
-data class SquadSelection(
+internal data class SquadSelection(
     val players: List<Player>,
     val totalCost: Double,
     val totalScore: Double,
 )
 
-data class StartingXISelection(
+internal data class StartingXISelection(
     val startingXI: List<Player>,
     val bench: List<Player>,
     val captain: Player,
@@ -31,7 +31,7 @@ private val VALID_FORMATIONS: List<Triple<Int, Int, Int>> = buildList {
  * Greedy-fill + bounded local-search squad selection. Not provably optimal (that would need an
  * ILP solver), but respects budget/position/club-limit constraints and runs on every KMP target.
  */
-fun pickSquad(
+internal fun pickSquad(
     players: List<Player>,
     fixtures: List<GameFixture>,
     currentGameweek: Int,
@@ -122,7 +122,7 @@ fun pickSquad(
  * a single gameweek. A small enough search space (15 players, 8 valid formations) to just try every
  * formation and keep the best, rather than needing the squad picker's greedy/local-search machinery.
  */
-fun pickStartingXI(squad: List<Player>, fixtures: List<GameFixture>, gameweek: Int): StartingXISelection {
+internal fun pickStartingXI(squad: List<Player>, fixtures: List<GameFixture>, gameweek: Int): StartingXISelection {
     val scoreFor = squad.associateWith { player ->
         player.points.toDouble() + fixtureEase(player.teamId, fixtures, gameweek, weeks = 1)
     }

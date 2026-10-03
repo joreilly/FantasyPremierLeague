@@ -8,7 +8,9 @@ import dev.johnoreilly.common.viewmodel.PlayerListViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
+import kotlin.native.HiddenFromObjC
 
+@HiddenFromObjC
 val viewModelModule = module {
     viewModelOf(::PlayerListViewModel)
     viewModelOf(::PlayerDetailsViewModel)

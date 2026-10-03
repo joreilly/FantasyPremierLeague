@@ -42,7 +42,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlayerListView(
+internal fun PlayerListView(
     onPlayerSelected: (player: Player) -> Unit,
     onShowSettings: () -> Unit
 ) {

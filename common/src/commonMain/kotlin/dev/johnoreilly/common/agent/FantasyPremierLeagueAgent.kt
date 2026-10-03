@@ -10,7 +10,7 @@ import dev.johnoreilly.common.data.repository.FantasyPremierLeagueRepository
  * One-shot console agent used by the JVM `main` demo. The UI uses
  * [FantasyPremierLeagueAgentProvider] instead (streaming, multi-turn).
  */
-class FantasyPremierLeagueAgent(private val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) {
+internal class FantasyPremierLeagueAgent(private val fantasyPremierLeagueRepository: FantasyPremierLeagueRepository) {
 
     suspend fun createAgent() = AIAgent(
         promptExecutor = getPromptExecutor(),

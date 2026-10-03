@@ -7,7 +7,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
 @Serializable
-data class FixtureDto(
+internal data class FixtureDto(
     val id: Int,
     val event: Int?,
     val kickoff_time: Instant?,

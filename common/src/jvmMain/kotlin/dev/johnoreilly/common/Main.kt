@@ -101,7 +101,7 @@ suspend fun main2() {
 /*
     Use okAlgo library to pick team
  */
-fun pickTeam(staticInfo: BootstrapStaticInfoDto) {
+internal fun pickTeam(staticInfo: BootstrapStaticInfoDto) {
 
 
     expressionsbasedmodel {

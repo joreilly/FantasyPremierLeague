@@ -3,7 +3,7 @@ package dev.johnoreilly.common.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class EventDto(
+internal data class EventDto(
     val average_entry_score: Int,
     val chip_plays: List<ChipPlayDto>,
     val data_checked: Boolean,

@@ -1,9 +1,11 @@
 package dev.johnoreilly.common.model
+import kotlin.native.HiddenFromObjC
 
 /**
  * A single gameweek ("event" in FPL's own vocabulary). Held in memory rather than the database -
  * it's small, and only ever read alongside a fresh bootstrap fetch.
  */
+@HiddenFromObjC
 data class Gameweek(
     val id: Int,
     val name: String,

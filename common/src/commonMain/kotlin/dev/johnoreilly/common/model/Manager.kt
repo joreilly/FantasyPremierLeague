@@ -1,6 +1,8 @@
 package dev.johnoreilly.common.model
+import kotlin.native.HiddenFromObjC
 
 /** A manager and the leagues they're in, as returned in a single `entry/{id}/` call. */
+@HiddenFromObjC
 data class Manager(
     val id: Int,
     val teamName: String,
@@ -12,6 +14,7 @@ data class Manager(
     val leagues: List<League>
 )
 
+@HiddenFromObjC
 data class League(
     val id: Int,
     val name: String,

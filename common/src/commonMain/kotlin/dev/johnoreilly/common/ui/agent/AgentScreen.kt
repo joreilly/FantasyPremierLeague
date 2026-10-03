@@ -65,7 +65,7 @@ private val suggestions = listOf(
 )
 
 @Composable
-fun AgentScreen(onPlayerSelected: (playerId: Int) -> Unit = {}) {
+internal fun AgentScreen(onPlayerSelected: (playerId: Int) -> Unit = {}) {
     val viewModel = koinViewModel<AgentViewModel>()
     val uiState by viewModel.uiState.collectAsState()
 

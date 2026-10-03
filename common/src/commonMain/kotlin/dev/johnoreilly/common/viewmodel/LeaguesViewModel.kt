@@ -18,12 +18,12 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
 /** A league the manager is in, paired with its current table. */
-data class LeagueWithStandings(
+internal data class LeagueWithStandings(
     val league: League,
     val standings: LeagueStandingsDto
 )
 
-open class LeaguesViewModel(
+internal open class LeaguesViewModel(
     private val repository: FantasyPremierLeagueRepository
 ) : ViewModel(), KoinComponent {
 

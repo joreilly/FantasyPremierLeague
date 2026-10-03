@@ -11,7 +11,7 @@ import io.ktor.client.engine.android.*
 import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 
-actual fun platformModule() = module {
+internal actual fun platformModule() = module {
     single { Android.create() }
     single { dataStore(get()) }
 
@@ -19,7 +19,7 @@ actual fun platformModule() = module {
 }
 
 
-fun createRoomDatabase(ctx: Context): AppDatabase {
+internal fun createRoomDatabase(ctx: Context): AppDatabase {
     val dbFile = ctx.getDatabasePath(dbFileName)
     return Room.databaseBuilder<AppDatabase>(ctx, dbFile.absolutePath)
         .setDriver(BundledSQLiteDriver())
