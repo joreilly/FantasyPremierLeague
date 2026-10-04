@@ -13,7 +13,7 @@ private val POSITION_QUOTAS = mapOf(1 to 2, 2 to 5, 3 to 5, 4 to 3)
 class SquadPickerTest {
 
     @Test
-    fun `season-long pick respects squad size, position, budget and club constraints`() {
+    fun `season-long pick respects squad size position budget and club constraints`() {
         val players = syntheticPlayerPool()
 
         val selection = pickSquad(
@@ -29,7 +29,7 @@ class SquadPickerTest {
     }
 
     @Test
-    fun `fixture-run pick respects squad size, position, budget and club constraints`() {
+    fun `fixture-run pick respects squad size position budget and club constraints`() {
         val players = syntheticPlayerPool()
         val fixtures = syntheticFixturePool()
 
@@ -65,7 +65,7 @@ class SquadPickerTest {
     }
 
     @Test
-    fun `starting XI picks a valid formation, captain and vice-captain`() {
+    fun `starting XI picks a valid formation captain and vice-captain`() {
         val players = syntheticPlayerPool()
         val fixtures = syntheticFixturePool()
         val squad = pickSquad(
