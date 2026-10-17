@@ -60,13 +60,6 @@ jobs:
         env:
           MAESTRO_VERSION: 2.11.0
 
-      # TEMP diagnostic: can the macOS runner reach the FPL API?
-      - name: Check FPL API reachability
-        continue-on-error: true
-        run: |
-          curl -sS -o /dev/null -w 'bootstrap-static: HTTP %{http_code}, %{size_download} bytes, %{time_total}s\n' --max-time 60 https://fantasy.premierleague.com/api/bootstrap-static/
-          curl -sS -o /dev/null -w 'fixtures: HTTP %{http_code}, %{time_total}s\n' --max-time 60 https://fantasy.premierleague.com/api/fixtures/
-
       - name: Run Maestro tests
         env:
           # Starting Maestro's iOS driver on a cold runner can take a few minutes (default limit ~2 min)
@@ -85,14 +78,6 @@ jobs:
           name: maestro-screenshot-ios
           path: maestro-debug/**/takeScreenshot/*.png
           include-hidden-files: true
-
-      # TEMP diagnostic: the app's own log from the simulator
-      - name: Collect app log
-        if: failure()
-        run: |
-          mkdir -p maestro-debug
-          xcrun simctl spawn booted log show --last 10m --style compact --predicate 'process == "FantasyPremierLeague"' > maestro-debug/app.log || true
-          tail -50 maestro-debug/app.log || true
 
       - name: Collect iOS crash reports
         if: failure()
