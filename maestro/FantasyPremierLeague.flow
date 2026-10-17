@@ -4,15 +4,16 @@ appId: ${APP_ID}
 - launchApp:
     clearState: true
 
-# Players and fixtures come from the live FPL API, so allow for a slow network and match
+# Players and fixtures come from the live FPL API (a large first payload, slow on CI simulators),
+# so allow plenty of time and match
 # patterns rather than particular players or teams (they change through the season)
 - assertVisible: "Fantasy Premier League"
 - extendedWaitUntil:
     visible: ".*, \\d+ points, £.*"
-    timeout: 30000
+    timeout: 90000
 - takeScreenshot: FantasyPremierLeague
 
 - tapOn: "Fixtures"
 - extendedWaitUntil:
     visible: "Gameweek \\d+"
-    timeout: 30000
+    timeout: 90000
