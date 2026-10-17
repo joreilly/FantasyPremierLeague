@@ -11,6 +11,15 @@ appId: ${APP_ID}
 - extendedWaitUntil:
     visible: ".*, \\d+ points, £.*"
     timeout: 90000
+# Player photos download after the rows' text is up, and the screen can sit still in between, so
+# waitForAnimationToEnd alone returns too early. Maestro has no sleep: wait for text that never
+# appears (optional, so its timeout just continues) to give them time, then let the screen settle.
+- extendedWaitUntil:
+    visible: "maestro-photo-delay-never-shown"
+    timeout: 10000
+    optional: true
+- waitForAnimationToEnd:
+    timeout: 15000
 - takeScreenshot: FantasyPremierLeague
 
 - tapOn: "Fixtures"
