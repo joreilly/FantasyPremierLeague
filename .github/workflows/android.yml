@@ -67,7 +67,8 @@ jobs:
       - name: Run Maestro tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 32
+          # minSdk is 35, so the emulator needs at least API 35
+          api-level: 35
           arch: x86_64
           profile: Nexus 6
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
