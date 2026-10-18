@@ -76,8 +76,11 @@ class FantasyPremierLeagueRepository : KoinComponent {
 
     private suspend fun loadData() {
         try {
-            val bootstrapStaticInfoDto = fantasyPremierLeagueApi.fetchBootstrapStaticInfo()
-            val fixtures = fantasyPremierLeagueApi.fetchFixtures()
+            // Retried: this runs once at start-up, so one transient failure would otherwise leave
+            // the players list spinning until the app is restarted.
+            val (bootstrapStaticInfoDto, fixtures) = retrying {
+                fantasyPremierLeagueApi.fetchBootstrapStaticInfo() to fantasyPremierLeagueApi.fetchFixtures()
+            }
             // region -> country name, used to populate player nationality (best-effort)
             // region -> country name, used to populate player nationality (best-effort)
             val regionNames = runCatching { fantasyPremierLeagueApi.fetchRegions() }
