@@ -30,3 +30,6 @@ gradle-app.setting
 *.xcscheme
 xcschememanagement.plist
 *.xcbkptlist
+# swiftc output when building outside Xcode's DerivedData
+*.emit-module.d
+*.emit-module.dia
